@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>全能生词本 Pro — Own Your Words.</title>
+  <meta name="description" content="Own Your Words. 构建持久的英语词汇能力。网页划词标记、批注金句、艾宾浩斯复习、导入导出。支持支付宝/微信支付，License Key 激活，最多 2 台设备。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              600: "#8B5CF6",
+              700: "#7C3AED",
+              800: "#6D28D9"
+            }
+          },
+          boxShadow: {
+            glow: "0 0 40px rgba(139, 92, 246, 0.18)"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --grid-color: rgba(0, 0, 0, 0.06); }
+    .dark { --grid-color: rgba(255, 255, 255, 0.06); }
+    .bg-grid {
+      background-image:
+        radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
+      background-size: 22px 22px;
+    }
+  </style>
+</head>
+
+<body class="bg-[#F6F3FF] text-[#1A1A22] antialiased dark:bg-[#0B0B10] dark:text-white">
+  <div class="relative min-h-screen overflow-hidden">
+    <div class="pointer-events-none absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-300/35 blur-[140px] dark:bg-purple-600/20"></div>
+    <div class="pointer-events-none absolute top-1/3 right-[-120px] h-[420px] w-[420px] rounded-full bg-purple-300/25 blur-[140px] dark:bg-purple-700/15"></div>
+    <div class="pointer-events-none absolute bottom-[-120px] left-[-120px] h-[420px] w-[420px] rounded-full bg-purple-200/30 blur-[140px] dark:bg-purple-600/10"></div>
+    <div class="pointer-events-none absolute inset-0 bg-grid opacity-20"></div>
+
+    <header class="relative z-10">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6 sm:py-6 lg:px-8">
+        <a class="flex items-center gap-3" href="#top" aria-label="回到顶部">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-glow">
+            <img src="icon.png" alt="全能生词本 Pro 图标" class="h-6 w-6 object-contain"/>
+          </div>
+          <span class="text-lg font-semibold tracking-wide">全能生词本 Pro</span>
+        </a>
+
+        <nav class="hidden gap-8 text-sm text-slate-600 md:flex dark:text-white/70">
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#features">功能</a>
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#workflow">流程</a>
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#screens">截图</a>
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#pricing">价格</a>
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="hidden items-center gap-2 rounded-full border border-black/10 px-3 py-2 text-xs text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white md:flex" type="button" aria-label="主题切换">
+            <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="h-4 w-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+            主题
+          </button>
+
+          <a href="activate.html" class="hidden rounded-full border border-black/10 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white md:block">
+            激活
+          </a>
+          <a href="buy.html" class="rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-5 py-2 text-sm font-medium text-white shadow-glow hover:brightness-110">
+            立即购买
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section id="top" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 pt-12 pb-10 sm:px-6 sm:pt-14 sm:pb-12 lg:px-8 lg:pt-20 lg:pb-16">
+        <div class="max-w-3xl">
+          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Vocabulary Tool for Real Reading</p>
+
+          <h1 class="mt-5 text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+            <span class="block bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Own Your Words.</span>
+            <span class="mt-3 block text-xl font-medium text-slate-700 dark:text-white/80 sm:text-2xl">构建持久的英语词汇能力</span>
+          </h1>
+
+          <p class="mt-6 text-lg text-slate-600 dark:text-white/70 leading-relaxed">
+            在阅读中标记，在复习中掌握。用更稳定的采集体验 + 艾宾浩斯节奏，减少遗忘，让词汇长期沉淀。
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3 sm:gap-4">
+            <a href="buy.html" class="w-full rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-3 text-center text-sm font-medium text-white shadow-glow hover:brightness-110 sm:w-auto">
+              获取专业版（88 RMB / $25 / 年）
+            </a>
+            <a href="activate.html" class="w-full rounded-full border border-black/10 px-6 py-3 text-center text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white sm:w-auto">
+              输入 License 激活
+            </a>
+            <a href="install.html" class="w-full rounded-full border border-black/10 px-6 py-3 text-center text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white sm:w-auto">
+              安装插件
+            </a>
+          </div>
+
+          <div class="mt-8 grid gap-3 text-xs text-slate-600 dark:text-white/60 sm:mt-10 sm:grid-cols-3">
+            <div class="rounded-2xl border border-black/10 bg-white/70 px-4 py-3 dark:border-white/10 dark:bg-white/5">
+              一次性付费 = 1 年授权（不自动续费）
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-white/70 px-4 py-3 dark:border-white/10 dark:bg-white/5">
+              最多 2 台设备激活（激活时联网一次）
+            </div>
+            <div class="rounded-2xl border border-black/10 bg-white/70 px-4 py-3 dark:border-white/10 dark:bg-white/5">
+              中国用户支持支付宝/微信支付
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div class="mb-8 max-w-2xl sm:mb-10">
+          <h2 class="text-2xl font-semibold sm:text-3xl">真实界面，一眼就懂</h2>
+          <p class="mt-3 text-slate-600 dark:text-white/70">把插件的关键交互放在首屏区域，让用户理解“怎么用”和“好在哪”。</p>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+          <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
+            <div class="aspect-[16/9] w-full rounded-2xl bg-gradient-to-br from-purple-200/60 via-white to-white dark:from-purple-900/30 dark:via-[#0B0B10] dark:to-[#0B0B10]">
+              <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为主界面截图（弹窗/词典/金句）</div>
+            </div>
+          </div>
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+            <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
+              <div class="aspect-[4/3] w-full rounded-2xl bg-gradient-to-br from-purple-100/80 via-white to-white dark:from-purple-900/20 dark:via-[#0B0B10] dark:to-[#0B0B10]">
+                <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为单词本/复习截图</div>
+              </div>
+            </div>
+            <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
+              <div class="aspect-[4/3] w-full rounded-2xl bg-gradient-to-br from-purple-100/80 via-white to-white dark:from-purple-900/20 dark:via-[#0B0B10] dark:to-[#0B0B10]">
+                <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为仪表盘/统计截图</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-2xl font-semibold sm:text-3xl">更少打扰，更高效率</h2>
+          <p class="mt-3 text-slate-600 dark:text-white/70">
+            为高频阅读场景设计：稳定采集 + 结构化管理 + 节奏复习，让“标记”变成“掌握”。
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">稳定划词/双击弹窗</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">在网页中快速查词与标记，减少误触与崩溃，保持阅读流畅。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">一键标记 + 自动高亮</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">标记的词立刻进入单词本，在页面持续高亮，阅读即积累。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">句子/长句理解</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">支持句子级理解辅助（按你的翻译接口能力展示），提升语境掌握。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">批注与金句（含来源）</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">单词/句子可批注；金句显示来源与原始链接，方便回溯语境。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">艾宾浩斯复习系统</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">按状态与节奏复习，可选每次学习数量，减少无效重复。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 backdrop-blur dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-lg font-semibold">导入导出 + 批量编辑</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">数据可迁移、可整理；适合长期积累与二次利用（Pro 功能）。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-2xl font-semibold sm:text-3xl">轻量流程，强大效果</h2>
+          <p class="mt-3 text-slate-600 dark:text-white/70">三步完成从获取到掌握：把“当下遇到的词”，变成“长期属于你的能力”。</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">Step 01</p>
+            <h3 class="mt-2 text-lg font-semibold">标记</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">在阅读中快速标记生词与句子，减少打断。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">Step 02</p>
+            <h3 class="mt-2 text-lg font-semibold">整理</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">用批注、来源与状态管理把词汇结构化，方便复盘。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">Step 03</p>
+            <h3 class="mt-2 text-lg font-semibold">复习</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">按遗忘曲线自动推进复习节奏，让记忆稳定沉淀。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-2xl font-semibold sm:text-3xl">透明、简单的定价</h2>
+          <p class="mt-3 text-slate-600 dark:text-white/70">
+            先买断（1 年授权），后续可选择续期。中国用户支持支付宝/微信；购买后通过邮件获得 License Key。
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-8 dark:border-white/10 dark:bg-white/5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">免费版</h3>
+              <span class="text-xs rounded-full border border-black/10 px-3 py-1 text-slate-600 dark:border-white/10 dark:text-white/60">入门体验</span>
+            </div>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">适合轻量使用与试用核心流程。</p>
+
+            <div class="mt-6 text-3xl font-semibold">¥0<span class="text-base font-normal text-slate-500 dark:text-white/60"> / 永久</span></div>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-600 dark:text-white/70">
+              <li>标记单词：最多 200 个</li>
+              <li>批注：最多 10 条</li>
+              <li>基础查词/高亮</li>
+              <li class="text-slate-400 dark:text-white/50">不支持导入/导出与批量编辑</li>
+            </ul>
+
+            <a href="install.html" class="mt-8 block w-full rounded-full border border-black/10 px-6 py-3 text-center text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">
+              安装并开始使用
+            </a>
+          </div>
+
+          <div class="rounded-2xl border border-purple-500/40 bg-white/70 p-8 shadow-glow dark:bg-white/5">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">专业版 Pro</h3>
+              <span class="text-xs rounded-full bg-purple-600/20 px-3 py-1 text-purple-700 dark:text-purple-200">最受欢迎</span>
+            </div>
+
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">适合长期积累、复习与数据管理。</p>
+
+            <div class="mt-6 text-3xl font-semibold">88 RMB / $25<span class="text-base font-normal text-slate-500 dark:text-white/60"> / 年</span></div>
+
+            <ul class="mt-6 space-y-3 text-sm text-slate-600 dark:text-white/70">
+              <li>标记单词：无限</li>
+              <li>批注：无限</li>
+              <li>导入/导出 + 批量编辑</li>
+              <li>艾宾浩斯复习：自定义学习数量/状态</li>
+              <li>最多 2 台设备激活</li>
+              <li>邀请码奖励（规则以页面说明为准）</li>
+            </ul>
+
+            <a href="buy.html" class="mt-8 block w-full rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-3 text-center text-sm font-medium text-white shadow-glow hover:brightness-110">
+              立即购买（获取 License Key）
+            </a>
+
+            <p class="mt-4 text-xs text-slate-500 dark:text-white/50">
+              提示：当前阶段不做持续在线验证；仅在激活时联网一次即可。
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-10 rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+          <h4 class="text-base font-semibold">免费 vs 专业版对比</h4>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead class="text-slate-500 dark:text-white/60">
+                <tr>
+                  <th class="py-3 pr-4">功能</th>
+                  <th class="py-3 pr-4">免费版</th>
+                  <th class="py-3">专业版 Pro</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-600 dark:text-white/75">
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">单词标记数量</td>
+                  <td class="py-3 pr-4">最多 200</td>
+                  <td class="py-3">无限</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">批注（单词/句子）</td>
+                  <td class="py-3 pr-4">最多 10 条</td>
+                  <td class="py-3">无限</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">导入/导出</td>
+                  <td class="py-3 pr-4">不支持</td>
+                  <td class="py-3">支持</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">批量编辑</td>
+                  <td class="py-3 pr-4">不支持</td>
+                  <td class="py-3">支持</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">复习系统</td>
+                  <td class="py-3 pr-4">基础复习</td>
+                  <td class="py-3">自定义学习数量/状态</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">设备激活</td>
+                  <td class="py-3 pr-4">1 台</td>
+                  <td class="py-3">最多 2 台</td>
+                </tr>
+                <tr class="border-t border-black/10 dark:border-white/10">
+                  <td class="py-3 pr-4">邀请码奖励</td>
+                  <td class="py-3 pr-4">不支持</td>
+                  <td class="py-3">支持（按规则发放）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-2xl font-semibold sm:text-3xl">常见问题</h2>
+          <p class="mt-3 text-slate-600 dark:text-white/70">把关键规则说清楚，减少沟通成本。</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">这是订阅吗？会自动续费吗？</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">不是订阅。当前为 1 年授权买断，不会自动扣费；到期后你可以选择是否续期。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">我如何获得 License Key？</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">购买后会通过邮件发送 License Key。你也可以在激活页面输入 key 完成绑定。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">最多 2 台设备如何定义？会泄露隐私吗？</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">设备限制通过本地安装生成的匿名标识（hash）实现，仅用于设备计数，不收集你的真实设备信息。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">支持中国支付吗？</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">支持。购买页提供支付宝/微信支付指引（二维码或跳转链接）。</p>
+          </div>
+
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">邀请码奖励怎么生效？</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">激活时可填写邀请码；双方在成功激活绑定后获得奖励。具体防滥用规则以激活页说明为准。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative z-10">
+      <div class="mx-auto max-w-6xl px-5 pb-12 sm:px-6 sm:pb-14 lg:px-8">
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">隐私</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">默认本地存储，不上传你的阅读内容与生词数据。</p>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">退款承诺</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">如 7 天内无法激活，可联系支持处理退款。</p>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-base font-semibold">联系支持</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-white/70">support@example.com</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="relative z-10 border-t border-black/10 dark:border-white/10">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 text-sm text-slate-500 dark:text-white/50 md:flex-row lg:px-8">
+        <div class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-purple-600">
+            <img src="icon.png" alt="全能生词本 Pro 图标" class="h-5 w-5 object-contain"/>
+          </div>
+          <span>全能生词本 Pro</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="privacy.html">隐私政策</a>
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="buy.html">购买</a>
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="activate.html">激活</a>
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:support@example.com">支持邮箱</a>
+        </div>
+
+        <p>© 2026 全能生词本 Pro. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (saved === "dark" || (!saved && prefersDark)) {
+        root.classList.add("dark");
+      }
+    })();
+
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        const root = document.documentElement;
+        const isDark = root.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+    }
+  </script>
+</body>
+</html>
