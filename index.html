@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>霍德英语学习管家 · HORD — Own Your Words</title>
-  <meta name="description" content="Own Your Words｜霍德英语学习管家 · HORD。构建持久的英语能力：网页划词标记、批注金句、艾宾浩斯复习、导入导出。支持支付宝/微信支付，License Key 激活，最多 2 台设备。" />
+  <title>HORD · 霍德英语学习管家 — Own Your Words</title>
+  <meta name="description" content="Own Your Words｜HORD · 霍德英语学习管家（HORD English Companion）。构建持久的英语能力：网页划词标记、批注金句、艾宾浩斯复习、导入导出。支持支付宝/微信支付，License Key 激活，最多 2 台设备。" />
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -63,11 +63,11 @@
       <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5 lg:px-8">
         <a class="flex items-center gap-3" href="#top" aria-label="回到顶部">
           <div class="flex h-11 w-11 items-center justify-center rounded-xl">
-            <img src="logo.svg" alt="霍德英语学习管家（HORD）图标" class="h-10 w-10 object-contain"/>
+            <img src="logo.svg" alt="HORD · 霍德英语学习管家 图标" class="h-10 w-10 object-contain"/>
           </div>
           <div class="leading-tight">
-            <div class="text-lg font-semibold tracking-wide">霍德英语学习管家</div>
-            <div class="mt-0.5 text-xs font-semibold tracking-[0.18em] text-violet-600 dark:text-violet-300">HORD · Own Your Words</div>
+            <div class="text-lg font-semibold tracking-wide"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</div>
+            <div class="mt-0.5 text-[11px] font-medium tracking-[0.18em] text-slate-500 dark:text-white/55">HORD English Companion</div>
           </div>
         </a>
 
@@ -106,13 +106,10 @@
     <section id="top" class="relative z-10">
       <div class="mx-auto max-w-6xl px-5 pt-12 pb-10 sm:px-6 sm:pt-14 sm:pb-12 lg:px-8 lg:pt-20 lg:pb-16">
         <div class="max-w-3xl">
-          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">HORD · Own Your Words</p>
+          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">HORD English Companion</p>
 
           <h1 class="mt-5 text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-            <span class="block text-slate-900 dark:text-white">
-              霍德英语学习管家
-              <span class="ml-3 inline-flex translate-y-[-0.12em] items-center rounded-full border border-black/10 bg-white/70 px-3 py-1 text-sm font-semibold tracking-[0.18em] text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/80">HORD</span>
-            </span>
+            <span class="block text-slate-900 dark:text-white"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</span>
             <span class="mt-3 block bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Own Your Words</span>
             <span class="mt-3 block text-xl font-medium text-slate-700 dark:text-white/80 sm:text-2xl">构建持久的英语能力</span>
           </h1>
@@ -150,9 +147,25 @@
 
     <section id="screens" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
-        <div class="mb-8 max-w-2xl sm:mb-10">
-          <h2 class="text-2xl font-semibold sm:text-3xl">真实界面，一眼就懂</h2>
-          <p class="mt-3 text-slate-600 dark:text-white/70">把插件的关键交互放在首屏区域，让用户理解“怎么用”和“好在哪”。</p>
+        <div class="mb-8 sm:mb-10">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div class="max-w-2xl">
+              <h2 class="text-2xl font-semibold sm:text-3xl">真实界面，一眼就懂</h2>
+              <p class="mt-3 text-slate-600 dark:text-white/70">把插件的关键交互放在首屏区域，让用户理解“怎么用”和“好在哪”。</p>
+            </div>
+            <button
+              id="screensThemeToggle"
+              type="button"
+              class="rounded-full bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2.5 text-sm font-medium text-white shadow-glow hover:brightness-110"
+            >
+              🌙 切换到夜间联动预览
+            </button>
+          </div>
+          <div class="mt-3">
+            <span id="screensThemeStatus" class="inline-flex items-center rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-700 dark:text-violet-300">
+              当前：日间联动预览（网页 + 插件截图）
+            </span>
+          </div>
         </div>
         <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
@@ -180,7 +193,7 @@
               <img
                 id="screensMainImage"
                 src="screens/app-main.png"
-                alt="霍德英语学习管家（HORD）应用界面：主界面"
+                alt="HORD · 霍德英语学习管家 应用界面：主界面"
                 class="max-h-[520px] w-full rounded-xl object-contain"
                 loading="eager"
                 decoding="async"
@@ -214,7 +227,7 @@
                 class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
                 data-screen-src-light="screens/app-main.png"
                 data-screen-src-dark="screens/app-main-dark.png"
-                data-screen-alt="霍德英语学习管家（HORD）应用界面：主界面"
+                data-screen-alt="HORD · 霍德英语学习管家 应用界面：主界面"
                 data-screen-caption="主界面"
               >
                 <img
@@ -239,7 +252,7 @@
                 class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
                 data-screen-src-light="screens/app-review.png"
                 data-screen-src-dark="screens/app-review-dark.png"
-                data-screen-alt="霍德英语学习管家（HORD）应用界面：复习与计划"
+                data-screen-alt="HORD · 霍德英语学习管家 应用界面：复习与计划"
                 data-screen-caption="复习与计划"
               >
                 <img
@@ -264,7 +277,7 @@
                 class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
                 data-screen-src-light="screens/app-stats.png"
                 data-screen-src-dark="screens/app-stats-dark.png"
-                data-screen-alt="霍德英语学习管家（HORD）应用界面：统计与仪表盘"
+                data-screen-alt="HORD · 霍德英语学习管家 应用界面：统计与仪表盘"
                 data-screen-caption="统计与仪表盘"
               >
                 <img
@@ -534,11 +547,11 @@
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 text-sm text-slate-500 dark:text-white/50 md:flex-row lg:px-8">
 	        <div class="flex items-center gap-3">
 	          <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white/80 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5">
-		            <img src="logo.svg" alt="霍德英语学习管家（HORD）图标" class="h-6 w-6 object-contain"/>
+		            <img src="logo.svg" alt="HORD · 霍德英语学习管家 图标" class="h-6 w-6 object-contain"/>
 		          </div>
               <div class="leading-tight">
-                <div class="font-medium text-slate-700 dark:text-white/80">霍德英语学习管家</div>
-                <div class="mt-0.5 text-[11px] tracking-[0.2em] text-slate-500 dark:text-white/50">HORD · Own Your Words</div>
+                <div class="font-medium text-slate-700 dark:text-white/80"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</div>
+                <div class="mt-0.5 text-[11px] tracking-[0.2em] text-slate-500 dark:text-white/50">HORD English Companion</div>
               </div>
 		        </div>
 
@@ -549,7 +562,7 @@
           <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:support@example.com">支持邮箱</a>
         </div>
 
-	        <p>© 2026 霍德英语学习管家 · HORD. All rights reserved.</p>
+	        <p>© 2026 HORD · 霍德英语学习管家. All rights reserved.</p>
 	      </div>
 	    </footer>
   </div>
@@ -564,12 +577,20 @@
       }
     })();
 
+    const isSiteDarkMode = () => document.documentElement.classList.contains("dark");
+    const setSiteTheme = (isDark) => {
+      const root = document.documentElement;
+      root.classList.toggle("dark", Boolean(isDark));
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      window.dispatchEvent(new CustomEvent("themechange", { detail: { isDark: Boolean(isDark) } }));
+    };
+    window.__isSiteDarkMode = isSiteDarkMode;
+    window.__setSiteTheme = setSiteTheme;
+
     const themeToggle = document.getElementById("themeToggle");
     if (themeToggle) {
       themeToggle.addEventListener("click", () => {
-        const root = document.documentElement;
-        const isDark = root.classList.toggle("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
+        setSiteTheme(!isSiteDarkMode());
       });
     }
 
@@ -580,6 +601,8 @@
       const mainImage = document.getElementById("screensMainImage");
       const mainCaption = document.getElementById("screensMainCaption");
       const autoplayButton = document.getElementById("screensAutoplay");
+      const screensThemeToggle = document.getElementById("screensThemeToggle");
+      const screensThemeStatus = document.getElementById("screensThemeStatus");
 
       if (!thumbs || !mainButton || !mainImage || !mainCaption) return;
 
@@ -590,6 +613,7 @@
         window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       function isDarkThemeActive() {
+        if (typeof window.__isSiteDarkMode === "function") return window.__isSiteDarkMode();
         return document.documentElement.classList.contains("dark");
       }
 
@@ -619,6 +643,19 @@
           const dark = imageEl.getAttribute("data-src-dark") || light;
           applyImageWithFallback(imageEl, isDarkThemeActive() ? dark : light, light);
         });
+      }
+
+      function updateThemeFeatureUi(isDark) {
+        if (screensThemeToggle) {
+          screensThemeToggle.textContent = isDark
+            ? "☀️ 切换到日间联动预览"
+            : "🌙 切换到夜间联动预览";
+        }
+        if (screensThemeStatus) {
+          screensThemeStatus.textContent = isDark
+            ? "当前：夜间联动预览（网页 + 插件截图）"
+            : "当前：日间联动预览（网页 + 插件截图）";
+        }
       }
 
       let currentIndex = 0;
@@ -794,14 +831,22 @@
         });
       }
 
-      // Theme switches to corresponding screenshot variants.
-      if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-          refreshThumbTheme();
-          setActive(currentIndex);
-          if (!modal.classList.contains("hidden")) syncModal();
+      if (screensThemeToggle) {
+        screensThemeToggle.addEventListener("click", () => {
+          if (typeof window.__setSiteTheme === "function") {
+            window.__setSiteTheme(!isDarkThemeActive());
+          }
         });
       }
+
+      // Theme switches to corresponding screenshot variants.
+      window.addEventListener("themechange", (event) => {
+        const isDark = event?.detail?.isDark ?? isDarkThemeActive();
+        refreshThumbTheme();
+        setActive(currentIndex);
+        if (!modal.classList.contains("hidden")) syncModal();
+        updateThemeFeatureUi(isDark);
+      });
 
       // Pause while interacting with the screenshots area.
       if (screensSection) {
@@ -819,6 +864,7 @@
       mainImage.classList.add("transition-opacity", "duration-200");
       refreshThumbTheme();
       setActive(currentIndex);
+      updateThemeFeatureUi(isDarkThemeActive());
 
       // Auto start (unless user prefers reduced motion)
       if (!prefersReducedMotion) startAutoplay();
