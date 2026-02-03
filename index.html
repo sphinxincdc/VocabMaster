@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>全能生词本 Pro — Own Your Words.</title>
-  <meta name="description" content="Own Your Words. 构建持久的英语词汇能力。网页划词标记、批注金句、艾宾浩斯复习、导入导出。支持支付宝/微信支付，License Key 激活，最多 2 台设备。" />
-  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <title>霍德英语学习管家 · HORD — Own Your Words</title>
+  <meta name="description" content="Own Your Words｜霍德英语学习管家 · HORD。构建持久的英语能力：网页划词标记、批注金句、艾宾浩斯复习、导入导出。支持支付宝/微信支付，License Key 激活，最多 2 台设备。" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -34,6 +38,17 @@
         radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
       background-size: 22px 22px;
     }
+
+    /* Simple masonry for screenshots (no fixed aspect ratio). */
+    .masonry { column-gap: 1rem; }
+    .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+
+    @keyframes screensProgress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    #screensProgressBar { transform-origin: left; }
+    .screens-progress-on { animation: screensProgress 3.5s linear infinite; }
   </style>
 </head>
 
@@ -44,13 +59,16 @@
     <div class="pointer-events-none absolute bottom-[-120px] left-[-120px] h-[420px] w-[420px] rounded-full bg-purple-200/30 blur-[140px] dark:bg-purple-600/10"></div>
     <div class="pointer-events-none absolute inset-0 bg-grid opacity-20"></div>
 
-    <header class="relative z-10">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6 sm:py-6 lg:px-8">
+    <header class="fixed inset-x-0 top-0 z-30 border-b border-black/5 bg-[#F6F3FF]/70 backdrop-blur dark:border-white/10 dark:bg-[#0B0B10]/60">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5 lg:px-8">
         <a class="flex items-center gap-3" href="#top" aria-label="回到顶部">
-          <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white/80 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5">
-            <img src="logo.svg" alt="全能生词本 Pro 图标" class="h-7 w-7 object-contain"/>
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl">
+            <img src="logo.svg" alt="霍德英语学习管家（HORD）图标" class="h-10 w-10 object-contain"/>
           </div>
-          <span class="text-lg font-semibold tracking-wide">全能生词本 Pro</span>
+          <div class="leading-tight">
+            <div class="text-lg font-semibold tracking-wide">霍德英语学习管家</div>
+            <div class="mt-0.5 text-xs font-semibold tracking-[0.18em] text-violet-600 dark:text-violet-300">HORD · Own Your Words</div>
+          </div>
         </a>
 
         <nav class="hidden gap-8 text-sm text-slate-600 md:flex dark:text-white/70">
@@ -83,14 +101,20 @@
       </div>
     </header>
 
+    <div aria-hidden="true" class="h-[72px] sm:h-[84px]"></div>
+
     <section id="top" class="relative z-10">
       <div class="mx-auto max-w-6xl px-5 pt-12 pb-10 sm:px-6 sm:pt-14 sm:pb-12 lg:px-8 lg:pt-20 lg:pb-16">
         <div class="max-w-3xl">
-          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Vocabulary Tool for Real Reading</p>
+          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">HORD · Own Your Words</p>
 
           <h1 class="mt-5 text-3xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-            <span class="block bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Own Your Words.</span>
-            <span class="mt-3 block text-xl font-medium text-slate-700 dark:text-white/80 sm:text-2xl">构建持久的英语词汇能力</span>
+            <span class="block text-slate-900 dark:text-white">
+              霍德英语学习管家
+              <span class="ml-3 inline-flex translate-y-[-0.12em] items-center rounded-full border border-black/10 bg-white/70 px-3 py-1 text-sm font-semibold tracking-[0.18em] text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/80">HORD</span>
+            </span>
+            <span class="mt-3 block bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Own Your Words</span>
+            <span class="mt-3 block text-xl font-medium text-slate-700 dark:text-white/80 sm:text-2xl">构建持久的英语能力</span>
           </h1>
 
           <p class="mt-6 text-lg text-slate-600 dark:text-white/70 leading-relaxed">
@@ -124,35 +148,148 @@
       </div>
     </section>
 
-    <section id="screens" class="relative z-10">
+    <section id="screens" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div class="mb-8 max-w-2xl sm:mb-10">
           <h2 class="text-2xl font-semibold sm:text-3xl">真实界面，一眼就懂</h2>
           <p class="mt-3 text-slate-600 dark:text-white/70">把插件的关键交互放在首屏区域，让用户理解“怎么用”和“好在哪”。</p>
         </div>
-        <div class="grid gap-6 lg:grid-cols-2">
+        <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
-            <div class="aspect-[16/9] w-full rounded-2xl bg-gradient-to-br from-purple-200/60 via-white to-white dark:from-purple-900/30 dark:via-[#0B0B10] dark:to-[#0B0B10]">
-              <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为主界面截图（弹窗/词典/金句）</div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-white">应用界面</h3>
+                <p class="mt-1 text-xs text-slate-600 dark:text-white/60">自动轮播 · 点击放大 · ←/→ 切换</p>
+              </div>
+              <button
+                id="screensAutoplay"
+                type="button"
+                class="rounded-full border border-black/10 bg-white/80 px-3 py-1.5 text-xs text-slate-700 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:text-white"
+                aria-pressed="false"
+              >
+                自动播放
+              </button>
+            </div>
+
+            <button
+              id="screensMainButton"
+              type="button"
+              class="group mt-4 block w-full overflow-hidden rounded-2xl border border-black/5 bg-gradient-to-br from-slate-100 via-white to-white p-2 text-left shadow-sm dark:border-white/10 dark:from-white/5 dark:via-white/5 dark:to-white/0"
+              aria-label="放大查看截图"
+            >
+              <img
+                id="screensMainImage"
+                src="screens/app-main.png"
+                alt="霍德英语学习管家（HORD）应用界面：主界面"
+                class="max-h-[520px] w-full rounded-xl object-contain"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="mt-2 flex items-center justify-between gap-3 px-1">
+                <p id="screensMainCaption" class="text-xs text-slate-600 dark:text-white/60">主界面</p>
+                <p class="text-xs text-slate-500 dark:text-white/50">点击放大</p>
+              </div>
+
+              <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-black/5 dark:bg-white/10">
+                <div id="screensProgressBar" class="h-full w-full rounded-full bg-purple-500/70"></div>
+              </div>
+            </button>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">划词弹窗</span>
+              <span class="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">批注金句</span>
+              <span class="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">复习节奏</span>
+              <span class="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">导入导出</span>
+              <span class="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-white/70">统计面板</span>
             </div>
           </div>
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-            <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
-              <div class="aspect-[4/3] w-full rounded-2xl bg-gradient-to-br from-purple-100/80 via-white to-white dark:from-purple-900/20 dark:via-[#0B0B10] dark:to-[#0B0B10]">
-                <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为单词本/复习截图</div>
-              </div>
-            </div>
-            <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
-              <div class="aspect-[4/3] w-full rounded-2xl bg-gradient-to-br from-purple-100/80 via-white to-white dark:from-purple-900/20 dark:via-[#0B0B10] dark:to-[#0B0B10]">
-                <div class="flex h-full items-center justify-center text-xs text-slate-500 dark:text-white/50">替换为仪表盘/统计截图</div>
-              </div>
+
+          <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
+            <h3 class="text-sm font-semibold text-slate-900 dark:text-white">更多截图</h3>
+            <p class="mt-1 text-xs text-slate-600 dark:text-white/60">支持任意比例；夜间模式会自动切换到 dark 截图（若存在）。</p>
+
+            <div id="screensThumbs" class="masonry mt-4 columns-1 sm:columns-2 lg:columns-1">
+              <button
+                type="button"
+                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
+                data-screen-src-light="screens/app-main.png"
+                data-screen-src-dark="screens/app-main-dark.png"
+                data-screen-alt="霍德英语学习管家（HORD）应用界面：主界面"
+                data-screen-caption="主界面"
+              >
+                <img
+                  src="screens/app-main.png"
+                  alt=""
+                  class="w-full rounded-xl object-contain"
+                  data-screen-thumb
+                  data-src-light="screens/app-main.png"
+                  data-src-dark="screens/app-main-dark.png"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="mt-2 flex items-center justify-between gap-2 px-1">
+                  <span class="text-xs text-slate-700 dark:text-white/70">主界面</span>
+                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
+                </div>
+                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
+              </button>
+
+              <button
+                type="button"
+                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
+                data-screen-src-light="screens/app-review.png"
+                data-screen-src-dark="screens/app-review-dark.png"
+                data-screen-alt="霍德英语学习管家（HORD）应用界面：复习与计划"
+                data-screen-caption="复习与计划"
+              >
+                <img
+                  src="screens/app-review.png"
+                  alt=""
+                  class="w-full rounded-xl object-contain"
+                  data-screen-thumb
+                  data-src-light="screens/app-review.png"
+                  data-src-dark="screens/app-review-dark.png"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="mt-2 flex items-center justify-between gap-2 px-1">
+                  <span class="text-xs text-slate-700 dark:text-white/70">复习与计划</span>
+                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
+                </div>
+                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
+              </button>
+
+              <button
+                type="button"
+                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
+                data-screen-src-light="screens/app-stats.png"
+                data-screen-src-dark="screens/app-stats-dark.png"
+                data-screen-alt="霍德英语学习管家（HORD）应用界面：统计与仪表盘"
+                data-screen-caption="统计与仪表盘"
+              >
+                <img
+                  src="screens/app-stats.png"
+                  alt=""
+                  class="w-full rounded-xl object-contain"
+                  data-screen-thumb
+                  data-src-light="screens/app-stats.png"
+                  data-src-dark="screens/app-stats-dark.png"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="mt-2 flex items-center justify-between gap-2 px-1">
+                  <span class="text-xs text-slate-700 dark:text-white/70">统计与仪表盘</span>
+                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
+                </div>
+                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="features" class="relative z-10">
+    <section id="features" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div class="mb-10 max-w-2xl">
           <h2 class="text-2xl font-semibold sm:text-3xl">更少打扰，更高效率</h2>
@@ -195,7 +332,7 @@
       </div>
     </section>
 
-    <section id="workflow" class="relative z-10">
+    <section id="workflow" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div class="mb-10 max-w-2xl">
           <h2 class="text-2xl font-semibold sm:text-3xl">轻量流程，强大效果</h2>
@@ -224,7 +361,7 @@
       </div>
     </section>
 
-    <section id="pricing" class="relative z-10">
+    <section id="pricing" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div class="mb-10 max-w-2xl">
           <h2 class="text-2xl font-semibold sm:text-3xl">透明、简单的定价</h2>
@@ -338,7 +475,7 @@
       </div>
     </section>
 
-    <section id="faq" class="relative z-10">
+    <section id="faq" class="relative z-10 scroll-mt-28">
       <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <div class="mb-10 max-w-2xl">
           <h2 class="text-2xl font-semibold sm:text-3xl">常见问题</h2>
@@ -397,10 +534,13 @@
       <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 text-sm text-slate-500 dark:text-white/50 md:flex-row lg:px-8">
 	        <div class="flex items-center gap-3">
 	          <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-black/10 bg-white/80 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5">
-	            <img src="logo.svg" alt="全能生词本 Pro 图标" class="h-6 w-6 object-contain"/>
-	          </div>
-	          <span>全能生词本 Pro</span>
-	        </div>
+		            <img src="logo.svg" alt="霍德英语学习管家（HORD）图标" class="h-6 w-6 object-contain"/>
+		          </div>
+              <div class="leading-tight">
+                <div class="font-medium text-slate-700 dark:text-white/80">霍德英语学习管家</div>
+                <div class="mt-0.5 text-[11px] tracking-[0.2em] text-slate-500 dark:text-white/50">HORD · Own Your Words</div>
+              </div>
+		        </div>
 
         <div class="flex flex-wrap items-center justify-center gap-4">
           <a class="hover:text-slate-900 dark:hover:text-white/80" href="privacy.html">隐私政策</a>
@@ -409,9 +549,9 @@
           <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:support@example.com">支持邮箱</a>
         </div>
 
-        <p>© 2026 全能生词本 Pro. All rights reserved.</p>
-      </div>
-    </footer>
+	        <p>© 2026 霍德英语学习管家 · HORD. All rights reserved.</p>
+	      </div>
+	    </footer>
   </div>
 
   <script>
@@ -432,6 +572,257 @@
         localStorage.setItem("theme", isDark ? "dark" : "light");
       });
     }
+
+    (function () {
+      const screensSection = document.getElementById("screens");
+      const thumbs = document.getElementById("screensThumbs");
+      const mainButton = document.getElementById("screensMainButton");
+      const mainImage = document.getElementById("screensMainImage");
+      const mainCaption = document.getElementById("screensMainCaption");
+      const autoplayButton = document.getElementById("screensAutoplay");
+
+      if (!thumbs || !mainButton || !mainImage || !mainCaption) return;
+
+      const items = Array.from(thumbs.querySelectorAll("[data-screen-caption]"));
+      if (items.length === 0) return;
+
+      const prefersReducedMotion =
+        window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function isDarkThemeActive() {
+        return document.documentElement.classList.contains("dark");
+      }
+
+      function getScreenSources(el) {
+        const light = el.getAttribute("data-screen-src-light") || "";
+        const dark = el.getAttribute("data-screen-src-dark") || light;
+        const preferred = isDarkThemeActive() ? dark : light;
+        return { preferred, fallback: light };
+      }
+
+      function applyImageWithFallback(imageEl, preferredSrc, fallbackSrc) {
+        const fallback = fallbackSrc || preferredSrc;
+        imageEl.onerror = null;
+        imageEl.onerror = () => {
+          if (imageEl.getAttribute("src") !== fallback) {
+            imageEl.setAttribute("src", fallback);
+          }
+          imageEl.onerror = null;
+        };
+        imageEl.setAttribute("src", preferredSrc || fallback);
+      }
+
+      function refreshThumbTheme() {
+        const thumbsImages = thumbs.querySelectorAll("[data-screen-thumb]");
+        thumbsImages.forEach((imageEl) => {
+          const light = imageEl.getAttribute("data-src-light") || "";
+          const dark = imageEl.getAttribute("data-src-dark") || light;
+          applyImageWithFallback(imageEl, isDarkThemeActive() ? dark : light, light);
+        });
+      }
+
+      let currentIndex = 0;
+
+      function setActive(index) {
+        const safeIndex = (index + items.length) % items.length;
+        const el = items[safeIndex];
+        const { preferred: src, fallback } = getScreenSources(el);
+        const alt = el.getAttribute("data-screen-alt") || "应用界面截图";
+        const caption = el.getAttribute("data-screen-caption") || "";
+
+        currentIndex = safeIndex;
+        items.forEach((node, i) => {
+          const isActive = i === safeIndex;
+          node.classList.toggle("ring-2", isActive);
+          node.classList.toggle("ring-purple-500/60", isActive);
+          node.classList.toggle("ring-offset-2", isActive);
+          node.classList.toggle("ring-offset-transparent", isActive);
+          node.classList.toggle("scale-[1.01]", isActive);
+          node.setAttribute("aria-current", isActive ? "true" : "false");
+
+          const badge = node.querySelector("[data-active-badge]");
+          if (badge) badge.classList.toggle("hidden", !isActive);
+        });
+
+        if (!prefersReducedMotion) {
+          mainImage.classList.add("opacity-0");
+          requestAnimationFrame(() => {
+            applyImageWithFallback(mainImage, src, fallback);
+            mainImage.setAttribute("alt", alt);
+            mainCaption.textContent = caption;
+            requestAnimationFrame(() => mainImage.classList.remove("opacity-0"));
+          });
+        } else {
+          applyImageWithFallback(mainImage, src, fallback);
+          mainImage.setAttribute("alt", alt);
+          mainCaption.textContent = caption;
+        }
+      }
+
+      items.forEach((el, index) => {
+        el.addEventListener("click", () => {
+          stopAutoplay();
+          setActive(index);
+        });
+      });
+
+      // Lightbox
+      const modal = document.createElement("div");
+      modal.className =
+        "fixed inset-0 z-[60] hidden items-center justify-center bg-black/70 p-4 backdrop-blur";
+      modal.innerHTML = `
+        <div class="relative w-full max-w-5xl">
+          <button type="button" class="absolute -top-12 right-0 rounded-full bg-white/10 px-3 py-2 text-sm text-white hover:bg-white/20" data-close>关闭</button>
+          <div class="rounded-2xl bg-black/30 p-2">
+            <img class="max-h-[82vh] w-full rounded-xl object-contain" alt="" />
+          </div>
+          <div class="mt-3 flex items-center justify-between text-sm text-white/80">
+            <span data-caption></span>
+            <span class="text-white/60"><span data-index></span>/<span data-total></span></span>
+          </div>
+          <button type="button" class="absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white/10 px-3 py-2 text-white hover:bg-white/20" data-prev aria-label="上一张">‹</button>
+          <button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white/10 px-3 py-2 text-white hover:bg-white/20" data-next aria-label="下一张">›</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const modalImage = modal.querySelector("img");
+      const modalCaption = modal.querySelector("[data-caption]");
+      const modalIndex = modal.querySelector("[data-index]");
+      const modalTotal = modal.querySelector("[data-total]");
+      const closeModalButton = modal.querySelector("[data-close]");
+      const prevModalButton = modal.querySelector("[data-prev]");
+      const nextModalButton = modal.querySelector("[data-next]");
+
+      function openModal() {
+        modalTotal.textContent = String(items.length);
+        syncModal();
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+
+      function syncModal() {
+        const el = items[currentIndex];
+        const { preferred: src, fallback } = getScreenSources(el);
+        const alt = el.getAttribute("data-screen-alt") || "应用界面截图";
+        const caption = el.getAttribute("data-screen-caption") || "";
+        applyImageWithFallback(modalImage, src, fallback);
+        modalImage.setAttribute("alt", alt);
+        modalCaption.textContent = caption;
+        modalIndex.textContent = String(currentIndex + 1);
+      }
+
+      function prev() {
+        setActive(currentIndex - 1);
+        syncModal();
+      }
+      function next() {
+        setActive(currentIndex + 1);
+        syncModal();
+      }
+
+      mainButton.addEventListener("click", () => {
+        stopAutoplay();
+        openModal();
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+      closeModalButton.addEventListener("click", closeModal);
+      prevModalButton.addEventListener("click", prev);
+      nextModalButton.addEventListener("click", next);
+
+      document.addEventListener("keydown", (e) => {
+        if (modal.classList.contains("hidden")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft") prev();
+        if (e.key === "ArrowRight") next();
+      });
+
+      // Autoplay
+      let autoplayTimer = null;
+
+      function setAutoplayUi(isOn) {
+        if (!autoplayButton) return;
+        autoplayButton.setAttribute("aria-pressed", isOn ? "true" : "false");
+        autoplayButton.textContent = isOn ? "暂停播放" : "自动播放";
+      }
+
+      function startAutoplay() {
+        if (prefersReducedMotion || autoplayTimer) return;
+        autoplayTimer = window.setInterval(() => {
+          setActive(currentIndex + 1);
+        }, 3500);
+        setAutoplayUi(true);
+
+        const progressBar = document.getElementById("screensProgressBar");
+        if (progressBar) {
+          progressBar.classList.remove("screens-progress-on");
+          void progressBar.offsetWidth;
+          progressBar.classList.add("screens-progress-on");
+        }
+      }
+
+      function stopAutoplay() {
+        if (!autoplayTimer) return;
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+        setAutoplayUi(false);
+
+        const progressBar = document.getElementById("screensProgressBar");
+        if (progressBar) {
+          progressBar.classList.remove("screens-progress-on");
+          progressBar.style.transform = "scaleX(0)";
+          void progressBar.offsetWidth;
+          progressBar.style.transform = "";
+        }
+      }
+
+      if (autoplayButton) {
+        autoplayButton.addEventListener("click", () => {
+          const pressed = autoplayButton.getAttribute("aria-pressed") === "true";
+          if (pressed) stopAutoplay();
+          else startAutoplay();
+        });
+      }
+
+      // Theme switches to corresponding screenshot variants.
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          refreshThumbTheme();
+          setActive(currentIndex);
+          if (!modal.classList.contains("hidden")) syncModal();
+        });
+      }
+
+      // Pause while interacting with the screenshots area.
+      if (screensSection) {
+        screensSection.addEventListener("mouseenter", stopAutoplay);
+        screensSection.addEventListener("mouseleave", () => {
+          if (!prefersReducedMotion) startAutoplay();
+        });
+        screensSection.addEventListener("focusin", stopAutoplay);
+        screensSection.addEventListener("focusout", () => {
+          if (!prefersReducedMotion) startAutoplay();
+        });
+      }
+
+      // Initial state
+      mainImage.classList.add("transition-opacity", "duration-200");
+      refreshThumbTheme();
+      setActive(currentIndex);
+
+      // Auto start (unless user prefers reduced motion)
+      if (!prefersReducedMotion) startAutoplay();
+    })();
   </script>
 </body>
 </html>
