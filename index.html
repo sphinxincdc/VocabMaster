@@ -193,14 +193,14 @@
             >
               <img
                 id="screensMainImage"
-                src="screens/app-main.png"
-                alt="HORD · 霍德英语学习管家 应用界面：主界面"
+                src="screens/manange单词本/manange单词本日间1.png"
+                alt="HORD · 霍德英语学习管家 应用界面：单词本总览"
                 class="max-h-[520px] w-full rounded-xl object-contain"
                 loading="eager"
                 decoding="async"
               />
               <div class="mt-2 flex items-center justify-between gap-3 px-1">
-                <p id="screensMainCaption" class="text-xs text-slate-600 dark:text-white/60">主界面</p>
+                <p id="screensMainCaption" class="text-xs text-slate-600 dark:text-white/60">单词本总览</p>
                 <p class="text-xs text-slate-500 dark:text-white/50">点击放大</p>
               </div>
 
@@ -221,83 +221,10 @@
           <div class="rounded-3xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
             <h3 class="text-sm font-semibold text-slate-900 dark:text-white">更多截图</h3>
             <p class="mt-1 text-xs text-slate-600 dark:text-white/60">支持任意比例；夜间模式会自动切换到 dark 截图（若存在）。</p>
+            <div id="screensFilters" class="mt-3 flex flex-wrap gap-2"></div>
+            <p id="screensCount" class="mt-2 text-[11px] text-slate-500 dark:text-white/50">已加载 0 张</p>
 
-            <div id="screensThumbs" class="masonry mt-4 columns-1 sm:columns-2 lg:columns-1">
-              <button
-                type="button"
-                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
-                data-screen-src-light="screens/app-main.png"
-                data-screen-src-dark="screens/app-main-dark.png"
-                data-screen-alt="HORD · 霍德英语学习管家 应用界面：主界面"
-                data-screen-caption="主界面"
-              >
-                <img
-                  src="screens/app-main.png"
-                  alt=""
-                  class="w-full rounded-xl object-contain"
-                  data-screen-thumb
-                  data-src-light="screens/app-main.png"
-                  data-src-dark="screens/app-main-dark.png"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="mt-2 flex items-center justify-between gap-2 px-1">
-                  <span class="text-xs text-slate-700 dark:text-white/70">主界面</span>
-                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
-                </div>
-                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
-              </button>
-
-              <button
-                type="button"
-                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
-                data-screen-src-light="screens/app-review.png"
-                data-screen-src-dark="screens/app-review-dark.png"
-                data-screen-alt="HORD · 霍德英语学习管家 应用界面：复习与计划"
-                data-screen-caption="复习与计划"
-              >
-                <img
-                  src="screens/app-review.png"
-                  alt=""
-                  class="w-full rounded-xl object-contain"
-                  data-screen-thumb
-                  data-src-light="screens/app-review.png"
-                  data-src-dark="screens/app-review-dark.png"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="mt-2 flex items-center justify-between gap-2 px-1">
-                  <span class="text-xs text-slate-700 dark:text-white/70">复习与计划</span>
-                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
-                </div>
-                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
-              </button>
-
-              <button
-                type="button"
-                class="masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7"
-                data-screen-src-light="screens/app-stats.png"
-                data-screen-src-dark="screens/app-stats-dark.png"
-                data-screen-alt="HORD · 霍德英语学习管家 应用界面：统计与仪表盘"
-                data-screen-caption="统计与仪表盘"
-              >
-                <img
-                  src="screens/app-stats.png"
-                  alt=""
-                  class="w-full rounded-xl object-contain"
-                  data-screen-thumb
-                  data-src-light="screens/app-stats.png"
-                  data-src-dark="screens/app-stats-dark.png"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="mt-2 flex items-center justify-between gap-2 px-1">
-                  <span class="text-xs text-slate-700 dark:text-white/70">统计与仪表盘</span>
-                  <span class="text-xs text-slate-500 dark:text-white/50">点击查看</span>
-                </div>
-                <span class="pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white" data-active-badge>已选</span>
-              </button>
-            </div>
+            <div id="screensThumbs" class="masonry mt-4 columns-1 sm:columns-2 lg:columns-2"></div>
           </div>
         </div>
       </div>
@@ -621,6 +548,8 @@
     (function () {
       const screensSection = document.getElementById("screens");
       const thumbs = document.getElementById("screensThumbs");
+      const screensFilters = document.getElementById("screensFilters");
+      const screensCount = document.getElementById("screensCount");
       const mainButton = document.getElementById("screensMainButton");
       const mainImage = document.getElementById("screensMainImage");
       const mainCaption = document.getElementById("screensMainCaption");
@@ -629,6 +558,145 @@
       const screensThemeStatus = document.getElementById("screensThemeStatus");
 
       if (!thumbs || !mainButton || !mainImage || !mainCaption) return;
+      const screenCatalog = [
+        {
+          category: "单词本",
+          caption: "单词本总览",
+          alt: "HORD · 霍德英语学习管家 应用界面：单词本总览",
+          light: "screens/manange单词本/manange单词本日间1.png",
+          dark: "screens/manange单词本/manange单词本夜间1.png",
+        },
+        {
+          category: "单词本",
+          caption: "单词本列表细节",
+          alt: "HORD · 霍德英语学习管家 应用界面：单词本列表细节",
+          light: "screens/manange单词本/manange单词本日间2.png",
+          dark: "screens/manange单词本/manange单词本夜间2.png",
+        },
+        {
+          category: "划词弹窗",
+          caption: "划词翻译弹窗",
+          alt: "HORD · 霍德英语学习管家 应用界面：划词翻译弹窗",
+          light: "screens/content弹窗/日间模式翻译.png",
+          dark: "screens/content弹窗/夜间模式翻译.png",
+        },
+        {
+          category: "划词弹窗",
+          caption: "划词释义弹窗",
+          alt: "HORD · 霍德英语学习管家 应用界面：划词释义弹窗",
+          light: "screens/content弹窗/日间模式弹窗.png",
+          dark: "screens/content弹窗/夜间网页截图.png",
+        },
+        {
+          category: "划词弹窗",
+          caption: "弹窗扩展状态",
+          alt: "HORD · 霍德英语学习管家 应用界面：弹窗扩展状态",
+          light: "screens/content弹窗/日间模式弹窗2.png",
+          dark: "screens/content弹窗/夜间网页截图.png",
+        },
+        {
+          category: "Popup 菜单",
+          caption: "菜单栏（日间）",
+          alt: "HORD · 霍德英语学习管家 应用界面：菜单栏日间模式",
+          light: "screens/popup菜单/ 日间菜单栏.png",
+          dark: "screens/popup菜单/夜间菜单栏.png",
+        },
+        {
+          category: "艾宾浩斯",
+          caption: "复习进度总览",
+          alt: "HORD · 霍德英语学习管家 应用界面：艾宾浩斯复习进度总览",
+          light: "screens/test艾宾浩斯/艾宾浩斯日间模式0.png",
+          dark: "screens/test艾宾浩斯/艾宾浩斯0.png",
+        },
+        {
+          category: "艾宾浩斯",
+          caption: "复习任务面板",
+          alt: "HORD · 霍德英语学习管家 应用界面：艾宾浩斯复习任务面板",
+          light: "screens/test艾宾浩斯/艾宾浩斯日间模式2.png",
+          dark: "screens/test艾宾浩斯/艾宾浩斯2.png",
+        },
+        {
+          category: "艾宾浩斯",
+          caption: "复习行动状态",
+          alt: "HORD · 霍德英语学习管家 应用界面：艾宾浩斯复习行动状态",
+          light: "screens/test艾宾浩斯/艾宾浩斯日间模式4.png",
+          dark: "screens/test艾宾浩斯/艾宾浩斯4.png",
+        },
+        {
+          category: "艾宾浩斯",
+          caption: "复习统计趋势",
+          alt: "HORD · 霍德英语学习管家 应用界面：艾宾浩斯复习统计趋势",
+          light: "screens/test艾宾浩斯/艾宾浩斯日间模式7.png",
+          dark: "screens/test艾宾浩斯/艾宾浩斯7.png",
+        },
+      ];
+      const filterOptions = ["全部", "单词本", "划词弹窗", "Popup 菜单", "艾宾浩斯"];
+
+      function renderFilters() {
+        if (!screensFilters) return;
+        screensFilters.innerHTML = "";
+        filterOptions.forEach((label, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = label;
+          button.className =
+            "rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-xs text-slate-700 transition hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:text-white";
+          if (index === 0) {
+            button.classList.add("border-violet-500/40", "bg-violet-500/10", "text-violet-700", "dark:text-violet-300");
+          }
+          button.setAttribute("data-screen-filter", label === "全部" ? "all" : label);
+          screensFilters.appendChild(button);
+        });
+      }
+
+      function renderThumbs() {
+        thumbs.innerHTML = "";
+        screenCatalog.forEach((item) => {
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className =
+            "masonry-item relative w-full overflow-hidden rounded-2xl border border-black/5 bg-slate-100/70 p-2 text-left shadow-sm transition hover:border-black/10 hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-purple-500/40 dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/7";
+          card.setAttribute("data-screen-src-light", item.light);
+          card.setAttribute("data-screen-src-dark", item.dark || item.light);
+          card.setAttribute("data-screen-alt", item.alt);
+          card.setAttribute("data-screen-caption", item.caption);
+          card.setAttribute("data-screen-category", item.category);
+
+          const image = document.createElement("img");
+          image.setAttribute("src", item.light);
+          image.setAttribute("alt", "");
+          image.setAttribute("loading", "lazy");
+          image.setAttribute("decoding", "async");
+          image.setAttribute("data-screen-thumb", "");
+          image.setAttribute("data-src-light", item.light);
+          image.setAttribute("data-src-dark", item.dark || item.light);
+          image.className = "w-full rounded-xl object-contain";
+          card.appendChild(image);
+
+          const row = document.createElement("div");
+          row.className = "mt-2 flex items-center justify-between gap-2 px-1";
+          row.innerHTML = `
+            <div class="min-w-0">
+              <span class="block truncate text-xs text-slate-700 dark:text-white/70">${item.caption}</span>
+              <span class="mt-0.5 inline-flex rounded-full border border-black/10 px-2 py-0.5 text-[10px] text-slate-500 dark:border-white/10 dark:text-white/50">${item.category}</span>
+            </div>
+            <span class="shrink-0 text-xs text-slate-500 dark:text-white/50">点击查看</span>
+          `;
+          card.appendChild(row);
+
+          const badge = document.createElement("span");
+          badge.className =
+            "pointer-events-none absolute right-3 top-3 hidden rounded-full bg-purple-600 px-2 py-1 text-[11px] font-medium text-white";
+          badge.setAttribute("data-active-badge", "");
+          badge.textContent = "已选";
+          card.appendChild(badge);
+
+          thumbs.appendChild(card);
+        });
+      }
+
+      renderFilters();
+      renderThumbs();
 
       const items = Array.from(thumbs.querySelectorAll("[data-screen-caption]"));
       if (items.length === 0) return;
@@ -668,6 +736,14 @@
           applyImageWithFallback(imageEl, isDarkThemeActive() ? dark : light, light);
         });
       }
+      function getVisibleItems() {
+        return items.filter((node) => !node.hidden);
+      }
+
+      function updateCount() {
+        if (!screensCount) return;
+        screensCount.textContent = `已加载 ${getVisibleItems().length} 张`;
+      }
 
       function updateThemeFeatureUi(isDark) {
         if (screensThemeToggle) {
@@ -683,17 +759,17 @@
       }
 
       let currentIndex = 0;
+      let activeItem = null;
 
-      function setActive(index) {
-        const safeIndex = (index + items.length) % items.length;
-        const el = items[safeIndex];
+      function setActiveByElement(el) {
+        if (!el) return;
         const { preferred: src, fallback } = getScreenSources(el);
         const alt = el.getAttribute("data-screen-alt") || "应用界面截图";
         const caption = el.getAttribute("data-screen-caption") || "";
+        activeItem = el;
 
-        currentIndex = safeIndex;
-        items.forEach((node, i) => {
-          const isActive = i === safeIndex;
+        items.forEach((node) => {
+          const isActive = node === el;
           node.classList.toggle("ring-2", isActive);
           node.classList.toggle("ring-purple-500/60", isActive);
           node.classList.toggle("ring-offset-2", isActive);
@@ -720,12 +796,61 @@
         }
       }
 
+      function setActive(index) {
+        const visibleItems = getVisibleItems();
+        if (visibleItems.length === 0) return;
+        const safeIndex = (index + visibleItems.length) % visibleItems.length;
+        currentIndex = safeIndex;
+        setActiveByElement(visibleItems[safeIndex]);
+      }
+
       items.forEach((el, index) => {
         el.addEventListener("click", () => {
           stopAutoplay();
-          setActive(index);
+          const visibleItems = getVisibleItems();
+          const nextIndex = visibleItems.indexOf(el);
+          currentIndex = nextIndex >= 0 ? nextIndex : 0;
+          setActiveByElement(el);
         });
       });
+
+      function applyFilter(filterValue) {
+        items.forEach((node) => {
+          const category = node.getAttribute("data-screen-category") || "";
+          node.hidden = !(filterValue === "all" || category === filterValue);
+        });
+        if (screensFilters) {
+          screensFilters.querySelectorAll("[data-screen-filter]").forEach((button) => {
+            const isActive = button.getAttribute("data-screen-filter") === filterValue;
+            button.classList.toggle("border-violet-500/40", isActive);
+            button.classList.toggle("bg-violet-500/10", isActive);
+            button.classList.toggle("text-violet-700", isActive);
+            button.classList.toggle("dark:text-violet-300", isActive);
+          });
+        }
+        const visibleItems = getVisibleItems();
+        updateCount();
+        if (visibleItems.length === 0) return;
+        if (!activeItem || activeItem.hidden) {
+          currentIndex = 0;
+          setActive(0);
+          return;
+        }
+        const currentVisibleIndex = visibleItems.indexOf(activeItem);
+        currentIndex = currentVisibleIndex >= 0 ? currentVisibleIndex : 0;
+        setActive(currentIndex);
+      }
+
+      if (screensFilters) {
+        screensFilters.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLElement)) return;
+          const filterValue = target.getAttribute("data-screen-filter");
+          if (!filterValue) return;
+          stopAutoplay();
+          applyFilter(filterValue);
+        });
+      }
 
       // Lightbox
       const modal = document.createElement("div");
@@ -756,7 +881,7 @@
       const nextModalButton = modal.querySelector("[data-next]");
 
       function openModal() {
-        modalTotal.textContent = String(items.length);
+        modalTotal.textContent = String(getVisibleItems().length || items.length);
         syncModal();
         modal.classList.remove("hidden");
         modal.classList.add("flex");
@@ -770,7 +895,9 @@
       }
 
       function syncModal() {
-        const el = items[currentIndex];
+        const visibleItems = getVisibleItems();
+        if (visibleItems.length === 0) return;
+        const el = activeItem && !activeItem.hidden ? activeItem : visibleItems[currentIndex] || visibleItems[0];
         const { preferred: src, fallback } = getScreenSources(el);
         const alt = el.getAttribute("data-screen-alt") || "应用界面截图";
         const caption = el.getAttribute("data-screen-caption") || "";
@@ -867,7 +994,8 @@
       window.addEventListener("themechange", (event) => {
         const isDark = event?.detail?.isDark ?? isDarkThemeActive();
         refreshThumbTheme();
-        setActive(currentIndex);
+        if (activeItem && !activeItem.hidden) setActiveByElement(activeItem);
+        else setActive(currentIndex);
         if (!modal.classList.contains("hidden")) syncModal();
         updateThemeFeatureUi(isDark);
       });
@@ -887,7 +1015,7 @@
       // Initial state
       mainImage.classList.add("transition-opacity", "duration-200");
       refreshThumbTheme();
-      setActive(currentIndex);
+      applyFilter("all");
       updateThemeFeatureUi(isDarkThemeActive());
 
       // Auto start (unless user prefers reduced motion)
