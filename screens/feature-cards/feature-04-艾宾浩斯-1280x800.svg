@@ -1,0 +1,30 @@
+<svg width="1280" height="800" viewBox="0 0 1280 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F2FF"/>
+      <stop offset="1" stop-color="#F2F5FF"/>
+    </linearGradient>
+    <filter id="cardShadow" x="0" y="0" width="200%" height="200%">
+      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#1B1135" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+
+  <text x="96" y="176" font-family="Manrope, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" letter-spacing="4" fill="#7A6F9B">FEATURE 04</text>
+  <text x="96" y="222" font-family="Manrope, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="30" font-weight="600" fill="#121726">艾宾浩斯节奏复习</text>
+
+  <text x="96" y="268" font-family="Manrope, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#374151">
+    <tspan x="96" dy="0">按遗忘曲线推进复习计划，展示任务与</tspan>
+    <tspan x="96" dy="24">统计趋势，减少无效重复。</tspan>
+  </text>
+
+  <text x="96" y="344" font-family="Manrope, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#6B7280">
+    关键词：复习计划 / 进度追踪 / 统计趋势
+  </text>
+
+  <rect x="520" y="128" width="680" height="540" rx="32" fill="#FFFFFF" filter="url(#cardShadow)"/>
+  <rect x="540" y="150" width="640" height="490" rx="24" fill="#EEF1FF"/>
+  <image href="../test艾宾浩斯/艾宾浩斯日间模式2.png" x="548" y="158" width="624" height="474" preserveAspectRatio="xMidYMid meet"/>
+  <text x="540" y="700" font-family="Manrope, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#6B7280">复习任务面板</text>
+</svg>
