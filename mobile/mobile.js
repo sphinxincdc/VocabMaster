@@ -647,7 +647,7 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('q-export-img') && ($('q-export-img').textContent = (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u9009\u4e2d\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Selected'));
+    $('q-export-img') && ($('q-export-img').textContent = (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Image'));
     $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
     $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
     const wSort = $('w-sort');
@@ -687,6 +687,7 @@
     $('dlg-w-close') && ($('dlg-w-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
     $('dlg-q-close') && ($('dlg-q-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
     $('dlg-q-save') && ($('dlg-q-save').textContent = (lang === 'zh' ? '\u4fdd\u5b58' : 'Save'));
+    $('dlg-q-export') && ($('dlg-q-export').textContent = (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Image'));
     $('dlg-w-meaning') && ($('dlg-w-meaning').placeholder = (lang === 'zh' ? '\u4e2d\u6587\u91ca\u4e49' : 'Chinese meaning'));
     $('dlg-w-english') && ($('dlg-w-english').placeholder = (lang === 'zh' ? '\u82f1\u6587\u91ca\u4e49' : 'English meaning'));
     $('dlg-w-note') && ($('dlg-w-note').placeholder = (lang === 'zh' ? '\u6279\u6ce8' : 'Note / Annotation'));
@@ -1359,6 +1360,21 @@
     return null;
   }
 
+  function removeWordRecord(asset0, id){
+    const key = String(id || '').toLowerCase().trim();
+    if(!key) return false;
+    const arr = Array.isArray(asset0?.words) ? asset0.words : null;
+    if(!arr) return false;
+    for(let i = 0; i < arr.length; i += 1){
+      const rec = arr[i];
+      const rid = String(rec?.id || rec?.word || '').toLowerCase().trim();
+      if(rid !== key) continue;
+      arr.splice(i, 1);
+      return true;
+    }
+    return false;
+  }
+
   function commitWordRating(asset, wordId, quality){
     const now = Date.now();
     const rec = findWordRecord(asset, wordId);
@@ -1782,12 +1798,20 @@
       const sub = String(rec?.translation || rec?.annotation || rec?.url || '');
       const badges = [];
       if(rec?.isFavorite === true) badges.push('<span class=\"badge fav\">\u2605</span>');
-      if(isDueRec(rec || {})) badges.push(`<span class=\"badge due\">${escapeHtml(t('badge_due'))}</span>`);
+      badges.push(`<button class=\"badge exportBtn\" data-export-quote=\"1\" type=\"button\">${lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export'}</button>`);
       if(Array.isArray(rec?.tags) && rec.tags.length) badges.push(`<span class=\"badge\">${rec.tags.slice(0,3).join(', ')}</span>`);
       div.innerHTML =
         `${quoteSelectMode ? `<input class=\"liPick\" type=\"checkbox\" ${selectedQuotes.has(id0) ? 'checked' : ''} aria-label=\"select\">` : ''}`+
         `<div class=\"liTop\"><div class=\"liTitle\">${escapeHtml(title || (lang === 'zh' ? '\uff08\u7a7a\uff09' : '(empty)'))}</div><div class=\"liBadges\">${badges.join('')}</div></div>`+
         `<div class=\"liSub\">${escapeHtml(sub || '')}</div>`;
+      const exportBtn = div.querySelector('[data-export-quote=\"1\"]');
+      if(exportBtn){
+        exportBtn.addEventListener('click', (e)=>{
+          e.preventDefault();
+          e.stopPropagation();
+          exportSelectedQuoteImages([rec]).catch(()=>{});
+        });
+      }
       div.addEventListener('click', (e)=>{
         if(quoteSelectMode){
           e.preventDefault();
@@ -1862,7 +1886,7 @@
       const del = $('q-batch-del');
       const exp = $('q-export-img');
       const apply = $('q-batch-tag-apply');
-      if(exp) exp.disabled = quoteExportRuntime.inFlight ? true : !(enable && sel > 0);
+      if(exp) exp.disabled = !!quoteExportRuntime.inFlight;
       if(del) del.disabled = !(enable && sel > 0);
       if(apply) apply.disabled = !(enable && sel > 0);
     }
@@ -1881,7 +1905,7 @@
           ? (lang === 'zh'
               ? `\ud83d\uddbc\ufe0f \u5bfc\u51fa\u4e2d ${quoteExportRuntime.done}/${quoteExportRuntime.total}`
               : `\ud83d\uddbc\ufe0f Exporting ${quoteExportRuntime.done}/${quoteExportRuntime.total}`)
-          : (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u9009\u4e2d\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Selected');
+          : (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Image');
         if(!isRunning) btnExport.disabled = false;
       }
       if(btnCancel){
@@ -1948,20 +1972,24 @@
         toast('toast-quotes', lang === 'zh' ? '\u8bf7\u5148\u5bfc\u5165\u8d44\u4ea7\u6587\u4ef6\u3002' : 'Import an asset first.');
         return;
       }
-      if(!Array.isArray(listOverride) && (!quoteSelectMode || selectedQuotes.size === 0)){
-        toast('toast-quotes', lang === 'zh' ? '\u8bf7\u5148\u8fdb\u5165\u9009\u62e9\u6a21\u5f0f\u5e76\u52fe\u9009\u81f3\u5c11 1 \u6761\u91d1\u53e5\u3002' : 'Select at least 1 quote first.');
-        return;
-      }
       const exporter = globalThis.QuoteCardExporter;
       if(!exporter || typeof exporter.exportPng !== 'function'){
         toast('toast-quotes', lang === 'zh' ? '\u5bfc\u51fa\u6a21\u5757\u672a\u52a0\u8f7d\uff0c\u8bf7\u5237\u65b0\u540e\u91cd\u8bd5\u3002' : 'Exporter not loaded. Refresh and try again.');
         return;
       }
-      const list = Array.isArray(listOverride)
+      let list = Array.isArray(listOverride)
         ? listOverride.filter(rec=>rec && rec.isDeleted !== true)
-        : Array.from(selectedQuotes).map(id=>findQuoteRecord(asset, id)).filter(rec=>rec && rec.isDeleted !== true);
+        : [];
       if(!list.length){
-        toast('toast-quotes', lang === 'zh' ? '\u672a\u627e\u5230\u53ef\u5bfc\u51fa\u7684\u91d1\u53e5\u3002' : 'No quotes available for export.');
+        if(quoteSelectMode && selectedQuotes.size > 0){
+          list = Array.from(selectedQuotes).map(id=>findQuoteRecord(asset, id)).filter(rec=>rec && rec.isDeleted !== true);
+        } else if(dlgQuoteId){
+          const rec = findQuoteRecord(asset, dlgQuoteId);
+          if(rec && rec.isDeleted !== true) list = [rec];
+        }
+      }
+      if(!list.length){
+        toast('toast-quotes', lang === 'zh' ? '\u8bf7\u5148\u6253\u5f00\u4e00\u6761\u91d1\u53e5\u6216\u9009\u4e2d\u91d1\u53e5\u540e\u518d\u5bfc\u51fa\u3002' : 'Open a quote or select quotes before export.');
         return;
       }
       quoteExportRuntime.cancelRequested = false;
@@ -2218,11 +2246,7 @@
       if(!asset || !dlgWordId) return;
       if(!confirm(t('confirm_delete_one_word'))) return;
       const mr = await commitMutation(asset, ()=>{
-        const rec = findWordRecord(asset, dlgWordId);
-        if(!rec || rec.isDeleted === true) return false;
-        rec.isDeleted = true;
-        rec.updatedAt = Date.now();
-        return true;
+        return removeWordRecord(asset, dlgWordId);
       });
       if(!mr.ok){
         toast('toast-dlg-word', lang === 'zh' ? `\u5220\u9664\u5931\u8d25\uff1a${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
@@ -2231,7 +2255,7 @@
       closeWordDialog();
       updateHomeUI(asset);
       renderWords();
-      toast('toast-words', lang === 'zh' ? '\u5df2\u8f6f\u5220\u9664\u3002' : 'Deleted (soft-delete).');
+      toast('toast-words', lang === 'zh' ? '\u5df2\u5220\u9664\u3002' : 'Deleted.');
     });
 
     // --- Quote dialog ---
@@ -2296,6 +2320,18 @@
       updateHomeUI(asset);
       renderQuotes();
       toast('toast-dlg-quote', t('toast_saved'));
+    });
+
+    $('dlg-q-export')?.addEventListener('click', async ()=>{
+      toast('toast-dlg-quote','');
+      if(!asset || !dlgQuoteId) return;
+      const rec = findQuoteRecord(asset, dlgQuoteId);
+      if(!rec || rec.isDeleted === true){
+        toast('toast-dlg-quote', lang === 'zh' ? '\u8be5\u91d1\u53e5\u5df2\u4e0d\u5b58\u5728\u3002' : 'Quote no longer exists.');
+        return;
+      }
+      await exportSelectedQuoteImages([rec]);
+      toast('toast-dlg-quote', lang === 'zh' ? '\u5df2\u89e6\u53d1\u5bfc\u51fa\u3002' : 'Export started.');
     });
 
     $('dlg-q-del')?.addEventListener('click', async ()=>{
@@ -2566,11 +2602,7 @@
       const mr = await commitMutation(asset, ()=>{
         let changed = false;
         for(const id of ids){
-          const rec = findWordRecord(asset, id);
-          if(!rec || rec.isDeleted === true) continue;
-          rec.isDeleted = true;
-          rec.updatedAt = Date.now();
-          changed = true;
+          if(removeWordRecord(asset, id)) changed = true;
         }
         return changed;
       });
@@ -2578,7 +2610,7 @@
         toast('toast-words', lang === 'zh' ? `\u6279\u91cf\u5220\u9664\u5931\u8d25\uff1a${mr.error || 'unknown'}` : `Batch delete failed: ${mr.error || 'unknown'}`);
         return;
       }
-      toast('toast-words', t('toast_deleted', selectedWords.size, t('word_unit')));
+      toast('toast-words', lang === 'zh' ? `\u5df2\u5220\u9664 ${selectedWords.size} \u4e2a\u5355\u8bcd\u3002` : `Deleted ${selectedWords.size} words.`);
       setWordSelectMode(false);
       updateHomeUI(asset);
     });

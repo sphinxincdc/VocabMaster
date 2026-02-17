@@ -459,6 +459,17 @@ input::placeholder{
   background: rgba(255,61,92,0.08);
   color:#8a1530;
 }
+.badge.exportBtn{
+  cursor: pointer;
+  border-color: rgba(90,69,255,0.32);
+  background: rgba(90,69,255,0.10);
+  color: #2f2a71;
+}
+[data-theme="dark"] .badge.exportBtn{
+  border-color: rgba(116,103,255,0.48);
+  background: rgba(116,103,255,0.20);
+  color: #dfe4ff;
+}
 
 /* List hosts: page scroll, not inner fixed-scroll. */
 #w-list, #q-list{
