@@ -586,6 +586,11 @@ body.modal-open{
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   align-items: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+  padding-top: 10px;
+  background: linear-gradient(180deg, rgba(18,23,54,0), rgba(18,23,54,0.94) 35%);
 }
 .dlgActions #dlg-q-meta{
   grid-column: 1 / -1;
