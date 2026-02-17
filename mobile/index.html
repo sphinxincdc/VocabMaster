@@ -25,19 +25,17 @@
         <div>
           <h1 id="brandTitle">HORD Mobile Manager</h1>
           <p id="brandTagline">Import / manage / export your vocabulary asset without File System Access API.</p>
+          <p class="brandSlogan" id="brandSlogan">Yesterday, You Said Tomorrow</p>
         </div>
       </div>
       <div class="langRow">
-        <span class="verBadge" id="mobile-version">v-</span>
-        <button class="btn iconToggle" id="btn-lang" type="button" aria-label="Language toggle">🇬🇧</button>
         <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
       </div>
       <div class="tabs" role="tablist" aria-label="Tabs">
-        <button class="tab" id="tab-home" data-tab="home" data-active="1">📦 Asset</button>
+        <button class="tab" id="tab-home" data-tab="home" data-active="1">📦 资产管理</button>
         <button class="tab" id="tab-words" data-tab="words" data-active="0">📘 Vocabulary</button>
         <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">✨ Quotes</button>
         <button class="tab" id="tab-review" data-tab="review" data-active="0">🧠 Review</button>
-        <button class="tab" id="tab-debug" data-tab="debug" data-active="0">Debug</button>
       </div>
     </div>
 
@@ -67,6 +65,25 @@
             Desktop: export HORD asset JSON -> Mobile: Import -> after study Export and replace cloud file -> Desktop import/merge.
           </div>
         </div>
+        <details class="hintBox" id="home-debug-fold" style="margin-top:12px;">
+          <summary style="font-weight:900; cursor:pointer;">调试与快照（高级）</summary>
+          <div class="row" style="margin-top:10px;">
+            <button class="btn" id="btn-dump" disabled>Dump JSON</button>
+            <button class="btn" id="btn-rehash" disabled>Recompute Hash</button>
+          </div>
+          <div class="row" style="margin-top:10px;">
+            <button class="btn" id="btn-backup-now" disabled>Backup Now</button>
+            <select id="bk-select" disabled style="flex:1; min-width:220px;"></select>
+            <button class="btn danger" id="btn-restore-backup" disabled>Restore</button>
+          </div>
+          <div class="row small muted" style="margin-top:8px;">
+            <span id="bk-hint">Keeps the latest 3 snapshots. Restore is local-only.</span>
+          </div>
+          <div class="row small muted" style="margin-top:8px;">
+            <button class="btn" id="btn-cache-bust" type="button">Reload (no cache)</button>
+          </div>
+          <pre id="debug-out" class="small" style="margin-top:10px; white-space:pre-wrap; word-break:break-word; color:#2a2a3d;"></pre>
+        </details>
       </div>
 
       <div class="card" id="panel-words" style="display:none;">
@@ -111,24 +128,9 @@
         </div>
         <div class="row" style="margin-top:10px;">
           <button class="btn" id="q-select" disabled>Select</button>
-          <button class="btn" id="q-export-img" disabled>🖼️ Export Selected</button>
-          <button class="btn danger" id="q-export-cancel" style="display:none;">Cancel Export</button>
           <button class="btn danger" id="q-batch-del" disabled>Delete</button>
           <input id="q-batch-tags" type="text" placeholder="Add tags (comma)" style="flex:1; min-width: 200px;">
           <button class="btn primary" id="q-batch-tag-apply" disabled>Apply</button>
-        </div>
-        <div class="qExportProgress" id="q-export-progress-wrap" style="display:none;">
-          <div class="qExportProgressBar">
-            <div class="qExportProgressFill" id="q-export-progress-fill"></div>
-          </div>
-          <div class="small muted" id="q-export-progress-text">0 / 0</div>
-        </div>
-        <div class="qExportFailWrap" id="q-export-fail-wrap" style="display:none;">
-          <div class="row">
-            <span class="small muted" id="q-export-fail-title">Failed items</span>
-            <button class="btn" id="q-export-retry-failed">Retry Failed</button>
-          </div>
-          <ul class="qExportFailList" id="q-export-fail-list"></ul>
         </div>
         <div class="row small muted" style="margin-top:8px;">
           <span id="q-exp-style-lbl">Export style</span>
@@ -154,7 +156,6 @@
         <h2>Review</h2>
         <div class="row">
           <button class="tab" id="rv-words" data-active="1" type="button">Words</button>
-          <button class="tab" id="rv-quotes" data-active="0" type="button">Quotes</button>
           <select id="rv-meaning-mode">
             <option value="both">CN + EN</option>
             <option value="cn">CN</option>
@@ -177,27 +178,6 @@
           </div>
         </div>
         <div class="toast" id="toast-review"></div>
-      </div>
-
-      <div class="card" id="panel-debug" style="display:none;">
-        <h2>Debug</h2>
-        <div class="row">
-          <button class="btn" id="btn-dump" disabled>Dump JSON</button>
-          <button class="btn" id="btn-rehash" disabled>Recompute Hash</button>
-        </div>
-        <div class="row" style="margin-top:10px;">
-          <button class="btn" id="btn-backup-now" disabled>Backup Now</button>
-          <select id="bk-select" disabled style="flex:1; min-width:220px;"></select>
-          <button class="btn danger" id="btn-restore-backup" disabled>Restore</button>
-        </div>
-        <div class="row small muted" style="margin-top:8px;">
-          <span id="bk-hint">Keeps the latest 3 snapshots. Restore is local-only.</span>
-        </div>
-        <div class="row small muted" style="margin-top:8px;">
-          <span class="pill" id="dbg-version">Version: -</span>
-          <button class="btn" id="btn-cache-bust" type="button">Reload (no cache)</button>
-        </div>
-        <pre id="debug-out" class="small" style="margin-top:10px; white-space:pre-wrap; word-break:break-word; color:#2a2a3d;"></pre>
       </div>
     </div>
   </div>
@@ -247,10 +227,6 @@
           <div class="small muted" id="dlg-q-label">Edit Quote</div>
           <div class="qWord" id="dlg-q-title" style="font-size:18px; margin:0;">quote</div>
         </div>
-        <div class="row">
-          <button class="btn danger" id="dlg-q-del">Delete</button>
-          <button class="btn" id="dlg-q-close">Close</button>
-        </div>
       </div>
     </div>
     <div style="padding:14px 14px;">
@@ -272,9 +248,11 @@
       <div class="row" style="margin-top:10px;">
         <input id="dlg-q-tags" type="text" placeholder="Tags (comma separated)" style="flex:1; min-width: 220px;">
       </div>
-      <div class="row" style="margin-top:12px;">
+      <div class="row dlgActions" style="margin-top:12px;">
         <button class="btn primary" id="dlg-q-save">Save</button>
         <button class="btn" id="dlg-q-export">🖼️ Export Image</button>
+        <button class="btn danger" id="dlg-q-del">Delete</button>
+        <button class="btn" id="dlg-q-close">Close</button>
         <span class="small muted" id="dlg-q-meta"></span>
       </div>
       <div class="toast" id="toast-dlg-quote"></div>

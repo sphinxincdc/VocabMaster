@@ -44,7 +44,7 @@ body{
 .wrap{
   max-width: 980px;
   margin: 0 auto;
-  padding: 18px 16px 32px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(32px + env(safe-area-inset-bottom, 0px));
 }
 
 .top{
@@ -127,6 +127,14 @@ body{
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
+}
+.brandSlogan{
+  margin: 6px 0 0;
+  color: #8f96b8;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 .tabs{
@@ -465,6 +473,9 @@ input::placeholder{
   background: rgba(90,69,255,0.10);
   color: #2f2a71;
 }
+[data-theme="dark"] .brandSlogan{
+  color: #9da9cf;
+}
 [data-theme="dark"] .badge.exportBtn{
   border-color: rgba(116,103,255,0.48);
   background: rgba(116,103,255,0.20);
@@ -552,10 +563,32 @@ input::placeholder{
     radial-gradient(420px 180px at 20% 0%, rgba(116,103,255,0.20), transparent 60%),
     rgba(16,21,46,0.96);
 }
+[data-theme="dark"] .top{
+  background: linear-gradient(180deg, rgba(11,16,34,0.92), rgba(11,16,34,0.22));
+  border-radius: 18px;
+  padding: 8px;
+}
 [data-theme="dark"] select{
   background: #131a3d;
   color: #e7ecff;
   border-color: #2a3566;
+}
+
+dialog::backdrop{
+  background: rgba(3, 8, 22, 0.58);
+  backdrop-filter: blur(10px);
+}
+body.modal-open{
+  overflow: hidden;
+}
+.dlgActions{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  align-items: center;
+}
+.dlgActions #dlg-q-meta{
+  grid-column: 1 / -1;
 }
 [data-theme="dark"] dialog{
   background: #121736;

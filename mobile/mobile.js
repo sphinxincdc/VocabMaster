@@ -324,7 +324,7 @@
     return 'Auto';
   }
 
-  let lang = getLang();
+  let lang = 'zh';
   let themeMode = 'light';
   let wordsSortField = 'time';
   let wordsSortDir = 'desc';
@@ -607,7 +607,7 @@
 
   function applyI18n(){
     try{
-      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.documentElement.lang = 'zh-CN';
     }catch(_){}
 
     // Brand
@@ -619,9 +619,8 @@
     $('tab-words') && ($('tab-words').textContent = t('tab_words'));
     $('tab-quotes') && ($('tab-quotes').textContent = t('tab_quotes'));
     $('tab-review') && ($('tab-review').textContent = t('tab_review'));
-    $('tab-debug') && ($('tab-debug').textContent = t('tab_debug'));
+    
     $('rv-words') && ($('rv-words').textContent = t('rv_words'));
-    $('rv-quotes') && ($('rv-quotes').textContent = t('rv_quotes'));
     $('home-sync-guide')?.querySelector('div') && ($('home-sync-guide').querySelector('div').textContent = t('sync_guide_title'));
     $('home-sync-guide')?.querySelector('.small') && ($('home-sync-guide').querySelector('.small').textContent = t('sync_guide_body'));
     const rvMode = $('rv-meaning-mode');
@@ -636,7 +635,7 @@
     document.querySelector('#panel-words h2') && (document.querySelector('#panel-words h2').textContent = t('h_words'));
     document.querySelector('#panel-quotes h2') && (document.querySelector('#panel-quotes h2').textContent = t('h_quotes'));
     document.querySelector('#panel-review h2') && (document.querySelector('#panel-review h2').textContent = t('h_review'));
-    document.querySelector('#panel-debug h2') && (document.querySelector('#panel-debug h2').textContent = t('h_debug'));
+    
 
     // Buttons / labels
     $('btn-import') && ($('btn-import').textContent = t('btn_import'));
@@ -710,8 +709,8 @@
     $('q-q') && ($('q-q').placeholder = t('ph_search_quotes'));
     $('w-batch-tags') && ($('w-batch-tags').placeholder = t('ph_tags'));
     $('q-batch-tags') && ($('q-batch-tags').placeholder = t('ph_tags'));
-    $('w-hint') && ($('w-hint').textContent = t('hint_words'));
-    $('q-hint') && ($('q-hint').textContent = t('hint_quotes'));
+    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '点开单词查看详情；删除为硬删除。' : 'Tap a word for details; delete is hard delete.'));
+    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '点击右侧“导出图片”可直接导出单条。' : 'Use the right-side export button for single quote export.'));
 
     // Review buttons
     document.querySelector('.rate[data-q=\"0\"]') && (document.querySelector('.rate[data-q=\"0\"]').textContent = t('rate_forgot'));
@@ -719,11 +718,6 @@
     document.querySelector('.rate[data-q=\"5\"]') && (document.querySelector('.rate[data-q=\"5\"]').textContent = t('rate_easy'));
 
     // Language toggle shows the target language label (what you switch to).
-    const bl = $('btn-lang');
-    if(bl){
-      bl.textContent = (lang === 'zh') ? '\ud83c\uddec\ud83c\udde7' : '\ud83c\udde8\ud83c\uddf3';
-      bl.title = (lang === 'zh') ? 'Switch to English' : '\u5207\u6362\u5230\u4e2d\u6587';
-    }
     const rmh = $('review-mode-hint');
     if(rmh){
       rmh.textContent = lang === 'zh'
@@ -731,7 +725,6 @@
         : 'When your library is large, review auto-focuses on the most important 50-100 items.';
     }
     applyTheme();
-    setVersionTag();
     updateSortStatePills();
   }
 
@@ -1016,7 +1009,7 @@
   }
 
   function setTab(tab){
-    for(const id of ['home','words','quotes','review','debug']){
+    for(const id of ['home','words','quotes','review']){
       const btn = document.querySelector(`.tab[data-tab="${id}"]`);
       if(btn) btn.dataset.active = id === tab ? '1' : '0';
       const panel = $(`panel-${id}`);
@@ -1549,14 +1542,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    $('btn-lang')?.addEventListener('click', ()=>{
-      lang = (lang === 'zh') ? 'en' : 'zh';
-      try{ localStorage.setItem(LANG_KEY, lang); }catch(_){}
-      applyI18n();
-      updateHomeUI(asset);
-      renderBackups();
-    });
-
     $('btn-theme')?.addEventListener('click', ()=>{
       if(themeMode === 'auto') themeMode = 'light';
       else if(themeMode === 'light') themeMode = 'dark';
@@ -1668,16 +1653,14 @@
 
     let queue = [];
     let qIdx = 0;
-    let reviewTarget = 'words'; // 'words' | 'quotes'
+    let reviewTarget = 'words';
     let reviewMeaningMode = String(localStorage.getItem('hord_mobile_review_meaning_mode_v1') || 'both');
     if(!['both','cn','en'].includes(reviewMeaningMode)) reviewMeaningMode = 'both';
 
     function setReviewTarget(t){
-      reviewTarget = t === 'quotes' ? 'quotes' : 'words';
+      reviewTarget = 'words';
       const bw = $('rv-words');
-      const bq = $('rv-quotes');
       if(bw) bw.dataset.active = reviewTarget === 'words' ? '1' : '0';
-      if(bq) bq.dataset.active = reviewTarget === 'quotes' ? '1' : '0';
       toast('toast-review','');
       const card = $('review-card');
       if(card) card.dataset.on = '0';
@@ -1686,7 +1669,6 @@
     }
 
     $('rv-words')?.addEventListener('click', ()=> setReviewTarget('words'));
-    $('rv-quotes')?.addEventListener('click', ()=> setReviewTarget('quotes'));
     const rvModeEl = $('rv-meaning-mode');
     if(rvModeEl){
       rvModeEl.value = reviewMeaningMode;
@@ -1694,7 +1676,7 @@
         const v = String(rvModeEl.value || 'both');
         reviewMeaningMode = ['both','cn','en'].includes(v) ? v : 'both';
         try{ localStorage.setItem('hord_mobile_review_meaning_mode_v1', reviewMeaningMode); }catch(_){}
-        if(reviewTarget === 'words') renderReview();
+        renderReview();
       });
     }
 
@@ -2190,17 +2172,21 @@
     const phUk = getWordPhonetic(rec, 'uk');
     $('dlg-w-phon-us').textContent = `US: ${phUs || '-'}`;
     $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
-    $('dlg-w-meta').textContent = lang === 'zh'
+      $('dlg-w-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
       : `Updated: ${fmtTime(rec.updatedAt)} · Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
-      if(dlg && typeof dlg.showModal === 'function') dlg.showModal();
+      if(dlg && typeof dlg.showModal === 'function'){
+        dlg.showModal();
+        document.body.classList.add('modal-open');
+      }
     }
 
     function closeWordDialog(){
       stopWordPronounce();
       const dlg = $('dlg-word');
       if(dlg && typeof dlg.close === 'function') dlg.close();
+      document.body.classList.remove('modal-open');
       dlgWordId = '';
     }
 
@@ -2274,15 +2260,19 @@
       $('dlg-q-title2').value = String(rec.title || '');
     $('dlg-q-tags').value = Array.isArray(rec.tags) ? rec.tags.join(', ') : '';
     $('dlg-q-meta').textContent = lang === 'zh'
-      ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
-      : `Updated: ${fmtTime(rec.updatedAt)} · Reviews: ${Number(rec.reviewCount)||0}`;
+      ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
+      : `Updated: ${fmtTime(rec.updatedAt)}`;
       const dlg = $('dlg-quote');
-      if(dlg && typeof dlg.showModal === 'function') dlg.showModal();
+      if(dlg && typeof dlg.showModal === 'function'){
+        dlg.showModal();
+        document.body.classList.add('modal-open');
+      }
     }
 
     function closeQuoteDialog(){
       const dlg = $('dlg-quote');
       if(dlg && typeof dlg.close === 'function') dlg.close();
+      document.body.classList.remove('modal-open');
       dlgQuoteId = '';
     }
 
@@ -2366,40 +2356,28 @@
         toast('toast-review',
           queue.length
             ? (lang === 'zh' ? '\u672c\u6b21\u590d\u4e60\u5df2\u5b8c\u6210\u3002' : 'Session finished.')
-            : (reviewTarget === 'quotes'
-                ? (lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u91d1\u53e5\u3002' : 'No due quotes found.')
-                : (lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u5355\u8bcd\u3002' : 'No due words found.'))
+            : (lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u5355\u8bcd\u3002' : 'No due words found.')
         );
         return;
       }
       const id = queue[qIdx];
-      const rec = reviewTarget === 'quotes'
-        ? (findQuoteRecord(asset, id) || {})
-        : (findWordRecord(asset, id) || {});
+      const rec = findWordRecord(asset, id) || {};
       if(card) card.dataset.on = '1';
       if(prog) prog.textContent = `${qIdx + 1} / ${queue.length}`;
-      if(reviewTarget === 'quotes'){
-        if(wEl) wEl.textContent = (lang === 'zh' ? '\u91d1\u53e5' : 'Quote');
-        const text = String(rec.text || '').trim();
-        const tr = String(rec.translation || '').trim();
-        const note = String(rec.annotation || '').trim();
-        if(mEl) mEl.textContent = (text + (tr ? `\n\n${tr}` : '') + (note ? `\n\n${note}` : '')).trim() || (lang === 'zh' ? '\uff08\u7a7a\u91d1\u53e5\uff09' : '(empty quote)');
+      if(wEl) wEl.textContent = String(rec.word || rec.id || id);
+      const cn = String(getWordMeaning(rec) || '').trim();
+      const en = String(getWordEnglishMeaning(rec) || '').trim();
+      let lines = '';
+      if(reviewMeaningMode === 'cn'){
+        lines = cn || (lang === 'zh' ? '\uff08\u6682\u65e0\u4e2d\u6587\u91ca\u4e49\uff09' : '(no Chinese meaning)');
+      }else if(reviewMeaningMode === 'en'){
+        lines = en || (lang === 'zh' ? '\uff08\u6682\u65e0\u82f1\u6587\u91ca\u4e49\uff09' : '(no English meaning)');
       }else{
-        if(wEl) wEl.textContent = String(rec.word || rec.id || id);
-        const cn = String(getWordMeaning(rec) || '').trim();
-        const en = String(getWordEnglishMeaning(rec) || '').trim();
-        let lines = '';
-        if(reviewMeaningMode === 'cn'){
-          lines = cn || (lang === 'zh' ? '\uff08\u6682\u65e0\u4e2d\u6587\u91ca\u4e49\uff09' : '(no Chinese meaning)');
-        }else if(reviewMeaningMode === 'en'){
-          lines = en || (lang === 'zh' ? '\uff08\u6682\u65e0\u82f1\u6587\u91ca\u4e49\uff09' : '(no English meaning)');
-        }else{
-          const p1 = `CN: ${cn || (lang === 'zh' ? '\u6682\u65e0' : 'N/A')}`;
-          const p2 = `EN: ${en || (lang === 'zh' ? '\u6682\u65e0' : 'N/A')}`;
-          lines = `${p1}\n\n${p2}`;
-        }
-        if(mEl) mEl.textContent = lines;
+        const p1 = `CN: ${cn || (lang === 'zh' ? '\u6682\u65e0' : 'N/A')}`;
+        const p2 = `EN: ${en || (lang === 'zh' ? '\u6682\u65e0' : 'N/A')}`;
+        lines = `${p1}\n\n${p2}`;
       }
+      if(mEl) mEl.textContent = lines;
     }
 
     $('btn-start').addEventListener('click', ()=>{
@@ -2412,15 +2390,11 @@
       const laser = laserEnabled(asset);
       const lim = laser ? clamp(desired, 50, 100) : clamp(desired, 1, 200);
       if($('limit')) $('limit').value = String(lim);
-      queue = reviewTarget === 'quotes'
-        ? buildQuoteReviewQueue(asset, lim)
-        : buildReviewQueue(asset, lim);
+      queue = buildReviewQueue(asset, lim);
       qIdx = 0;
       renderReview();
       if(!queue.length){
-        toast('toast-review', reviewTarget === 'quotes'
-          ? (lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u91d1\u53e5\uff0c\u53ef\u7a0d\u540e\u518d\u8bd5\u6216\u5bfc\u5165\u66f4\u591a\u91d1\u53e5\u3002' : 'No due quotes found. Try later or import more quotes.')
-          : (lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u5355\u8bcd\uff0c\u53ef\u7a0d\u540e\u518d\u8bd5\u6216\u5bfc\u5165\u66f4\u5927\u7684\u8d44\u4ea7\u3002' : 'No due words found. Try later or import a larger asset.'));
+        toast('toast-review', lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u5355\u8bcd\uff0c\u53ef\u7a0d\u540e\u518d\u8bd5\u6216\u5bfc\u5165\u66f4\u5927\u7684\u8d44\u4ea7\u3002' : 'No due words found. Try later or import a larger asset.');
       }
     });
 
@@ -2432,9 +2406,7 @@
         const id = queue[qIdx];
 
       const mr = await commitMutation(asset, ()=>{
-        const r = reviewTarget === 'quotes'
-          ? commitQuoteRating(asset, id, q)
-          : commitWordRating(asset, id, q);
+        const r = commitWordRating(asset, id, q);
         return r.ok;
       });
       if(!mr.ok){
@@ -2459,7 +2431,7 @@
         `capabilities: ${JSON.stringify(caps)} isPro=${isProUser()}\n`+
         `summary: ${summary}`;
       out.textContent = runtime + '\n\n' + (asset ? JSON.stringify(asset, null, 2) : (lang === 'zh' ? '(\u65e0\u8d44\u4ea7)' : '(no asset)'));
-      setTab('debug');
+      setTab('home');
     });
 
     $('btn-rehash').addEventListener('click', async ()=>{
