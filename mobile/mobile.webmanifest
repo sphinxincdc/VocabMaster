@@ -1,0 +1,24 @@
+{
+  "name": "HORD Mobile Web Manager",
+  "short_name": "HORD",
+  "description": "Import, manage, review and export your HORD asset on mobile.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1022",
+  "theme_color": "#0b1022",
+  "icons": [
+    {
+      "src": "logo-square-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
