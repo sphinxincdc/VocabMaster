@@ -253,6 +253,15 @@ input[type="number"], input[type="text"]{
   font-weight: 800;
   outline:none;
 }
+select{
+  border:1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-weight: 800;
+  outline:none;
+}
 input[readonly]{
   opacity: 0.96;
 }
@@ -286,7 +295,7 @@ input::placeholder{
   border:1px solid var(--border);
   background:
     radial-gradient(420px 180px at 20% 0%, rgba(90,69,255,0.10), transparent 60%),
-    #fff;
+    var(--card);
   padding: 14px 14px;
 }
 .reviewCard[data-on="1"]{ display:block; }
@@ -521,6 +530,21 @@ input::placeholder{
 [data-theme="dark"] .qMeaning,
 [data-theme="dark"] .liTitle{
   color: var(--ink);
+}
+[data-theme="dark"] .pill.laser{
+  border-color: rgba(116,103,255,0.55);
+  background: rgba(116,103,255,0.16);
+  color: #dfe4ff;
+}
+[data-theme="dark"] .reviewCard{
+  background:
+    radial-gradient(420px 180px at 20% 0%, rgba(116,103,255,0.20), transparent 60%),
+    rgba(16,21,46,0.96);
+}
+[data-theme="dark"] select{
+  background: #131a3d;
+  color: #e7ecff;
+  border-color: #2a3566;
 }
 [data-theme="dark"] dialog{
   background: #121736;
