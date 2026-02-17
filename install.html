@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>安装插件 — HORD · 霍德英语学习管家</title>
-  <meta name="description" content="HORD · 霍德英语学习管家（HORD English Companion）安装指引（Chrome MV3）。" />
-  <link rel="icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="apple-touch-icon" href="logo.png?v=20260203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>安装下载 - HORD · 霍德英语学习管家</title>
+  <meta name="description" content="HORD · 霍德英语学习管家安装与下载入口：Chrome 商店、GitHub、百度网盘。" />
+  <link rel="icon" type="image/png" href="logo.png?v=20260217" />
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260217" />
+  <link rel="apple-touch-icon" href="logo.png?v=20260217" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -26,14 +26,13 @@
           }
         }
       }
-    }
+    };
   </script>
   <style>
     :root { --grid-color: rgba(0, 0, 0, 0.06); }
     .dark { --grid-color: rgba(255, 255, 255, 0.06); }
     .bg-grid {
-      background-image:
-        radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
+      background-image: radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
       background-size: 22px 22px;
     }
   </style>
@@ -44,11 +43,9 @@
     <div class="pointer-events-none absolute inset-0 bg-grid opacity-20"></div>
 
     <header class="relative z-10">
-      <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
-        <a class="flex items-center gap-3" href="index.html" aria-label="回到首页">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl">
-            <img src="logo.png" alt="HORD · 霍德英语学习管家 图标" class="h-10 w-10 object-contain"/>
-          </div>
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
+        <a class="flex items-center gap-3" href="index.html" aria-label="返回首页">
+          <img src="logo.png" alt="HORD Logo" class="h-10 w-10 object-contain" />
           <div class="leading-tight">
             <div class="text-lg font-semibold tracking-wide"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</div>
             <div class="mt-0.5 text-[11px] font-medium tracking-[0.18em] text-slate-500 dark:text-white/55">HORD English Companion</div>
@@ -56,61 +53,86 @@
         </a>
         <div class="flex items-center gap-3">
           <button id="themeToggle" class="hidden items-center gap-2 rounded-full border border-black/10 px-3 py-2 text-xs text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white md:flex" type="button" aria-label="主题切换">
-            <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-            </svg>
-            <svg class="h-4 w-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-            </svg>
-            主题
+            🌗 主题
           </button>
-          <a href="buy.html" class="rounded-full border border-black/10 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">购买</a>
+          <a href="index.html" class="rounded-full border border-black/10 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">返回官网</a>
         </div>
       </div>
     </header>
 
     <main class="relative z-10">
-      <div class="mx-auto max-w-5xl px-5 pb-14 pt-8 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl px-5 pb-14 pt-8 sm:px-6 lg:px-8">
         <div class="mb-8">
-          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Install Guide</p>
-          <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">安装插件</h1>
-          <p class="mt-3 text-slate-600 dark:text-white/70">支持 Chrome MV3。若已上架商店，可直接在商店页面安装。</p>
+          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Install & Download</p>
+          <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">HORD 安装方式（3 选 1）</h1>
+          <p class="mt-3 text-slate-600 dark:text-white/70">优先推荐 Chrome 商店安装。国内网络可使用百度网盘。开发者用户可走 GitHub 包安装。</p>
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <section class="rounded-3xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
-            <h2 class="text-lg font-semibold">本地加载安装（开发者模式）</h2>
-            <ol class="mt-4 space-y-3 text-sm text-slate-600 dark:text-white/70 list-decimal list-inside">
-              <li>打开 Chrome → 地址栏输入 <span class="text-slate-900 dark:text-white">chrome://extensions/</span></li>
-              <li>右上角开启「开发者模式」</li>
-              <li>点击「加载已解压的扩展程序」</li>
-              <li>选择项目根目录：<span class="text-slate-900 dark:text-white">Vocabulary Builder</span></li>
-              <li>安装完成后，浏览网页划词即可使用</li>
-            </ol>
-          </section>
+        <section class="grid gap-5 md:grid-cols-3">
+          <article class="rounded-3xl border border-black/10 bg-white/80 p-6 dark:border-white/10 dark:bg-white/5">
+            <div class="text-xs text-slate-500 dark:text-white/60">方式 1（推荐）</div>
+            <h2 class="mt-2 text-lg font-semibold">🛍️ Chrome 商店安装</h2>
+            <p class="mt-3 text-sm text-slate-600 dark:text-white/70">自动更新、最省事，适合大多数用户。</p>
+            <a
+              href="https://chromewebstore.google.com/detail/hord-english-companion/cnmlcjjclidbefafpepadcdcjleamnni?hl=zh-CN&authuser=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-4 py-3 text-sm font-medium text-white shadow-glow hover:brightness-110"
+            >
+              打开 Chrome 商店
+            </a>
+          </article>
 
-          <aside class="rounded-3xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
-            <h2 class="text-lg font-semibold">商店安装（如已上架）</h2>
-            <p class="mt-4 text-sm text-slate-600 dark:text-white/70">替换为 Chrome Web Store 的安装链接。</p>
-            <a href="#" class="mt-6 inline-flex items-center justify-center rounded-full border border-black/10 px-5 py-3 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">打开商店页面</a>
-            <div class="mt-6 text-xs text-slate-500 dark:text-white/50">如果你是企业环境，可能需要允许扩展安装权限。</div>
-          </aside>
-        </div>
+          <article class="rounded-3xl border border-black/10 bg-white/80 p-6 dark:border-white/10 dark:bg-white/5">
+            <div class="text-xs text-slate-500 dark:text-white/60">方式 2</div>
+            <h2 class="mt-2 text-lg font-semibold">💻 GitHub 下载</h2>
+            <p class="mt-3 text-sm text-slate-600 dark:text-white/70">适合手动安装、版本回滚、开发者调试。</p>
+            <a
+              href="https://github.com/sphinxincdc/VocabMaster-Extension"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex w-full items-center justify-center rounded-full border border-black/10 px-4 py-3 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white"
+            >
+              打开 GitHub 仓库
+            </a>
+          </article>
 
-        <div class="mt-10 rounded-3xl border border-black/10 bg-white/70 p-6 text-sm text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-          安装后如需升级专业版，请前往购买页面获取 License Key，再回到激活页面完成绑定。
-        </div>
+          <article class="rounded-3xl border border-black/10 bg-white/80 p-6 dark:border-white/10 dark:bg-white/5">
+            <div class="text-xs text-slate-500 dark:text-white/60">方式 3（国内用户）</div>
+            <h2 class="mt-2 text-lg font-semibold">🇨🇳 百度网盘下载</h2>
+            <p class="mt-3 text-sm text-slate-600 dark:text-white/70">分享文件：<span class="font-medium">HORD · 霍德英语学习管家</span></p>
+            <div class="mt-3 rounded-2xl border border-black/10 bg-white/70 p-3 text-sm dark:border-white/10 dark:bg-white/5">
+              <div>提取码：<span class="font-semibold">8888</span></div>
+            </div>
+            <a
+              href="https://pan.baidu.com/s/1xobPL3RakEK9N9aJOpFR0A?pwd=8888"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex w-full items-center justify-center rounded-full border border-black/10 px-4 py-3 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white"
+            >
+              打开百度网盘链接
+            </a>
+          </article>
+        </section>
+
+        <section class="mt-8 rounded-3xl border border-black/10 bg-white/80 p-6 dark:border-white/10 dark:bg-white/5">
+          <h3 class="text-base font-semibold">手动安装步骤（GitHub / 百度网盘下载包通用）</h3>
+          <ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-slate-600 dark:text-white/70">
+            <li>打开 Chrome，访问 <span class="text-slate-900 dark:text-white">chrome://extensions/</span></li>
+            <li>右上角开启 <span class="text-slate-900 dark:text-white">开发者模式</span></li>
+            <li>点击 <span class="text-slate-900 dark:text-white">加载已解压的扩展程序</span></li>
+            <li>选择解压后的 HORD 插件目录（含 <span class="text-slate-900 dark:text-white">manifest.json</span>）</li>
+          </ol>
+        </section>
       </div>
     </main>
 
     <footer class="relative z-10 border-t border-black/10 dark:border-white/10">
-      <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-slate-500 dark:text-white/50 md:flex-row">
-        <p>© 2026 HORD · 霍德英语学习管家. All rights reserved.</p>
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-slate-500 dark:text-white/50 md:flex-row">
+        <p>© 2026 HORD · 霍德英语学习管家</p>
         <div class="flex items-center gap-4">
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="index.html">返回首页</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="activate.html">激活</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:support@example.com">支持邮箱</a>
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="index.html">首页</a>
+          <a class="hover:text-slate-900 dark:hover:text-white/80" href="mobile/">Mobile Manager</a>
         </div>
       </div>
     </footer>
@@ -121,9 +143,7 @@
       const root = document.documentElement;
       const saved = localStorage.getItem("theme");
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (saved === "dark" || (!saved && prefersDark)) {
-        root.classList.add("dark");
-      }
+      if (saved === "dark" || (!saved && prefersDark)) root.classList.add("dark");
     })();
 
     const themeToggle = document.getElementById("themeToggle");
