@@ -1,4 +1,4 @@
-﻿// mobile.js
+// mobile.js
 // Phase 3 scaffold: a simple, local IndexedDB-backed web manager for HORD assets.
 // - Works without File System Access API (mobile-friendly).
 // - Manual import/export only. No auto cloud writeback.
@@ -52,12 +52,12 @@
       ph_search_words: 'Search word / meaning / note',
       ph_search_quotes: 'Search quote / translation / note',
       ph_tags: 'Add tags (comma)',
-      hint_words: 'Tap a word to view details. Delete is soft-delete.',
-      hint_quotes: 'Tap an item to view. Delete is soft-delete.',
+      hint_words: 'Tap a word to view details. Delete is hard delete.',
+      hint_quotes: 'Tap an item to view.',
       lbl_session_size: 'Session size',
-      rate_forgot: 'Forgot',
-      rate_hard: 'Hard',
-      rate_easy: 'Easy',
+      rate_forgot: 'Not Remembered',
+      rate_hard: 'Familiar',
+      rate_easy: 'Mastered',
       toast_import_first: 'Import an asset first.',
       toast_import_ok: 'Import successful (merged if local copy existed). You can export anytime.',
       toast_import_cancel: 'Import cancelled.',
@@ -75,9 +75,9 @@
         `Changes detected: ${changed ? 'YES' : 'NO'}\n\n`+
         `Proceed with import?`
       ),
-      confirm_delete_words: (n)=>`Soft-delete ${n} words?`,
+      confirm_delete_words: (n)=>`Delete ${n} words?`,
       confirm_delete_quotes: (n)=>`Soft-delete ${n} quotes?`,
-      confirm_delete_one_word: 'Soft-delete this word?',
+      confirm_delete_one_word: 'Delete this word?',
       confirm_delete_one_quote: 'Soft-delete this quote?',
       rv_words: 'Words',
       rv_quotes: 'Quotes',
@@ -114,12 +114,12 @@
       ph_search_words: '\u641c\u7d22\uff1a\u5355\u8bcd / \u91ca\u4e49 / \u6279\u6ce8',
       ph_search_quotes: '\u641c\u7d22\uff1a\u91d1\u53e5 / \u7ffb\u8bd1 / \u6279\u6ce8',
       ph_tags: '\u6dfb\u52a0\u6807\u7b7e\uff08\u9017\u53f7\u5206\u9694\uff09',
-      hint_words: '\u70b9\u51fb\u5355\u8bcd\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u8f6f\u5220\u9664\u3002',
-      hint_quotes: '\u70b9\u51fb\u6761\u76ee\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u8f6f\u5220\u9664\u3002',
+      hint_words: '\u70b9\u51fb\u5355\u8bcd\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u786c\u5220\u9664\u3002',
+      hint_quotes: '\u70b9\u51fb\u6761\u76ee\u67e5\u770b\u8be6\u60c5\u3002',
       lbl_session_size: '\u5355\u6b21\u6570\u91cf',
-      rate_forgot: '\u5fd8\u4e86',
-      rate_hard: '\u56f0\u96be',
-      rate_easy: '\u7b80\u5355',
+      rate_forgot: '\u4e0d\u8bb0\u5f97',
+      rate_hard: '\u6709\u5370\u8c61',
+      rate_easy: '\u5df2\u638c\u63e1',
       toast_import_first: '\u8bf7\u5148\u5bfc\u5165\u8d44\u4ea7\u6587\u4ef6\u3002',
       toast_import_ok: '\u5bfc\u5165\u6210\u529f\uff08\u5982\u6709\u672c\u5730\u526f\u672c\u4f1a\u81ea\u52a8\u5408\u5e76\uff09\u3002',
       toast_import_cancel: '\u5df2\u53d6\u6d88\u5bfc\u5165\u3002',
@@ -129,9 +129,9 @@
       toast_tags_applied: (n)=>`\u5df2\u4e3a ${n} \u6761\u8bb0\u5f55\u6dfb\u52a0\u6807\u7b7e\u3002`,
       toast_deleted: (n, what)=>`\u5df2\u8f6f\u5220\u9664 ${n} \u6761${what}\u3002`,
       confirm_import_merge: (w,q)=>`\u5bfc\u5165\u9884\u89c8\n\n\u5bfc\u5165\uff1a\u5355\u8bcd=${w} \u91d1\u53e5=${q}\n\n\u7ee7\u7eed\u5bfc\u5165\uff1f`,
-      confirm_delete_words: (n)=>`\u8f6f\u5220\u9664 ${n} \u4e2a\u5355\u8bcd\uff1f`,
+      confirm_delete_words: (n)=>`\u5220\u9664 ${n} \u4e2a\u5355\u8bcd\uff1f`,
       confirm_delete_quotes: (n)=>`\u8f6f\u5220\u9664 ${n} \u6761\u91d1\u53e5\uff1f`,
-      confirm_delete_one_word: '\u8f6f\u5220\u9664\u8fd9\u4e2a\u5355\u8bcd\uff1f',
+      confirm_delete_one_word: '\u5220\u9664\u8fd9\u4e2a\u5355\u8bcd\uff1f',
       confirm_delete_one_quote: '\u8f6f\u5220\u9664\u8fd9\u6761\u91d1\u53e5\uff1f',
       rv_words: '\u5355\u8bcd',
       rv_quotes: '\u91d1\u53e5',
@@ -150,7 +150,7 @@
       h_words: '\ud83d\udcd8 Vocabulary',
       h_quotes: '\u2728 Quotes Library',
       stat_total_words: 'Vocabulary Size',
-      hint_quotes: 'Tap an item to view details. Delete is soft-delete.',
+      hint_quotes: 'Tap an item to view details.',
       rv_words: '\ud83d\udcd8 Words',
       rv_quotes: '\u2728 Quotes',
       rv_mode_both: 'CN + EN',
@@ -164,12 +164,12 @@
     zh: {
       brand_title: '\u0048\u004f\u0052\u0044 \u624b\u673a\u7ba1\u7406\u5668',
       brand_tagline: '\u4e0d\u4f9d\u8d56\u6587\u4ef6\u7cfb\u7edf API\uff0c\u5bfc\u5165 / \u7ba1\u7406 / \u5bfc\u51fa\u5b8c\u6574\u8d44\u4ea7\u3002',
-      tab_home: '\ud83d\udce6 \u8d44\u4ea7',
+      tab_home: '\ud83d\udce6 \u8d44\u4ea7\u7ba1\u7406',
       tab_words: '\ud83d\udcd8 \u5355\u8bcd\u672c',
       tab_quotes: '\u2728 \u91d1\u53e5\u5e93',
       tab_review: '\ud83e\udde0 \u827e\u5bbe\u6d69\u65af\u590d\u4e60',
       tab_debug: '\u8c03\u8bd5',
-      h_asset: '\u8d44\u4ea7\u6587\u4ef6',
+      h_asset: '\ud83d\udce6 \u8d44\u4ea7\u7ba1\u7406',
       h_words: '\ud83d\udcd8 \u5355\u8bcd\u672c',
       h_quotes: '\u2728 \u91d1\u53e5\u5e93',
       h_review: '\ud83e\udde0 \u827e\u5bbe\u6d69\u65af\u590d\u4e60',
@@ -191,12 +191,12 @@
       ph_search_words: '\u641c\u7d22\uff1a\u5355\u8bcd / \u91ca\u4e49 / \u6279\u6ce8',
       ph_search_quotes: '\u641c\u7d22\uff1a\u91d1\u53e5 / \u7ffb\u8bd1 / \u6279\u6ce8',
       ph_tags: '\u6dfb\u52a0\u6807\u7b7e\uff08\u9017\u53f7\u5206\u9694\uff09',
-      hint_words: '\u70b9\u51fb\u5355\u8bcd\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u8f6f\u5220\u9664\u3002',
+      hint_words: '\u70b9\u51fb\u5355\u8bcd\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u786c\u5220\u9664\u3002',
       hint_quotes: '\u70b9\u51fb\u6761\u76ee\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u8f6f\u5220\u9664\u3002',
       lbl_session_size: '\u5355\u6b21\u6570\u91cf',
-      rate_forgot: '\u5fd8\u4e86',
-      rate_hard: '\u56f0\u96be',
-      rate_easy: '\u7b80\u5355',
+      rate_forgot: '\u4e0d\u8bb0\u5f97',
+      rate_hard: '\u6709\u5370\u8c61',
+      rate_easy: '\u5df2\u638c\u63e1',
       toast_import_first: '\u8bf7\u5148\u5bfc\u5165\u8d44\u4ea7\u6587\u4ef6\u3002',
       toast_import_ok: '\u5bfc\u5165\u6210\u529f\uff08\u5982\u6709\u672c\u5730\u526f\u672c\u4f1a\u81ea\u52a8\u5408\u5e76\uff09\uff0c\u53ef\u968f\u65f6\u5bfc\u51fa\u3002',
       toast_import_cancel: '\u5df2\u53d6\u6d88\u5bfc\u5165\u3002',
@@ -225,21 +225,15 @@
         `\u786e\u8ba4\u7ee7\u7eed\u5bfc\u5165\u5417\uff1f`
       ),
       confirm_import_merge: (w,q)=>`\u5bfc\u5165\u9884\u89c8\n\n\u5bfc\u5165\u5185\u5bb9\uff1a\u5355\u8bcd=${w}\uff0c\u91d1\u53e5=${q}\n\n\u7ee7\u7eed\u5bfc\u5165\u5417\uff1f`,
-      confirm_delete_words: (n)=>`\u8f6f\u5220\u9664 ${n} \u4e2a\u5355\u8bcd\uff1f`,
+      confirm_delete_words: (n)=>`\u5220\u9664 ${n} \u4e2a\u5355\u8bcd\uff1f`,
       confirm_delete_quotes: (n)=>`\u8f6f\u5220\u9664 ${n} \u6761\u91d1\u53e5\uff1f`,
-      confirm_delete_one_word: '\u8f6f\u5220\u9664\u8fd9\u4e2a\u5355\u8bcd\uff1f',
+      confirm_delete_one_word: '\u5220\u9664\u8fd9\u4e2a\u5355\u8bcd\uff1f',
       confirm_delete_one_quote: '\u8f6f\u5220\u9664\u8fd9\u6761\u91d1\u53e5\uff1f',
     }
   };
 
   function getLang(){
-    try{
-      const v = String(localStorage.getItem(LANG_KEY) || '').trim().toLowerCase();
-      if(v === 'zh' || v === 'en') return v;
-    }catch(_){}
-    const nav = String(navigator.language || '').toLowerCase();
-    if(nav.startsWith('zh')) return 'zh';
-    // Default to Chinese for first-run UX in this project.
+    // Mobile is Chinese-only by product decision.
     return 'zh';
   }
 
@@ -646,7 +640,6 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('q-export-img') && ($('q-export-img').textContent = (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Image'));
     $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
     $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
     const wSort = $('w-sort');
@@ -663,14 +656,12 @@
     }
     $('w-batch-del') && ($('w-batch-del').textContent = t('btn_delete'));
     $('q-batch-del') && ($('q-batch-del').textContent = t('btn_delete'));
-    $('q-export-cancel') && ($('q-export-cancel').textContent = (lang === 'zh' ? '\u53d6\u6d88\u5bfc\u51fa' : 'Cancel Export'));
-    $('q-export-fail-title') && ($('q-export-fail-title').textContent = (lang === 'zh' ? '\u5931\u8d25\u9879' : 'Failed items'));
-    $('q-export-retry-failed') && ($('q-export-retry-failed').textContent = (lang === 'zh' ? '\u4ec5\u91cd\u8bd5\u5931\u8d25\u9879' : 'Retry Failed'));
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -680,12 +671,15 @@
 
     // Dialog labels + placeholders
     $('dlg-w-label') && ($('dlg-w-label').textContent = (lang === 'zh' ? '\u5355\u8bcd\u8be6\u60c5' : 'Word details'));
-    $('dlg-q-label') && ($('dlg-q-label').textContent = (lang === 'zh' ? '\u7f16\u8f91\u91d1\u53e5' : 'Edit Quote'));
+    $('dlg-q-label') && ($('dlg-q-label').textContent = (lang === 'zh' ? '\u67e5\u770b\u91d1\u53e5' : 'Quote'));
+    $('dlg-w-save') && ($('dlg-w-save').textContent = (lang === 'zh' ? '\u4fdd\u5b58' : 'Save'));
     $('dlg-w-del') && ($('dlg-w-del').textContent = t('btn_delete'));
     $('dlg-q-del') && ($('dlg-q-del').textContent = t('btn_delete'));
     $('dlg-w-close') && ($('dlg-w-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
     $('dlg-q-close') && ($('dlg-q-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
     $('dlg-q-save') && ($('dlg-q-save').textContent = (lang === 'zh' ? '\u4fdd\u5b58' : 'Save'));
+    $('dlg-q-edit') && ($('dlg-q-edit').textContent = (lang === 'zh' ? '\u7f16\u8f91' : 'Edit'));
+    $('dlg-q-cancel-edit') && ($('dlg-q-cancel-edit').textContent = (lang === 'zh' ? '\u53d6\u6d88\u7f16\u8f91' : 'Cancel Edit'));
     $('dlg-q-export') && ($('dlg-q-export').textContent = (lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export Image'));
     $('dlg-w-meaning') && ($('dlg-w-meaning').placeholder = (lang === 'zh' ? '\u4e2d\u6587\u91ca\u4e49' : 'Chinese meaning'));
     $('dlg-w-english') && ($('dlg-w-english').placeholder = (lang === 'zh' ? '\u82f1\u6587\u91ca\u4e49' : 'English meaning'));
@@ -695,9 +689,6 @@
     $('dlg-q-text') && ($('dlg-q-text').placeholder = (lang === 'zh' ? '\u91d1\u53e5\u539f\u6587' : 'Quote text'));
     $('dlg-q-translation') && ($('dlg-q-translation').placeholder = (lang === 'zh' ? '\u7ffb\u8bd1' : 'Translation'));
     $('dlg-q-note') && ($('dlg-q-note').placeholder = (lang === 'zh' ? '\u6279\u6ce8' : 'Note / Annotation'));
-    $('dlg-q-url') && ($('dlg-q-url').placeholder = (lang === 'zh' ? '\u6765\u6e90\u94fe\u63a5\uff08\u53ef\u9009\uff09' : 'Source URL (optional)'));
-    $('dlg-q-title2') && ($('dlg-q-title2').placeholder = (lang === 'zh' ? '\u9875\u9762\u6807\u9898\uff08\u53ef\u9009\uff09' : 'Page title (optional)'));
-    $('dlg-q-tags') && ($('dlg-q-tags').placeholder = (lang === 'zh' ? '\u6807\u7b7e\uff08\u9017\u53f7\u5206\u9694\uff09' : 'Tags (comma separated)'));
 
     // Stats labels
     $('lbl-total-words') && ($('lbl-total-words').textContent = t('stat_total_words'));
@@ -856,6 +847,12 @@
     return 'By time';
   }
 
+  function isIOSLike(){
+    const ua = String(navigator.userAgent || '');
+    const p = String(navigator.platform || '');
+    return /iPad|iPhone|iPod/i.test(ua) || (p === 'MacIntel' && (navigator.maxTouchPoints || 0) > 1);
+  }
+
   function updateSortStatePills(){
     const w = $('w-sort-state');
     if(w){
@@ -996,15 +993,10 @@
 
     const limitEl = $('limit');
     if(limitEl){
-      if(laser){
-        limitEl.min = '50';
-        limitEl.max = '100';
-        const v = clamp(limitEl.value || 50, 50, 100);
-        limitEl.value = String(v);
-      }else{
-        limitEl.min = '1';
-        limitEl.max = '200';
-      }
+      limitEl.min = '1';
+      limitEl.max = '200';
+      const v = clamp(limitEl.value || 20, 1, 200);
+      limitEl.value = String(v);
     }
   }
 
@@ -1457,9 +1449,9 @@
       return dueIds.slice(0, lim);
     }
 
-    const lim = clamp(desiredLimit, 50, 100);
+    const lim = clamp(desiredLimit, 1, 200);
     const metaMap = buildMetaMapFromAsset(asset);
-    const k = Math.min(lim, 100, dueIds.length);
+    const k = Math.min(Math.max(1, lim), 100, dueIds.length);
     if(globalThis.HordReviewEngine?.selectTopKWords){
       return globalThis.HordReviewEngine.selectTopKWords(dueIds, metaMap, now, k);
     }
@@ -1474,9 +1466,9 @@
       const lim = clamp(desiredLimit, 1, 200);
       return dueIds.slice(0, lim);
     }
-    const lim = clamp(desiredLimit, 50, 100);
+    const lim = clamp(desiredLimit, 1, 200);
     const metaMap = buildQuoteMetaMapFromAsset(asset);
-    const k = Math.min(lim, 100, dueIds.length);
+    const k = Math.min(Math.max(1, lim), 100, dueIds.length);
     if(globalThis.HordReviewEngine?.selectTopKWords){
       return globalThis.HordReviewEngine.selectTopKWords(dueIds, metaMap, now, k);
     }
@@ -1774,7 +1766,7 @@
     function buildQuoteRow(rec){
       const div = document.createElement('div');
       div.className = 'listItem';
-      div.dataset.pick = quoteSelectMode ? '1' : '0';
+      div.dataset.pick = '0';
       const id0 = String(rec?.id || '').trim();
       const title = String(rec?.text || '').slice(0, 120);
       const sub = String(rec?.translation || rec?.annotation || rec?.url || '');
@@ -1783,7 +1775,6 @@
       badges.push(`<button class=\"badge exportBtn\" data-export-quote=\"1\" type=\"button\">${lang === 'zh' ? '\ud83d\uddbc\ufe0f \u5bfc\u51fa\u56fe\u7247' : '\ud83d\uddbc\ufe0f Export'}</button>`);
       if(Array.isArray(rec?.tags) && rec.tags.length) badges.push(`<span class=\"badge\">${rec.tags.slice(0,3).join(', ')}</span>`);
       div.innerHTML =
-        `${quoteSelectMode ? `<input class=\"liPick\" type=\"checkbox\" ${selectedQuotes.has(id0) ? 'checked' : ''} aria-label=\"select\">` : ''}`+
         `<div class=\"liTop\"><div class=\"liTitle\">${escapeHtml(title || (lang === 'zh' ? '\uff08\u7a7a\uff09' : '(empty)'))}</div><div class=\"liBadges\">${badges.join('')}</div></div>`+
         `<div class=\"liSub\">${escapeHtml(sub || '')}</div>`;
       const exportBtn = div.querySelector('[data-export-quote=\"1\"]');
@@ -1795,13 +1786,6 @@
         });
       }
       div.addEventListener('click', (e)=>{
-        if(quoteSelectMode){
-          e.preventDefault();
-          e.stopPropagation();
-          toggleQuoteSelected(id0);
-          renderQuotes();
-          return;
-        }
         openQuoteDialog(String(rec?.id || ''));
       });
       return div;
@@ -1841,7 +1825,7 @@
     }
 
     function setQuoteSelectMode(on){
-      quoteSelectMode = !!on;
+      quoteSelectMode = false;
       selectedQuotes.clear();
       const btn = $('q-select');
       if(btn) btn.textContent = quoteSelectMode ? (lang === 'zh' ? '\u5b8c\u6210' : 'Done') : t('btn_select');
@@ -1862,15 +1846,10 @@
     }
 
     function updateQuoteBatchButtons(){
-      const hasAsset = !!asset;
-      const sel = selectedQuotes.size;
-      const enable = hasAsset && quoteSelectMode;
       const del = $('q-batch-del');
-      const exp = $('q-export-img');
       const apply = $('q-batch-tag-apply');
-      if(exp) exp.disabled = !!quoteExportRuntime.inFlight;
-      if(del) del.disabled = !(enable && sel > 0);
-      if(apply) apply.disabled = !(enable && sel > 0);
+      if(del) del.disabled = true;
+      if(apply) apply.disabled = true;
     }
 
     function setQuoteExportUi(isRunning){
@@ -2047,9 +2026,12 @@
           setQuoteExportUi(true);
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
+        const iosHint = isIOSLike()
+          ? (lang === 'zh' ? '（iPhone 请在系统分享或新开页面中保存图片）' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          : '';
         toast('toast-quotes', lang === 'zh'
-          ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002`
-          : `Export done: success ${successCount}, failed ${quoteExportRuntime.failed}, retried ${quoteExportRuntime.retried}.`);
+          ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
+          : `Export done: success ${successCount}, failed ${quoteExportRuntime.failed}, retried ${quoteExportRuntime.retried}.${iosHint}`);
       }catch(e){
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5931\u8d25\uff1a${String(e && e.message || e || 'unknown')}`
@@ -2205,6 +2187,14 @@
       return out;
     }
 
+    function splitEnglishMeaningInput(raw){
+      return String(raw || '')
+        .split(/\s*\|\s*|\s*;\s*|\s*\n\s*/)
+        .map(x=>String(x || '').trim())
+        .filter(Boolean)
+        .slice(0, 6);
+    }
+
     $('dlg-w-close')?.addEventListener('click', closeWordDialog);
     $('dlg-word')?.addEventListener('click', (e)=>{
       const dlg = $('dlg-word');
@@ -2230,7 +2220,6 @@
     $('dlg-w-del')?.addEventListener('click', async ()=>{
       toast('toast-dlg-word','');
       if(!asset || !dlgWordId) return;
-      if(!confirm(t('confirm_delete_one_word'))) return;
       const mr = await commitMutation(asset, ()=>{
         return removeWordRecord(asset, dlgWordId);
       });
@@ -2243,9 +2232,64 @@
       renderWords();
       toast('toast-words', lang === 'zh' ? '\u5df2\u5220\u9664\u3002' : 'Deleted.');
     });
+    $('dlg-w-save')?.addEventListener('click', async ()=>{
+      toast('toast-dlg-word','');
+      if(!asset || !dlgWordId) return;
+      const mr = await commitMutation(asset, ()=>{
+        const rec = findWordRecord(asset, dlgWordId);
+        if(!rec) return false;
+        const meaning = String($('dlg-w-meaning')?.value || '').trim();
+        const englishMeaning = splitEnglishMeaningInput($('dlg-w-english')?.value || '');
+        const note = String($('dlg-w-note')?.value || '').trim();
+        const prevMeaning = String(rec.meaning || '').trim();
+        const prevEn = Array.isArray(rec.englishMeaning) ? rec.englishMeaning.map(x=>String(x || '').trim()).filter(Boolean) : [];
+        const prevNote = String(rec.annotation || '').trim();
+        if(
+          prevMeaning === meaning &&
+          JSON.stringify(prevEn) === JSON.stringify(englishMeaning) &&
+          prevNote === note
+        ){
+          return false;
+        }
+        rec.meaning = meaning;
+        rec.englishMeaning = englishMeaning;
+        rec.annotation = note;
+        rec.updatedAt = Date.now();
+        return true;
+      });
+      if(!mr.ok){
+        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        return;
+      }
+      updateHomeUI(asset);
+      renderWords();
+      renderReview();
+      toast('toast-dlg-word', t('toast_saved'));
+    });
 
     // --- Quote dialog ---
     let dlgQuoteId = '';
+    let dlgQuoteEditing = false;
+    function setQuoteDialogEditMode(on){
+      dlgQuoteEditing = !!on;
+      const t = $('dlg-q-text');
+      const tr = $('dlg-q-translation');
+      const n = $('dlg-q-note');
+      if(t) t.readOnly = !dlgQuoteEditing;
+      if(tr) tr.readOnly = !dlgQuoteEditing;
+      if(n) n.readOnly = !dlgQuoteEditing;
+      // iOS keyboard guard: readonly mode should never request keyboard.
+      const im = dlgQuoteEditing ? 'text' : 'none';
+      if(t) t.setAttribute('inputmode', im);
+      if(tr) tr.setAttribute('inputmode', im);
+      if(n) n.setAttribute('inputmode', im);
+      const bEdit = $('dlg-q-edit');
+      const bCancel = $('dlg-q-cancel-edit');
+      const bSave = $('dlg-q-save');
+      if(bEdit) bEdit.style.display = dlgQuoteEditing ? 'none' : '';
+      if(bCancel) bCancel.style.display = dlgQuoteEditing ? '' : 'none';
+      if(bSave) bSave.style.display = dlgQuoteEditing ? '' : 'none';
+    }
     function openQuoteDialog(id){
       toast('toast-dlg-quote','');
       if(!asset) return;
@@ -2256,16 +2300,30 @@
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
-      $('dlg-q-url').value = String(rec.url || '');
-      $('dlg-q-title2').value = String(rec.title || '');
-    $('dlg-q-tags').value = Array.isArray(rec.tags) ? rec.tags.join(', ') : '';
     $('dlg-q-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
       : `Updated: ${fmtTime(rec.updatedAt)}`;
       const dlg = $('dlg-quote');
       if(dlg && typeof dlg.showModal === 'function'){
+        setQuoteDialogEditMode(false);
+        // blur any previously focused editable to avoid keyboard carry-over on iOS.
+        try {
+          const ae = document.activeElement;
+          if(ae && typeof ae.blur === 'function') ae.blur();
+        } catch (_) {}
         dlg.showModal();
         document.body.classList.add('modal-open');
+        // keep focus on dialog container, not text fields.
+        try {
+          requestAnimationFrame(() => {
+            if (dlgQuoteEditing) return;
+            const ae = document.activeElement;
+            if (ae && ['dlg-q-text','dlg-q-translation','dlg-q-note'].includes(String(ae.id || ''))) {
+              ae.blur?.();
+            }
+            dlg.focus?.();
+          });
+        } catch (_) {}
       }
     }
 
@@ -2274,9 +2332,24 @@
       if(dlg && typeof dlg.close === 'function') dlg.close();
       document.body.classList.remove('modal-open');
       dlgQuoteId = '';
+      dlgQuoteEditing = false;
     }
 
     $('dlg-q-close')?.addEventListener('click', closeQuoteDialog);
+    $('dlg-q-edit')?.addEventListener('click', ()=>{
+      setQuoteDialogEditMode(true);
+      const t = $('dlg-q-text');
+      if(t) t.focus();
+    });
+    $('dlg-q-cancel-edit')?.addEventListener('click', ()=>{
+      if(!asset || !dlgQuoteId) return;
+      const rec = findQuoteRecord(asset, dlgQuoteId);
+      if(!rec) return;
+      $('dlg-q-text').value = String(rec.text || '');
+      $('dlg-q-translation').value = String(rec.translation || '');
+      $('dlg-q-note').value = String(rec.annotation || '');
+      setQuoteDialogEditMode(false);
+    });
     $('dlg-quote')?.addEventListener('click', (e)=>{
       const dlg = $('dlg-quote');
       if(!dlg) return;
@@ -2284,22 +2357,16 @@
     });
     $('dlg-q-save')?.addEventListener('click', async ()=>{
       toast('toast-dlg-quote','');
-      if(!asset || !dlgQuoteId) return;
+      if(!asset || !dlgQuoteId || !dlgQuoteEditing) return;
       const text = String($('dlg-q-text')?.value || '').trim();
       const translation = String($('dlg-q-translation')?.value || '').trim();
       const note = String($('dlg-q-note')?.value || '').trim();
-      const url = String($('dlg-q-url')?.value || '').trim();
-      const title2 = String($('dlg-q-title2')?.value || '').trim();
-      const tags = parseTags($('dlg-q-tags')?.value || '');
       const mr = await commitMutation(asset, ()=>{
         const rec = findQuoteRecord(asset, dlgQuoteId);
         if(!rec || rec.isDeleted === true) return false;
         rec.text = text;
         rec.translation = translation;
         rec.annotation = note;
-        rec.url = url;
-        rec.title = title2;
-        rec.tags = tags;
         rec.updatedAt = Date.now();
         return true;
       });
@@ -2309,6 +2376,7 @@
       }
       updateHomeUI(asset);
       renderQuotes();
+      setQuoteDialogEditMode(false);
       toast('toast-dlg-quote', t('toast_saved'));
     });
 
@@ -2342,7 +2410,7 @@
       closeQuoteDialog();
       updateHomeUI(asset);
       renderQuotes();
-      toast('toast-quotes', lang === 'zh' ? '\u5df2\u8f6f\u5220\u9664\u3002' : 'Deleted (soft-delete).');
+      toast('toast-quotes', lang === 'zh' ? '\u5df2\u5220\u9664\u3002' : 'Deleted.');
     });
 
     function renderReview(){
@@ -2350,6 +2418,7 @@
       const prog = $('review-progress');
       const wEl = $('q-word');
       const mEl = $('q-meaning');
+      stopWordPronounce();
       if(!asset || !queue.length || qIdx >= queue.length){
         if(card) card.dataset.on = '0';
         if(prog) prog.textContent = queue.length ? `${queue.length} / ${queue.length}` : '0 / 0';
@@ -2365,6 +2434,12 @@
       if(card) card.dataset.on = '1';
       if(prog) prog.textContent = `${qIdx + 1} / ${queue.length}`;
       if(wEl) wEl.textContent = String(rec.word || rec.id || id);
+      const qPhUs = $('q-phon-us');
+      const qPhUk = $('q-phon-uk');
+      const phUs = getWordPhonetic(rec, 'us');
+      const phUk = getWordPhonetic(rec, 'uk');
+      if(qPhUs) qPhUs.textContent = `US: ${phUs || '-'}`;
+      if(qPhUk) qPhUk.textContent = `UK: ${phUk || '-'}`;
       const cn = String(getWordMeaning(rec) || '').trim();
       const en = String(getWordEnglishMeaning(rec) || '').trim();
       let lines = '';
@@ -2387,8 +2462,7 @@
         return;
       }
       const desired = Number($('limit')?.value || 20) || 20;
-      const laser = laserEnabled(asset);
-      const lim = laser ? clamp(desired, 50, 100) : clamp(desired, 1, 200);
+      const lim = clamp(desired, 1, 200);
       if($('limit')) $('limit').value = String(lim);
       queue = buildReviewQueue(asset, lim);
       qIdx = 0;
@@ -2397,6 +2471,72 @@
         toast('toast-review', lang === 'zh' ? '\u6682\u65e0\u5230\u671f\u5355\u8bcd\uff0c\u53ef\u7a0d\u540e\u518d\u8bd5\u6216\u5bfc\u5165\u66f4\u5927\u7684\u8d44\u4ea7\u3002' : 'No due words found. Try later or import a larger asset.');
       }
     });
+
+    $('q-play-us')?.addEventListener('click', async ()=>{
+      toast('toast-review','');
+      if(!asset || !queue.length || qIdx >= queue.length) return;
+      const rec = findWordRecord(asset, queue[qIdx]);
+      if(!rec) return;
+      const ok = await playWordPronounce(rec, 'us');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
+    });
+    $('q-play-uk')?.addEventListener('click', async ()=>{
+      toast('toast-review','');
+      if(!asset || !queue.length || qIdx >= queue.length) return;
+      const rec = findWordRecord(asset, queue[qIdx]);
+      if(!rec) return;
+      const ok = await playWordPronounce(rec, 'uk');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
+    });
+
+    $('rv-delete-word')?.addEventListener('click', async ()=>{
+      toast('toast-review','');
+      if(!asset || !queue.length || qIdx >= queue.length) return;
+      const id = queue[qIdx];
+      if(!id) return;
+      const mr = await commitMutation(asset, ()=>{
+        return removeWordRecord(asset, id);
+      });
+      if(!mr.ok){
+        toast('toast-review', lang === 'zh' ? `删除失败：${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        return;
+      }
+      queue = queue.filter((w)=>String(w || '') !== String(id));
+      if(qIdx >= queue.length) qIdx = Math.max(0, queue.length - 1);
+      updateHomeUI(asset);
+      renderWords();
+      renderReview();
+      toast('toast-review', lang === 'zh' ? '已删除本词。' : 'Deleted.');
+    });
+    const closeReviewMoreMenu = ()=>{
+      const menu = $('rv-more-menu');
+      if(menu) menu.dataset.open = '0';
+    };
+    $('rv-more-toggle')?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = $('rv-more-menu');
+      if(!menu) return;
+      menu.dataset.open = menu.dataset.open === '1' ? '0' : '1';
+    });
+    $('rv-edit-word')?.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      if(!asset || !queue.length || qIdx >= queue.length) return;
+      const id = String(queue[qIdx] || '').trim().toLowerCase();
+      closeReviewMoreMenu();
+      if(!id) return;
+      openWordDialog(id);
+    });
+    $('rv-delete-word')?.addEventListener('click', ()=> closeReviewMoreMenu());
+    document.addEventListener('mousedown', (e)=>{
+      const menu = $('rv-more-menu');
+      const toggler = $('rv-more-toggle');
+      if(!menu || menu.dataset.open !== '1') return;
+      const t = e?.target;
+      if(menu.contains(t) || (toggler && toggler.contains(t))) return;
+      closeReviewMoreMenu();
+    }, true);
 
     document.querySelectorAll('.rate').forEach(btn=>{
       btn.addEventListener('click', async ()=>{
@@ -2569,7 +2709,6 @@
     $('w-batch-del')?.addEventListener('click', async ()=>{
       toast('toast-words','');
       if(!asset || !wordSelectMode || selectedWords.size === 0) return;
-      if(!confirm(t('confirm_delete_words', selectedWords.size))) return;
       const ids = Array.from(selectedWords);
       const mr = await commitMutation(asset, ()=>{
         let changed = false;

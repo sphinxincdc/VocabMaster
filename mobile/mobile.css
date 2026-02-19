@@ -14,6 +14,7 @@
   --ok: #2fbf71;
   --warn: #ff9b3d;
   --radius: 16px;
+  --status-overlay: linear-gradient(180deg, rgba(246,248,255,0.96), rgba(246,248,255,0.78) 52%, rgba(246,248,255,0));
 }
 
 [data-theme="dark"]{
@@ -27,6 +28,7 @@
   --danger: #ff6c8b;
   --ok: #41c783;
   --warn: #ffb35f;
+  --status-overlay: linear-gradient(180deg, rgba(11,16,34,0.96), rgba(11,16,34,0.82) 52%, rgba(11,16,34,0));
 }
 
 *{ box-sizing: border-box; }
@@ -39,6 +41,17 @@ body{
     radial-gradient(900px 420px at 8% -10%, rgba(90,69,255,0.12), transparent 55%),
     radial-gradient(900px 520px at 92% -20%, rgba(40,187,255,0.10), transparent 55%),
     var(--bg);
+}
+body::before{
+  content:"";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(env(safe-area-inset-top, 0px) + 20px);
+  z-index: 1000;
+  pointer-events: none;
+  background: var(--status-overlay);
 }
 
 .wrap{
@@ -53,6 +66,25 @@ body{
   align-items:flex-start;
   justify-content:space-between;
   flex-wrap:wrap;
+  position: relative;
+  padding: 10px 10px 8px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.54);
+  border: 1px solid rgba(90,69,255,0.12);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 24px rgba(16,24,58,0.07);
+}
+.top::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-10px;
+  height:22px;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+  background: linear-gradient(180deg, rgba(90,69,255,0.12), rgba(90,69,255,0));
+  pointer-events:none;
 }
 
 .brand{
@@ -87,11 +119,27 @@ body{
   display:block;
 }
 
-.langRow{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:8px;
+.floatingControls{
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  right: max(12px, env(safe-area-inset-right, 0px));
+  left: auto;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.floatingControls .iconToggle{
+  pointer-events: auto;
+  box-shadow: 0 10px 22px rgba(18,25,56,0.18);
+  border-color: rgba(90,69,255,0.26);
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(8px);
+}
+[data-theme="dark"] .floatingControls .iconToggle{
+  background: rgba(10,14,31,0.9);
+  color: #eaf0ff;
 }
 
 .verBadge{
@@ -272,6 +320,7 @@ select{
 }
 input[readonly]{
   opacity: 0.96;
+  cursor: default;
 }
 input::placeholder{
   color: var(--muted);
@@ -307,6 +356,45 @@ input::placeholder{
   padding: 14px 14px;
 }
 .reviewCard[data-on="1"]{ display:block; }
+.reviewHeadRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.rvMoreWrap{
+  position: relative;
+}
+.rvMoreBtn{
+  width: 38px;
+  height: 34px;
+  min-width: 38px;
+  padding: 0;
+  border-radius: 10px;
+  font-size: 20px;
+  line-height: 1;
+}
+.rvMoreMenu{
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 150px;
+  z-index: 20;
+  display: none;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 0 14px 30px rgba(10,14,31,0.18);
+  padding: 8px;
+  gap: 8px;
+}
+.rvMoreMenu[data-open="1"]{
+  display: grid;
+}
+.rvMoreMenu .btn{
+  width: 100%;
+  justify-content: flex-start;
+}
 
 .qWord{
   font-size: 32px;
@@ -561,12 +649,22 @@ input::placeholder{
 [data-theme="dark"] .reviewCard{
   background:
     radial-gradient(420px 180px at 20% 0%, rgba(116,103,255,0.20), transparent 60%),
-    rgba(16,21,46,0.96);
+    rgba(16,21,46,0.98) !important;
+  border-color: #2a3566;
+}
+[data-theme="dark"] .reviewCard .qWord{
+  color: #eef2ff;
+}
+[data-theme="dark"] .reviewCard .qMeaning{
+  color: #d9e2ff;
 }
 [data-theme="dark"] .top{
   background: linear-gradient(180deg, rgba(11,16,34,0.92), rgba(11,16,34,0.22));
   border-radius: 18px;
-  padding: 8px;
+  padding: 8px 8px 8px 8px;
+}
+[data-theme="dark"] .top::before{
+  background: linear-gradient(180deg, rgba(116,103,255,0.24), rgba(116,103,255,0));
 }
 [data-theme="dark"] select{
   background: #131a3d;
@@ -580,6 +678,8 @@ dialog::backdrop{
 }
 body.modal-open{
   overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 .dlgActions{
   display: grid;
@@ -606,4 +706,11 @@ body.modal-open{
 
 @media (min-width: 900px){
   .grid{ grid-template-columns: 1.1fr 0.9fr; }
+}
+
+@media (max-width: 899px){
+  .floatingControls{
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
+    right: max(10px, env(safe-area-inset-right, 0px));
+  }
 }

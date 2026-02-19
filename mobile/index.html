@@ -1,18 +1,23 @@
-﻿<!doctype html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HORD Mobile Web Manager</title>
+  <title>HORD 手机管理器</title>
   <meta name="theme-color" content="#0b1022">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="HORD">
-  <link rel="icon" type="image/png" sizes="32x32" href="icon128.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="logo-square-1024.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="logo-square-1024.png">
-  <link rel="apple-touch-icon-precomposed" href="logo-square-1024.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon32.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="logo-square-1024.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png?v=2.54.43">
+  <link rel="apple-touch-icon" sizes="167x167" href="icon-167.png?v=2.54.43">
+  <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png?v=2.54.43">
+  <link rel="apple-touch-icon" sizes="120x120" href="icon-120.png?v=2.54.43">
+  <link rel="apple-touch-icon-precomposed" href="icon-180.png?v=2.54.43">
+  <link rel="manifest" href="mobile.webmanifest">
   <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
@@ -23,117 +28,112 @@
           <img class="logoImg" src="logo-square-1024.png" alt="">
         </div>
         <div>
-          <h1 id="brandTitle">HORD Mobile Manager</h1>
-          <p id="brandTagline">Import / manage / export your vocabulary asset without File System Access API.</p>
+          <h1 id="brandTitle">HORD 手机管理器</h1>
+          <p id="brandTagline">不依赖文件系统 API，导入 / 管理 / 导出完整资产。</p>
           <p class="brandSlogan" id="brandSlogan">Yesterday, You Said Tomorrow</p>
         </div>
       </div>
-      <div class="langRow">
-        <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
-      </div>
       <div class="tabs" role="tablist" aria-label="Tabs">
         <button class="tab" id="tab-home" data-tab="home" data-active="1">📦 资产管理</button>
-        <button class="tab" id="tab-words" data-tab="words" data-active="0">📘 Vocabulary</button>
-        <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">✨ Quotes</button>
-        <button class="tab" id="tab-review" data-tab="review" data-active="0">🧠 Review</button>
+        <button class="tab" id="tab-words" data-tab="words" data-active="0">📘 单词本</button>
+        <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">✨ 金句库</button>
+        <button class="tab" id="tab-review" data-tab="review" data-active="0">🧠 艾宾浩斯复习</button>
       </div>
+    </div>
+    <div class="floatingControls" id="top-controls" aria-label="页面控制">
+      <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
     </div>
 
     <div class="grid">
       <div class="card" id="panel-home">
-        <h2>Asset</h2>
+        <h2>资产管理</h2>
         <div class="row">
           <input id="file" type="file" accept="application/json,.json">
-          <button class="btn primary" id="btn-import">Import</button>
-          <button class="btn" id="btn-export" disabled>Export</button>
-          <button class="btn danger" id="btn-reset" disabled>Reset Local Copy</button>
+          <button class="btn primary" id="btn-import">导入</button>
+          <button class="btn" id="btn-export" disabled>导出</button>
+          <button class="btn danger" id="btn-reset" disabled>重置本地副本</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <span class="pill" id="pill-status">No asset loaded</span>
-          <span class="pill warn" id="pill-dirty" style="display:none;">Saving...</span>
-          <span class="pill laser" id="pill-laser" style="display:none;">Smart Focus Review (50-100)</span>
+          <span class="pill" id="pill-status">未加载资产</span>
+          <span class="pill warn" id="pill-dirty" style="display:none;">保存中...</span>
+          <span class="pill laser" id="pill-laser" style="display:none;">智能精选复习（50-100）</span>
         </div>
         <div class="row small muted" style="margin-top:10px;">
-          <div class="stat"><span id="lbl-total-words">Total Words</span> <b id="s-words">0</b></div>
-          <div class="stat"><span id="lbl-total-quotes">Total Quotes</span> <b id="s-quotes">0</b></div>
-          <div class="stat"><span id="lbl-updated">Updated</span> <b id="s-updated">-</b></div>
+          <div class="stat"><span id="lbl-total-words">单词总数</span> <b id="s-words">0</b></div>
+          <div class="stat"><span id="lbl-total-quotes">金句总数</span> <b id="s-quotes">0</b></div>
+          <div class="stat"><span id="lbl-updated">更新时间</span> <b id="s-updated">-</b></div>
         </div>
         <div class="toast" id="toast-home"></div>
         <div class="hintBox" id="home-sync-guide" style="margin-top:12px;">
-          <div style="font-weight:900; margin-bottom:6px;">No asset yet</div>
+          <div style="font-weight:900; margin-bottom:6px;">尚未导入资产</div>
           <div class="small muted">
-            Desktop: export HORD asset JSON -> Mobile: Import -> after study Export and replace cloud file -> Desktop import/merge.
+            电脑端导出 HORD 资产 JSON -> 手机端导入 -> 学习后导出并覆盖云端文件 -> 电脑端再次读取合并。
           </div>
         </div>
         <details class="hintBox" id="home-debug-fold" style="margin-top:12px;">
           <summary style="font-weight:900; cursor:pointer;">调试与快照（高级）</summary>
           <div class="row" style="margin-top:10px;">
-            <button class="btn" id="btn-dump" disabled>Dump JSON</button>
-            <button class="btn" id="btn-rehash" disabled>Recompute Hash</button>
+            <button class="btn" id="btn-dump" disabled>导出调试 JSON</button>
+            <button class="btn" id="btn-rehash" disabled>重算 Hash</button>
           </div>
           <div class="row" style="margin-top:10px;">
-            <button class="btn" id="btn-backup-now" disabled>Backup Now</button>
+            <button class="btn" id="btn-backup-now" disabled>立即快照</button>
             <select id="bk-select" disabled style="flex:1; min-width:220px;"></select>
-            <button class="btn danger" id="btn-restore-backup" disabled>Restore</button>
+            <button class="btn danger" id="btn-restore-backup" disabled>恢复</button>
           </div>
           <div class="row small muted" style="margin-top:8px;">
-            <span id="bk-hint">Keeps the latest 3 snapshots. Restore is local-only.</span>
+            <span id="bk-hint">保留最近 3 份快照，恢复仅影响本地副本。</span>
           </div>
           <div class="row small muted" style="margin-top:8px;">
-            <button class="btn" id="btn-cache-bust" type="button">Reload (no cache)</button>
+            <button class="btn" id="btn-cache-bust" type="button">强制刷新（无缓存）</button>
           </div>
           <pre id="debug-out" class="small" style="margin-top:10px; white-space:pre-wrap; word-break:break-word; color:#2a2a3d;"></pre>
         </details>
       </div>
 
       <div class="card" id="panel-words" style="display:none;">
-        <h2>Words</h2>
+        <h2>单词本</h2>
         <div class="row">
-          <input id="w-q" type="text" placeholder="Search word / meaning / note" style="flex:1; min-width: 220px;">
+          <input id="w-q" type="text" placeholder="搜索：单词 / 释义 / 批注" style="flex:1; min-width: 220px;">
           <select id="w-sort" style="min-width: 120px;">
-            <option value="time">By time</option>
-            <option value="alpha">A-Z</option>
-            <option value="review">Reviews</option>
+            <option value="time">按时间</option>
+            <option value="alpha">按字母</option>
           </select>
           <button class="btn" id="w-sort-dir" type="button">↓</button>
-          <button class="btn" id="w-refresh" disabled>Refresh</button>
+          <button class="btn" id="w-refresh" disabled>刷新</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <button class="btn" id="w-select" disabled>Select</button>
-          <button class="btn" id="w-all" disabled>All</button>
-          <button class="btn danger" id="w-batch-del" disabled>Delete</button>
-          <input id="w-batch-tags" type="text" placeholder="Add tags (comma)" style="flex:1; min-width: 200px;">
-          <button class="btn primary" id="w-batch-tag-apply" disabled>Apply</button>
+          <button class="btn" id="w-select" disabled>选择</button>
+          <button class="btn" id="w-all" disabled>全选</button>
+          <button class="btn danger" id="w-batch-del" disabled>删除</button>
+          <input id="w-batch-tags" type="text" placeholder="添加标签（逗号分隔）" style="flex:1; min-width: 200px;">
+          <button class="btn primary" id="w-batch-tag-apply" disabled>应用</button>
         </div>
         <div class="row small muted" style="margin-top:10px;">
           <span class="pill" id="w-count">0</span>
-          <span class="pill" id="w-sort-state">By time ↓</span>
-          <span class="pill" id="w-hint">Tap a word to view details. Delete is soft-delete.</span>
+          <span class="pill" id="w-sort-state">按时间 ↓</span>
+          <span class="pill" id="w-hint">点开单词查看详情；删除为硬删除。</span>
         </div>
         <div id="w-list" style="margin-top:12px;"></div>
         <div class="toast" id="toast-words"></div>
       </div>
 
       <div class="card" id="panel-quotes" style="display:none;">
-        <h2>Quotes</h2>
+        <h2>金句库</h2>
         <div class="row">
-          <input id="q-q" type="text" placeholder="Search quote / translation / note" style="flex:1; min-width: 220px;">
+          <input id="q-q" type="text" placeholder="搜索：金句 / 翻译 / 批注" style="flex:1; min-width: 220px;">
           <select id="q-sort" style="min-width: 120px;">
-            <option value="time">By time</option>
-            <option value="alpha">A-Z</option>
-            <option value="review">Reviews</option>
+            <option value="time">按时间</option>
+            <option value="alpha">按字母</option>
           </select>
           <button class="btn" id="q-sort-dir" type="button">↓</button>
-          <button class="btn" id="q-refresh" disabled>Refresh</button>
+          <button class="btn" id="q-refresh" disabled>刷新</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <button class="btn" id="q-select" disabled>Select</button>
-          <button class="btn danger" id="q-batch-del" disabled>Delete</button>
-          <input id="q-batch-tags" type="text" placeholder="Add tags (comma)" style="flex:1; min-width: 200px;">
-          <button class="btn primary" id="q-batch-tag-apply" disabled>Apply</button>
+          <span class="pill">手机版仅支持单条导出图片</span>
         </div>
         <div class="row small muted" style="margin-top:8px;">
-          <span id="q-exp-style-lbl">Export style</span>
+          <span id="q-exp-style-lbl">导出样式</span>
           <select id="q-exp-template" style="min-width: 120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
@@ -145,36 +145,51 @@
         </div>
         <div class="row small muted" style="margin-top:10px;">
           <span class="pill" id="q-count">0</span>
-          <span class="pill" id="q-sort-state">By time ↓</span>
-          <span class="pill" id="q-hint">Tap an item to view. Delete is soft-delete.</span>
+          <span class="pill" id="q-sort-state">按时间 ↓</span>
+          <span class="pill" id="q-hint">点击右侧“导出图片”可直接导出单条。</span>
         </div>
         <div id="q-list" style="margin-top:12px;"></div>
         <div class="toast" id="toast-quotes"></div>
       </div>
 
       <div class="card" id="panel-review">
-        <h2>Review</h2>
+        <h2>🧠 艾宾浩斯复习</h2>
         <div class="row">
-          <button class="tab" id="rv-words" data-active="1" type="button">Words</button>
+          <button class="tab" id="rv-words" data-active="1" type="button">单词</button>
           <select id="rv-meaning-mode">
-            <option value="both">CN + EN</option>
-            <option value="cn">CN</option>
-            <option value="en">EN</option>
+            <option value="both">中英都显示</option>
+            <option value="cn">仅中文</option>
+            <option value="en">仅英文</option>
           </select>
-          <label class="small muted" for="limit" id="lbl-session-size">Session size</label>
+          <label class="small muted" for="limit" id="lbl-session-size">单次数量</label>
           <input id="limit" type="number" min="1" max="200" value="20" style="width:110px;">
-          <button class="btn primary" id="btn-start" disabled>Start</button>
-          <span class="pill laser" id="pill-review-mode" style="display:none;">Smart Focus Review (50-100)</span>
+          <button class="btn primary" id="btn-start" disabled>开始</button>
+          <span class="pill laser" id="pill-review-mode" style="display:none;">智能精选复习（50-100）</span>
         </div>
         <div class="small muted" id="review-mode-hint" style="margin-top:8px;"></div>
         <div class="reviewCard" id="review-card" data-on="0">
-          <div class="small muted" id="review-progress">0 / 0</div>
+          <div class="reviewHeadRow">
+            <div class="small muted" id="review-progress">0 / 0</div>
+            <div class="rvMoreWrap">
+              <button class="btn rvMoreBtn" id="rv-more-toggle" type="button" aria-label="更多操作">⋯</button>
+              <div class="rvMoreMenu" id="rv-more-menu" data-open="0">
+                <button class="btn" id="rv-edit-word" type="button">编辑当前词</button>
+                <button class="btn danger" id="rv-delete-word" type="button">删除当前词</button>
+              </div>
+            </div>
+          </div>
           <div class="qWord" id="q-word">word</div>
+          <div class="phoneticRow" style="margin-bottom:8px;">
+            <span class="phoneticPill" id="q-phon-us">US: -</span>
+            <button class="btn" id="q-play-us" type="button">🔰 US</button>
+            <span class="phoneticPill" id="q-phon-uk">UK: -</span>
+            <button class="btn" id="q-play-uk" type="button">🔰 UK</button>
+          </div>
           <p class="qMeaning" id="q-meaning">meaning</p>
           <div class="rateRow">
-            <button class="rate r0" data-q="0">Forgot</button>
-            <button class="rate r3" data-q="3">Hard</button>
-            <button class="rate r5" data-q="5">Easy</button>
+            <button class="rate r0" data-q="0">不记得</button>
+            <button class="rate r3" data-q="3">有印象</button>
+            <button class="rate r5" data-q="5">已掌握</button>
           </div>
         </div>
         <div class="toast" id="toast-review"></div>
@@ -188,24 +203,25 @@
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
-          <div class="small muted" id="dlg-w-label">Word details</div>
+          <div class="small muted" id="dlg-w-label">单词详情</div>
           <div class="qWord" id="dlg-w-title" style="font-size:22px; margin:0;">word</div>
         </div>
         <div class="row">
-          <button class="btn danger" id="dlg-w-del">Delete</button>
-          <button class="btn" id="dlg-w-close">Close</button>
+          <button class="btn primary" id="dlg-w-save">保存</button>
+          <button class="btn danger" id="dlg-w-del">删除</button>
+          <button class="btn" id="dlg-w-close">关闭</button>
         </div>
       </div>
     </div>
     <div style="padding:14px 14px;">
       <div class="row">
-        <input id="dlg-w-meaning" type="text" placeholder="中文释义" style="flex:1; min-width: 220px;" readonly>
+        <input id="dlg-w-meaning" type="text" placeholder="中文释义" style="flex:1; min-width: 220px;">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-w-english" type="text" placeholder="English meaning" style="flex:1; min-width: 220px;" readonly>
+        <input id="dlg-w-english" type="text" placeholder="英文释义" style="flex:1; min-width: 220px;">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-w-note" type="text" placeholder="Note / Annotation" style="flex:1; min-width: 220px;" readonly>
+        <input id="dlg-w-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;">
       </div>
       <div class="phoneticRow" style="margin-top:10px;">
         <span class="phoneticPill" id="dlg-w-phon-us">US: -</span>
@@ -224,35 +240,28 @@
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
-          <div class="small muted" id="dlg-q-label">Edit Quote</div>
+          <div class="small muted" id="dlg-q-label">查看金句</div>
           <div class="qWord" id="dlg-q-title" style="font-size:18px; margin:0;">quote</div>
         </div>
       </div>
     </div>
     <div style="padding:14px 14px;">
       <div class="row">
-        <input id="dlg-q-text" type="text" placeholder="Quote text" style="flex:1; min-width: 220px;">
+        <input id="dlg-q-text" type="text" placeholder="金句原文" style="flex:1; min-width: 220px;" readonly inputmode="none">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-translation" type="text" placeholder="Translation" style="flex:1; min-width: 220px;">
+        <input id="dlg-q-translation" type="text" placeholder="翻译" style="flex:1; min-width: 220px;" readonly inputmode="none">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-note" type="text" placeholder="Note / Annotation" style="flex:1; min-width: 220px;">
-      </div>
-      <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-url" type="text" placeholder="Source URL (optional)" style="flex:1; min-width: 220px;">
-      </div>
-      <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-title2" type="text" placeholder="Page title (optional)" style="flex:1; min-width: 220px;">
-      </div>
-      <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-tags" type="text" placeholder="Tags (comma separated)" style="flex:1; min-width: 220px;">
+        <input id="dlg-q-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;" readonly inputmode="none">
       </div>
       <div class="row dlgActions" style="margin-top:12px;">
-        <button class="btn primary" id="dlg-q-save">Save</button>
-        <button class="btn" id="dlg-q-export">🖼️ Export Image</button>
-        <button class="btn danger" id="dlg-q-del">Delete</button>
-        <button class="btn" id="dlg-q-close">Close</button>
+        <button class="btn" id="dlg-q-edit">编辑</button>
+        <button class="btn" id="dlg-q-cancel-edit" style="display:none;">取消编辑</button>
+        <button class="btn primary" id="dlg-q-save" style="display:none;">保存</button>
+        <button class="btn" id="dlg-q-export">🖼️ 导出图片</button>
+        <button class="btn danger" id="dlg-q-del">删除</button>
+        <button class="btn" id="dlg-q-close">关闭</button>
         <span class="small muted" id="dlg-q-meta"></span>
       </div>
       <div class="toast" id="toast-dlg-quote"></div>
