@@ -12,6 +12,7 @@
   const BACKUP_KEY = 'hord_mobile_backups_v1';
   const MOBILE_QUOTE_EXPORT_PREFS_KEY = 'hord_mobile_quote_export_prefs_v1';
   const REVIEW_LIMIT_KEY = 'hord_mobile_review_limit_v1';
+  const REVIEW_LIMIT_USER_SET_KEY = 'hord_mobile_review_limit_user_set_v1';
   const DAY = 24 * 60 * 60 * 1000;
 
   const $ = (id)=>document.getElementById(id);
@@ -240,6 +241,10 @@
 
   function getReviewSessionLimit(){
     try{
+      const userSet = String(localStorage.getItem(REVIEW_LIMIT_USER_SET_KEY) || '') === '1';
+      if(!userSet){
+        localStorage.setItem(REVIEW_LIMIT_KEY, '20');
+      }
       const raw = Number(localStorage.getItem(REVIEW_LIMIT_KEY) || 20);
       return clamp(raw, 1, 200);
     }catch(_){
@@ -249,7 +254,10 @@
 
   function setReviewSessionLimit(v){
     const n = clamp(Number(v) || 20, 1, 200);
-    try{ localStorage.setItem(REVIEW_LIMIT_KEY, String(n)); }catch(_){}
+    try{
+      localStorage.setItem(REVIEW_LIMIT_KEY, String(n));
+      localStorage.setItem(REVIEW_LIMIT_USER_SET_KEY, '1');
+    }catch(_){}
     return n;
   }
 
