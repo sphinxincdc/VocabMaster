@@ -2323,6 +2323,15 @@
       if(bCancel) bCancel.style.display = dlgQuoteEditing ? '' : 'none';
       if(bSave) bSave.style.display = dlgQuoteEditing ? '' : 'none';
     }
+    function enforceQuoteViewNoKeyboard(){
+      if(dlgQuoteEditing) return;
+      try {
+        const ae = document.activeElement;
+        if(ae && ['dlg-q-text','dlg-q-translation','dlg-q-note'].includes(String(ae.id || ''))){
+          ae.blur?.();
+        }
+      } catch(_) {}
+    }
     function openQuoteDialog(id){
       toast('toast-dlg-quote','');
       if(!asset) return;
@@ -2350,10 +2359,7 @@
         try {
           requestAnimationFrame(() => {
             if (dlgQuoteEditing) return;
-            const ae = document.activeElement;
-            if (ae && ['dlg-q-text','dlg-q-translation','dlg-q-note'].includes(String(ae.id || ''))) {
-              ae.blur?.();
-            }
+            enforceQuoteViewNoKeyboard();
             dlg.focus?.();
           });
         } catch (_) {}
@@ -2382,6 +2388,21 @@
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
       setQuoteDialogEditMode(false);
+      enforceQuoteViewNoKeyboard();
+    });
+    // iOS/Safari hard guard: even if user taps readonly field in view-mode, keep keyboard closed.
+    ['dlg-q-text','dlg-q-translation','dlg-q-note'].forEach((id)=>{
+      $(id)?.addEventListener('focus', ()=>{
+        if(!dlgQuoteEditing) enforceQuoteViewNoKeyboard();
+      });
+      $(id)?.addEventListener('pointerdown', (e)=>{
+        if(dlgQuoteEditing) return;
+        e.preventDefault();
+      });
+      $(id)?.addEventListener('touchstart', (e)=>{
+        if(dlgQuoteEditing) return;
+        e.preventDefault();
+      }, { passive: false });
     });
     $('dlg-quote')?.addEventListener('click', (e)=>{
       const dlg = $('dlg-quote');
