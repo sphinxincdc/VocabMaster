@@ -67,7 +67,7 @@ body::before{
   justify-content:space-between;
   flex-wrap:wrap;
   position: relative;
-  padding: 10px 10px 8px;
+  padding: 10px 56px 8px 10px;
   border-radius: 16px;
   background: rgba(255,255,255,0.54);
   border: 1px solid rgba(90,69,255,0.12);
@@ -121,8 +121,8 @@ body::before{
 
 .floatingControls{
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 8px);
-  right: max(12px, env(safe-area-inset-right, 0px));
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  right: max(14px, env(safe-area-inset-right, 0px));
   left: auto;
   z-index: 1200;
   display: flex;
@@ -133,8 +133,8 @@ body::before{
 .floatingControls .iconToggle{
   pointer-events: auto;
   box-shadow: 0 10px 22px rgba(18,25,56,0.18);
-  border-color: rgba(90,69,255,0.26);
-  background: rgba(255,255,255,0.88);
+  border-color: rgba(90,69,255,0.18);
+  background: rgba(255,255,255,0.74);
   backdrop-filter: blur(8px);
 }
 [data-theme="dark"] .floatingControls .iconToggle{
