@@ -1,4 +1,4 @@
-// mobile.js
+﻿// mobile.js
 // Phase 3 scaffold: a simple, local IndexedDB-backed web manager for HORD assets.
 // - Works without File System Access API (mobile-friendly).
 // - Manual import/export only. No auto cloud writeback.
@@ -661,7 +661,7 @@
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '鍒犻櫎鏈瘝' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -1506,11 +1506,11 @@
       for(let i=0;i<backups.length;i++){
         const b = backups[i];
         const opt = document.createElement('option');
-        const tag = b.reason ? ` · ${b.reason}` : '';
+        const tag = b.reason ? ` 路 ${b.reason}` : '';
         const words = activeWords(b.asset).length;
         const quotes = Array.isArray(b.asset?.quotes) ? b.asset.quotes.filter(q=>q && q.isDeleted !== true).length : 0;
         opt.value = String(i);
-        opt.textContent = `${fmtTime(b.ts)}${tag} · w=${words} q=${quotes}`;
+        opt.textContent = `${fmtTime(b.ts)}${tag} 路 w=${words} q=${quotes}`;
         sel.appendChild(opt);
       }
       if(btnRestore) btnRestore.disabled = backups.length === 0;
@@ -1885,8 +1885,8 @@
       if(pgText){
         pgText.textContent = isRunning
           ? (lang === 'zh'
-              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} · \u5931\u8d25 ${quoteExportRuntime.failed}`
-              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} · Failed ${quoteExportRuntime.failed}`)
+              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 \u5931\u8d25 ${quoteExportRuntime.failed}`
+              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 Failed ${quoteExportRuntime.failed}`)
           : '';
       }
       if(failWrap){
@@ -2027,7 +2027,7 @@
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
         const iosHint = isIOSLike()
-          ? (lang === 'zh' ? '（iPhone 请在系统分享或新开页面中保存图片）' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          ? (lang === 'zh' ? '锛坕Phone 璇峰湪绯荤粺鍒嗕韩鎴栨柊寮€椤甸潰涓繚瀛樺浘鐗囷級' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
           : '';
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
@@ -2156,7 +2156,7 @@
     $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
       $('dlg-w-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
-      : `Updated: ${fmtTime(rec.updatedAt)} · Reviews: ${Number(rec.reviewCount)||0}`;
+      : `Updated: ${fmtTime(rec.updatedAt)} 路 Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
       if(dlg && typeof dlg.showModal === 'function'){
         dlg.showModal();
@@ -2275,9 +2275,13 @@
       const t = $('dlg-q-text');
       const tr = $('dlg-q-translation');
       const n = $('dlg-q-note');
-      if(t) t.readOnly = !dlgQuoteEditing;
-      if(tr) tr.readOnly = !dlgQuoteEditing;
-      if(n) n.readOnly = !dlgQuoteEditing;
+      const fields = [t, tr, n].filter(Boolean);
+      fields.forEach((f)=>{
+        f.readOnly = !dlgQuoteEditing;
+        f.disabled = !dlgQuoteEditing;
+        f.tabIndex = dlgQuoteEditing ? 0 : -1;
+        f.style.pointerEvents = dlgQuoteEditing ? '' : 'none';
+      });
       // iOS keyboard guard: readonly mode should never request keyboard.
       const im = dlgQuoteEditing ? 'text' : 'none';
       if(t) t.setAttribute('inputmode', im);
@@ -2627,7 +2631,7 @@
       wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
-      wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
+        wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
         renderWords();
         updateSortStatePills();
         toast('toast-words', wordsSortDir === 'asc'
@@ -2777,7 +2781,7 @@
       qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
-      qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
+        qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
         renderQuotes();
         updateSortStatePills();
         toast('toast-quotes', quotesSortDir === 'asc'
@@ -2897,5 +2901,6 @@
     toast('toast-home', `Fatal error: ${String(e && e.message || e)}`);
   });
 })();
+
 
 
