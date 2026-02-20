@@ -240,28 +240,40 @@
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
-          <div class="small muted" id="dlg-q-label">查看金句</div>
+          <div class="small muted" id="dlg-q-label">金句详情</div>
           <div class="qWord" id="dlg-q-title" style="font-size:18px; margin:0;">quote</div>
         </div>
       </div>
     </div>
-    <div style="padding:14px 14px;">
-      <div class="row">
-        <input id="dlg-q-text" type="text" placeholder="金句原文" style="flex:1; min-width: 220px;" readonly inputmode="none">
+    <div class="dlgQuoteBody">
+      <div class="dlgQuoteView" id="dlg-q-view">
+        <div class="quoteReadEn" id="dlg-q-view-text"></div>
+        <div class="quoteReadCn" id="dlg-q-view-translation"></div>
+        <details class="quoteReadNoteWrap" id="dlg-q-view-note-wrap">
+          <summary id="dlg-q-note-summary">批注</summary>
+          <div class="quoteReadNote" id="dlg-q-view-note"></div>
+        </details>
       </div>
-      <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-translation" type="text" placeholder="翻译" style="flex:1; min-width: 220px;" readonly inputmode="none">
+      <div class="dlgQuoteEdit" id="dlg-q-edit-panel" style="display:none;">
+        <div class="row">
+          <input id="dlg-q-text" type="text" placeholder="金句原文" style="flex:1; min-width: 220px;" readonly inputmode="none">
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <input id="dlg-q-translation" type="text" placeholder="翻译" style="flex:1; min-width: 220px;" readonly inputmode="none">
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <input id="dlg-q-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;" readonly inputmode="none">
+        </div>
       </div>
-      <div class="row" style="margin-top:10px;">
-        <input id="dlg-q-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;" readonly inputmode="none">
-      </div>
-      <div class="row dlgActions" style="margin-top:12px;">
-        <button class="btn" id="dlg-q-edit">编辑</button>
-        <button class="btn" id="dlg-q-cancel-edit" style="display:none;">取消编辑</button>
-        <button class="btn primary" id="dlg-q-save" style="display:none;">保存</button>
-        <button class="btn" id="dlg-q-export">🖼️ 导出图片</button>
-        <button class="btn danger" id="dlg-q-del">删除</button>
+      <div class="row dlgActions">
+        <button class="btn primary" id="dlg-q-export">🖼️ 导出图片</button>
         <button class="btn" id="dlg-q-close">关闭</button>
+        <button class="btn" id="dlg-q-edit">编辑</button>
+        <button class="btn primary" id="dlg-q-save" style="display:none;">保存</button>
+        <button class="btn" id="dlg-q-cancel-edit" style="display:none;">取消编辑</button>
+        <button class="btn danger" id="dlg-q-del" style="display:none;">删除</button>
+      </div>
+      <div class="row" style="margin-top:10px;">
         <span class="small muted" id="dlg-q-meta"></span>
       </div>
       <div class="toast" id="toast-dlg-quote"></div>

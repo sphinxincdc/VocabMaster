@@ -683,17 +683,74 @@ body.modal-open{
 }
 .dlgActions{
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  align-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
   position: sticky;
   bottom: 0;
-  z-index: 3;
+  z-index: 4;
   padding-top: 10px;
-  background: linear-gradient(180deg, rgba(18,23,54,0), rgba(18,23,54,0.94) 35%);
+  padding-bottom: 2px;
+  background: var(--card);
+  border-top: 1px solid var(--border);
 }
-.dlgActions #dlg-q-meta{
-  grid-column: 1 / -1;
+.dlgActions .btn{
+  min-height: 46px;
+  border-radius: 14px;
+}
+.dlgQuoteBody{
+  padding: 14px;
+}
+.dlgQuoteView{
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.64);
+}
+.quoteReadEn{
+  font-size: 34px;
+  line-height: 1.16;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  word-break: break-word;
+}
+.quoteReadCn{
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 700;
+  color: #2f356b;
+  margin-bottom: 8px;
+}
+.quoteReadNoteWrap{
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+.quoteReadNoteWrap > summary{
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 800;
+}
+.quoteReadNote{
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.dlgQuoteEdit{
+  margin-top: 12px;
+}
+[data-theme="dark"] .dlgActions{
+  background: #121736;
+}
+[data-theme="dark"] .dlgQuoteView{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+}
+[data-theme="dark"] .quoteReadCn{
+  color: #c6d2ff;
 }
 [data-theme="dark"] dialog{
   background: #121736;

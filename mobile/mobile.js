@@ -687,7 +687,7 @@
 
     // Dialog labels + placeholders
     $('dlg-w-label') && ($('dlg-w-label').textContent = (lang === 'zh' ? '\u5355\u8bcd\u8be6\u60c5' : 'Word details'));
-    $('dlg-q-label') && ($('dlg-q-label').textContent = (lang === 'zh' ? '\u67e5\u770b\u91d1\u53e5' : 'Quote'));
+    $('dlg-q-label') && ($('dlg-q-label').textContent = (lang === 'zh' ? '\u91d1\u53e5\u8be6\u60c5' : 'Quote details'));
     $('dlg-w-save') && ($('dlg-w-save').textContent = (lang === 'zh' ? '\u4fdd\u5b58' : 'Save'));
     $('dlg-w-del') && ($('dlg-w-del').textContent = t('btn_delete'));
     $('dlg-q-del') && ($('dlg-q-del').textContent = t('btn_delete'));
@@ -705,6 +705,7 @@
     $('dlg-q-text') && ($('dlg-q-text').placeholder = (lang === 'zh' ? '\u91d1\u53e5\u539f\u6587' : 'Quote text'));
     $('dlg-q-translation') && ($('dlg-q-translation').placeholder = (lang === 'zh' ? '\u7ffb\u8bd1' : 'Translation'));
     $('dlg-q-note') && ($('dlg-q-note').placeholder = (lang === 'zh' ? '\u6279\u6ce8' : 'Note / Annotation'));
+    $('dlg-q-note-summary') && ($('dlg-q-note-summary').textContent = (lang === 'zh' ? '\u6279\u6ce8' : 'Notes'));
 
     // Stats labels
     $('lbl-total-words') && ($('lbl-total-words').textContent = t('stat_total_words'));
@@ -1997,8 +1998,9 @@
             mainFont: String(quoteExportPrefs.mainFont || 'inter'),
             cjkFont: String(quoteExportPrefs.cjkFont || 'notoSansSC'),
             showTranslation: true,
-            showSource: true,
-            showAnnotation: true,
+            showSource: false,
+            showAnnotation: false,
+            watermarkMode: 'signature',
             capabilities: getCapabilities(),
             isProUser: false,
           })
@@ -2006,8 +2008,9 @@
             ratio: '9:16',
             template: 'hordSignature',
             showTranslation: true,
-            showSource: true,
-            showAnnotation: true,
+            showSource: false,
+            showAnnotation: false,
+            watermarkMode: 'signature',
           };
       try{
         for(let i = 0; i < list.length; i += 1){
@@ -2299,6 +2302,22 @@
     // --- Quote dialog ---
     let dlgQuoteId = '';
     let dlgQuoteEditing = false;
+    function renderQuoteDialogView(rec){
+      const txt = String(rec?.text || '').trim();
+      const tr = String(rec?.translation || '').trim();
+      const note = String(rec?.annotation || '').trim();
+      const vText = $('dlg-q-view-text');
+      const vTr = $('dlg-q-view-translation');
+      const vNoteWrap = $('dlg-q-view-note-wrap');
+      const vNote = $('dlg-q-view-note');
+      if(vText) vText.textContent = txt || (lang === 'zh' ? '\uff08\u7a7a\u767d\u91d1\u53e5\uff09' : '(empty quote)');
+      if(vTr){
+        vTr.textContent = tr || (lang === 'zh' ? '\uff08\u6682\u65e0\u7ffb\u8bd1\uff09' : '(no translation)');
+        vTr.style.display = tr ? '' : 'none';
+      }
+      if(vNoteWrap) vNoteWrap.style.display = note ? '' : 'none';
+      if(vNote) vNote.textContent = note;
+    }
     function setQuoteDialogEditMode(on){
       dlgQuoteEditing = !!on;
       const t = $('dlg-q-text');
@@ -2319,9 +2338,21 @@
       const bEdit = $('dlg-q-edit');
       const bCancel = $('dlg-q-cancel-edit');
       const bSave = $('dlg-q-save');
+      const bDel = $('dlg-q-del');
+      const view = $('dlg-q-view');
+      const editPanel = $('dlg-q-edit-panel');
+      const label = $('dlg-q-label');
+      if(view) view.style.display = dlgQuoteEditing ? 'none' : '';
+      if(editPanel) editPanel.style.display = dlgQuoteEditing ? '' : 'none';
       if(bEdit) bEdit.style.display = dlgQuoteEditing ? 'none' : '';
       if(bCancel) bCancel.style.display = dlgQuoteEditing ? '' : 'none';
       if(bSave) bSave.style.display = dlgQuoteEditing ? '' : 'none';
+      if(bDel) bDel.style.display = dlgQuoteEditing ? '' : 'none';
+      if(label){
+        label.textContent = dlgQuoteEditing
+          ? (lang === 'zh' ? '\u7f16\u8f91\u91d1\u53e5' : 'Edit quote')
+          : (lang === 'zh' ? '\u91d1\u53e5\u8be6\u60c5' : 'Quote details');
+      }
     }
     function enforceQuoteViewNoKeyboard(){
       if(dlgQuoteEditing) return;
@@ -2342,6 +2373,7 @@
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
+      renderQuoteDialogView(rec);
     $('dlg-q-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
       : `Updated: ${fmtTime(rec.updatedAt)}`;
@@ -2389,6 +2421,7 @@
       $('dlg-q-note').value = String(rec.annotation || '');
       setQuoteDialogEditMode(false);
       enforceQuoteViewNoKeyboard();
+      renderQuoteDialogView(rec);
     });
     // iOS/Safari hard guard: even if user taps readonly field in view-mode, keep keyboard closed.
     ['dlg-q-text','dlg-q-translation','dlg-q-note'].forEach((id)=>{
@@ -2431,6 +2464,7 @@
       updateHomeUI(asset);
       renderQuotes();
       setQuoteDialogEditMode(false);
+      renderQuoteDialogView({ text, translation, annotation: note });
       toast('toast-dlg-quote', t('toast_saved'));
     });
 
