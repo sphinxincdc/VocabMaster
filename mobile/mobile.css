@@ -683,16 +683,14 @@ body.modal-open{
 }
 .dlgActions{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
   align-items: stretch;
-  position: sticky;
-  bottom: 0;
-  z-index: 4;
+  position: static;
   padding-top: 10px;
   padding-bottom: 2px;
-  background: var(--card);
-  border-top: 1px solid var(--border);
+  background: transparent;
+  border-top: 0;
 }
 .dlgActions .btn{
   min-height: 46px;
@@ -700,6 +698,26 @@ body.modal-open{
 }
 .dlgQuoteBody{
   padding: 14px;
+}
+.quotePreviewBox{
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.7);
+  padding: 10px;
+}
+.quotePreviewCtrl{
+  align-items: center;
+  margin-bottom: 8px;
+}
+.quotePreviewCanvas{
+  display: block;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0f1430;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 .dlgQuoteView{
   display: block;
@@ -744,10 +762,16 @@ body.modal-open{
   margin-top: 12px;
 }
 [data-theme="dark"] .dlgActions{
-  background: #121736;
+  background: transparent;
 }
 [data-theme="dark"] .dlgQuoteView{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+}
+[data-theme="dark"] .quotePreviewBox{
+  background: rgba(15,20,46,0.92);
+}
+[data-theme="dark"] .quotePreviewCanvas{
+  background: #090d1f;
 }
 [data-theme="dark"] .quoteReadCn{
   color: #c6d2ff;
@@ -771,3 +795,8 @@ body.modal-open{
     right: max(10px, env(safe-area-inset-right, 0px));
   }
 }
+
+
+
+
+

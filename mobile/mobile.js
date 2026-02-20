@@ -1,4 +1,4 @@
-﻿// mobile.js
+// mobile.js
 // Phase 3 scaffold: a simple, local IndexedDB-backed web manager for HORD assets.
 // - Works without File System Access API (mobile-friendly).
 // - Manual import/export only. No auto cloud writeback.
@@ -344,6 +344,8 @@
     template: 'hordSignature',
     mainFont: 'inter',
     cjkFont: 'notoSansSC',
+    ratio: '9:16',
+    fontAdjust: 0,
   };
   const quoteExportRuntime = {
     inFlight: false,
@@ -514,6 +516,11 @@
       const raw = JSON.parse(String(localStorage.getItem(MOBILE_QUOTE_EXPORT_PREFS_KEY) || '{}'));
       if(raw && typeof raw === 'object'){
         quoteExportPrefs = Object.assign({}, quoteExportPrefs, raw);
+        const allowedRatio = ['9:16', '4:5', '1:1', '16:9', 'iphone'];
+        if(!allowedRatio.includes(String(quoteExportPrefs.ratio || ''))){
+          quoteExportPrefs.ratio = '9:16';
+        }
+        quoteExportPrefs.fontAdjust = clamp(Number(quoteExportPrefs.fontAdjust) || 0, -30, 30);
       }
     }catch(_){}
   }
@@ -675,6 +682,11 @@
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
+    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '预览导出' : 'Export preview'));
+    const qAdjustLblA = document.querySelector('label[for="q-exp-font-adjust"]');
+    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '字号' : 'Font');
+    const qAdjustLblB = document.querySelector('label[for="dlg-q-exp-font-adjust"]');
+    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '字号' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
     $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
@@ -751,71 +763,192 @@
     }, { once: false });
   }
 
+  function ensureQuoteExportUiScaffold(){
+    const bindKey = (id, key)=>{
+      const el = $(id);
+      if(el && !el.dataset.expKey) el.dataset.expKey = key;
+      return el;
+    };
+    const tpl = bindKey('q-exp-template', 'template');
+    bindKey('q-exp-main-font', 'mainFont');
+    bindKey('q-exp-cjk-font', 'cjkFont');
+
+    if(tpl && !$('q-exp-ratio')){
+      const ratio = document.createElement('select');
+      ratio.id = 'q-exp-ratio';
+      ratio.dataset.expKey = 'ratio';
+      ratio.style.minWidth = '98px';
+      ratio.innerHTML = '<option value="9:16">9:16</option><option value="4:5">4:5</option><option value="1:1">1:1</option><option value="16:9">16:9</option>';
+      tpl.insertAdjacentElement('afterend', ratio);
+    }
+    if(tpl && !$('q-exp-font-adjust')){
+      const host = tpl.parentElement;
+      if(host){
+        const lbl = document.createElement('label');
+        lbl.htmlFor = 'q-exp-font-adjust';
+        lbl.className = 'small muted';
+        lbl.textContent = '字号';
+        const inp = document.createElement('input');
+        inp.id = 'q-exp-font-adjust';
+        inp.dataset.expKey = 'fontAdjust';
+        inp.type = 'range';
+        inp.min = '-30';
+        inp.max = '30';
+        inp.step = '1';
+        inp.value = '0';
+        const val = document.createElement('span');
+        val.className = 'pill';
+        val.id = 'q-exp-font-adjust-val';
+        val.textContent = '0';
+        host.appendChild(lbl);
+        host.appendChild(inp);
+        host.appendChild(val);
+      }
+    }
+
+    const dlgActions = $('dlg-q-export')?.closest('.row.dlgActions');
+    if(dlgActions && !$('dlg-q-preview-canvas')){
+      const box = document.createElement('div');
+      box.className = 'quotePreviewBox';
+      box.id = 'dlg-q-preview-wrap';
+      box.innerHTML = `
+        <div class="row small muted quotePreviewCtrl">
+          <span>预览导出</span>
+          <select id="dlg-q-exp-template" data-exp-key="template" style="min-width:120px;">
+            <option value="hordSignature">HORD</option>
+            <option value="editorial">Editorial</option>
+            <option value="gradientSoft">Gradient</option>
+            <option value="nightCircuit">Night</option>
+          </select>
+          <select id="dlg-q-exp-ratio" data-exp-key="ratio" style="min-width:98px;">
+            <option value="9:16">9:16</option>
+            <option value="4:5">4:5</option>
+            <option value="1:1">1:1</option>
+            <option value="16:9">16:9</option>
+          </select>
+          <select id="dlg-q-exp-main-font" data-exp-key="mainFont" style="min-width:120px;"></select>
+          <select id="dlg-q-exp-cjk-font" data-exp-key="cjkFont" style="min-width:120px;"></select>
+          <label for="dlg-q-exp-font-adjust" class="small muted">字号</label>
+          <input id="dlg-q-exp-font-adjust" data-exp-key="fontAdjust" type="range" min="-30" max="30" step="1" value="0">
+          <span class="pill" id="dlg-q-exp-font-adjust-val">0</span>
+        </div>
+        <canvas id="dlg-q-preview-canvas" class="quotePreviewCanvas" aria-label="Quote export preview"></canvas>
+      `;
+      dlgActions.insertAdjacentElement('beforebegin', box);
+    }
+  }
+
   function initQuoteExportControls(){
+    ensureQuoteExportUiScaffold();
     loadQuoteExportPrefs();
     const exporter = globalThis.QuoteCardExporter || null;
-    const mainSel = $('q-exp-main-font');
-    const cjkSel = $('q-exp-cjk-font');
-    const tplSel = $('q-exp-template');
+    const mainFontMap = exporter?.MAIN_FONT_OPTIONS && typeof exporter.MAIN_FONT_OPTIONS === 'object'
+      ? exporter.MAIN_FONT_OPTIONS
+      : {
+          inter: { label: 'Inter' },
+          playfair: { label: 'Playfair Display' },
+          garamond: { label: 'EB Garamond' },
+          lora: { label: 'Lora' },
+        };
+    const cjkFontMap = exporter?.CJK_FONT_OPTIONS && typeof exporter.CJK_FONT_OPTIONS === 'object'
+      ? exporter.CJK_FONT_OPTIONS
+      : {
+          notoSansSC: { label: 'Noto Sans SC' },
+          notoSerifSC: { label: 'Noto Serif SC' },
+          lxgwWenKai: { label: 'LXGW WenKai' },
+        };
+    const templateMap = lang === 'zh'
+      ? {
+          hordSignature: 'HORD 品牌',
+          editorial: 'Editorial 杂志',
+          gradientSoft: 'Gradient 渐变',
+          nightCircuit: 'Night 夜间',
+        }
+      : {
+          hordSignature: 'HORD Signature',
+          editorial: 'Editorial',
+          gradientSoft: 'Gradient Soft',
+          nightCircuit: 'Night Circuit',
+        };
 
-    if(mainSel){
-      const fontMap = exporter?.MAIN_FONT_OPTIONS && typeof exporter.MAIN_FONT_OPTIONS === 'object'
-        ? exporter.MAIN_FONT_OPTIONS
-        : {
-            inter: { label: 'Inter' },
-            playfair: { label: 'Playfair Display' },
-            garamond: { label: 'EB Garamond' },
-            lora: { label: 'Lora' },
-          };
-      const keys = Object.keys(fontMap);
-      mainSel.textContent = '';
-      for(const k of keys){
-        const opt = document.createElement('option');
-        opt.value = k;
-        opt.textContent = String(fontMap[k]?.label || k);
-        mainSel.appendChild(opt);
+    const setOptions = (selector, options)=>{
+      const nodes = Array.from(document.querySelectorAll(selector));
+      for(const sel of nodes){
+        const old = String(sel.value || '');
+        sel.textContent = '';
+        for(const it of options){
+          const opt = document.createElement('option');
+          opt.value = String(it.value);
+          opt.textContent = String(it.label);
+          sel.appendChild(opt);
+        }
+        if(old) sel.value = old;
       }
-      mainSel.value = keys.includes(quoteExportPrefs.mainFont) ? quoteExportPrefs.mainFont : keys[0];
-      quoteExportPrefs.mainFont = mainSel.value;
-      mainSel.addEventListener('change', ()=>{
-        quoteExportPrefs.mainFont = String(mainSel.value || 'inter');
-        saveQuoteExportPrefs();
-      });
-    }
+      return nodes;
+    };
 
-    if(cjkSel){
-      const fontMap = exporter?.CJK_FONT_OPTIONS && typeof exporter.CJK_FONT_OPTIONS === 'object'
-        ? exporter.CJK_FONT_OPTIONS
-        : {
-            notoSansSC: { label: 'Noto Sans SC' },
-            notoSerifSC: { label: 'Noto Serif SC' },
-            lxgwWenKai: { label: 'LXGW WenKai' },
-          };
-      const keys = Object.keys(fontMap);
-      cjkSel.textContent = '';
-      for(const k of keys){
-        const opt = document.createElement('option');
-        opt.value = k;
-        opt.textContent = String(fontMap[k]?.label || k);
-        cjkSel.appendChild(opt);
-      }
-      cjkSel.value = keys.includes(quoteExportPrefs.cjkFont) ? quoteExportPrefs.cjkFont : keys[0];
-      quoteExportPrefs.cjkFont = cjkSel.value;
-      cjkSel.addEventListener('change', ()=>{
-        quoteExportPrefs.cjkFont = String(cjkSel.value || 'notoSansSC');
-        saveQuoteExportPrefs();
-      });
-    }
+    const mainNodes = setOptions('select[data-exp-key="mainFont"]', Object.keys(mainFontMap).map(k=>({ value:k, label:String(mainFontMap[k]?.label || k) })));
+    const cjkNodes = setOptions('select[data-exp-key="cjkFont"]', Object.keys(cjkFontMap).map(k=>({ value:k, label:String(cjkFontMap[k]?.label || k) })));
+    const tplNodes = setOptions('select[data-exp-key="template"]', Object.keys(templateMap).map(k=>({ value:k, label:String(templateMap[k]) })));
+    const ratioNodes = Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'));
+    const adjNodes = Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'));
 
-    if(tplSel){
-      const keys = ['hordSignature', 'editorial', 'gradientSoft', 'nightCircuit'];
-      tplSel.value = keys.includes(quoteExportPrefs.template) ? quoteExportPrefs.template : 'hordSignature';
-      quoteExportPrefs.template = tplSel.value;
-      tplSel.addEventListener('change', ()=>{
-        quoteExportPrefs.template = String(tplSel.value || 'hordSignature');
-        saveQuoteExportPrefs();
+    if(!Object.keys(mainFontMap).includes(quoteExportPrefs.mainFont)) quoteExportPrefs.mainFont = Object.keys(mainFontMap)[0] || 'inter';
+    if(!Object.keys(cjkFontMap).includes(quoteExportPrefs.cjkFont)) quoteExportPrefs.cjkFont = Object.keys(cjkFontMap)[0] || 'notoSansSC';
+    if(!Object.keys(templateMap).includes(quoteExportPrefs.template)) quoteExportPrefs.template = 'hordSignature';
+    if(!['9:16','4:5','1:1','16:9','iphone'].includes(String(quoteExportPrefs.ratio || ''))){
+      quoteExportPrefs.ratio = '9:16';
+    }
+    quoteExportPrefs.fontAdjust = clamp(Number(quoteExportPrefs.fontAdjust) || 0, -30, 30);
+
+    const syncExportControls = ()=>{
+      for(const n of mainNodes){ n.value = quoteExportPrefs.mainFont; }
+      for(const n of cjkNodes){ n.value = quoteExportPrefs.cjkFont; }
+      for(const n of tplNodes){ n.value = quoteExportPrefs.template; }
+      for(const n of ratioNodes){ n.value = quoteExportPrefs.ratio; }
+      for(const n of adjNodes){ n.value = String(quoteExportPrefs.fontAdjust); }
+      const a = $('q-exp-font-adjust-val');
+      const b = $('dlg-q-exp-font-adjust-val');
+      if(a) a.textContent = String(quoteExportPrefs.fontAdjust > 0 ? `+${quoteExportPrefs.fontAdjust}` : quoteExportPrefs.fontAdjust);
+      if(b) b.textContent = String(quoteExportPrefs.fontAdjust > 0 ? `+${quoteExportPrefs.fontAdjust}` : quoteExportPrefs.fontAdjust);
+    };
+    const onChange = ()=>{
+      saveQuoteExportPrefs();
+      syncExportControls();
+      renderQuoteDialogPreview();
+    };
+    for(const n of mainNodes){
+      n.addEventListener('change', ()=>{
+        quoteExportPrefs.mainFont = String(n.value || 'inter');
+        onChange();
       });
     }
+    for(const n of cjkNodes){
+      n.addEventListener('change', ()=>{
+        quoteExportPrefs.cjkFont = String(n.value || 'notoSansSC');
+        onChange();
+      });
+    }
+    for(const n of tplNodes){
+      n.addEventListener('change', ()=>{
+        quoteExportPrefs.template = String(n.value || 'hordSignature');
+        onChange();
+      });
+    }
+    for(const n of ratioNodes){
+      n.addEventListener('change', ()=>{
+        quoteExportPrefs.ratio = String(n.value || '9:16');
+        onChange();
+      });
+    }
+    for(const n of adjNodes){
+      n.addEventListener('input', ()=>{
+        quoteExportPrefs.fontAdjust = clamp(Number(n.value) || 0, -30, 30);
+        onChange();
+      });
+    }
+    syncExportControls();
+    saveQuoteExportPrefs();
   }
 
   function fmtTime(ts){
@@ -1991,27 +2124,24 @@
       quoteExportRuntime.failedIds = [];
       renderQuoteExportFailures();
       setQuoteExportUi(true);
-      const baseSettings = exporter.normalizeSettings
-        ? exporter.normalizeSettings({
+      const exportSettings = typeof getQuoteExportSettings === 'function'
+        ? getQuoteExportSettings()
+        : {
             ratio: '9:16',
             template: String(quoteExportPrefs.template || 'hordSignature'),
             mainFont: String(quoteExportPrefs.mainFont || 'inter'),
             cjkFont: String(quoteExportPrefs.cjkFont || 'notoSansSC'),
+            fontAdjust: clamp(Number(quoteExportPrefs.fontAdjust) || 0, -30, 30),
             showTranslation: true,
             showSource: false,
             showAnnotation: false,
             watermarkMode: 'signature',
             capabilities: getCapabilities(),
             isProUser: false,
-          })
-        : {
-            ratio: '9:16',
-            template: 'hordSignature',
-            showTranslation: true,
-            showSource: false,
-            showAnnotation: false,
-            watermarkMode: 'signature',
           };
+      const baseSettings = exporter.normalizeSettings
+        ? exporter.normalizeSettings(exportSettings)
+        : exportSettings;
       try{
         for(let i = 0; i < list.length; i += 1){
           if(quoteExportRuntime.cancelRequested){
@@ -2363,6 +2493,50 @@
         }
       } catch(_) {}
     }
+    function buildCurrentQuoteExportSentence(rec){
+      const base = rec || {};
+      return {
+        text: String($('dlg-q-text')?.value || base.text || '').trim(),
+        translation: String($('dlg-q-translation')?.value || base.translation || '').trim(),
+        note: String($('dlg-q-note')?.value || base.annotation || '').trim(),
+        url: String(base.url || '').trim(),
+        title: String(base.title || '').trim(),
+        sourceLabel: String(base.sourceLabel || '').trim(),
+      };
+    }
+    function getQuoteExportSettings(){
+      return {
+        ratio: String(quoteExportPrefs.ratio || '9:16'),
+        template: String(quoteExportPrefs.template || 'hordSignature'),
+        mainFont: String(quoteExportPrefs.mainFont || 'inter'),
+        cjkFont: String(quoteExportPrefs.cjkFont || 'notoSansSC'),
+        fontAdjust: clamp(Number(quoteExportPrefs.fontAdjust) || 0, -30, 30),
+        showTranslation: true,
+        showSource: false,
+        showAnnotation: false,
+        watermarkMode: 'signature',
+        capabilities: getCapabilities(),
+        isProUser: false,
+      };
+    }
+    function renderQuoteDialogPreview(recArg){
+      const canvas = $('dlg-q-preview-canvas');
+      if(!canvas) return;
+      const exporter = globalThis.QuoteCardExporter;
+      if(!exporter || typeof exporter.renderPreview !== 'function') return;
+      const rec = recArg || (dlgQuoteId ? findQuoteRecord(asset, dlgQuoteId) : null);
+      if(!rec) return;
+      const settings = getQuoteExportSettings();
+      settings.previewFit = true;
+      settings.previewScale = 1;
+      settings.previewScaleMode = 'fit';
+      settings.previewMaxWidth = Math.max(280, Math.floor(canvas.parentElement?.clientWidth || canvas.clientWidth || 320) - 6);
+      settings.previewMaxHeight = 560;
+      const sentence = buildCurrentQuoteExportSentence(rec);
+      try{
+        exporter.renderPreview(sentence, settings, canvas);
+      }catch(_){}
+    }
     function openQuoteDialog(id){
       toast('toast-dlg-quote','');
       if(!asset) return;
@@ -2393,6 +2567,7 @@
             if (dlgQuoteEditing) return;
             enforceQuoteViewNoKeyboard();
             dlg.focus?.();
+            renderQuoteDialogPreview(rec);
           });
         } catch (_) {}
       }
@@ -2411,6 +2586,7 @@
       setQuoteDialogEditMode(true);
       const t = $('dlg-q-text');
       if(t) t.focus();
+      renderQuoteDialogPreview();
     });
     $('dlg-q-cancel-edit')?.addEventListener('click', ()=>{
       if(!asset || !dlgQuoteId) return;
@@ -2422,6 +2598,7 @@
       setQuoteDialogEditMode(false);
       enforceQuoteViewNoKeyboard();
       renderQuoteDialogView(rec);
+      renderQuoteDialogPreview(rec);
     });
     // iOS/Safari hard guard: even if user taps readonly field in view-mode, keep keyboard closed.
     ['dlg-q-text','dlg-q-translation','dlg-q-note'].forEach((id)=>{
@@ -2465,6 +2642,7 @@
       renderQuotes();
       setQuoteDialogEditMode(false);
       renderQuoteDialogView({ text, translation, annotation: note });
+      renderQuoteDialogPreview({ text, translation, annotation: note });
       toast('toast-dlg-quote', t('toast_saved'));
     });
 
@@ -2479,6 +2657,9 @@
       await exportSelectedQuoteImages([rec]);
       toast('toast-dlg-quote', lang === 'zh' ? '\u5df2\u89e6\u53d1\u5bfc\u51fa\u3002' : 'Export started.');
     });
+    $('dlg-q-text')?.addEventListener('input', ()=> renderQuoteDialogPreview());
+    $('dlg-q-translation')?.addEventListener('input', ()=> renderQuoteDialogPreview());
+    $('dlg-q-note')?.addEventListener('input', ()=> renderQuoteDialogPreview());
 
     $('dlg-q-del')?.addEventListener('click', async ()=>{
       toast('toast-dlg-quote','');
@@ -2833,33 +3014,17 @@
           : `Sort: ${sortFieldLabel('quotes', quotesSortField)}`);
       });
     }
-    const expMain = $('q-exp-main-font');
-    if(expMain){
+    for(const expMain of Array.from(document.querySelectorAll('select[data-exp-key="mainFont"]'))){
       expMain.title = (lang === 'zh' ? '\u82f1\u6587\u5b57\u4f53' : 'Main font');
     }
-    const expCjk = $('q-exp-cjk-font');
-    if(expCjk){
+    for(const expCjk of Array.from(document.querySelectorAll('select[data-exp-key="cjkFont"]'))){
       expCjk.title = (lang === 'zh' ? '\u4e2d\u6587\u5b57\u4f53' : 'CJK font');
     }
-    const expTpl = $('q-exp-template');
-    if(expTpl){
-      const tplMap = lang === 'zh'
-        ? {
-            hordSignature: 'HORD \u54c1\u724c',
-            editorial: 'Editorial \u6742\u5fd7',
-            gradientSoft: 'Gradient \u6e10\u53d8',
-            nightCircuit: 'Night \u591c\u95f4',
-          }
-        : {
-            hordSignature: 'HORD Signature',
-            editorial: 'Editorial',
-            gradientSoft: 'Gradient Soft',
-            nightCircuit: 'Night Circuit',
-          };
-      Array.from(expTpl.options || []).forEach((opt)=>{
-        const key = String(opt.value || '');
-        if(tplMap[key]) opt.textContent = tplMap[key];
-      });
+    for(const expRatio of Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'))){
+      expRatio.title = (lang === 'zh' ? '导出比例' : 'Export ratio');
+    }
+    for(const expAdj of Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'))){
+      expAdj.title = (lang === 'zh' ? '字号微调' : 'Font size adjust');
     }
     const qSortDir = $('q-sort-dir');
     if(qSortDir){
