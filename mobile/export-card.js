@@ -41,7 +41,7 @@
     annotationStyle: 'normal',
     showTranslation: true,
     showAnnotation: false,
-    showSource: true,
+    showSource: false,
     showWatermark: true,
     watermarkMode: 'signature',
     isProUser: false,

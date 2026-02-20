@@ -625,6 +625,7 @@
   function applyI18n(){
     try{
       document.documentElement.lang = 'zh-CN';
+      document.title = `${t('brand_title')} · HORD`;
     }catch(_){}
 
     // Brand
