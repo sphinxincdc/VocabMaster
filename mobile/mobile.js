@@ -2537,6 +2537,38 @@
         exporter.renderPreview(sentence, settings, canvas);
       }catch(_){}
     }
+    async function exportCurrentDialogQuoteImage(){
+      const exporter = globalThis.QuoteCardExporter;
+      if(!exporter || typeof exporter.exportPng !== 'function'){
+        toast('toast-dlg-quote', lang === 'zh' ? '导出模块未加载，请刷新后重试。' : 'Exporter not loaded. Refresh and try again.');
+        return false;
+      }
+      if(!asset || !dlgQuoteId) return false;
+      const rec = findQuoteRecord(asset, dlgQuoteId);
+      if(!rec || rec.isDeleted === true){
+        toast('toast-dlg-quote', lang === 'zh' ? '该金句已不存在。' : 'Quote no longer exists.');
+        return false;
+      }
+      const sentence = buildCurrentQuoteExportSentence(rec);
+      const baseSettings = exporter.normalizeSettings
+        ? exporter.normalizeSettings(getQuoteExportSettings())
+        : getQuoteExportSettings();
+      try{
+        await exporter.exportPng(sentence, baseSettings, {
+          filenamePrefix: 'hord-mobile-quote',
+          index: 1,
+          filenamePattern: 'hord-mobile-{date}-{index}',
+          withMockup: false,
+        });
+        toast('toast-dlg-quote', lang === 'zh' ? '已触发导出。' : 'Export started.');
+        return true;
+      }catch(e){
+        toast('toast-dlg-quote', lang === 'zh'
+          ? `导出失败：${String(e && e.message || e || 'unknown')}`
+          : `Export failed: ${String(e && e.message || e || 'unknown')}`);
+        return false;
+      }
+    }
     function openQuoteDialog(id){
       toast('toast-dlg-quote','');
       if(!asset) return;
@@ -2648,18 +2680,12 @@
 
     $('dlg-q-export')?.addEventListener('click', async ()=>{
       toast('toast-dlg-quote','');
-      if(!asset || !dlgQuoteId) return;
-      const rec = findQuoteRecord(asset, dlgQuoteId);
-      if(!rec || rec.isDeleted === true){
-        toast('toast-dlg-quote', lang === 'zh' ? '\u8be5\u91d1\u53e5\u5df2\u4e0d\u5b58\u5728\u3002' : 'Quote no longer exists.');
-        return;
-      }
-      await exportSelectedQuoteImages([rec]);
-      toast('toast-dlg-quote', lang === 'zh' ? '\u5df2\u89e6\u53d1\u5bfc\u51fa\u3002' : 'Export started.');
+      await exportCurrentDialogQuoteImage();
     });
     $('dlg-q-text')?.addEventListener('input', ()=> renderQuoteDialogPreview());
     $('dlg-q-translation')?.addEventListener('input', ()=> renderQuoteDialogPreview());
     $('dlg-q-note')?.addEventListener('input', ()=> renderQuoteDialogPreview());
+    globalThis.addEventListener('resize', ()=>{ if(dlgQuoteId) renderQuoteDialogPreview(); });
 
     $('dlg-q-del')?.addEventListener('click', async ()=>{
       toast('toast-dlg-quote','');
