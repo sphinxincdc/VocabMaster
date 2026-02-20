@@ -11,6 +11,7 @@
   const THEME_KEY = 'hord_mobile_theme_v1';
   const BACKUP_KEY = 'hord_mobile_backups_v1';
   const MOBILE_QUOTE_EXPORT_PREFS_KEY = 'hord_mobile_quote_export_prefs_v1';
+  const REVIEW_LIMIT_KEY = 'hord_mobile_review_limit_v1';
   const DAY = 24 * 60 * 60 * 1000;
 
   const $ = (id)=>document.getElementById(id);
@@ -235,6 +236,21 @@
   function getLang(){
     // Mobile is Chinese-only by product decision.
     return 'zh';
+  }
+
+  function getReviewSessionLimit(){
+    try{
+      const raw = Number(localStorage.getItem(REVIEW_LIMIT_KEY) || 20);
+      return clamp(raw, 1, 200);
+    }catch(_){
+      return 20;
+    }
+  }
+
+  function setReviewSessionLimit(v){
+    const n = clamp(Number(v) || 20, 1, 200);
+    try{ localStorage.setItem(REVIEW_LIMIT_KEY, String(n)); }catch(_){}
+    return n;
   }
 
   function getThemeMode(){
@@ -995,7 +1011,7 @@
     if(limitEl){
       limitEl.min = '1';
       limitEl.max = '200';
-      const v = clamp(limitEl.value || 20, 1, 200);
+      const v = getReviewSessionLimit();
       limitEl.value = String(v);
     }
   }
@@ -1669,6 +1685,19 @@
         reviewMeaningMode = ['both','cn','en'].includes(v) ? v : 'both';
         try{ localStorage.setItem('hord_mobile_review_meaning_mode_v1', reviewMeaningMode); }catch(_){}
         renderReview();
+      });
+    }
+    const rvLimitEl = $('limit');
+    if(rvLimitEl){
+      rvLimitEl.value = String(getReviewSessionLimit());
+      const syncLimit = ()=>{
+        const n = setReviewSessionLimit(rvLimitEl.value);
+        rvLimitEl.value = String(n);
+      };
+      rvLimitEl.addEventListener('change', syncLimit);
+      rvLimitEl.addEventListener('blur', syncLimit);
+      rvLimitEl.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter') syncLimit();
       });
     }
 
@@ -2465,9 +2494,10 @@
         toast('toast-review', t('toast_import_first'));
         return;
       }
-      const desired = Number($('limit')?.value || 20) || 20;
+      const desired = Number($('limit')?.value || getReviewSessionLimit()) || getReviewSessionLimit();
       const lim = clamp(desired, 1, 200);
       if($('limit')) $('limit').value = String(lim);
+      setReviewSessionLimit(lim);
       queue = buildReviewQueue(asset, lim);
       qIdx = 0;
       renderReview();
