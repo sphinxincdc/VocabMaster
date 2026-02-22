@@ -842,7 +842,7 @@
       box.id = 'dlg-q-preview-wrap';
       box.innerHTML = `
         <div class="row small muted quotePreviewCtrl">
-          <span>棰勮瀵煎嚭</span>
+          <span>预览导出</span>
           <select id="dlg-q-exp-template" data-exp-key="template" style="min-width:120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
