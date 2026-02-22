@@ -2584,7 +2584,7 @@
       const rec = findQuoteRecord(asset, id);
       if(!rec || rec.isDeleted === true) return;
       dlgQuoteId = String(id || '');
-      $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
+      if($('dlg-q-title')) $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
