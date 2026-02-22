@@ -2801,7 +2801,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'us');
-      if(!ok) toast('toast-review', lang === 'zh' ? '鏃犲彲鐢ㄥ彂闊炽€? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
     $('q-play-uk')?.addEventListener('click', async ()=>{
       toast('toast-review','');
@@ -2809,7 +2809,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'uk');
-      if(!ok) toast('toast-review', lang === 'zh' ? '鏃犲彲鐢ㄥ彂闊炽€? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
 
     $('rv-delete-word')?.addEventListener('click', async ()=>{
