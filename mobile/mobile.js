@@ -711,7 +711,7 @@
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
-    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '棰勮瀵煎嚭' : 'Export preview'));
+    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '预览导出' : 'Export preview'));
     const qAdjustLblA = document.querySelector('label[for="q-exp-font-adjust"]');
     if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '瀛楀彿' : 'Font');
     const qAdjustLblB = document.querySelector('label[for="dlg-q-exp-font-adjust"]');
@@ -1036,14 +1036,14 @@
     const w = $('w-sort-state');
     if(w){
       w.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`;
     }
     const q = $('q-sort-state');
     if(q){
       q.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`;
     }
   }
 
@@ -1719,7 +1719,7 @@
       else themeMode = 'auto';
       try{ localStorage.setItem(THEME_KEY, themeMode); }catch(_){}
       applyTheme();
-      toast('toast-home', lang === 'zh' ? `涓婚锛?{themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
+      toast('toast-home', lang === 'zh' ? `主题：${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
     });
 
     // Best-effort flush on backgrounding.
@@ -2448,7 +2448,7 @@
         return true;
       });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `淇濆瓨澶辫触锛?{mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
         return;
       }
       updateHomeUI(asset);
@@ -2568,13 +2568,13 @@
     async function exportCurrentDialogQuoteImage(){
       const exporter = globalThis.QuoteCardExporter;
       if(!exporter || typeof exporter.exportPng !== 'function'){
-        toast('toast-dlg-quote', lang === 'zh' ? '瀵煎嚭妯″潡鏈姞杞斤紝璇峰埛鏂板悗閲嶈瘯銆? : 'Exporter not loaded. Refresh and try again.');
+        toast('toast-dlg-quote', lang === 'zh' ? '导出模块未加载，请刷新后重试。' : 'Exporter not loaded. Refresh and try again.');
         return false;
       }
       if(!asset || !dlgQuoteId) return false;
       const rec = findQuoteRecord(asset, dlgQuoteId);
       if(!rec || rec.isDeleted === true){
-        toast('toast-dlg-quote', lang === 'zh' ? '璇ラ噾鍙ュ凡涓嶅瓨鍦ㄣ€? : 'Quote no longer exists.');
+        toast('toast-dlg-quote', lang === 'zh' ? '该金句已不存在。' : 'Quote no longer exists.');
         return false;
       }
       const sentence = buildCurrentQuoteExportSentence(rec);
@@ -2588,11 +2588,11 @@
           filenamePattern: 'hord-mobile-{date}-{index}',
           withMockup: false,
         });
-        toast('toast-dlg-quote', lang === 'zh' ? '宸茶Е鍙戝鍑恒€? : 'Export started.');
+        toast('toast-dlg-quote', lang === 'zh' ? '已触发导出。' : 'Export started.');
         return true;
       }catch(e){
         toast('toast-dlg-quote', lang === 'zh'
-          ? `瀵煎嚭澶辫触锛?{String(e && e.message || e || 'unknown')}`
+          ? `导出失败：${String(e && e.message || e || 'unknown')}`
           : `Export failed: ${String(e && e.message || e || 'unknown')}`);
         return false;
       }
@@ -2821,7 +2821,7 @@
         return removeWordRecord(asset, id);
       });
       if(!mr.ok){
-        toast('toast-review', lang === 'zh' ? `鍒犻櫎澶辫触锛?{mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        toast('toast-review', lang === 'zh' ? `删除失败：${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
         return;
       }
       queue = queue.filter((w)=>String(w || '') !== String(id));
@@ -2829,7 +2829,7 @@
       updateHomeUI(asset);
       renderWords();
       renderReview();
-      toast('toast-review', lang === 'zh' ? '宸插垹闄ゆ湰璇嶃€? : 'Deleted.');
+      toast('toast-review', lang === 'zh' ? '已删除本词。' : 'Deleted.');
     });
     const closeReviewMoreMenu = ()=>{
       const menu = $('rv-more-menu');
