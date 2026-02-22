@@ -67,7 +67,7 @@ body::before{
   justify-content:space-between;
   flex-wrap:wrap;
   position: relative;
-  padding: 10px 56px 8px 10px;
+  padding: 10px 10px 8px 10px;
   border-radius: 16px;
   background: rgba(255,255,255,0.54);
   border: 1px solid rgba(90,69,255,0.12);
@@ -120,18 +120,17 @@ body::before{
 }
 
 .floatingControls{
-  position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 10px);
-  right: max(14px, env(safe-area-inset-right, 0px));
+  position: absolute;
+  top: 10px;
+  right: 10px;
   left: auto;
-  z-index: 1200;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  pointer-events: none;
+  pointer-events: auto;
 }
 .floatingControls .iconToggle{
-  pointer-events: auto;
   box-shadow: 0 10px 22px rgba(18,25,56,0.18);
   border-color: rgba(90,69,255,0.18);
   background: rgba(255,255,255,0.74);
@@ -672,6 +671,10 @@ input::placeholder{
   border-color: #2a3566;
 }
 
+dialog:not([open]){
+  display: none !important;
+}
+
 dialog::backdrop{
   background: rgba(3, 8, 22, 0.58);
   backdrop-filter: blur(10px);
@@ -810,8 +813,8 @@ body.modal-open{
 
 @media (max-width: 899px){
   .floatingControls{
-    top: calc(env(safe-area-inset-top, 0px) + 10px);
-    right: max(10px, env(safe-area-inset-right, 0px));
+    top: 10px;
+    right: 10px;
   }
 }
 
