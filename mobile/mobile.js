@@ -653,7 +653,7 @@
   function applyI18n(){
     try{
       document.documentElement.lang = 'zh-CN';
-      document.title = `${t('brand_title')} 路 HORD`;
+      document.title = `${t('brand_title')} · HORD`;
     }catch(_){}
 
     // Brand
@@ -718,7 +718,7 @@
     if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '瀛楀彿' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '鍒犻櫎鏈瘝' : 'Delete Word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除当前词' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -758,8 +758,8 @@
     $('q-q') && ($('q-q').placeholder = t('ph_search_quotes'));
     $('w-batch-tags') && ($('w-batch-tags').placeholder = t('ph_tags'));
     $('q-batch-tags') && ($('q-batch-tags').placeholder = t('ph_tags'));
-    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '鐐瑰紑鍗曡瘝鏌ョ湅璇︽儏锛涘垹闄や负纭垹闄ゃ€? : 'Tap a word for details; delete is hard delete.'));
-    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '鐐瑰嚮鍙充晶鈥滃鍑哄浘鐗団€濆彲鐩存帴瀵煎嚭鍗曟潯銆? : 'Use the right-side export button for single quote export.'));
+    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '点击单词查看详情；删除为硬删除。' : 'Tap a word for details; delete is hard delete.'));
+    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '点击右侧导出图片可直接导出单条。' : 'Use the right-side export button for single quote export.'));
 
     // Review buttons
     document.querySelector('.rate[data-q=\"0\"]') && (document.querySelector('.rate[data-q=\"0\"]').textContent = t('rate_forgot'));
@@ -2947,10 +2947,10 @@
     }
     const wSortDir = $('w-sort-dir');
     if(wSortDir){
-      wSortDir.textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?;
+      wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
-        wSortDir.textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?;
+        wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
         renderWords();
         updateSortStatePills();
         toast('toast-words', wordsSortDir === 'asc'
@@ -3081,10 +3081,10 @@
     }
     const qSortDir = $('q-sort-dir');
     if(qSortDir){
-      qSortDir.textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?;
+      qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
-        qSortDir.textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?;
+        qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
         renderQuotes();
         updateSortStatePills();
         toast('toast-quotes', quotesSortDir === 'asc'
