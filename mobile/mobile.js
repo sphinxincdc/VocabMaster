@@ -16,6 +16,26 @@
   const DAY = 24 * 60 * 60 * 1000;
 
   const $ = (id)=>document.getElementById(id);
+  const canUseNativeDialog = (dlg)=>(!!dlg && typeof dlg.showModal === 'function' && typeof dlg.close === 'function');
+  function openDialogSafe(dlg){
+    if(!dlg) return false;
+    if(canUseNativeDialog(dlg)){
+      dlg.showModal();
+      return true;
+    }
+    dlg.setAttribute('open', 'open');
+    dlg.style.display = 'block';
+    return true;
+  }
+  function closeDialogSafe(dlg){
+    if(!dlg) return;
+    if(canUseNativeDialog(dlg)){
+      dlg.close();
+      return;
+    }
+    dlg.removeAttribute('open');
+    dlg.style.display = 'none';
+  }
 
   function toast(id, msg){
     const el = $(id);
@@ -2329,8 +2349,7 @@
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
       : `Updated: ${fmtTime(rec.updatedAt)} 路 Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
-      if(dlg && typeof dlg.showModal === 'function'){
-        dlg.showModal();
+      if(openDialogSafe(dlg)){
         document.body.classList.add('modal-open');
       }
     }
@@ -2338,7 +2357,7 @@
     function closeWordDialog(){
       stopWordPronounce();
       const dlg = $('dlg-word');
-      if(dlg && typeof dlg.close === 'function') dlg.close();
+      closeDialogSafe(dlg);
       document.body.classList.remove('modal-open');
       dlgWordId = '';
     }
@@ -2593,14 +2612,13 @@
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
       : `Updated: ${fmtTime(rec.updatedAt)}`;
       const dlg = $('dlg-quote');
-      if(dlg && typeof dlg.showModal === 'function'){
+      if(openDialogSafe(dlg)){
         setQuoteDialogEditMode(false);
         // blur any previously focused editable to avoid keyboard carry-over on iOS.
         try {
           const ae = document.activeElement;
           if(ae && typeof ae.blur === 'function') ae.blur();
         } catch (_) {}
-        dlg.showModal();
         document.body.classList.add('modal-open');
         // keep focus on dialog container, not text fields.
         try {
@@ -2616,7 +2634,7 @@
 
     function closeQuoteDialog(){
       const dlg = $('dlg-quote');
-      if(dlg && typeof dlg.close === 'function') dlg.close();
+      closeDialogSafe(dlg);
       document.body.classList.remove('modal-open');
       dlgQuoteId = '';
       dlgQuoteEditing = false;
