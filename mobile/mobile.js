@@ -692,8 +692,8 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?);
-    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?);
+    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
+    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
     const wSort = $('w-sort');
     if(wSort){
       const o0 = wSort.querySelector('option[value="time"]'); if(o0) o0.textContent = (lang === 'zh' ? '\u6309\u65f6\u95f4' : 'By time');
