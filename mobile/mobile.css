@@ -686,11 +686,14 @@ body.modal-open{
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
   align-items: stretch;
-  position: static;
-  padding-top: 10px;
-  padding-bottom: 2px;
-  background: transparent;
-  border-top: 0;
+  position: sticky;
+  bottom: 0;
+  margin-top: 12px;
+  padding: 12px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(251,251,255,0.72), rgba(251,251,255,0.96) 36%);
+  border-top: 1px solid rgba(90,69,255,0.12);
+  backdrop-filter: blur(8px);
+  z-index: 2;
 }
 .dlgActions .btn{
   min-height: 46px;
@@ -698,8 +701,11 @@ body.modal-open{
 }
 .dlgQuoteBody{
   padding: 14px;
-  max-height: min(76vh, 780px);
+  max-height: min(82vh, 820px);
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .quotePreviewBox{
   margin-top: 12px;
@@ -768,10 +774,14 @@ body.modal-open{
   color: var(--muted);
 }
 .dlgQuoteEdit{
-  margin-top: 12px;
+  margin-top: 4px;
+}
+.dlgQuoteEdit input{
+  min-height: 48px;
 }
 [data-theme="dark"] .dlgActions{
-  background: transparent;
+  background: linear-gradient(180deg, rgba(10,14,31,0.66), rgba(10,14,31,0.95) 38%);
+  border-top-color: rgba(116,103,255,0.24);
 }
 [data-theme="dark"] .dlgQuoteView{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
@@ -808,6 +818,9 @@ body.modal-open{
 @media (max-width: 620px){
   .dlgActions{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dlgActions .btn{
+    min-height: 44px;
   }
   .quoteReadEn{
     font-size: 30px;
