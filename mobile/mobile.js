@@ -764,11 +764,11 @@
     img.dataset.brandInit = '1';
     img.addEventListener('error', ()=>{
       const cur = String(img.getAttribute('src') || '').trim();
-      if(cur === 'icon128.png'){
+      if(cur === 'apple-touch-icon.png'){
         img.style.display = 'none';
         return;
       }
-      img.setAttribute('src', 'icon128.png');
+      img.setAttribute('src', 'apple-touch-icon.png');
     }, { once: false });
   }
 
