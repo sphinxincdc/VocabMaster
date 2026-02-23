@@ -804,9 +804,25 @@ body.modal-open{
 .dlgQuoteEdit input{
   min-height: 48px;
 }
+.dlgWordView{
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.64);
+}
+.dlgWordEdit{
+  margin-top: 4px;
+}
+.dlgWordEdit input{
+  min-height: 48px;
+}
 [data-theme="dark"] .dlgActions{
   background: linear-gradient(180deg, rgba(10,14,31,0.66), rgba(10,14,31,0.95) 38%);
   border-top-color: rgba(116,103,255,0.24);
+}
+[data-theme="dark"] .dlgWordView{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
 }
 [data-theme="dark"] .dlgQuoteView{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
