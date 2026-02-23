@@ -10,37 +10,12 @@
   const LANG_KEY = 'hord_mobile_lang_v1';
   const THEME_KEY = 'hord_mobile_theme_v1';
   const BACKUP_KEY = 'hord_mobile_backups_v1';
-  const TAB_KEY = 'hord_mobile_tab_v1';
   const MOBILE_QUOTE_EXPORT_PREFS_KEY = 'hord_mobile_quote_export_prefs_v1';
   const REVIEW_LIMIT_KEY = 'hord_mobile_review_limit_v1';
   const REVIEW_LIMIT_USER_SET_KEY = 'hord_mobile_review_limit_user_set_v1';
   const DAY = 24 * 60 * 60 * 1000;
 
   const $ = (id)=>document.getElementById(id);
-  const viewportMeta = document.querySelector('meta[name="viewport"]');
-  if(viewportMeta){
-    viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
-  }
-  const canUseNativeDialog = (dlg)=>(!!dlg && typeof dlg.showModal === 'function' && typeof dlg.close === 'function');
-  function openDialogSafe(dlg){
-    if(!dlg) return false;
-    if(canUseNativeDialog(dlg)){
-      dlg.showModal();
-      return true;
-    }
-    dlg.setAttribute('open', 'open');
-    dlg.style.display = 'block';
-    return true;
-  }
-  function closeDialogSafe(dlg){
-    if(!dlg) return;
-    if(canUseNativeDialog(dlg)){
-      dlg.close();
-      return;
-    }
-    dlg.removeAttribute('open');
-    dlg.style.display = 'none';
-  }
 
   function toast(id, msg){
     const el = $(id);
@@ -342,13 +317,16 @@
       }
     }
   }
+
   function setVersionTag(){
     const vm = detectVersionMeta();
     const el = $('mobile-version');
     if(el) el.textContent = vm.tag;
     const dbg = $('dbg-version');
     if(dbg){
-      dbg.textContent = 'Version: ' + vm.tag + ' (' + vm.source + ')';
+      dbg.textContent = lang === 'zh'
+        ? `版本：${vm.tag}（${vm.source}）`
+        : `Version: ${vm.tag} (${vm.source})`;
     }
   }
 
@@ -655,7 +633,7 @@
   function applyI18n(){
     try{
       document.documentElement.lang = 'zh-CN';
-      document.title = `${t('brand_title')} 闂?HORD`;
+      document.title = `${t('brand_title')} · HORD`;
     }catch(_){}
 
     // Brand
@@ -694,8 +672,8 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '闂? : '闂?);
-    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '闂? : '闂?);
+    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
+    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
     const wSort = $('w-sort');
     if(wSort){
       const o0 = wSort.querySelector('option[value="time"]'); if(o0) o0.textContent = (lang === 'zh' ? '\u6309\u65f6\u95f4' : 'By time');
@@ -713,14 +691,14 @@
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
-    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '婵犵妲呴崑鍛熆濡皷鍋撳鐓庣仸闁挎繄鍋涢濂稿炊閿濆懍澹曢梺姹囧灲濞佳呮暜閸洘鐓? : 'Export preview'));
+    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '预览导出' : 'Export preview'));
     const qAdjustLblA = document.querySelector('label[for="q-exp-font-adjust"]');
-    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '闂備浇顕х€涒晝绮欓幒妞尖偓鍐川閼割兛姹? : 'Font');
+    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '字号' : 'Font');
     const qAdjustLblB = document.querySelector('label[for="dlg-q-exp-font-adjust"]');
-    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '闂備浇顕х€涒晝绮欓幒妞尖偓鍐川閼割兛姹? : 'Font');
+    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '字号' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '闂傚倷绀侀幉锛勬暜閻愬绠鹃柍褜鍓氱换娑㈠川椤撶喎鏀梺闈涙处閸旀瑩鐛鈧畷妯侯啅椤旂晫鈧偊姊? : 'Delete Word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -735,8 +713,6 @@
     $('dlg-w-del') && ($('dlg-w-del').textContent = t('btn_delete'));
     $('dlg-q-del') && ($('dlg-q-del').textContent = t('btn_delete'));
     $('dlg-w-close') && ($('dlg-w-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
-    $('dlg-w-edit') && ($('dlg-w-edit').textContent = (lang === 'zh' ? '\u7f16\u8f91' : 'Edit'));
-    $('dlg-w-cancel-edit') && ($('dlg-w-cancel-edit').textContent = (lang === 'zh' ? '\u53d6\u6d88\u7f16\u8f91' : 'Cancel Edit'));
     $('dlg-q-close') && ($('dlg-q-close').textContent = (lang === 'zh' ? '\u5173\u95ed' : 'Close'));
     $('dlg-q-save') && ($('dlg-q-save').textContent = (lang === 'zh' ? '\u4fdd\u5b58' : 'Save'));
     $('dlg-q-edit') && ($('dlg-q-edit').textContent = (lang === 'zh' ? '\u7f16\u8f91' : 'Edit'));
@@ -750,7 +726,6 @@
     $('dlg-q-text') && ($('dlg-q-text').placeholder = (lang === 'zh' ? '\u91d1\u53e5\u539f\u6587' : 'Quote text'));
     $('dlg-q-translation') && ($('dlg-q-translation').placeholder = (lang === 'zh' ? '\u7ffb\u8bd1' : 'Translation'));
     $('dlg-q-note') && ($('dlg-q-note').placeholder = (lang === 'zh' ? '\u6279\u6ce8' : 'Note / Annotation'));
-    $('dlg-w-note-summary') && ($('dlg-w-note-summary').textContent = (lang === 'zh' ? '\u6279\u6ce8' : 'Notes'));
     $('dlg-q-note-summary') && ($('dlg-q-note-summary').textContent = (lang === 'zh' ? '\u6279\u6ce8' : 'Notes'));
 
     // Stats labels
@@ -763,8 +738,8 @@
     $('q-q') && ($('q-q').placeholder = t('ph_search_quotes'));
     $('w-batch-tags') && ($('w-batch-tags').placeholder = t('ph_tags'));
     $('q-batch-tags') && ($('q-batch-tags').placeholder = t('ph_tags'));
-    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '闂傚倷鑳剁划顖炲礉濡ゅ懎绠犻柟鎹愵嚙閸氳銇勯弴妤€浜鹃悗瑙勬穿缁绘繂顕ｉ幘顔芥櫖闁告洦鍎烽幘缁樷拺闁告繂瀚～锕傛煕鎼粹€虫毐闁挎洏鍨藉畷銊╊敍濞戞褰撮梻浣瑰濡礁螞閸曨垰绀堝ù鐓庣摠閻撱儲绻涢幋鐐垫噮闁宠棄顦甸弻娑㈠Ω閵壯呅ㄥ┑顔硷梗缁瑦淇婇崼鏇炵妞ゆ梻铏庡Σ鍦磽娴ｉ缚妾搁柛娆忛叄瀹曟粌鈻庨幘鍐茬€悷婊呭鐢鍩涢弮鍫熺厪闁割偅绻傞弳濠囨煕? : 'Tap a word for details; delete is hard delete.'));
-    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '闂傚倷鑳剁划顖炲礉濡ゅ懎绠犻柟鎹愵嚙閸氳銇勯弴妤€浜鹃悗瑙勬穿缂嶄礁鐣峰Δ鍛窛妞ゆ梻鏅ぐ鍧楁⒑鐠囧弶鎹ｉ柡浣规倐瀹曘垼顦圭€规洜鏁婚、姗€濮€閻橀潧鈧偤姊洪崨濠冨瘷闁告劗鍋撳В鍫ユ⒒娴ｅ憡鍟為柣鐕佸灦瀹曞綊宕樼憗浣规そ瀹曠螖閳ь剛绮婚幎鑺ョ厪濠㈣泛鐗嗛崝鎾煕閵堝啫鈧繈寮诲☉銏犵婵犻潧娲﹂崕鎾绘倵鐟欏嫭绀堥柛鐘崇墪椤曪綁鎳滈棃娑氱枃闂? : 'Use the right-side export button for single quote export.'));
+    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '点开单词查看详情；删除为硬删除。' : 'Tap a word for details; delete is hard delete.'));
+    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '点击右侧“导出图片”可直接导出单条。' : 'Use the right-side export button for single quote export.'));
 
     // Review buttons
     document.querySelector('.rate[data-q=\"0\"]') && (document.querySelector('.rate[data-q=\"0\"]').textContent = t('rate_forgot'));
@@ -789,11 +764,11 @@
     img.dataset.brandInit = '1';
     img.addEventListener('error', ()=>{
       const cur = String(img.getAttribute('src') || '').trim();
-      if(cur === 'apple-touch-icon.png'){
+      if(cur === 'icon128.png'){
         img.style.display = 'none';
         return;
       }
-      img.setAttribute('src', 'apple-touch-icon.png');
+      img.setAttribute('src', 'icon128.png');
     }, { once: false });
   }
 
@@ -821,7 +796,7 @@
         const lbl = document.createElement('label');
         lbl.htmlFor = 'q-exp-font-adjust';
         lbl.className = 'small muted';
-        lbl.textContent = '闂傚倷娴囬褏鈧稈鏅濈划娆撳箳濡炲皷鍋撻崘顔煎窛闁煎壊鍏涘Ч?;
+        lbl.textContent = '字号';
         const inp = document.createElement('input');
         inp.id = 'q-exp-font-adjust';
         inp.dataset.expKey = 'fontAdjust';
@@ -847,7 +822,7 @@
       box.id = 'dlg-q-preview-wrap';
       box.innerHTML = `
         <div class="row small muted quotePreviewCtrl">
-          <span>濠电姷顣藉Σ鍛村磻閸涱収鐔嗘俊顖氱毞閸嬫挸顫濋悡搴ｄ桓闂佹寧绻勯崑娑㈩敇婵傜鐐婇柨婵嗘噸婢规洟姊哄Ч鍥х伈婵炰匠鍛殰闁割偅娲橀悡?/span>
+          <span>预览导出</span>
           <select id="dlg-q-exp-template" data-exp-key="template" style="min-width:120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
@@ -862,7 +837,7 @@
           </select>
           <select id="dlg-q-exp-main-font" data-exp-key="mainFont" style="min-width:120px;"></select>
           <select id="dlg-q-exp-cjk-font" data-exp-key="cjkFont" style="min-width:120px;"></select>
-          <label for="dlg-q-exp-font-adjust" class="small muted">闂傚倷娴囬褏鈧稈鏅濈划娆撳箳濡炲皷鍋撻崘顔煎窛闁煎壊鍏涘Ч?/label>
+          <label for="dlg-q-exp-font-adjust" class="small muted">字号</label>
           <input id="dlg-q-exp-font-adjust" data-exp-key="fontAdjust" type="range" min="-30" max="30" step="1" value="0">
           <span class="pill" id="dlg-q-exp-font-adjust-val">0</span>
         </div>
@@ -893,10 +868,10 @@
         };
     const templateMap = lang === 'zh'
       ? {
-          hordSignature: 'HORD 闂傚倸鍊风粈渚€骞夐敍鍕床闁逞屽墴閺屻倗鈧湱濮撮悡鎰版煛?,
-          editorial: 'Editorial 闂傚倸鍊风粈渚€骞栭位鍥敍閻愯尙锛欓梺鍛婄缚閸庢彃鐣?,
-          gradientSoft: 'Gradient 婵犵數濮烽弫鎼佸磻閻愬搫绠板┑鐘宠壘缁€澶愭煛閸ゅ爼顣﹀Ч?,
-          nightCircuit: 'Night 濠电姷鏁告慨浼村垂婵傜鏄ラ柡宥庡亜閸ㄦ繈鏌熼悙顒傜獮?,
+          hordSignature: 'HORD 品牌',
+          editorial: 'Editorial 杂志',
+          gradientSoft: 'Gradient 渐变',
+          nightCircuit: 'Night 夜间',
         }
       : {
           hordSignature: 'HORD Signature',
@@ -1041,14 +1016,14 @@
     const w = $('w-sort-state');
     if(w){
       w.textContent = lang === 'zh'
-        ? `闂傚倸鍊风粈浣革耿闁秴纾块柕鍫濇处閺嗘粓鏌熼悜妯活梿濠殿喛娅曢妵鍕箻閸楃偟浠鹃梺?{sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '闂? : '闂?}`
-        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '闂? : '闂?}`;
+        ? `排序：${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`;
     }
     const q = $('q-sort-state');
     if(q){
       q.textContent = lang === 'zh'
-        ? `闂傚倸鍊风粈浣革耿闁秴纾块柕鍫濇处閺嗘粓鏌熼悜妯活梿濠殿喛娅曢妵鍕箻閸楃偟浠鹃梺?{sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '闂? : '闂?}`
-        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '闂? : '闂?}`;
+        ? `排序：${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`;
     }
   }
 
@@ -1185,28 +1160,11 @@
   }
 
   function setTab(tab){
-    const nextTab = ['home','words','quotes','review'].includes(String(tab || '').trim()) ? String(tab).trim() : 'home';
-    // Guard against stale inline editor artifacts when switching sections.
-    closeDialogSafe($('dlg-word'));
-    closeDialogSafe($('dlg-quote'));
-    document.body.classList.remove('modal-open');
     for(const id of ['home','words','quotes','review']){
       const btn = document.querySelector(`.tab[data-tab="${id}"]`);
-      if(btn) btn.dataset.active = id === nextTab ? '1' : '0';
+      if(btn) btn.dataset.active = id === tab ? '1' : '0';
       const panel = $(`panel-${id}`);
-      if(panel) panel.style.display = id === nextTab ? 'block' : 'none';
-    }
-    if(nextTab === 'words' && typeof renderWords === 'function') renderWords();
-    if(nextTab === 'quotes' && typeof renderQuotes === 'function') renderQuotes();
-    try{ localStorage.setItem(TAB_KEY, nextTab); }catch(_){}
-  }
-
-  function loadTab(){
-    try{
-      const v = String(localStorage.getItem(TAB_KEY) || '').trim();
-      return ['home','words','quotes','review'].includes(v) ? v : 'home';
-    }catch(_){
-      return 'home';
+      if(panel) panel.style.display = id === tab ? 'block' : 'none';
     }
   }
 
@@ -1691,23 +1649,6 @@
     applyI18n();
     initQuoteExportControls();
     updateHomeUI(asset);
-    // Startup safety: ensure dialogs never render inline on page boot.
-    closeDialogSafe($('dlg-word'));
-    closeDialogSafe($('dlg-quote'));
-    document.body.classList.remove('modal-open');
-    const sanitizeDialogState = ()=>{
-      ['dlg-word', 'dlg-quote'].forEach((id)=>{
-        const dlg = $(id);
-        if(!dlg) return;
-        dlg.removeAttribute('open');
-        dlg.style.display = 'none';
-      });
-      const editPanel = $('dlg-q-edit-panel');
-      const viewPanel = $('dlg-q-view');
-      if(editPanel) editPanel.style.display = 'none';
-      if(viewPanel) viewPanel.style.display = '';
-    };
-    sanitizeDialogState();
 
     let backups = await loadBackups();
     function renderBackups(){
@@ -1724,11 +1665,11 @@
       for(let i=0;i<backups.length;i++){
         const b = backups[i];
         const opt = document.createElement('option');
-        const tag = b.reason ? ` 闂?${b.reason}` : '';
+        const tag = b.reason ? ` 路 ${b.reason}` : '';
         const words = activeWords(b.asset).length;
         const quotes = Array.isArray(b.asset?.quotes) ? b.asset.quotes.filter(q=>q && q.isDeleted !== true).length : 0;
         opt.value = String(i);
-        opt.textContent = `${fmtTime(b.ts)}${tag} 闂?w=${words} q=${quotes}`;
+        opt.textContent = `${fmtTime(b.ts)}${tag} 路 w=${words} q=${quotes}`;
         sel.appendChild(opt);
       }
       if(btnRestore) btnRestore.disabled = backups.length === 0;
@@ -1739,7 +1680,6 @@
     document.querySelectorAll('.tab').forEach(btn=>{
       btn.addEventListener('click', ()=> setTab(btn.dataset.tab || 'home'));
     });
-    setTab(loadTab());
 
     const toTop = $('btn-to-top');
     const syncToTop = ()=>{
@@ -1759,7 +1699,7 @@
       else themeMode = 'auto';
       try{ localStorage.setItem(THEME_KEY, themeMode); }catch(_){}
       applyTheme();
-      toast('toast-home', lang === 'zh' ? `濠电姷鏁搁崑鐐哄垂閸洖绠伴柟闂磋閳ь剨绠撻幃婊勬叏閹般劌浜鹃柛灞剧〒椤╃兘鎮楅敐搴′簼婵?{themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
+      toast('toast-home', lang === 'zh' ? `主题：${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
     });
 
     // Best-effort flush on backgrounding.
@@ -2117,8 +2057,8 @@
       if(pgText){
         pgText.textContent = isRunning
           ? (lang === 'zh'
-              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 闂?\u5931\u8d25 ${quoteExportRuntime.failed}`
-              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 闂?Failed ${quoteExportRuntime.failed}`)
+              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 \u5931\u8d25 ${quoteExportRuntime.failed}`
+              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 Failed ${quoteExportRuntime.failed}`)
           : '';
       }
       if(failWrap){
@@ -2258,7 +2198,7 @@
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
         const iosHint = isIOSLike()
-          ? (lang === 'zh' ? '闂傚倸鍊烽悞锔锯偓绗涘懐鐭欓柟瀛樼箥閻掍粙鏌ｉ幋鐙€娼搊ne 闂傚倷娴囧畷鍨叏閺夋嚚娲Χ婢跺﹤绨ラ梺鍦帛鐢亪鎳撻幐搴涗簻闊洦鎸婚ˉ婊堟倵閸偆鍙€闁哄被鍊栭幈銊╁箛椤戣棄浜炬俊銈呮噹閺勩儵鏌ｅΟ鑲╁笡闁绘挻娲熼弻鐔兼倻濡櫣浠稿銈冨劜閻熲晛顫忕紒妯肩闁绘劦鍓氶悵姘旈悩闈涗粶妞ゆ垵顦锝嗙鐎ｎ€晠鏌ㄩ弮鈧崕宕囨暜鎼淬劍鐓熼幖娣焺閸熷繘鏌涢悩鍐叉诞鐎规洘鍨块獮姗€骞囨担鐟扮槣闂備線娼ч悧鍡椕洪敃鍌氭辈妞ゆ帊鑳剁粻楣冩煠濞村娅呮い锝堝亹缁辨帞鈧綆浜跺Ο鈧銈冨灪閿氶柍瑙勫灴瀹曞ジ濮€閳轰焦娅栭梻鍌欐祰椤曆呪偓娑掓櫇缁瑩骞掑Δ浣规珨濠电姷鏁搁崑娑㈡偤閵娾晜鏅濋柕蹇嬪€曠粻鏍喐閺傝法鏆﹂柤鍛婎問濡插綊骞栨潏鍓хУ婵? : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          ? (lang === 'zh' ? '（iPhone 请在系统分享或新开页面中保存图片）' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
           : '';
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
@@ -2368,74 +2308,39 @@
       }
       list.appendChild(frag);
     }
+
     // --- Word dialog ---
     let dlgWordId = '';
-    let dlgWordEditing = false;
-    function renderWordDialogView(rec){
-      const cn = String(getWordMeaning(rec) || '').trim();
-      const en = String(getWordEnglishMeaning(rec) || '').trim();
-      const note = String(rec?.annotation || '').trim();
-      const vCn = $('dlg-w-view-cn');
-      const vEn = $('dlg-w-view-en');
-      const vNoteWrap = $('dlg-w-view-note-wrap');
-      const vNote = $('dlg-w-view-note');
-      if(vCn) vCn.textContent = `CN: ${cn || (lang === 'zh' ? '闂備礁鎼Λ妤呭磹閻熸嫈娑㈠Χ婢跺鍘掓繝鐢靛С閼冲爼鎮? : 'N/A')}`;
-      if(vEn) vEn.textContent = `EN: ${en || (lang === 'zh' ? '闂備礁鎼Λ妤呭磹閻熸嫈娑㈠Χ婢跺鍘掓繝鐢靛С閼冲爼鎮? : 'N/A')}`;
-      if(vNoteWrap) vNoteWrap.style.display = note ? '' : 'none';
-      if(vNote) vNote.textContent = note;
-    }
-    function setWordDialogEditMode(on){
-      dlgWordEditing = !!on;
-      const view = $('dlg-w-view');
-      const editPanel = $('dlg-w-edit-panel');
-      if(view) view.style.display = dlgWordEditing ? 'none' : '';
-      if(editPanel) editPanel.style.display = dlgWordEditing ? '' : 'none';
-      const bEdit = $('dlg-w-edit');
-      const bSave = $('dlg-w-save');
-      const bCancel = $('dlg-w-cancel-edit');
-      const bDel = $('dlg-w-del');
-      if(bEdit) bEdit.style.display = dlgWordEditing ? 'none' : '';
-      if(bSave) bSave.style.display = dlgWordEditing ? '' : 'none';
-      if(bCancel) bCancel.style.display = dlgWordEditing ? '' : 'none';
-      if(bDel) bDel.style.display = dlgWordEditing ? '' : 'none';
-      const fields = [$('dlg-w-meaning'), $('dlg-w-english'), $('dlg-w-note')].filter(Boolean);
-      for(const f of fields){
-        f.readOnly = !dlgWordEditing;
-        f.disabled = !dlgWordEditing;
-        f.tabIndex = dlgWordEditing ? 0 : -1;
-        f.style.pointerEvents = dlgWordEditing ? '' : 'none';
-      }
-    }
     function openWordDialog(id){
       toast('toast-dlg-word','');
       if(!asset) return;
       const rec = findWordRecord(asset, id);
       if(!rec) return;
       dlgWordId = String(id || '');
-      $('dlg-w-title').textContent = String(rec.word || rec.id || id);
-      $('dlg-w-meaning').value = getWordMeaning(rec);
-      $('dlg-w-english').value = getWordEnglishMeaning(rec);
-      $('dlg-w-note').value = String(rec.annotation || '');
-      const phUs = getWordPhonetic(rec, 'us');
-      const phUk = getWordPhonetic(rec, 'uk');
-      $('dlg-w-phon-us').textContent = `US: ${phUs || '-'}`;
-      $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
-      renderWordDialogView(rec);
-      setWordDialogEditMode(false);
+    $('dlg-w-title').textContent = String(rec.word || rec.id || id);
+    $('dlg-w-meaning').value = getWordMeaning(rec);
+    $('dlg-w-english').value = getWordEnglishMeaning(rec);
+    $('dlg-w-note').value = String(rec.annotation || '');
+    const phUs = getWordPhonetic(rec, 'us');
+    const phUk = getWordPhonetic(rec, 'uk');
+    $('dlg-w-phon-us').textContent = `US: ${phUs || '-'}`;
+    $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
       $('dlg-w-meta').textContent = lang === 'zh'
-        ? `闂備礁鎼ú銈夋偤閵娾晛钃熷┑鐘叉处閺?{fmtTime(rec.updatedAt)} 闁?濠电姰鍨煎▔娑氱矓瀹曞洤濮柛鏇ㄥ灡閺?{Number(rec.reviewCount)||0}`
-        : `Updated: ${fmtTime(rec.updatedAt)} 闁?Reviews: ${Number(rec.reviewCount)||0}`;
+      ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
+      : `Updated: ${fmtTime(rec.updatedAt)} 路 Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
-      if(openDialogSafe(dlg)) document.body.classList.add('modal-open');
+      if(dlg && typeof dlg.showModal === 'function'){
+        dlg.showModal();
+        document.body.classList.add('modal-open');
+      }
     }
 
     function closeWordDialog(){
       stopWordPronounce();
       const dlg = $('dlg-word');
-      closeDialogSafe(dlg);
+      if(dlg && typeof dlg.close === 'function') dlg.close();
       document.body.classList.remove('modal-open');
       dlgWordId = '';
-      dlgWordEditing = false;
     }
 
     function parseTags(s){
@@ -2462,20 +2367,6 @@
     }
 
     $('dlg-w-close')?.addEventListener('click', closeWordDialog);
-    $('dlg-w-edit')?.addEventListener('click', ()=>{
-      setWordDialogEditMode(true);
-      $('dlg-w-meaning')?.focus();
-    });
-    $('dlg-w-cancel-edit')?.addEventListener('click', ()=>{
-      if(!asset || !dlgWordId) return;
-      const rec = findWordRecord(asset, dlgWordId);
-      if(!rec) return;
-      $('dlg-w-meaning').value = getWordMeaning(rec);
-      $('dlg-w-english').value = getWordEnglishMeaning(rec);
-      $('dlg-w-note').value = String(rec.annotation || '');
-      renderWordDialogView(rec);
-      setWordDialogEditMode(false);
-    });
     $('dlg-word')?.addEventListener('click', (e)=>{
       const dlg = $('dlg-word');
       if(!dlg) return;
@@ -2487,7 +2378,7 @@
       const rec = findWordRecord(asset, dlgWordId);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'us');
-      if(!ok) toast('toast-dlg-word', lang === 'zh' ? '闂備礁鎼崯鐗堟叏绾惧浜归柡灞诲劜閸嬨劑鏌曟繛鍨姎缂佸弶妞藉缁樼節閸曨偂缂撻梺? : 'No pronunciation available.');
+      if(!ok) toast('toast-dlg-word', lang === 'zh' ? '\u65e0\u53ef\u7528\u53d1\u97f3\u3002' : 'No pronunciation available.');
     });
     $('dlg-w-play-uk')?.addEventListener('click', async ()=>{
       toast('toast-dlg-word','');
@@ -2495,20 +2386,22 @@
       const rec = findWordRecord(asset, dlgWordId);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'uk');
-      if(!ok) toast('toast-dlg-word', lang === 'zh' ? '闂備礁鎼崯鐗堟叏绾惧浜归柡灞诲劜閸嬨劑鏌曟繛鍨姎缂佸弶妞藉缁樼節閸曨偂缂撻梺? : 'No pronunciation available.');
+      if(!ok) toast('toast-dlg-word', lang === 'zh' ? '\u65e0\u53ef\u7528\u53d1\u97f3\u3002' : 'No pronunciation available.');
     });
     $('dlg-w-del')?.addEventListener('click', async ()=>{
       toast('toast-dlg-word','');
       if(!asset || !dlgWordId) return;
-      const mr = await commitMutation(asset, ()=> removeWordRecord(asset, dlgWordId));
+      const mr = await commitMutation(asset, ()=>{
+        return removeWordRecord(asset, dlgWordId);
+      });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `闂備礁鎲＄敮鐐寸箾閳ь剚绻涢崨顓烆劉鐎垫澘瀚蹇涱敃閵夋劖娲熼弻?{mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `\u5220\u9664\u5931\u8d25\uff1a${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
         return;
       }
       closeWordDialog();
       updateHomeUI(asset);
       renderWords();
-      toast('toast-words', lang === 'zh' ? '闁诲海鎳撻幉陇銇愰崘顔煎瀭鐟滅増甯楅埛鏃堟煏閸繂鏆婇柛? : 'Deleted.');
+      toast('toast-words', lang === 'zh' ? '\u5df2\u5220\u9664\u3002' : 'Deleted.');
     });
     $('dlg-w-save')?.addEventListener('click', async ()=>{
       toast('toast-dlg-word','');
@@ -2522,7 +2415,13 @@
         const prevMeaning = String(rec.meaning || '').trim();
         const prevEn = Array.isArray(rec.englishMeaning) ? rec.englishMeaning.map(x=>String(x || '').trim()).filter(Boolean) : [];
         const prevNote = String(rec.annotation || '').trim();
-        if(prevMeaning === meaning && JSON.stringify(prevEn) === JSON.stringify(englishMeaning) && prevNote === note) return false;
+        if(
+          prevMeaning === meaning &&
+          JSON.stringify(prevEn) === JSON.stringify(englishMeaning) &&
+          prevNote === note
+        ){
+          return false;
+        }
         rec.meaning = meaning;
         rec.englishMeaning = englishMeaning;
         rec.annotation = note;
@@ -2530,17 +2429,15 @@
         return true;
       });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `濠电儑绲藉ú锔炬崲閸岀偞鍋ら柕濠忕畱缁剁偤寮堕崼顐函鐞氭繈姊?{mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
         return;
       }
       updateHomeUI(asset);
       renderWords();
       renderReview();
-      const rec = findWordRecord(asset, dlgWordId);
-      if(rec) renderWordDialogView(rec);
-      setWordDialogEditMode(false);
       toast('toast-dlg-word', t('toast_saved'));
     });
+
     // --- Quote dialog ---
     let dlgQuoteId = '';
     let dlgQuoteEditing = false;
@@ -2548,14 +2445,11 @@
       const txt = String(rec?.text || '').trim();
       const tr = String(rec?.translation || '').trim();
       const note = String(rec?.annotation || '').trim();
-      const vTxt = $('dlg-q-view-text');
+      const vText = $('dlg-q-view-text');
       const vTr = $('dlg-q-view-translation');
       const vNoteWrap = $('dlg-q-view-note-wrap');
       const vNote = $('dlg-q-view-note');
-      if(vTxt){
-        vTxt.textContent = txt || (lang === 'zh' ? '闂傚倷鐒︾€笛呯矙閹达附鍋嬪┑鐘插€甸弸鏃堢叓閸ャ劎鈽夌紒顐㈢Ч閺岋絽螣鐠囪尙绁烽梺鍝勫€戦崶銊у幐闂佺鏈喊宥囩矈椤愩倗纾? : '(no quote text)');
-        vTxt.style.display = txt ? '' : 'none';
-      }
+      if(vText) vText.textContent = txt || (lang === 'zh' ? '\uff08\u7a7a\u767d\u91d1\u53e5\uff09' : '(empty quote)');
       if(vTr){
         vTr.textContent = tr || (lang === 'zh' ? '\uff08\u6682\u65e0\u7ffb\u8bd1\uff09' : '(no translation)');
         vTr.style.display = tr ? '' : 'none';
@@ -2655,13 +2549,13 @@
     async function exportCurrentDialogQuoteImage(){
       const exporter = globalThis.QuoteCardExporter;
       if(!exporter || typeof exporter.exportPng !== 'function'){
-        toast('toast-dlg-quote', lang === 'zh' ? '闂傚倷娴囬褍霉閻戣棄鏋侀柟闂寸閸屻劎鎲搁弬璺ㄦ殾闁汇垹澹婇弫鍥煟閹邦剛肖闁哥姵鐗犲畷瑙勩偅閸愨晜鍎銈嗗姦濠⑩偓婵烇綆鍣ｅ缁樻媴閸涘﹥鍎撻梺缁橆殕缁秶绮嬪鍜佺叆闁告洦鍓欏鍧楁⒑缂佹ê濮囬柣掳鍔嶉幈銊ヮ煥閸喓鍘搁梺绋挎湰閿氶柍褜鍓氶〃鍫㈠垝閸喎绶為柟閭﹀幖娴狀垶姊洪幖鐐插妧闁告劏鏁╅埡鍛拺缂侇垱娲樺▍鍡涙煟閳哄﹤鐏犳い鏇秮椤㈡宕熼銈夌崜闂備礁婀遍…鍫燁殽閹间礁鐒垫い鎺戝€归弳顒佹叏婵犲啯銇濇鐐存崌楠炴帡寮┑鍕姦闁哄矉缍侀弫鍌滄嫚閼碱兛妗撳┑? : 'Exporter not loaded. Refresh and try again.');
+        toast('toast-dlg-quote', lang === 'zh' ? '导出模块未加载，请刷新后重试。' : 'Exporter not loaded. Refresh and try again.');
         return false;
       }
       if(!asset || !dlgQuoteId) return false;
       const rec = findQuoteRecord(asset, dlgQuoteId);
       if(!rec || rec.isDeleted === true){
-        toast('toast-dlg-quote', lang === 'zh' ? '闂傚倷娴囧畷鍨叏閺夋嚚娲閵堝懐锛熼梺姹囧灮椤牓姊婚姣兼棃鏁愰崨顓熸闂佹椿鍘介〃濠囧蓟閺囩喎绶為柛顐ｇ箓婵酣姊洪幖鐐测偓鏍暜閹烘鐓″鑸靛姇缁犺崵鈧娲栧▔锕傚閵堝棛鍘介柟鐑樺▕瀹曟繈骞嬪┑鍫熸闂佺粯鍨煎Λ鍕劔闂備焦瀵х换鍌炲磹閸涘﹦顩? : 'Quote no longer exists.');
+        toast('toast-dlg-quote', lang === 'zh' ? '该金句已不存在。' : 'Quote no longer exists.');
         return false;
       }
       const sentence = buildCurrentQuoteExportSentence(rec);
@@ -2675,11 +2569,11 @@
           filenamePattern: 'hord-mobile-{date}-{index}',
           withMockup: false,
         });
-        toast('toast-dlg-quote', lang === 'zh' ? '闂備浇顕у锕傦綖婢舵劖鍋ら柡鍥╁С閻掑﹥銇勮箛鎾寸ォ闁哄妞藉缁樻媴閸涘﹤鏆堥梺鑽ゅ櫐缁犳挸鐣疯ぐ鎺撳仺闁告挸寮堕弲顏堟⒒娓氬洤澧紒澶婎嚟缁牓宕熼娑氬幍濡炪倖鎸鹃崰搴ㄥ锤婵犲洦鐓? : 'Export started.');
+        toast('toast-dlg-quote', lang === 'zh' ? '已触发导出。' : 'Export started.');
         return true;
       }catch(e){
         toast('toast-dlg-quote', lang === 'zh'
-          ? `闂傚倷娴囬褍霉閻戣棄鏋侀柟闂寸閸屻劎鎲搁弬璺ㄦ殾闁汇垹澹婇弫鍥煟閺冨牜妫戠紒鎰仱閺屸剝寰勬繝鍕拡闂佺顑呴ˇ鎶铰烽崒鐐粹拻?{String(e && e.message || e || 'unknown')}`
+          ? `导出失败：${String(e && e.message || e || 'unknown')}`
           : `Export failed: ${String(e && e.message || e || 'unknown')}`);
         return false;
       }
@@ -2690,7 +2584,7 @@
       const rec = findQuoteRecord(asset, id);
       if(!rec || rec.isDeleted === true) return;
       dlgQuoteId = String(id || '');
-      if($('dlg-q-title')) $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
+      $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
@@ -2699,13 +2593,14 @@
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
       : `Updated: ${fmtTime(rec.updatedAt)}`;
       const dlg = $('dlg-quote');
-      if(openDialogSafe(dlg)){
+      if(dlg && typeof dlg.showModal === 'function'){
         setQuoteDialogEditMode(false);
         // blur any previously focused editable to avoid keyboard carry-over on iOS.
         try {
           const ae = document.activeElement;
           if(ae && typeof ae.blur === 'function') ae.blur();
         } catch (_) {}
+        dlg.showModal();
         document.body.classList.add('modal-open');
         // keep focus on dialog container, not text fields.
         try {
@@ -2721,7 +2616,7 @@
 
     function closeQuoteDialog(){
       const dlg = $('dlg-quote');
-      closeDialogSafe(dlg);
+      if(dlg && typeof dlg.close === 'function') dlg.close();
       document.body.classList.remove('modal-open');
       dlgQuoteId = '';
       dlgQuoteEditing = false;
@@ -2888,7 +2783,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'us');
-      if(!ok) toast('toast-review', lang === 'zh' ? '闂傚倸鍊风粈渚€骞栭锕€鐤柣妤€鐗婇崣蹇曠棯閹屽剭濞存粌缍婇弻锛勪沪鐠囨彃濮曢梺绋款儍閸旀垿寮婚弴鐔虹闁割煈鍠栨慨搴ｇ磽娴ｇ绾ф俊鐐舵椤繒绱掑Ο鑲╃槇闂佸憡娲﹂崑鍌滅磽閹剧粯鈷? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
     $('q-play-uk')?.addEventListener('click', async ()=>{
       toast('toast-review','');
@@ -2896,7 +2791,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'uk');
-      if(!ok) toast('toast-review', lang === 'zh' ? '闂傚倸鍊风粈渚€骞栭锕€鐤柣妤€鐗婇崣蹇曠棯閹屽剭濞存粌缍婇弻锛勪沪鐠囨彃濮曢梺绋款儍閸旀垿寮婚弴鐔虹闁割煈鍠栨慨搴ｇ磽娴ｇ绾ф俊鐐舵椤繒绱掑Ο鑲╃槇闂佸憡娲﹂崑鍌滅磽閹剧粯鈷? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
 
     $('rv-delete-word')?.addEventListener('click', async ()=>{
@@ -2908,7 +2803,7 @@
         return removeWordRecord(asset, id);
       });
       if(!mr.ok){
-        toast('toast-review', lang === 'zh' ? `闂傚倸鍊风粈渚€骞夐敍鍕殰闁绘劕顕粻楣冩煃瑜滈崜姘辨崲濞戙垹宸濇い鎾跺剱閸斿鎮楅崹顐ｇ凡閻庢凹鍘奸…鍥疀濞戣鲸鏅濋梺闈涱槹閸旀牕煤閻旂厧钃?{mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        toast('toast-review', lang === 'zh' ? `删除失败：${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
         return;
       }
       queue = queue.filter((w)=>String(w || '') !== String(id));
@@ -2916,7 +2811,7 @@
       updateHomeUI(asset);
       renderWords();
       renderReview();
-      toast('toast-review', lang === 'zh' ? '闂備浇顕уù鐑藉箠閹捐绠熼梽鍥Φ閹版澘绀冩い鏃傚帶閻庮參鎮峰鍛暭閻㈩垱顨婇崺娑㈠籍閸喓鍘梺鍓插亝缁诲啴藟閻愮儤鐓欓柣鎴炲灊閹查箖鏌熼鑲╃Ш鐎规洘鍎奸ˇ瀵告偖椤忓牊鈷? : 'Deleted.');
+      toast('toast-review', lang === 'zh' ? '已删除本词。' : 'Deleted.');
     });
     const closeReviewMoreMenu = ()=>{
       const menu = $('rv-more-menu');
@@ -3034,10 +2929,10 @@
     }
     const wSortDir = $('w-sort-dir');
     if(wSortDir){
-      wSortDir.textContent = wordsSortDir === 'asc' ? '闂? : '闂?;
+      wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
-        wSortDir.textContent = wordsSortDir === 'asc' ? '闂? : '闂?;
+        wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
         renderWords();
         updateSortStatePills();
         toast('toast-words', wordsSortDir === 'asc'
@@ -3161,17 +3056,17 @@
       expCjk.title = (lang === 'zh' ? '\u4e2d\u6587\u5b57\u4f53' : 'CJK font');
     }
     for(const expRatio of Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'))){
-      expRatio.title = (lang === 'zh' ? '闂傚倷娴囬褍霉閻戣棄鏋侀柟闂寸閸屻劎鎲搁弬璺ㄦ殾闁汇垹澹婇弫鍥煟閹邦厼濮堥悽顖椻偓鎰佸殨妞ゆ帒瀚粈鍫㈡喐瀹€鈧Σ? : 'Export ratio');
+      expRatio.title = (lang === 'zh' ? '导出比例' : 'Export ratio');
     }
     for(const expAdj of Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'))){
-      expAdj.title = (lang === 'zh' ? '闂傚倷娴囬褏鈧稈鏅濈划娆撳箳濡炲皷鍋撻崘顔煎窛闁煎壊鍏涘Ч妤呮⒑閸撹尙鍘涢柛锝庡櫍瀹曢潧螖娴ｅ吀绨婚梺鍝勫暙濞诧妇娑甸懜鐢电? : 'Font size adjust');
+      expAdj.title = (lang === 'zh' ? '字号微调' : 'Font size adjust');
     }
     const qSortDir = $('q-sort-dir');
     if(qSortDir){
-      qSortDir.textContent = quotesSortDir === 'asc' ? '闂? : '闂?;
+      qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
-        qSortDir.textContent = quotesSortDir === 'asc' ? '闂? : '闂?;
+        qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
         renderQuotes();
         updateSortStatePills();
         toast('toast-quotes', quotesSortDir === 'asc'
@@ -3291,7 +3186,6 @@
     toast('toast-home', `Fatal error: ${String(e && e.message || e)}`);
   });
 })();
-
 
 
 

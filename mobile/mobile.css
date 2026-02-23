@@ -33,11 +33,6 @@
 
 *{ box-sizing: border-box; }
 html, body{ height:100%; }
-html{
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  touch-action: manipulation;
-}
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -46,7 +41,6 @@ body{
     radial-gradient(900px 420px at 8% -10%, rgba(90,69,255,0.12), transparent 55%),
     radial-gradient(900px 520px at 92% -20%, rgba(40,187,255,0.10), transparent 55%),
     var(--bg);
-  overscroll-behavior: contain;
 }
 body::before{
   content:"";
@@ -73,8 +67,7 @@ body::before{
   justify-content:space-between;
   flex-wrap:wrap;
   position: relative;
-  padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px 10px;
-  padding-right: 64px;
+  padding: 10px 56px 8px 10px;
   border-radius: 16px;
   background: rgba(255,255,255,0.54);
   border: 1px solid rgba(90,69,255,0.12);
@@ -127,17 +120,18 @@ body::before{
 }
 
 .floatingControls{
-  position: absolute;
-  top: calc(12px + env(safe-area-inset-top, 0px));
-  right: 14px;
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  right: max(14px, env(safe-area-inset-right, 0px));
   left: auto;
-  z-index: 20;
+  z-index: 1200;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  pointer-events: auto;
+  pointer-events: none;
 }
 .floatingControls .iconToggle{
+  pointer-events: auto;
   box-shadow: 0 10px 22px rgba(18,25,56,0.18);
   border-color: rgba(90,69,255,0.18);
   background: rgba(255,255,255,0.74);
@@ -678,25 +672,6 @@ input::placeholder{
   border-color: #2a3566;
 }
 
-dialog:not([open]){
-  display: none !important;
-}
-dialog{
-  position: fixed;
-  inset: 50% auto auto 50%;
-  transform: translate(-50%, -50%);
-  width: min(720px, calc(100vw - 24px));
-  max-height: calc(100dvh - 24px);
-  overflow: hidden;
-  margin: 0;
-  border: none;
-  border-radius: 16px;
-  padding: 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-  background: #fbfbff;
-  color: var(--ink);
-}
-
 dialog::backdrop{
   background: rgba(3, 8, 22, 0.58);
   backdrop-filter: blur(10px);
@@ -711,14 +686,11 @@ body.modal-open{
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
   align-items: stretch;
-  position: sticky;
-  bottom: 0;
-  margin-top: 12px;
-  padding: 12px 0 calc(6px + env(safe-area-inset-bottom, 0px));
-  background: linear-gradient(180deg, rgba(251,251,255,0.72), rgba(251,251,255,0.96) 36%);
-  border-top: 1px solid rgba(90,69,255,0.12);
-  backdrop-filter: blur(8px);
-  z-index: 2;
+  position: static;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  background: transparent;
+  border-top: 0;
 }
 .dlgActions .btn{
   min-height: 46px;
@@ -726,11 +698,8 @@ body.modal-open{
 }
 .dlgQuoteBody{
   padding: 14px;
-  max-height: min(82vh, 820px);
+  max-height: min(76vh, 780px);
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 .quotePreviewBox{
   margin-top: 12px;
@@ -799,30 +768,10 @@ body.modal-open{
   color: var(--muted);
 }
 .dlgQuoteEdit{
-  margin-top: 4px;
-}
-.dlgQuoteEdit input{
-  min-height: 48px;
-}
-.dlgWordView{
-  display: block;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-  background: rgba(255,255,255,0.64);
-}
-.dlgWordEdit{
-  margin-top: 4px;
-}
-.dlgWordEdit input{
-  min-height: 48px;
+  margin-top: 12px;
 }
 [data-theme="dark"] .dlgActions{
-  background: linear-gradient(180deg, rgba(10,14,31,0.66), rgba(10,14,31,0.95) 38%);
-  border-top-color: rgba(116,103,255,0.24);
-}
-[data-theme="dark"] .dlgWordView{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+  background: transparent;
 }
 [data-theme="dark"] .dlgQuoteView{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
@@ -851,23 +800,14 @@ body.modal-open{
 
 @media (max-width: 899px){
   .floatingControls{
-    top: 10px;
-    right: 10px;
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
+    right: max(10px, env(safe-area-inset-right, 0px));
   }
 }
 
 @media (max-width: 620px){
-  dialog{
-    inset: auto 12px 12px 12px;
-    transform: none;
-    width: auto;
-    max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px));
-  }
   .dlgActions{
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .dlgActions .btn{
-    min-height: 44px;
   }
   .quoteReadEn{
     font-size: 30px;

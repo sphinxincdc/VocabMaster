@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HORD 手机管理器</title>
   <meta name="theme-color" content="#0b1022">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,8 +11,6 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" type="image/png" sizes="32x32" href="icon32.png" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/png" sizes="32x32" href="icon32.png" media="(prefers-color-scheme: dark)">
-  <link rel="icon" type="image/png" sizes="192x192" href="icon192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon512.png">
   <link rel="icon" type="image/png" sizes="1024x1024" href="logo-square-1024.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon.png">
@@ -41,9 +39,9 @@
         <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">✨ 金句库</button>
         <button class="tab" id="tab-review" data-tab="review" data-active="0">🧠 艾宾浩斯复习</button>
       </div>
-      <div class="floatingControls" id="top-controls" aria-label="页面控制">
-        <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
-      </div>
+    </div>
+    <div class="floatingControls" id="top-controls" aria-label="页面控制">
+      <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
     </div>
 
     <div class="grid">
@@ -68,7 +66,9 @@
         <div class="toast" id="toast-home"></div>
         <div class="hintBox" id="home-sync-guide" style="margin-top:12px;">
           <div style="font-weight:900; margin-bottom:6px;">尚未导入资产</div>
-          <div class="small muted">电脑端导出 HORD 资产 JSON -> 手机端导入 -> 学习后导出并覆盖云盘文件 -> 电脑端再读取合并。</div>
+          <div class="small muted">
+            电脑端导出 HORD 资产 JSON -> 手机端导入 -> 学习后导出并覆盖云盘文件 -> 电脑端再读取合并。
+          </div>
         </div>
         <details class="hintBox" id="home-debug-fold" style="margin-top:12px;">
           <summary style="font-weight:900; cursor:pointer;">调试与快照（高级）</summary>
@@ -112,7 +112,7 @@
         <div class="row small muted" style="margin-top:10px;">
           <span class="pill" id="w-count">0</span>
           <span class="pill" id="w-sort-state">按时间 ↕</span>
-          <span class="pill" id="w-hint">点击单词查看详情；删除为硬删除。</span>
+          <span class="pill" id="w-hint">点开单词查看详情；删除为硬删除。</span>
         </div>
         <div id="w-list" style="margin-top:12px;"></div>
         <div class="toast" id="toast-words"></div>
@@ -199,7 +199,7 @@
 
   <button class="toTopBtn" id="btn-to-top" type="button" aria-label="Back to top">↑</button>
 
-  <dialog id="dlg-word" style="display:none; border:none; border-radius:16px; max-width: 720px; width: calc(100% - 26px); padding:0; box-shadow: 0 20px 60px rgba(0,0,0,0.18);">
+  <dialog id="dlg-word" style="border:none; border-radius:16px; max-width: 720px; width: calc(100% - 26px); padding:0; box-shadow: 0 20px 60px rgba(0,0,0,0.18);">
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
@@ -207,33 +207,21 @@
           <div class="qWord" id="dlg-w-title" style="font-size:22px; margin:0;">word</div>
         </div>
         <div class="row">
+          <button class="btn primary" id="dlg-w-save">保存</button>
+          <button class="btn danger" id="dlg-w-del">删除</button>
           <button class="btn" id="dlg-w-close">关闭</button>
-          <button class="btn" id="dlg-w-edit">编辑</button>
-          <button class="btn primary" id="dlg-w-save" style="display:none;">保存</button>
-          <button class="btn" id="dlg-w-cancel-edit" style="display:none;">取消编辑</button>
-          <button class="btn danger" id="dlg-w-del" style="display:none;">删除</button>
         </div>
       </div>
     </div>
     <div style="padding:14px 14px;">
-      <div class="dlgWordView" id="dlg-w-view">
-        <div class="quoteReadCn" id="dlg-w-view-cn"></div>
-        <div class="quoteReadNote" id="dlg-w-view-en"></div>
-        <details class="quoteReadNoteWrap" id="dlg-w-view-note-wrap">
-          <summary id="dlg-w-note-summary">批注</summary>
-          <div class="quoteReadNote" id="dlg-w-view-note"></div>
-        </details>
+      <div class="row">
+        <input id="dlg-w-meaning" type="text" placeholder="中文释义" style="flex:1; min-width: 220px;">
       </div>
-      <div class="dlgWordEdit" id="dlg-w-edit-panel" style="display:none;">
-        <div class="row">
-          <input id="dlg-w-meaning" type="text" placeholder="中文释义" style="flex:1; min-width: 220px;">
-        </div>
-        <div class="row" style="margin-top:10px;">
-          <input id="dlg-w-english" type="text" placeholder="英文释义" style="flex:1; min-width: 220px;">
-        </div>
-        <div class="row" style="margin-top:10px;">
-          <input id="dlg-w-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;">
-        </div>
+      <div class="row" style="margin-top:10px;">
+        <input id="dlg-w-english" type="text" placeholder="英文释义" style="flex:1; min-width: 220px;">
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <input id="dlg-w-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;">
       </div>
       <div class="phoneticRow" style="margin-top:10px;">
         <span class="phoneticPill" id="dlg-w-phon-us">US: -</span>
@@ -248,11 +236,12 @@
     </div>
   </dialog>
 
-  <dialog id="dlg-quote" style="display:none; border:none; border-radius:16px; max-width: 860px; width: calc(100% - 26px); padding:0; box-shadow: 0 20px 60px rgba(0,0,0,0.18);">
+  <dialog id="dlg-quote" style="border:none; border-radius:16px; max-width: 860px; width: calc(100% - 26px); padding:0; box-shadow: 0 20px 60px rgba(0,0,0,0.18);">
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
           <div class="small muted" id="dlg-q-label">金句详情</div>
+          <div class="qWord" id="dlg-q-title" style="font-size:18px; margin:0;">quote</div>
         </div>
       </div>
     </div>
