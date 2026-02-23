@@ -2,7 +2,7 @@
   "name": "HORD 手机管理器",
   "short_name": "HORD",
   "description": "在手机端导入、管理、复习并导出你的 HORD 资产。",
-  "start_url": "./mobile.html?v=2.54.64",
+  "start_url": "./mobile.html?v=2.54.65",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
