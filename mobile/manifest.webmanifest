@@ -2,7 +2,7 @@
   "name": "HORD �ֻ�������",
   "short_name": "HORD",
   "description": "���ֻ��˵��롢�������ϰ��������� HORD �ʲ���",
-  "start_url": "./mobile.html?v=2.54.72",
+  "start_url": "./mobile.html?v=2.54.73",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
