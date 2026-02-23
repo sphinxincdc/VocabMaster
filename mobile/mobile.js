@@ -2792,7 +2792,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'us');
-      if(!ok) toast('toast-review', lang === 'zh' ? '??????' : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '\u65e0\u53ef\u7528\u53d1\u97f3\u3002' : 'No pronunciation available.');
     });
     $('q-play-uk')?.addEventListener('click', async ()=>{
       toast('toast-review','');
@@ -2800,7 +2800,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'uk');
-      if(!ok) toast('toast-review', lang === 'zh' ? '??????' : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '\u65e0\u53ef\u7528\u53d1\u97f3\u3002' : 'No pronunciation available.');
     });
 
     $('rv-delete-word')?.addEventListener('click', async ()=>{
@@ -2812,7 +2812,7 @@
         return removeWordRecord(asset, id);
       });
       if(!mr.ok){
-        toast('toast-review', lang === 'zh' ? `?????${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        toast('toast-review', lang === 'zh' ? `\u5220\u9664\u5931\u8d25\uff1a${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
         return;
       }
       queue = queue.filter((w)=>String(w || '') !== String(id));
@@ -2820,7 +2820,7 @@
       updateHomeUI(asset);
       renderWords();
       renderReview();
-      toast('toast-review', lang === 'zh' ? '??????' : 'Deleted.');
+      toast('toast-review', lang === 'zh' ? '\u5df2\u5220\u9664\u672c\u8bcd\u3002' : 'Deleted.');
     });
     const closeReviewMoreMenu = ()=>{
       const menu = $('rv-more-menu');
