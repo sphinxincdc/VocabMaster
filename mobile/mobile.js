@@ -2485,11 +2485,9 @@
       const txt = String(rec?.text || '').trim();
       const tr = String(rec?.translation || '').trim();
       const note = String(rec?.annotation || '').trim();
-      const vText = $('dlg-q-view-text');
       const vTr = $('dlg-q-view-translation');
       const vNoteWrap = $('dlg-q-view-note-wrap');
       const vNote = $('dlg-q-view-note');
-      if(vText) vText.textContent = txt || (lang === 'zh' ? '\uff08\u7a7a\u767d\u91d1\u53e5\uff09' : '(empty quote)');
       if(vTr){
         vTr.textContent = tr || (lang === 'zh' ? '\uff08\u6682\u65e0\u7ffb\u8bd1\uff09' : '(no translation)');
         vTr.style.display = tr ? '' : 'none';
