@@ -2938,7 +2938,7 @@
     }
     const wSortDir = $('w-sort-dir');
     if(wSortDir){
-      wSortDir.textContent = wordsSortDir === 'asc' ? '?' : '?';
+      wSortDir.textContent = wordsSortDir === 'asc' ? '\u2191' : '\u2193';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
         wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
@@ -3065,14 +3065,14 @@
       expCjk.title = (lang === 'zh' ? '\u4e2d\u6587\u5b57\u4f53' : 'CJK font');
     }
     for(const expRatio of Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'))){
-      expRatio.title = (lang === 'zh' ? '????' : 'Export ratio');
+      expRatio.title = (lang === 'zh' ? '\u5bfc\u51fa\u6bd4\u4f8b' : 'Export ratio');
     }
     for(const expAdj of Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'))){
-      expAdj.title = (lang === 'zh' ? '????' : 'Font size adjust');
+      expAdj.title = (lang === 'zh' ? '\u5b57\u53f7\u5fae\u8c03' : 'Font size adjust');
     }
     const qSortDir = $('q-sort-dir');
     if(qSortDir){
-      qSortDir.textContent = quotesSortDir === 'asc' ? '?' : '?';
+      qSortDir.textContent = quotesSortDir === 'asc' ? '\u2191' : '\u2193';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
         qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
