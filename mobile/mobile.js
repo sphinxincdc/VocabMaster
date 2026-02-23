@@ -1166,8 +1166,10 @@
       const panel = $(`panel-${id}`);
       if(panel) panel.style.display = id === tab ? 'block' : 'none';
     }
+    if(tab === 'words') renderWords();
+    if(tab === 'quotes') renderQuotes();
+    if(tab === 'review') renderReview();
   }
-
   function normalizeImportedAsset(parsed, deviceId){
     if(!isAssetLike(parsed)) throw new Error('invalid_json');
     if(Number(parsed.schemaVersion) !== 2) throw new Error('schema_not_v2');
@@ -1636,6 +1638,11 @@
 
   async function main(){
     initBrandAssets();
+    for(const dlg of Array.from(document.querySelectorAll('dialog'))){
+      try{ dlg.removeAttribute('open'); }catch(_){}
+      try{ if(typeof dlg.close === 'function') dlg.close(); }catch(_){}
+    }
+    document.body.classList.remove('modal-open');
     themeMode = getThemeMode();
     bindThemeMediaWatcher();
     applyTheme();
@@ -1665,11 +1672,11 @@
       for(let i=0;i<backups.length;i++){
         const b = backups[i];
         const opt = document.createElement('option');
-        const tag = b.reason ? ` 路 ${b.reason}` : '';
+        const tag = b.reason ? ` - ${b.reason}` : '';
         const words = activeWords(b.asset).length;
         const quotes = Array.isArray(b.asset?.quotes) ? b.asset.quotes.filter(q=>q && q.isDeleted !== true).length : 0;
         opt.value = String(i);
-        opt.textContent = `${fmtTime(b.ts)}${tag} 路 w=${words} q=${quotes}`;
+        opt.textContent = `${fmtTime(b.ts)}${tag} | w=${words} q=${quotes}`;
         sel.appendChild(opt);
       }
       if(btnRestore) btnRestore.disabled = backups.length === 0;
@@ -1699,7 +1706,7 @@
       else themeMode = 'auto';
       try{ localStorage.setItem(THEME_KEY, themeMode); }catch(_){}
       applyTheme();
-      toast('toast-home', lang === 'zh' ? `主题：${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
+      toast('toast-home', lang === 'zh' ? `\u4e3b\u9898\uff1a${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
     });
 
     // Best-effort flush on backgrounding.
@@ -2327,7 +2334,7 @@
     $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
       $('dlg-w-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
-      : `Updated: ${fmtTime(rec.updatedAt)} 路 Reviews: ${Number(rec.reviewCount)||0}`;
+      : `Updated: ${fmtTime(rec.updatedAt)} | Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
       if(dlg && typeof dlg.showModal === 'function'){
         dlg.showModal();
@@ -2584,7 +2591,7 @@
       const rec = findQuoteRecord(asset, id);
       if(!rec || rec.isDeleted === true) return;
       dlgQuoteId = String(id || '');
-      $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
+      $('dlg-q-title').textContent = (lang === 'zh' ? '\u91d1\u53e5\u8be6\u60c5' : 'Quote details');
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
@@ -3186,6 +3193,5 @@
     toast('toast-home', `Fatal error: ${String(e && e.message || e)}`);
   });
 })();
-
 
 
