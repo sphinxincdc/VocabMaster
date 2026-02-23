@@ -2338,16 +2338,24 @@
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
       : `Updated: ${fmtTime(rec.updatedAt)} | Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
-      if(dlg && typeof dlg.showModal === 'function'){
+      if(!dlg) return;
+      dlg.hidden = false;
+      if(typeof dlg.showModal === 'function'){
         dlg.showModal();
-        document.body.classList.add('modal-open');
+      }else{
+        dlg.setAttribute('open', '');
       }
+      document.body.classList.add('modal-open');
     }
 
     function closeWordDialog(){
       stopWordPronounce();
       const dlg = $('dlg-word');
-      if(dlg && typeof dlg.close === 'function') dlg.close();
+      if(dlg){
+        if(typeof dlg.close === 'function') dlg.close();
+        dlg.removeAttribute('open');
+        dlg.hidden = true;
+      }
       document.body.classList.remove('modal-open');
       dlgWordId = '';
     }
@@ -2602,30 +2610,38 @@
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)}`
       : `Updated: ${fmtTime(rec.updatedAt)}`;
       const dlg = $('dlg-quote');
-      if(dlg && typeof dlg.showModal === 'function'){
-        setQuoteDialogEditMode(false);
-        // blur any previously focused editable to avoid keyboard carry-over on iOS.
-        try {
-          const ae = document.activeElement;
-          if(ae && typeof ae.blur === 'function') ae.blur();
-        } catch (_) {}
+      if(!dlg) return;
+      setQuoteDialogEditMode(false);
+      // blur any previously focused editable to avoid keyboard carry-over on iOS.
+      try {
+        const ae = document.activeElement;
+        if(ae && typeof ae.blur === 'function') ae.blur();
+      } catch (_) {}
+      dlg.hidden = false;
+      if(typeof dlg.showModal === 'function'){
         dlg.showModal();
-        document.body.classList.add('modal-open');
-        // keep focus on dialog container, not text fields.
-        try {
-          requestAnimationFrame(() => {
-            if (dlgQuoteEditing) return;
-            enforceQuoteViewNoKeyboard();
-            dlg.focus?.();
-            renderQuoteDialogPreview(rec);
-          });
-        } catch (_) {}
+      }else{
+        dlg.setAttribute('open', '');
       }
+      document.body.classList.add('modal-open');
+      // keep focus on dialog container, not text fields.
+      try {
+        requestAnimationFrame(() => {
+          if (dlgQuoteEditing) return;
+          enforceQuoteViewNoKeyboard();
+          dlg.focus?.();
+          renderQuoteDialogPreview(rec);
+        });
+      } catch (_) {}
     }
 
     function closeQuoteDialog(){
       const dlg = $('dlg-quote');
-      if(dlg && typeof dlg.close === 'function') dlg.close();
+      if(dlg){
+        if(typeof dlg.close === 'function') dlg.close();
+        dlg.removeAttribute('open');
+        dlg.hidden = true;
+      }
       document.body.classList.remove('modal-open');
       dlgQuoteId = '';
       dlgQuoteEditing = false;
