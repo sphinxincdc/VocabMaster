@@ -1,0 +1,31 @@
+{
+  "name": "HORD \\u624b\\u673a\\u7ba1\\u7406\\u5668",
+  "short_name": "HORD",
+  "description": "\\u5bfc\\u5165\\u3001\\u7ba1\\u7406\\u3001\\u5bfc\\u51fa\\u5b8c\\u6574 HORD \\u8d44\\u4ea7\\uff08\\u79fb\\u52a8\\u7aef\\uff09\\u3002",
+  "start_url": "./mobile.html?v=2.54.74",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1022",
+  "theme_color": "#0b1022",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

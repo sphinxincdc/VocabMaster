@@ -326,7 +326,7 @@
     const dbg = $('dbg-version');
     if(dbg){
       dbg.textContent = lang === 'zh'
-        ? `???${vm.tag}?${vm.source}?`
+        ? `\u7248\u672c\uff1a${vm.tag}\uff08${vm.source}\uff09`
         : `Version: ${vm.tag} (${vm.source})`;
     }
   }
