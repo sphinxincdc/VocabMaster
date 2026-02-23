@@ -2941,7 +2941,7 @@
       wSortDir.textContent = wordsSortDir === 'asc' ? '\u2191' : '\u2193';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
-        wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
+        wSortDir.textContent = wordsSortDir === 'asc' ? '\u2191' : '\u2193';
         renderWords();
         updateSortStatePills();
         toast('toast-words', wordsSortDir === 'asc'
@@ -3075,7 +3075,7 @@
       qSortDir.textContent = quotesSortDir === 'asc' ? '\u2191' : '\u2193';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
-        qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
+        qSortDir.textContent = quotesSortDir === 'asc' ? '\u2191' : '\u2193';
         renderQuotes();
         updateSortStatePills();
         toast('toast-quotes', quotesSortDir === 'asc'
