@@ -1636,11 +1636,6 @@
 
   async function main(){
     initBrandAssets();
-    for(const dlg of Array.from(document.querySelectorAll('dialog'))){
-      try{ dlg.removeAttribute('open'); }catch(_){} 
-      try{ if(typeof dlg.close === 'function') dlg.close(); }catch(_){} 
-    }
-    document.body.classList.remove('modal-open');
     themeMode = getThemeMode();
     bindThemeMediaWatcher();
     applyTheme();
@@ -1670,7 +1665,7 @@
       for(let i=0;i<backups.length;i++){
         const b = backups[i];
         const opt = document.createElement('option');
-        const tag = b.reason ?  ?  : '';
+        const tag = b.reason ? ` 路 ${b.reason}` : '';
         const words = activeWords(b.asset).length;
         const quotes = Array.isArray(b.asset?.quotes) ? b.asset.quotes.filter(q=>q && q.isDeleted !== true).length : 0;
         opt.value = String(i);
@@ -1704,7 +1699,7 @@
       else themeMode = 'auto';
       try{ localStorage.setItem(THEME_KEY, themeMode); }catch(_){}
       applyTheme();
-      toast('toast-home', lang === 'zh' ? ??? : Theme: );
+      toast('toast-home', lang === 'zh' ? `主题：${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
     });
 
     // Best-effort flush on backgrounding.
@@ -2589,7 +2584,7 @@
       const rec = findQuoteRecord(asset, id);
       if(!rec || rec.isDeleted === true) return;
       dlgQuoteId = String(id || '');
-      dlg-q-title.textContent = (lang === 'zh' ? '????' : 'Quote details');
+      $('dlg-q-title').textContent = String(rec.text || '').slice(0, 120) || '(empty)';
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
