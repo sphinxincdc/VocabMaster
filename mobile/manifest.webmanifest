@@ -1,7 +1,7 @@
 {
-  "name": "HORD 手机管理器",
+  "name": "HORD 锟街伙拷锟斤拷锟斤拷锟斤拷",
   "short_name": "HORD",
-  "description": "在手机端导入、管理、复习并导出你的 HORD 资产。",
+  "description": "锟斤拷锟街伙拷锟剿碉拷锟诫、锟斤拷锟斤拷锟斤拷锟较帮拷锟斤拷锟斤拷锟斤拷锟斤拷 HORD 锟绞诧拷锟斤拷",
   "start_url": "./mobile.html?v=2.54.72",
   "scope": "./",
   "display": "standalone",
