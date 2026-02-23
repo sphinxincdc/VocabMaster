@@ -325,7 +325,7 @@
     const dbg = $('dbg-version');
     if(dbg){
       dbg.textContent = lang === 'zh'
-        ? `鐗堟湰锛?{vm.tag}锛?{vm.source}锛塦
+        ? `版本：${vm.tag}（${vm.source}）`
         : `Version: ${vm.tag} (${vm.source})`;
     }
   }
@@ -633,7 +633,7 @@
   function applyI18n(){
     try{
       document.documentElement.lang = 'zh-CN';
-      document.title = `${t('brand_title')} 路 HORD`;
+      document.title = `${t('brand_title')} · HORD`;
     }catch(_){}
 
     // Brand
@@ -672,8 +672,8 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?);
-    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?);
+    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
+    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
     const wSort = $('w-sort');
     if(wSort){
       const o0 = wSort.querySelector('option[value="time"]'); if(o0) o0.textContent = (lang === 'zh' ? '\u6309\u65f6\u95f4' : 'By time');
@@ -691,14 +691,14 @@
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
-    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '棰勮瀵煎嚭' : 'Export preview'));
+    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '预览导出' : 'Export preview'));
     const qAdjustLblA = document.querySelector('label[for="q-exp-font-adjust"]');
-    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '瀛楀彿' : 'Font');
+    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '字号' : 'Font');
     const qAdjustLblB = document.querySelector('label[for="dlg-q-exp-font-adjust"]');
-    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '瀛楀彿' : 'Font');
+    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '字号' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '鍒犻櫎鏈瘝' : 'Delete Word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -738,8 +738,8 @@
     $('q-q') && ($('q-q').placeholder = t('ph_search_quotes'));
     $('w-batch-tags') && ($('w-batch-tags').placeholder = t('ph_tags'));
     $('q-batch-tags') && ($('q-batch-tags').placeholder = t('ph_tags'));
-    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '鐐瑰紑鍗曡瘝鏌ョ湅璇︽儏锛涘垹闄や负纭垹闄ゃ€? : 'Tap a word for details; delete is hard delete.'));
-    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '鐐瑰嚮鍙充晶鈥滃鍑哄浘鐗団€濆彲鐩存帴瀵煎嚭鍗曟潯銆? : 'Use the right-side export button for single quote export.'));
+    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '点开单词查看详情；删除为硬删除。' : 'Tap a word for details; delete is hard delete.'));
+    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '点击右侧“导出图片”可直接导出单条。' : 'Use the right-side export button for single quote export.'));
 
     // Review buttons
     document.querySelector('.rate[data-q=\"0\"]') && (document.querySelector('.rate[data-q=\"0\"]').textContent = t('rate_forgot'));
@@ -796,7 +796,7 @@
         const lbl = document.createElement('label');
         lbl.htmlFor = 'q-exp-font-adjust';
         lbl.className = 'small muted';
-        lbl.textContent = '瀛楀彿';
+        lbl.textContent = '字号';
         const inp = document.createElement('input');
         inp.id = 'q-exp-font-adjust';
         inp.dataset.expKey = 'fontAdjust';
@@ -822,7 +822,7 @@
       box.id = 'dlg-q-preview-wrap';
       box.innerHTML = `
         <div class="row small muted quotePreviewCtrl">
-          <span>棰勮瀵煎嚭</span>
+          <span>预览导出</span>
           <select id="dlg-q-exp-template" data-exp-key="template" style="min-width:120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
@@ -837,7 +837,7 @@
           </select>
           <select id="dlg-q-exp-main-font" data-exp-key="mainFont" style="min-width:120px;"></select>
           <select id="dlg-q-exp-cjk-font" data-exp-key="cjkFont" style="min-width:120px;"></select>
-          <label for="dlg-q-exp-font-adjust" class="small muted">瀛楀彿</label>
+          <label for="dlg-q-exp-font-adjust" class="small muted">字号</label>
           <input id="dlg-q-exp-font-adjust" data-exp-key="fontAdjust" type="range" min="-30" max="30" step="1" value="0">
           <span class="pill" id="dlg-q-exp-font-adjust-val">0</span>
         </div>
@@ -868,10 +868,10 @@
         };
     const templateMap = lang === 'zh'
       ? {
-          hordSignature: 'HORD 鍝佺墝',
-          editorial: 'Editorial 鏉傚織',
-          gradientSoft: 'Gradient 娓愬彉',
-          nightCircuit: 'Night 澶滈棿',
+          hordSignature: 'HORD 品牌',
+          editorial: 'Editorial 杂志',
+          gradientSoft: 'Gradient 渐变',
+          nightCircuit: 'Night 夜间',
         }
       : {
           hordSignature: 'HORD Signature',
@@ -1016,14 +1016,14 @@
     const w = $('w-sort-state');
     if(w){
       w.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`;
     }
     const q = $('q-sort-state');
     if(q){
       q.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`;
     }
   }
 
@@ -1166,9 +1166,6 @@
       const panel = $(`panel-${id}`);
       if(panel) panel.style.display = id === tab ? 'block' : 'none';
     }
-    if(tab === 'words') renderWords();
-    if(tab === 'quotes') renderQuotes();
-    if(tab === 'review') renderReview();
   }
 
   function normalizeImportedAsset(parsed, deviceId){
@@ -1640,10 +1637,11 @@
   async function main(){
     initBrandAssets();
     for(const dlg of Array.from(document.querySelectorAll('dialog'))){
-      try{ dlg.removeAttribute('open'); }catch(_){}
-      try{ if(typeof dlg.close === 'function') dlg.close(); }catch(_){}
+      try{ dlg.removeAttribute('open'); }catch(_){} 
+      try{ if(typeof dlg.close === 'function') dlg.close(); }catch(_){} 
     }
     document.body.classList.remove('modal-open');
+    themeMode = getThemeMode();
     bindThemeMediaWatcher();
     applyTheme();
     let asset = await loadAsset();
@@ -1668,15 +1666,15 @@
         return;
       }
       sel.innerHTML = '';
-        const tag = b.reason ? ` · ${b.reason}` : '';
+      sel.disabled = backups.length === 0;
       for(let i=0;i<backups.length;i++){
         const b = backups[i];
         const opt = document.createElement('option');
-        opt.textContent = `${fmtTime(b.ts)}${tag} · w=${words} q=${quotes}`;
+        const tag = b.reason ?  ?  : '';
         const words = activeWords(b.asset).length;
         const quotes = Array.isArray(b.asset?.quotes) ? b.asset.quotes.filter(q=>q && q.isDeleted !== true).length : 0;
         opt.value = String(i);
-        opt.textContent = `${fmtTime(b.ts)}${tag} 璺?w=${words} q=${quotes}`;
+        opt.textContent = `${fmtTime(b.ts)}${tag} 路 w=${words} q=${quotes}`;
         sel.appendChild(opt);
       }
       if(btnRestore) btnRestore.disabled = backups.length === 0;
@@ -1706,7 +1704,7 @@
       else themeMode = 'auto';
       try{ localStorage.setItem(THEME_KEY, themeMode); }catch(_){}
       applyTheme();
-      toast('toast-home', lang === 'zh' ? `主题：${themeModeLabel(themeMode)}` : `Theme: ${themeModeLabel(themeMode)}`);
+      toast('toast-home', lang === 'zh' ? ??? : Theme: );
     });
 
     // Best-effort flush on backgrounding.
@@ -2064,8 +2062,8 @@
       if(pgText){
         pgText.textContent = isRunning
           ? (lang === 'zh'
-              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 璺?\u5931\u8d25 ${quoteExportRuntime.failed}`
-              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 璺?Failed ${quoteExportRuntime.failed}`)
+              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 \u5931\u8d25 ${quoteExportRuntime.failed}`
+              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 Failed ${quoteExportRuntime.failed}`)
           : '';
       }
       if(failWrap){
@@ -2205,7 +2203,7 @@
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
         const iosHint = isIOSLike()
-          ? (lang === 'zh' ? '锛坕Phone 璇峰湪绯荤粺鍒嗕韩鎴栨柊寮€椤甸潰涓繚瀛樺浘鐗囷級' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          ? (lang === 'zh' ? '（iPhone 请在系统分享或新开页面中保存图片）' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
           : '';
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
@@ -2436,7 +2434,7 @@
         return true;
       });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `淇濆瓨澶辫触锛?{mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
         return;
       }
       updateHomeUI(asset);
@@ -2556,13 +2554,13 @@
     async function exportCurrentDialogQuoteImage(){
       const exporter = globalThis.QuoteCardExporter;
       if(!exporter || typeof exporter.exportPng !== 'function'){
-        toast('toast-dlg-quote', lang === 'zh' ? '瀵煎嚭妯″潡鏈姞杞斤紝璇峰埛鏂板悗閲嶈瘯銆? : 'Exporter not loaded. Refresh and try again.');
+        toast('toast-dlg-quote', lang === 'zh' ? '导出模块未加载，请刷新后重试。' : 'Exporter not loaded. Refresh and try again.');
         return false;
       }
       if(!asset || !dlgQuoteId) return false;
       const rec = findQuoteRecord(asset, dlgQuoteId);
       if(!rec || rec.isDeleted === true){
-        toast('toast-dlg-quote', lang === 'zh' ? '璇ラ噾鍙ュ凡涓嶅瓨鍦ㄣ€? : 'Quote no longer exists.');
+        toast('toast-dlg-quote', lang === 'zh' ? '该金句已不存在。' : 'Quote no longer exists.');
         return false;
       }
       const sentence = buildCurrentQuoteExportSentence(rec);
@@ -2576,11 +2574,11 @@
           filenamePattern: 'hord-mobile-{date}-{index}',
           withMockup: false,
         });
-        toast('toast-dlg-quote', lang === 'zh' ? '宸茶Е鍙戝鍑恒€? : 'Export started.');
+        toast('toast-dlg-quote', lang === 'zh' ? '已触发导出。' : 'Export started.');
         return true;
       }catch(e){
         toast('toast-dlg-quote', lang === 'zh'
-          ? `瀵煎嚭澶辫触锛?{String(e && e.message || e || 'unknown')}`
+          ? `导出失败：${String(e && e.message || e || 'unknown')}`
           : `Export failed: ${String(e && e.message || e || 'unknown')}`);
         return false;
       }
@@ -2591,7 +2589,7 @@
       const rec = findQuoteRecord(asset, id);
       if(!rec || rec.isDeleted === true) return;
       dlgQuoteId = String(id || '');
-      $('dlg-q-title').textContent = (lang === 'zh' ? '閲戝彞璇︽儏' : 'Quote details');
+      dlg-q-title.textContent = (lang === 'zh' ? '????' : 'Quote details');
       $('dlg-q-text').value = String(rec.text || '');
       $('dlg-q-translation').value = String(rec.translation || '');
       $('dlg-q-note').value = String(rec.annotation || '');
@@ -2790,7 +2788,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'us');
-      if(!ok) toast('toast-review', lang === 'zh' ? '鏃犲彲鐢ㄥ彂闊炽€? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
     $('q-play-uk')?.addEventListener('click', async ()=>{
       toast('toast-review','');
@@ -2798,7 +2796,7 @@
       const rec = findWordRecord(asset, queue[qIdx]);
       if(!rec) return;
       const ok = await playWordPronounce(rec, 'uk');
-      if(!ok) toast('toast-review', lang === 'zh' ? '鏃犲彲鐢ㄥ彂闊炽€? : 'No pronunciation available.');
+      if(!ok) toast('toast-review', lang === 'zh' ? '无可用发音。' : 'No pronunciation available.');
     });
 
     $('rv-delete-word')?.addEventListener('click', async ()=>{
@@ -2810,7 +2808,7 @@
         return removeWordRecord(asset, id);
       });
       if(!mr.ok){
-        toast('toast-review', lang === 'zh' ? `鍒犻櫎澶辫触锛?{mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
+        toast('toast-review', lang === 'zh' ? `删除失败：${mr.error || 'unknown'}` : `Delete failed: ${mr.error || 'unknown'}`);
         return;
       }
       queue = queue.filter((w)=>String(w || '') !== String(id));
@@ -2818,7 +2816,7 @@
       updateHomeUI(asset);
       renderWords();
       renderReview();
-      toast('toast-review', lang === 'zh' ? '宸插垹闄ゆ湰璇嶃€? : 'Deleted.');
+      toast('toast-review', lang === 'zh' ? '已删除本词。' : 'Deleted.');
     });
     const closeReviewMoreMenu = ()=>{
       const menu = $('rv-more-menu');
@@ -2936,10 +2934,10 @@
     }
     const wSortDir = $('w-sort-dir');
     if(wSortDir){
-      wSortDir.textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?;
+      wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
       wSortDir.addEventListener('click', ()=>{
         wordsSortDir = wordsSortDir === 'asc' ? 'desc' : 'asc';
-        wSortDir.textContent = wordsSortDir === 'asc' ? '鈫? : '鈫?;
+        wSortDir.textContent = wordsSortDir === 'asc' ? '↑' : '↓';
         renderWords();
         updateSortStatePills();
         toast('toast-words', wordsSortDir === 'asc'
@@ -3063,17 +3061,17 @@
       expCjk.title = (lang === 'zh' ? '\u4e2d\u6587\u5b57\u4f53' : 'CJK font');
     }
     for(const expRatio of Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'))){
-      expRatio.title = (lang === 'zh' ? '瀵煎嚭姣斾緥' : 'Export ratio');
+      expRatio.title = (lang === 'zh' ? '导出比例' : 'Export ratio');
     }
     for(const expAdj of Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'))){
-      expAdj.title = (lang === 'zh' ? '瀛楀彿寰皟' : 'Font size adjust');
+      expAdj.title = (lang === 'zh' ? '字号微调' : 'Font size adjust');
     }
     const qSortDir = $('q-sort-dir');
     if(qSortDir){
-      qSortDir.textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?;
+      qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
       qSortDir.addEventListener('click', ()=>{
         quotesSortDir = quotesSortDir === 'asc' ? 'desc' : 'asc';
-        qSortDir.textContent = quotesSortDir === 'asc' ? '鈫? : '鈫?;
+        qSortDir.textContent = quotesSortDir === 'asc' ? '↑' : '↓';
         renderQuotes();
         updateSortStatePills();
         toast('toast-quotes', quotesSortDir === 'asc'
@@ -3193,4 +3191,6 @@
     toast('toast-home', `Fatal error: ${String(e && e.message || e)}`);
   });
 })();
+
+
 
