@@ -33,6 +33,11 @@
 
 *{ box-sizing: border-box; }
 html, body{ height:100%; }
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+}
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -41,6 +46,7 @@ body{
     radial-gradient(900px 420px at 8% -10%, rgba(90,69,255,0.12), transparent 55%),
     radial-gradient(900px 520px at 92% -20%, rgba(40,187,255,0.10), transparent 55%),
     var(--bg);
+  overscroll-behavior: none;
 }
 body::before{
   content:"";
@@ -120,18 +126,17 @@ body::before{
 }
 
 .floatingControls{
-  position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 10px);
-  right: max(14px, env(safe-area-inset-right, 0px));
+  position: absolute;
+  top: 8px;
+  right: 8px;
   left: auto;
-  z-index: 1200;
+  z-index: 12;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  pointer-events: none;
+  pointer-events: auto;
 }
 .floatingControls .iconToggle{
-  pointer-events: auto;
   box-shadow: 0 10px 22px rgba(18,25,56,0.18);
   border-color: rgba(90,69,255,0.18);
   background: rgba(255,255,255,0.74);
@@ -156,12 +161,30 @@ body::before{
 }
 
 .iconToggle{
-  width: 42px;
-  height: 42px;
-  min-width: 42px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
   padding: 0;
   border-radius: 12px;
   font-size: 18px;
+}
+
+dialog{
+  display: none;
+}
+dialog[open]{
+  display: block;
+  position: fixed;
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 1003;
+}
+dialog::backdrop{
+  background: rgba(10,16,34,0.46);
+  backdrop-filter: blur(6px);
 }
 
 .brand h1{
@@ -816,7 +839,6 @@ body.modal-open{
     font-size: 18px;
   }
 }
-
 
 
 
