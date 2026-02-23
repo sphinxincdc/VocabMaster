@@ -1,8 +1,8 @@
-ï»¿{
-  "name": "HORD æ‰‹æœºç®¡ç†å™¨",
+{
+  "name": "HORD ÊÖ»ú¹ÜÀíÆ÷",
   "short_name": "HORD",
-  "description": "åœ¨æ‰‹æœºç«¯å¯¼å…¥ã€ç®¡ç†ã€å¤ä¹ å¹¶å¯¼å‡ºä½ çš„ HORD èµ„äº§ã€‚",
-  "start_url": "./mobile.html?v=2.54.69",
+  "description": "ÔÚÊÖ»ú¶Ëµ¼Èë¡¢¹ÜÀí¡¢¸´Ï°²¢µ¼³öÄãµÄ HORD ×Ê²ú¡£",
+  "start_url": "./mobile.html?v=2.54.70",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -29,4 +29,5 @@
     }
   ]
 }
+
 
