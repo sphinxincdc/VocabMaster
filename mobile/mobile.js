@@ -889,10 +889,10 @@
         };
     const templateMap = lang === 'zh'
       ? {
-          hordSignature: 'HORD 鍝佺墝',
-          editorial: 'Editorial 鏉傚織',
-          gradientSoft: 'Gradient 娓愬彉',
-          nightCircuit: 'Night 澶滈棿',
+          hordSignature: 'HORD 品牌',
+          editorial: 'Editorial 杂志',
+          gradientSoft: 'Gradient 渐变',
+          nightCircuit: 'Night 夜间',
         }
       : {
           hordSignature: 'HORD Signature',
