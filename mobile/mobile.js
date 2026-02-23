@@ -1166,6 +1166,9 @@
       const panel = $(`panel-${id}`);
       if(panel) panel.style.display = id === tab ? 'block' : 'none';
     }
+    if(tab === 'words') renderWords();
+    if(tab === 'quotes') renderQuotes();
+    if(tab === 'review') renderReview();
   }
 
   function normalizeImportedAsset(parsed, deviceId){
@@ -2327,7 +2330,7 @@
     $('dlg-w-phon-uk').textContent = `UK: ${phUk || '-'}`;
       $('dlg-w-meta').textContent = lang === 'zh'
       ? `\u66f4\u65b0\uff1a${fmtTime(rec.updatedAt)} \u00b7 \u590d\u4e60\uff1a${Number(rec.reviewCount)||0}`
-      : `Updated: ${fmtTime(rec.updatedAt)} 路 Reviews: ${Number(rec.reviewCount)||0}`;
+      : `Updated: ${fmtTime(rec.updatedAt)} · Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
       if(dlg && typeof dlg.showModal === 'function'){
         dlg.showModal();
@@ -3186,6 +3189,5 @@
     toast('toast-home', `Fatal error: ${String(e && e.message || e)}`);
   });
 })();
-
 
 
