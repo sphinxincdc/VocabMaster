@@ -672,8 +672,8 @@
     $('w-select') && ($('w-select').textContent = t('btn_select'));
     $('q-select') && ($('q-select').textContent = t('btn_select'));
     $('w-all') && ($('w-all').textContent = t('btn_all'));
-    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '↑' : '↓');
-    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '↑' : '↓');
+    $('w-sort-dir') && ($('w-sort-dir').textContent = wordsSortDir === 'asc' ? '?' : '?');
+    $('q-sort-dir') && ($('q-sort-dir').textContent = quotesSortDir === 'asc' ? '?' : '?');
     const wSort = $('w-sort');
     if(wSort){
       const o0 = wSort.querySelector('option[value="time"]'); if(o0) o0.textContent = (lang === 'zh' ? '\u6309\u65f6\u95f4' : 'By time');
@@ -691,14 +691,14 @@
     $('w-batch-tag-apply') && ($('w-batch-tag-apply').textContent = t('btn_apply'));
     $('q-batch-tag-apply') && ($('q-batch-tag-apply').textContent = t('btn_apply'));
     $('q-exp-style-lbl') && ($('q-exp-style-lbl').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u6837\u5f0f' : 'Export style'));
-    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '预览导出' : 'Export preview'));
+    $('dlg-q-preview-wrap')?.querySelector('span') && ($('dlg-q-preview-wrap').querySelector('span').textContent = (lang === 'zh' ? '\u5bfc\u51fa\u9884\u89c8' : 'Export preview'));
     const qAdjustLblA = document.querySelector('label[for="q-exp-font-adjust"]');
-    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '字号' : 'Font');
+    if(qAdjustLblA) qAdjustLblA.textContent = (lang === 'zh' ? '\u5b57\u53f7' : 'Font');
     const qAdjustLblB = document.querySelector('label[for="dlg-q-exp-font-adjust"]');
-    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '字号' : 'Font');
+    if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '\u5b57\u53f7' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '删除本词' : 'Delete Word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '\u5220\u9664\u672c\u8bcd' : 'Delete Word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -738,8 +738,8 @@
     $('q-q') && ($('q-q').placeholder = t('ph_search_quotes'));
     $('w-batch-tags') && ($('w-batch-tags').placeholder = t('ph_tags'));
     $('q-batch-tags') && ($('q-batch-tags').placeholder = t('ph_tags'));
-    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '点开单词查看详情；删除为硬删除。' : 'Tap a word for details; delete is hard delete.'));
-    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '点击右侧“导出图片”可直接导出单条。' : 'Use the right-side export button for single quote export.'));
+    $('w-hint') && ($('w-hint').textContent = (lang === 'zh' ? '\u70b9\u51fb\u5355\u8bcd\u67e5\u770b\u8be6\u60c5\uff1b\u5220\u9664\u4e3a\u786c\u5220\u9664\u3002' : 'Tap a word for details; delete is hard delete.'));
+    $('q-hint') && ($('q-hint').textContent = (lang === 'zh' ? '\u70b9\u51fb\u53f3\u4fa7\u201c\u5bfc\u51fa\u56fe\u7247\u201d\u53ef\u76f4\u63a5\u5bfc\u51fa\u5355\u6761\u3002' : 'Use the right-side export button for single quote export.'));
 
     // Review buttons
     document.querySelector('.rate[data-q=\"0\"]') && (document.querySelector('.rate[data-q=\"0\"]').textContent = t('rate_forgot'));
@@ -1161,15 +1161,18 @@
 
   function setTab(tab){
     for(const id of ['home','words','quotes','review']){
-      const btn = document.querySelector(`.tab[data-tab="${id}"]`);
+      const btn = document.querySelector(`.tab[data-tab="\${id}"]`);
       if(btn) btn.dataset.active = id === tab ? '1' : '0';
-      const panel = $(`panel-${id}`);
+      const panel = $(`panel-\${id}`);
       if(panel) panel.style.display = id === tab ? 'block' : 'none';
     }
     if(tab === 'words') renderWords();
     if(tab === 'quotes') renderQuotes();
     if(tab === 'review') renderReview();
   }
+    if(tab === 'words') renderWords();
+    if(tab === 'quotes') renderQuotes();
+    if(tab === 'review') renderReview();
   function normalizeImportedAsset(parsed, deviceId){
     if(!isAssetLike(parsed)) throw new Error('invalid_json');
     if(Number(parsed.schemaVersion) !== 2) throw new Error('schema_not_v2');
