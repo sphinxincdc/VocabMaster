@@ -127,8 +127,8 @@ body::before{
 
 .floatingControls{
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: max(8px, env(safe-area-inset-top, 0px));
+  right: max(8px, env(safe-area-inset-right, 0px));
   left: auto;
   z-index: 12;
   display: flex;
@@ -839,7 +839,6 @@ body.modal-open{
     font-size: 18px;
   }
 }
-
 
 
 

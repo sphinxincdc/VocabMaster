@@ -1161,6 +1161,9 @@
   }
 
   function setTab(tab){
+    closeDialogSafely($('dlg-word'));
+    closeDialogSafely($('dlg-quote'));
+    document.body.classList.remove('modal-open');
     for(const id of ['home','words','quotes','review']){
       const btn = document.querySelector(`.tab[data-tab="${id}"]`);
       if(btn) btn.dataset.active = id === tab ? '1' : '0';

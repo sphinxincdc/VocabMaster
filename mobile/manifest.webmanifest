@@ -1,8 +1,8 @@
 {
-  "name": "HORD \\u624b\\u673a\\u7ba1\\u7406\\u5668",
+  "name": "HORD 手机管理器",
   "short_name": "HORD",
-  "description": "\\u5bfc\\u5165\\u3001\\u7ba1\\u7406\\u3001\\u5bfc\\u51fa\\u5b8c\\u6574 HORD \\u8d44\\u4ea7\\uff08\\u79fb\\u52a8\\u7aef\\uff09\\u3002",
-  "start_url": "./mobile.html?v=2.54.74",
+  "description": "导入?管理?导出完整 HORD 资产（移动端）?",
+  "start_url": "./mobile.html?v=2.54.75",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
