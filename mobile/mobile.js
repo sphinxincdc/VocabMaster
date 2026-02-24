@@ -2371,23 +2371,14 @@
       : `Updated: ${fmtTime(rec.updatedAt)} | Reviews: ${Number(rec.reviewCount)||0}`;
       const dlg = $('dlg-word');
       if(!dlg) return;
-      dlg.hidden = false;
-      if(typeof dlg.showModal === 'function'){
-        dlg.showModal();
-      }else{
-        dlg.setAttribute('open', '');
-      }
+      if(!openDialogSafely(dlg)) return;
       document.body.classList.add('modal-open');
     }
 
     function closeWordDialog(){
       stopWordPronounce();
       const dlg = $('dlg-word');
-      if(dlg){
-        if(typeof dlg.close === 'function') dlg.close();
-        dlg.removeAttribute('open');
-        dlg.hidden = true;
-      }
+      closeDialogSafely(dlg);
       document.body.classList.remove('modal-open');
       dlgWordId = '';
     }
