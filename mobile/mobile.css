@@ -699,10 +699,27 @@ dialog::backdrop{
   background: rgba(3, 8, 22, 0.58);
   backdrop-filter: blur(10px);
 }
+dialog.dlgFallbackOpen{
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0 auto;
+  width: min(920px, calc(100% - 24px)) !important;
+  max-height: min(86dvh, 920px);
+  overflow: auto;
+  z-index: 1002;
+}
 body.modal-open{
   overflow: hidden;
   overscroll-behavior: none;
   touch-action: none;
+}
+body.modal-open::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 8, 22, 0.58);
+  backdrop-filter: blur(10px);
+  z-index: 1001;
 }
 .dlgActions{
   display: grid;
@@ -839,6 +856,5 @@ body.modal-open{
     font-size: 18px;
   }
 }
-
 
 
