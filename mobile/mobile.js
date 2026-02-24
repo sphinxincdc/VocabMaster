@@ -2321,6 +2321,35 @@
       list.appendChild(frag);
     }
 
+    function openDialogSafely(dlg){
+      if(!dlg) return false;
+      dlg.hidden = false;
+      let openedByModal = false;
+      if(typeof dlg.showModal === 'function'){
+        try{
+          dlg.showModal();
+          openedByModal = true;
+        }catch(_){}
+      }
+      if(!openedByModal){
+        dlg.setAttribute('open', '');
+        dlg.classList.add('dlgFallbackOpen');
+      }else{
+        dlg.classList.remove('dlgFallbackOpen');
+      }
+      return true;
+    }
+
+    function closeDialogSafely(dlg){
+      if(!dlg) return;
+      dlg.classList.remove('dlgFallbackOpen');
+      try{
+        if(typeof dlg.close === 'function') dlg.close();
+      }catch(_){}
+      dlg.removeAttribute('open');
+      dlg.hidden = true;
+    }
+
     // --- Word dialog ---
     let dlgWordId = '';
     function openWordDialog(id){
