@@ -127,8 +127,8 @@ body::before{
 
 .floatingControls{
   position: absolute;
-  top: max(8px, env(safe-area-inset-top, 0px));
-  right: max(8px, env(safe-area-inset-right, 0px));
+  top: 8px;
+  right: 8px;
   left: auto;
   z-index: 12;
   display: flex;
@@ -840,8 +840,8 @@ body.modal-open::before{
 
 @media (max-width: 899px){
   .floatingControls{
-    top: calc(env(safe-area-inset-top, 0px) + 10px);
-    right: max(10px, env(safe-area-inset-right, 0px));
+    top: 8px;
+    right: 8px;
   }
 }
 
@@ -856,5 +856,4 @@ body.modal-open::before{
     font-size: 18px;
   }
 }
-
 
