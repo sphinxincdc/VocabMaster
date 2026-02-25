@@ -426,6 +426,13 @@ input::placeholder{
   margin: 2px 0 6px;
   word-break: break-word;
 }
+.dlgHeadLabel{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
 .qMeaning{
   font-size: 14px;
   line-height: 1.6;
@@ -856,4 +863,3 @@ body.modal-open::before{
     font-size: 18px;
   }
 }
-
