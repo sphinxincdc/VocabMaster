@@ -1731,7 +1731,7 @@
       window.addEventListener('pagehide', ()=>{ flushSave(asset).catch(()=>{}); });
     }catch(_){}
 
-    $('btn-import').addEventListener('click', async ()=>{
+    $('btn-import')?.addEventListener('click', async ()=>{
       toast('toast-home','');
       const f = $('file')?.files?.[0];
       if(!f){
@@ -1756,7 +1756,7 @@
       }
     });
 
-    $('btn-export').addEventListener('click', async ()=>{
+    $('btn-export')?.addEventListener('click', async ()=>{
       toast('toast-home','');
       if(!asset){
         toast('toast-home', lang === 'zh' ? '\u6ca1\u6709\u53ef\u5bfc\u51fa\u7684\u8d44\u4ea7\u3002' : 'No asset loaded.');
@@ -1768,7 +1768,7 @@
       toast('toast-home', t('toast_exported'));
     });
 
-    $('btn-reset').addEventListener('click', async ()=>{
+    $('btn-reset')?.addEventListener('click', async ()=>{
       toast('toast-home','');
       if(!confirm(lang === 'zh'
         ? '\u786e\u8ba4\u6e05\u7a7a\u672c\u5730\u526f\u672c\uff1f\u8fd9\u4ec5\u6e05\u9664\u6d4f\u89c8\u5668\u672c\u5730\u7f13\u5b58\uff0c\u4e0d\u4f1a\u5f71\u54cd\u4efb\u4f55\u4e91\u7aef\u6587\u4ef6\u3002'
@@ -2809,7 +2809,7 @@
       if(mEl) mEl.textContent = lines;
     }
 
-    $('btn-start').addEventListener('click', ()=>{
+    $('btn-start')?.addEventListener('click', ()=>{
       toast('toast-review','');
       if(!asset){
         toast('toast-review', t('toast_import_first'));
@@ -2915,7 +2915,7 @@
       });
     });
 
-    $('btn-dump').addEventListener('click', ()=>{
+    $('btn-dump')?.addEventListener('click', ()=>{
       const out = $('debug-out');
       if(!out) return;
       const caps = getCapabilities();
@@ -2929,7 +2929,7 @@
       setTab('home');
     });
 
-    $('btn-rehash').addEventListener('click', async ()=>{
+    $('btn-rehash')?.addEventListener('click', async ()=>{
       const out = $('debug-out');
       if(!asset){
         if(out) out.textContent = (lang === 'zh' ? '(\u65e0\u8d44\u4ea7)' : '(no asset)');
