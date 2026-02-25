@@ -60,6 +60,8 @@
       rate_forgot: 'Not Remembered',
       rate_hard: 'Familiar',
       rate_easy: 'Mastered',
+      rv_edit_word: 'Edit current word',
+      rv_delete_word: 'Delete current word',
       toast_import_first: 'Import an asset first.',
       toast_import_ok: 'Import successful (merged if local copy existed). You can export anytime.',
       toast_import_cancel: 'Import cancelled.',
@@ -122,6 +124,8 @@
       rate_forgot: '\u4e0d\u8bb0\u5f97',
       rate_hard: '\u6709\u5370\u8c61',
       rate_easy: '\u5df2\u638c\u63e1',
+      rv_edit_word: '\u7f16\u8f91\u5f53\u524d\u8bcd',
+      rv_delete_word: '\u5220\u9664\u5f53\u524d\u8bcd',
       toast_import_first: '\u8bf7\u5148\u5bfc\u5165\u8d44\u4ea7\u6587\u4ef6\u3002',
       toast_import_ok: '\u5bfc\u5165\u6210\u529f\uff08\u5982\u6709\u672c\u5730\u526f\u672c\u4f1a\u81ea\u52a8\u5408\u5e76\uff09\u3002',
       toast_import_cancel: '\u5df2\u53d6\u6d88\u5bfc\u5165\u3002',
@@ -699,7 +703,8 @@
     if(qAdjustLblB) qAdjustLblB.textContent = (lang === 'zh' ? '\u5b57\u53f7' : 'Font');
     $('lbl-session-size') && ($('lbl-session-size').textContent = t('lbl_session_size'));
     $('btn-start') && ($('btn-start').textContent = t('btn_start'));
-    $('rv-delete-word') && ($('rv-delete-word').textContent = (lang === 'zh' ? '\u5220\u9664\u672c\u8bcd' : 'Delete Word'));
+    $('rv-edit-word') && ($('rv-edit-word').textContent = t('rv_edit_word'));
+    $('rv-delete-word') && ($('rv-delete-word').textContent = t('rv_delete_word'));
     $('btn-backup-now') && ($('btn-backup-now').textContent = (lang === 'zh' ? '\u4fdd\u5b58\u5feb\u7167' : 'Save Snapshot'));
     $('btn-restore-backup') && ($('btn-restore-backup').textContent = (lang === 'zh' ? '\u6062\u590d\u5feb\u7167' : 'Restore Snapshot'));
     $('bk-hint') && ($('bk-hint').textContent = (lang === 'zh' ? '\u4ec5\u4fdd\u7559\u6700\u65b0 3 \u4efd\u5feb\u7167\uff0c\u6062\u590d\u4ec5\u5f71\u54cd\u672c\u5730\u3002' : 'Keeps the latest 3 snapshots. Restore is local-only.'));
@@ -1164,6 +1169,13 @@
     closeDialogSafely($('dlg-word'));
     closeDialogSafely($('dlg-quote'));
     document.body.classList.remove('modal-open');
+    const rvMenu = $('rv-more-menu');
+    if(rvMenu) rvMenu.dataset.open = '0';
+    dlgQuoteEditing = false;
+    const quoteView = $('dlg-q-view');
+    const quoteEdit = $('dlg-q-edit-panel');
+    if(quoteView) quoteView.style.display = '';
+    if(quoteEdit) quoteEdit.style.display = 'none';
     for(const id of ['home','words','quotes','review']){
       const btn = document.querySelector(`.tab[data-tab="${id}"]`);
       if(btn) btn.dataset.active = id === tab ? '1' : '0';
