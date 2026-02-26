@@ -1062,14 +1062,14 @@
     const w = $('w-sort-state');
     if(w){
       w.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`;
     }
     const q = $('q-sort-state');
     if(q){
       q.textContent = lang === 'zh'
-        ? `鎺掑簭锛?{sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`
-        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`;
+        ? `排序：${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`
+        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`;
     }
   }
 
