@@ -1,4 +1,4 @@
-// mobile.js
+﻿// mobile.js
 // Phase 3 scaffold: a simple, local IndexedDB-backed web manager for HORD assets.
 // - Works without File System Access API (mobile-friendly).
 // - Manual import/export only. No auto cloud writeback.
@@ -638,7 +638,7 @@
   function applyI18n(){
     try{
       document.documentElement.lang = 'zh-CN';
-      document.title = `${t('brand_title')} · HORD`;
+      document.title = `${t('brand_title')} 路 HORD`;
     }catch(_){}
 
     // Brand
@@ -793,7 +793,7 @@
       ratio.id = 'q-exp-ratio';
       ratio.dataset.expKey = 'ratio';
       ratio.style.minWidth = '98px';
-      ratio.innerHTML = '<option value="9:16">9:16</option><option value="4:5">4:5</option><option value="1:1">1:1</option><option value="16:9">16:9</option>';
+      ratio.innerHTML = '<option value="9:16">9:16</option><option value="4:5">4:5</option><option value="1:1">1:1</option><option value="16:9">16:9</option><option value="iphone">iPhone 壁纸</option>';
       tpl.insertAdjacentElement('afterend', ratio);
     }
     if(tpl && !$('q-exp-font-adjust')){
@@ -828,7 +828,7 @@
       box.id = 'dlg-q-preview-wrap';
       box.innerHTML = `
         <div class="row small muted quotePreviewCtrl">
-          <span>预览导出</span>
+          <span>预览导图</span>
           <select id="dlg-q-exp-template" data-exp-key="template" style="min-width:120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
@@ -872,19 +872,47 @@
           notoSerifSC: { label: 'Noto Serif SC' },
           lxgwWenKai: { label: 'LXGW WenKai' },
         };
-    const templateMap = lang === 'zh'
-      ? {
-          hordSignature: 'HORD 品牌',
-          editorial: 'Editorial 杂志',
-          gradientSoft: 'Gradient 渐变',
-          nightCircuit: 'Night 夜间',
-        }
-      : {
-          hordSignature: 'HORD Signature',
-          editorial: 'Editorial',
-          gradientSoft: 'Gradient Soft',
-          nightCircuit: 'Night Circuit',
-        };
+    const rawTemplateMap = exporter?.TEMPLATE_CONFIG && typeof exporter.TEMPLATE_CONFIG === 'object'
+      ? exporter.TEMPLATE_CONFIG
+      : null;
+    const templateLabelsZh = {
+      hordSignature: 'HORD 品牌',
+      editorial: 'Editorial 杂志',
+      gradientSoft: 'Gradient 渐变',
+      nightCircuit: 'Night 夜间',
+      iphoneWallpaper: 'iPhone 锁屏壁纸',
+      iphoneMinimalLight: 'iPhone 极简浅色',
+      iphoneMinimalDark: 'iPhone 极简深色',
+      iphoneFrostedGlass: 'iPhone 玻璃拟态',
+      iphoneMidnightGlow: 'iPhone 午夜微光',
+      iphoneBusinessGold: 'iPhone 商务金',
+      iphonePaperMinimal: 'iPhone 纸感简约',
+      iphoneNeonNight: 'iPhone 霓虹夜色',
+      iphoneFilmGrain: 'iPhone 颗粒胶片',
+    };
+    const templateLabelsEn = {
+      hordSignature: 'HORD Signature',
+      editorial: 'Editorial',
+      gradientSoft: 'Gradient Soft',
+      nightCircuit: 'Night Circuit',
+      iphoneWallpaper: 'iPhone Wallpaper',
+      iphoneMinimalLight: 'iPhone Minimal Light',
+      iphoneMinimalDark: 'iPhone Minimal Dark',
+      iphoneFrostedGlass: 'iPhone Frosted Glass',
+      iphoneMidnightGlow: 'iPhone Midnight Glow',
+      iphoneBusinessGold: 'iPhone Business Gold',
+      iphonePaperMinimal: 'iPhone Paper Minimal',
+      iphoneNeonNight: 'iPhone Neon Night',
+      iphoneFilmGrain: 'iPhone Film Grain',
+    };
+    const fallbackTemplateKeys = ['hordSignature', 'editorial', 'gradientSoft', 'nightCircuit', 'iphoneWallpaper'];
+    const templateKeys = rawTemplateMap ? Object.keys(rawTemplateMap) : fallbackTemplateKeys;
+    const templateMap = {};
+    for(const key of templateKeys){
+      templateMap[key] = (lang === 'zh')
+        ? String(templateLabelsZh[key] || key)
+        : String(templateLabelsEn[key] || key);
+    }
 
     const setOptions = (selector, options)=>{
       const nodes = Array.from(document.querySelectorAll(selector));
@@ -905,7 +933,13 @@
     const mainNodes = setOptions('select[data-exp-key="mainFont"]', Object.keys(mainFontMap).map(k=>({ value:k, label:String(mainFontMap[k]?.label || k) })));
     const cjkNodes = setOptions('select[data-exp-key="cjkFont"]', Object.keys(cjkFontMap).map(k=>({ value:k, label:String(cjkFontMap[k]?.label || k) })));
     const tplNodes = setOptions('select[data-exp-key="template"]', Object.keys(templateMap).map(k=>({ value:k, label:String(templateMap[k]) })));
-    const ratioNodes = Array.from(document.querySelectorAll('select[data-exp-key="ratio"]'));
+    const ratioNodes = setOptions('select[data-exp-key="ratio"]', [
+      { value: '9:16', label: '9:16' },
+      { value: '4:5', label: '4:5' },
+      { value: '1:1', label: '1:1' },
+      { value: '16:9', label: '16:9' },
+      { value: 'iphone', label: (lang === 'zh' ? 'iPhone 壁纸' : 'iPhone Wallpaper') },
+    ]);
     const adjNodes = Array.from(document.querySelectorAll('input[data-exp-key="fontAdjust"]'));
 
     if(!Object.keys(mainFontMap).includes(quoteExportPrefs.mainFont)) quoteExportPrefs.mainFont = Object.keys(mainFontMap)[0] || 'inter';
@@ -1022,14 +1056,14 @@
     const w = $('w-sort-state');
     if(w){
       w.textContent = lang === 'zh'
-        ? `排序：${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`
-        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '↑' : '↓'}`;
+        ? `鎺掑簭锛?{sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`
+        : `Sort: ${sortFieldLabel('words', wordsSortField)} ${wordsSortDir === 'asc' ? '鈫? : '鈫?}`;
     }
     const q = $('q-sort-state');
     if(q){
       q.textContent = lang === 'zh'
-        ? `排序：${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`
-        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '↑' : '↓'}`;
+        ? `鎺掑簭锛?{sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`
+        : `Sort: ${sortFieldLabel('quotes', quotesSortField)} ${quotesSortDir === 'asc' ? '鈫? : '鈫?}`;
     }
   }
 
@@ -2080,8 +2114,8 @@
       if(pgText){
         pgText.textContent = isRunning
           ? (lang === 'zh'
-              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 \u5931\u8d25 ${quoteExportRuntime.failed}`
-              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 路 Failed ${quoteExportRuntime.failed}`)
+              ? `\u8fdb\u5ea6 ${quoteExportRuntime.done}/${quoteExportRuntime.total} 璺?\u5931\u8d25 ${quoteExportRuntime.failed}`
+              : `Progress ${quoteExportRuntime.done}/${quoteExportRuntime.total} 璺?Failed ${quoteExportRuntime.failed}`)
           : '';
       }
       if(failWrap){
@@ -2221,7 +2255,7 @@
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
         const iosHint = isIOSLike()
-          ? (lang === 'zh' ? '（iPhone 请在系统分享或新开页面中保存图片）' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          ? (lang === 'zh' ? '锛坕Phone 璇峰湪绯荤粺鍒嗕韩鎴栨柊寮€椤甸潰涓繚瀛樺浘鐗囷級' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
           : '';
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
@@ -2543,7 +2577,7 @@
         return true;
       });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `淇濆瓨澶辫触锛?{mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
         return;
       }
       updateHomeUI(asset);
