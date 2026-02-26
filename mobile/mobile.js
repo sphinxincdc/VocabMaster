@@ -965,6 +965,7 @@
       saveQuoteExportPrefs();
       syncExportControls();
       renderQuoteDialogPreview();
+      renderQuoteListPreview();
     };
     for(const n of mainNodes){
       n.addEventListener('change', ()=>{
@@ -981,6 +982,9 @@
     for(const n of tplNodes){
       n.addEventListener('change', ()=>{
         quoteExportPrefs.template = String(n.value || 'hordSignature');
+        if(String(quoteExportPrefs.template).startsWith('iphone')){
+          quoteExportPrefs.ratio = 'iphone';
+        }
         onChange();
       });
     }
