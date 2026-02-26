@@ -2301,6 +2301,68 @@
     return null;
   }
 
+  function getFirstVisibleQuoteForPreview(){
+    if(!asset) return null;
+    const q = String($('q-q')?.value || '').trim().toLowerCase();
+    const items = activeQuotes(asset);
+    const filtered = q
+      ? items.filter(r=>{
+          const t0 = String(r.text || '').toLowerCase();
+          const tr0 = String(r.translation || '').toLowerCase();
+          const n0 = String(r.annotation || '').toLowerCase();
+          return t0.includes(q) || tr0.includes(q) || n0.includes(q);
+        })
+      : items;
+    const sorted = sortRecords(filtered, quotesSortField, quotesSortDir, 'quotes');
+    return sorted[0] || null;
+  }
+
+  function renderQuoteListPreview(){
+    const canvas = $('q-exp-preview-canvas');
+    if(!canvas) return;
+    const exporter = globalThis.QuoteCardExporter;
+    if(!exporter || typeof exporter.renderPreview !== 'function') return;
+    const rec = getFirstVisibleQuoteForPreview();
+    if(!rec){
+      try{
+        const ctx = canvas.getContext('2d');
+        if(ctx){
+          ctx.clearRect(0, 0, canvas.width || 0, canvas.height || 0);
+        }
+      }catch(_){}
+      return;
+    }
+    const settings = {
+      ratio: String(quoteExportPrefs.ratio || '9:16'),
+      template: String(quoteExportPrefs.template || 'hordSignature'),
+      mainFont: String(quoteExportPrefs.mainFont || 'inter'),
+      cjkFont: String(quoteExportPrefs.cjkFont || 'notoSansSC'),
+      fontAdjust: clamp(Number(quoteExportPrefs.fontAdjust) || 0, -30, 30),
+      showTranslation: true,
+      showSource: false,
+      showAnnotation: false,
+      watermarkMode: 'signature',
+      capabilities: getCapabilities(),
+      isProUser: false,
+      previewFit: true,
+      previewScale: 1,
+      previewScaleMode: 'fit',
+      previewMaxWidth: Math.max(280, Math.floor(canvas.parentElement?.clientWidth || canvas.clientWidth || 320) - 6),
+      previewMaxHeight: 560,
+    };
+    const sentence = {
+      text: String(rec.text || '').trim(),
+      translation: String(rec.translation || '').trim(),
+      note: String(rec.annotation || '').trim(),
+      url: String(rec.url || '').trim(),
+      title: String(rec.title || '').trim(),
+      sourceLabel: String(rec.sourceLabel || '').trim(),
+    };
+    try{
+      exporter.renderPreview(sentence, settings, canvas);
+    }catch(_){}
+  }
+
     function renderQuotes(){
       const list = $('q-list');
       if(!list) return;
@@ -2330,6 +2392,7 @@
         if(row) frag.appendChild(row);
       }
       list.appendChild(frag);
+      renderQuoteListPreview();
     }
 
     function openDialogSafely(dlg){

@@ -1,8 +1,8 @@
-{
-  "name": "HORD 手机管理器",
+﻿{
+  "name": "HORD 鎵嬫満绠＄悊鍣?,
   "short_name": "HORD",
-  "description": "导入 / 管理 / 导出完整 HORD 资产（移动端）",
-  "start_url": "./mobile.html?v=2.54.78",
+  "description": "瀵煎叆 / 绠＄悊 / 瀵煎嚭瀹屾暣 HORD 璧勪骇锛堢Щ鍔ㄧ锛?,
+  "start_url": "./mobile.html?v=2.54.79",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
@@ -29,3 +29,4 @@
     }
   ]
 }
+
