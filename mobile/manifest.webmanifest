@@ -1,7 +1,7 @@
 ﻿{
   "name": "HORD 鎵嬫満绠＄悊鍣?,
   "short_name": "HORD",
-  "description": "瀵煎叆 / 绠＄悊 / 瀵煎嚭瀹屾暣 HORD 璧勪骇锛堢Щ鍔ㄧ锛?,
+  "description": "瀵煎�?/ 绠＄�?/ 瀵煎嚭瀹屾�?HORD 璧勪骇锛堢Щ鍔ㄧ�?,
   "start_url": "./mobile.html?v=2.54.79",
   "scope": "./",
   "display": "standalone",
