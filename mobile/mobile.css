@@ -170,9 +170,10 @@ body::before{
 }
 
 dialog{
-  display: none;
+  display: none !important;
 }
-dialog[open]{
+dialog[open],
+dialog.dlgFallbackOpen{
   display: block;
   position: fixed;
   inset: auto;

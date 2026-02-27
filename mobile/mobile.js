@@ -2583,7 +2583,7 @@
         return true;
       });
       if(!mr.ok){
-        toast('toast-dlg-word', lang === 'zh' ? `淇濆瓨澶辫触锛?{mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
+        toast('toast-dlg-word', lang === 'zh' ? `保存失败：${mr.error || 'unknown'}` : `Save failed: ${mr.error || 'unknown'}`);
         return;
       }
       updateHomeUI(asset);
