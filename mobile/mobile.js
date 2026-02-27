@@ -2272,7 +2272,9 @@
         }
         const successCount = Math.max(0, list.length - quoteExportRuntime.failed);
         const iosHint = isIOSLike()
-          ? (lang === 'zh' ? '锛坕Phone 璇峰湪绯荤粺鍒嗕韩鎴栨柊寮€椤甸潰涓繚瀛樺浘鐗囷級' : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
+          ? (lang === 'zh'
+            ? '（iPhone 请在系统分享页或新开页面中长按保存图片）'
+            : ' (On iPhone, save via Share Sheet or long-press in opened tab).')
           : '';
         toast('toast-quotes', lang === 'zh'
           ? `\u5bfc\u51fa\u5b8c\u6210\uff1a\u6210\u529f ${successCount}\uff0c\u5931\u8d25 ${quoteExportRuntime.failed}\uff0c\u91cd\u8bd5 ${quoteExportRuntime.retried}\u3002${iosHint}`
