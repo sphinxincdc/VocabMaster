@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HORD 手机管理器</title>
+  <title>HORD 鎵嬫満绠＄悊鍣?/title>
   <meta name="theme-color" content="#0b1022">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,64 +32,64 @@
           <img class="logoImg" src="logo/Gemini_Generated_Image_z4fvgyz4fvgyz4fv.png" alt="">
         </div>
         <div>
-          <h1 id="brandTitle">HORD 手机管理器</h1>
-          <p id="brandTagline">不依赖文件系统 API，导入 / 管理 / 导出完整资产。</p>
+          <h1 id="brandTitle">HORD 鎵嬫満绠＄悊鍣?/h1>
+          <p id="brandTagline">涓嶄緷璧栨枃浠剁郴缁?API锛屽鍏?/ 绠＄悊 / 瀵煎嚭瀹屾暣璧勪骇銆?/p>
           <p class="brandSlogan" id="brandSlogan">Yesterday, You Said Tomorrow</p>
         </div>
       </div>
       <div class="tabs" role="tablist" aria-label="Tabs">
-        <button class="tab" id="tab-home" data-tab="home" data-active="1">📦 资产管理</button>
-        <button class="tab" id="tab-words" data-tab="words" data-active="0">📘 单词本</button>
-        <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">✨ 金句库</button>
-        <button class="tab" id="tab-review" data-tab="review" data-active="0">🧠 艾宾浩斯复习</button>
+        <button class="tab" id="tab-home" data-tab="home" data-active="1">馃摝 璧勪骇绠＄悊</button>
+        <button class="tab" id="tab-words" data-tab="words" data-active="0">馃摌 鍗曡瘝鏈?/button>
+        <button class="tab" id="tab-quotes" data-tab="quotes" data-active="0">鉁?閲戝彞搴?/button>
+        <button class="tab" id="tab-review" data-tab="review" data-active="0">馃 鑹惧娴╂柉澶嶄範</button>
       </div>
     </div>
-    <div class="floatingControls" id="top-controls" aria-label="页面控制">
-      <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">🌙</button>
+    <div class="floatingControls" id="top-controls" aria-label="椤甸潰鎺у埗">
+      <button class="btn iconToggle" id="btn-theme" type="button" aria-label="Theme toggle">馃寵</button>
     </div>
 
     <div class="grid">
       <div class="card" id="panel-home">
-        <h2>资产管理</h2>
+        <h2>璧勪骇绠＄悊</h2>
         <div class="row">
           <input id="file" type="file" accept="application/json,.json">
-          <button class="btn primary" id="btn-import">导入</button>
-          <button class="btn" id="btn-export" disabled>导出</button>
-          <button class="btn danger" id="btn-reset" disabled>重置本地副本</button>
+          <button class="btn primary" id="btn-import">瀵煎叆</button>
+          <button class="btn" id="btn-export" disabled>瀵煎嚭</button>
+          <button class="btn danger" id="btn-reset" disabled>閲嶇疆鏈湴鍓湰</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <span class="pill" id="pill-status">未加载资产</span>
-          <span class="pill warn" id="pill-dirty" style="display:none;">保存中...</span>
-          <span class="pill laser" id="pill-laser" style="display:none;">智能精选复习（50-100）</span>
+          <span class="pill" id="pill-status">鏈姞杞借祫浜?/span>
+          <span class="pill warn" id="pill-dirty" style="display:none;">淇濆瓨涓?..</span>
+          <span class="pill laser" id="pill-laser" style="display:none;">鏅鸿兘绮鹃€夊涔狅紙50-100锛?/span>
         </div>
         <div class="row small muted" style="margin-top:10px;">
-          <div class="stat"><span id="lbl-total-words">单词总数</span> <b id="s-words">0</b></div>
-          <div class="stat"><span id="lbl-total-quotes">金句总数</span> <b id="s-quotes">0</b></div>
-          <div class="stat"><span id="lbl-updated">更新时间</span> <b id="s-updated">-</b></div>
+          <div class="stat"><span id="lbl-total-words">鍗曡瘝鎬绘暟</span> <b id="s-words">0</b></div>
+          <div class="stat"><span id="lbl-total-quotes">閲戝彞鎬绘暟</span> <b id="s-quotes">0</b></div>
+          <div class="stat"><span id="lbl-updated">鏇存柊鏃堕棿</span> <b id="s-updated">-</b></div>
         </div>
         <div class="toast" id="toast-home"></div>
         <div class="hintBox" id="home-sync-guide" style="margin-top:12px;">
-          <div style="font-weight:900; margin-bottom:6px;">尚未导入资产</div>
+          <div style="font-weight:900; margin-bottom:6px;">灏氭湭瀵煎叆璧勪骇</div>
           <div class="small muted">
-            电脑端导出 HORD 资产 JSON -> 手机端导入 -> 学习后导出并覆盖云盘文件 -> 电脑端再读取合并。
+            鐢佃剳绔鍑?HORD 璧勪骇 JSON -> 鎵嬫満绔鍏?-> 瀛︿範鍚庡鍑哄苟瑕嗙洊浜戠洏鏂囦欢 -> 鐢佃剳绔啀璇诲彇鍚堝苟銆?
           </div>
         </div>
         <details class="hintBox" id="home-debug-fold" style="margin-top:12px;">
-          <summary style="font-weight:900; cursor:pointer;">调试与快照（高级）</summary>
+          <summary style="font-weight:900; cursor:pointer;">璋冭瘯涓庡揩鐓э紙楂樼骇锛?/summary>
           <div class="row" style="margin-top:10px;">
-            <button class="btn" id="btn-dump" disabled>导出调试 JSON</button>
-            <button class="btn" id="btn-rehash" disabled>重算 Hash</button>
+            <button class="btn" id="btn-dump" disabled>瀵煎嚭璋冭瘯 JSON</button>
+            <button class="btn" id="btn-rehash" disabled>閲嶇畻 Hash</button>
           </div>
           <div class="row" style="margin-top:10px;">
-            <button class="btn" id="btn-backup-now" disabled>立即快照</button>
+            <button class="btn" id="btn-backup-now" disabled>绔嬪嵆蹇収</button>
             <select id="bk-select" disabled style="flex:1; min-width:220px;"></select>
-            <button class="btn danger" id="btn-restore-backup" disabled>恢复</button>
+            <button class="btn danger" id="btn-restore-backup" disabled>鎭㈠</button>
           </div>
           <div class="row small muted" style="margin-top:8px;">
-            <span id="bk-hint">保留最新 3 份快照，恢复仅影响本地副本。</span>
+            <span id="bk-hint">淇濈暀鏈€鏂?3 浠藉揩鐓э紝鎭㈠浠呭奖鍝嶆湰鍦板壇鏈€?/span>
           </div>
           <div class="row small muted" style="margin-top:8px;">
-            <button class="btn" id="btn-cache-bust" type="button">强制刷新（无缓存）</button>
+            <button class="btn" id="btn-cache-bust" type="button">寮哄埗鍒锋柊锛堟棤缂撳瓨锛?/button>
           </div>
           <pre id="debug-out" class="small"
             style="margin-top:10px; white-space:pre-wrap; word-break:break-word; color:#2a2a3d;"></pre>
@@ -97,48 +97,48 @@
       </div>
 
       <div class="card" id="panel-words" style="display:none;">
-        <h2>单词本</h2>
+        <h2>鍗曡瘝鏈?/h2>
         <div class="row">
-          <input id="w-q" type="text" placeholder="搜索：单词 / 释义 / 批注" style="flex:1; min-width: 220px;">
+          <input id="w-q" type="text" placeholder="鎼滅储锛氬崟璇?/ 閲婁箟 / 鎵规敞" style="flex:1; min-width: 220px;">
           <select id="w-sort" style="min-width: 120px;">
-            <option value="time">按时间</option>
-            <option value="alpha">按字母</option>
+            <option value="time">鎸夋椂闂?/option>
+            <option value="alpha">鎸夊瓧姣?/option>
           </select>
-          <button class="btn" id="w-sort-dir" type="button">↕</button>
-          <button class="btn" id="w-refresh" disabled>刷新</button>
+          <button class="btn" id="w-sort-dir" type="button">鈫?/button>
+          <button class="btn" id="w-refresh" disabled>鍒锋柊</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <button class="btn" id="w-select" disabled>选择</button>
-          <button class="btn" id="w-all" disabled>全选</button>
-          <button class="btn danger" id="w-batch-del" disabled>删除</button>
-          <input id="w-batch-tags" type="text" placeholder="添加标签（逗号分隔）" style="flex:1; min-width: 200px;">
-          <button class="btn primary" id="w-batch-tag-apply" disabled>应用</button>
+          <button class="btn" id="w-select" disabled>閫夋嫨</button>
+          <button class="btn" id="w-all" disabled>鍏ㄩ€?/button>
+          <button class="btn danger" id="w-batch-del" disabled>鍒犻櫎</button>
+          <input id="w-batch-tags" type="text" placeholder="娣诲姞鏍囩锛堥€楀彿鍒嗛殧锛? style="flex:1; min-width: 200px;">
+          <button class="btn primary" id="w-batch-tag-apply" disabled>搴旂敤</button>
         </div>
         <div class="row small muted" style="margin-top:10px;">
           <span class="pill" id="w-count">0</span>
-          <span class="pill" id="w-sort-state">按时间 ↕</span>
-          <span class="pill" id="w-hint">点开单词查看详情；删除为硬删除。</span>
+          <span class="pill" id="w-sort-state">鎸夋椂闂?鈫?/span>
+          <span class="pill" id="w-hint">鐐瑰紑鍗曡瘝鏌ョ湅璇︽儏锛涘垹闄や负纭垹闄ゃ€?/span>
         </div>
         <div id="w-list" style="margin-top:12px;"></div>
         <div class="toast" id="toast-words"></div>
       </div>
 
       <div class="card" id="panel-quotes" style="display:none;">
-        <h2>金句库</h2>
+        <h2>閲戝彞搴?/h2>
         <div class="row">
-          <input id="q-q" type="text" placeholder="搜索：金句 / 翻译 / 批注" style="flex:1; min-width: 220px;">
+          <input id="q-q" type="text" placeholder="鎼滅储锛氶噾鍙?/ 缈昏瘧 / 鎵规敞" style="flex:1; min-width: 220px;">
           <select id="q-sort" style="min-width: 120px;">
-            <option value="time">按时间</option>
-            <option value="alpha">按字母</option>
+            <option value="time">鎸夋椂闂?/option>
+            <option value="alpha">鎸夊瓧姣?/option>
           </select>
-          <button class="btn" id="q-sort-dir" type="button">↕</button>
-          <button class="btn" id="q-refresh" disabled>刷新</button>
+          <button class="btn" id="q-sort-dir" type="button">鈫?/button>
+          <button class="btn" id="q-refresh" disabled>鍒锋柊</button>
         </div>
         <div class="row" style="margin-top:10px;">
-          <span class="pill">手机端仅支持单条导出图片</span>
+          <span class="pill">鎵嬫満绔粎鏀寔鍗曟潯瀵煎嚭鍥剧墖</span>
         </div>
         <div class="row small muted" style="margin-top:8px;">
-          <span id="q-exp-style-lbl">导出样式</span>
+          <span id="q-exp-style-lbl">瀵煎嚭鏍峰紡</span>
           <select id="q-exp-template" style="min-width: 120px;">
             <option value="hordSignature">HORD</option>
             <option value="editorial">Editorial</option>
@@ -150,51 +150,51 @@
         </div>
         <div class="row small muted" style="margin-top:10px;">
           <span class="pill" id="q-count">0</span>
-          <span class="pill" id="q-sort-state">按时间 ↕</span>
-          <span class="pill" id="q-hint">点击右侧“导出图片”可直接导出单条。</span>
+          <span class="pill" id="q-sort-state">鎸夋椂闂?鈫?/span>
+          <span class="pill" id="q-hint">鐐瑰嚮鍙充晶鈥滃鍑哄浘鐗団€濆彲鐩存帴瀵煎嚭鍗曟潯銆?/span>
         </div>
         <div id="q-list" style="margin-top:12px;"></div>
         <div class="toast" id="toast-quotes"></div>
       </div>
 
       <div class="card" id="panel-review">
-        <h2>🧠 艾宾浩斯复习</h2>
+        <h2>馃 鑹惧娴╂柉澶嶄範</h2>
         <div class="row">
-          <button class="tab" id="rv-words" data-active="1" type="button">单词</button>
+          <button class="tab" id="rv-words" data-active="1" type="button">鍗曡瘝</button>
           <select id="rv-meaning-mode">
-            <option value="both">中英都显示</option>
-            <option value="cn">仅中文</option>
-            <option value="en">仅英文</option>
+            <option value="both">涓嫳閮芥樉绀?/option>
+            <option value="cn">浠呬腑鏂?/option>
+            <option value="en">浠呰嫳鏂?/option>
           </select>
-          <label class="small muted" for="limit" id="lbl-session-size">单次数量</label>
+          <label class="small muted" for="limit" id="lbl-session-size">鍗曟鏁伴噺</label>
           <input id="limit" type="number" min="1" max="200" value="20" style="width:110px;">
-          <button class="btn primary" id="btn-start" disabled>开始</button>
-          <span class="pill laser" id="pill-review-mode" style="display:none;">智能精选复习（50-100）</span>
+          <button class="btn primary" id="btn-start" disabled>寮€濮?/button>
+          <span class="pill laser" id="pill-review-mode" style="display:none;">鏅鸿兘绮鹃€夊涔狅紙50-100锛?/span>
         </div>
         <div class="small muted" id="review-mode-hint" style="margin-top:8px;"></div>
         <div class="reviewCard" id="review-card" data-on="0">
           <div class="reviewHeadRow">
             <div class="small muted" id="review-progress">0 / 0</div>
             <div class="rvMoreWrap">
-              <button class="btn rvMoreBtn" id="rv-more-toggle" type="button" aria-label="更多操作">⋯</button>
+              <button class="btn rvMoreBtn" id="rv-more-toggle" type="button" aria-label="鏇村鎿嶄綔">鈰?/button>
               <div class="rvMoreMenu" id="rv-more-menu" data-open="0">
-                <button class="btn" id="rv-edit-word" type="button">编辑当前词</button>
-                <button class="btn danger" id="rv-delete-word" type="button">删除当前词</button>
+                <button class="btn" id="rv-edit-word" type="button">缂栬緫褰撳墠璇?/button>
+                <button class="btn danger" id="rv-delete-word" type="button">鍒犻櫎褰撳墠璇?/button>
               </div>
             </div>
           </div>
           <div class="qWord" id="q-word">word</div>
           <div class="phoneticRow" style="margin-bottom:8px;">
             <span class="phoneticPill" id="q-phon-us">US: -</span>
-            <button class="btn" id="q-play-us" type="button">🔊 US</button>
+            <button class="btn" id="q-play-us" type="button">馃攰 US</button>
             <span class="phoneticPill" id="q-phon-uk">UK: -</span>
-            <button class="btn" id="q-play-uk" type="button">🔊 UK</button>
+            <button class="btn" id="q-play-uk" type="button">馃攰 UK</button>
           </div>
           <p class="qMeaning" id="q-meaning">meaning</p>
           <div class="rateRow">
-            <button class="rate r0" data-q="0">不记得</button>
-            <button class="rate r3" data-q="3">有印象</button>
-            <button class="rate r5" data-q="5">已掌握</button>
+            <button class="rate r0" data-q="0">涓嶈寰?/button>
+            <button class="rate r3" data-q="3">鏈夊嵃璞?/button>
+            <button class="rate r5" data-q="5">宸叉帉鎻?/button>
           </div>
         </div>
         <div class="toast" id="toast-review"></div>
@@ -202,38 +202,38 @@
     </div>
   </div>
 
-  <button class="toTopBtn" id="btn-to-top" type="button" aria-label="Back to top">↑</button>
+  <button class="toTopBtn" id="btn-to-top" type="button" aria-label="Back to top">鈫?/button>
 
   <dialog id="dlg-word"
     style="border:none; border-radius:16px; max-width: 720px; width: calc(100% - 26px); padding:0; box-shadow: 0 20px 60px rgba(0,0,0,0.18);">
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
-          <div class="small muted" id="dlg-w-label">单词详情</div>
+          <div class="small muted" id="dlg-w-label">鍗曡瘝璇︽儏</div>
           <div class="qWord" id="dlg-w-title" style="font-size:22px; margin:0;">word</div>
         </div>
         <div class="row">
-          <button class="btn primary" id="dlg-w-save">保存</button>
-          <button class="btn danger" id="dlg-w-del">删除</button>
-          <button class="btn" id="dlg-w-close">关闭</button>
+          <button class="btn primary" id="dlg-w-save">淇濆瓨</button>
+          <button class="btn danger" id="dlg-w-del">鍒犻櫎</button>
+          <button class="btn" id="dlg-w-close">鍏抽棴</button>
         </div>
       </div>
     </div>
     <div style="padding:14px 14px;">
       <div class="row">
-        <input id="dlg-w-meaning" type="text" placeholder="中文释义" style="flex:1; min-width: 220px;">
+        <input id="dlg-w-meaning" type="text" placeholder="涓枃閲婁箟" style="flex:1; min-width: 220px;">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-w-english" type="text" placeholder="英文释义" style="flex:1; min-width: 220px;">
+        <input id="dlg-w-english" type="text" placeholder="鑻辨枃閲婁箟" style="flex:1; min-width: 220px;">
       </div>
       <div class="row" style="margin-top:10px;">
-        <input id="dlg-w-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;">
+        <input id="dlg-w-note" type="text" placeholder="鎵规敞" style="flex:1; min-width: 220px;">
       </div>
       <div class="phoneticRow" style="margin-top:10px;">
         <span class="phoneticPill" id="dlg-w-phon-us">US: -</span>
-        <button class="btn" id="dlg-w-play-us" type="button">🔊 US</button>
+        <button class="btn" id="dlg-w-play-us" type="button">馃攰 US</button>
         <span class="phoneticPill" id="dlg-w-phon-uk">UK: -</span>
-        <button class="btn" id="dlg-w-play-uk" type="button">🔊 UK</button>
+        <button class="btn" id="dlg-w-play-uk" type="button">馃攰 UK</button>
       </div>
       <div class="row" style="margin-top:12px;">
         <span class="small muted" id="dlg-w-meta"></span>
@@ -247,7 +247,7 @@
     <div style="padding:14px 14px; border-bottom:1px solid #ececff; background: rgba(255,255,255,0.95);">
       <div class="row" style="justify-content:space-between;">
         <div>
-          <div class="small muted" id="dlg-q-label">金句详情</div>
+          <div class="small muted" id="dlg-q-label">閲戝彞璇︽儏</div>
           <div class="qWord" id="dlg-q-title" style="font-size:18px; margin:0;">quote</div>
         </div>
       </div>
@@ -257,31 +257,31 @@
         <div class="quoteReadEn" id="dlg-q-view-text"></div>
         <div class="quoteReadCn" id="dlg-q-view-translation"></div>
         <details class="quoteReadNoteWrap" id="dlg-q-view-note-wrap">
-          <summary id="dlg-q-note-summary">批注</summary>
+          <summary id="dlg-q-note-summary">鎵规敞</summary>
           <div class="quoteReadNote" id="dlg-q-view-note"></div>
         </details>
       </div>
       <div class="dlgQuoteEdit" id="dlg-q-edit-panel" style="display:none;">
         <div class="row">
-          <input id="dlg-q-text" type="text" placeholder="金句原文" style="flex:1; min-width: 220px;" readonly
+          <input id="dlg-q-text" type="text" placeholder="閲戝彞鍘熸枃" style="flex:1; min-width: 220px;" readonly
             inputmode="none">
         </div>
         <div class="row" style="margin-top:10px;">
-          <input id="dlg-q-translation" type="text" placeholder="翻译" style="flex:1; min-width: 220px;" readonly
+          <input id="dlg-q-translation" type="text" placeholder="缈昏瘧" style="flex:1; min-width: 220px;" readonly
             inputmode="none">
         </div>
         <div class="row" style="margin-top:10px;">
-          <input id="dlg-q-note" type="text" placeholder="批注" style="flex:1; min-width: 220px;" readonly
+          <input id="dlg-q-note" type="text" placeholder="鎵规敞" style="flex:1; min-width: 220px;" readonly
             inputmode="none">
         </div>
       </div>
       <div class="row dlgActions">
-        <button class="btn primary" id="dlg-q-export">🖼️ 导出图片</button>
-        <button class="btn" id="dlg-q-close">关闭</button>
-        <button class="btn" id="dlg-q-edit">编辑</button>
-        <button class="btn primary" id="dlg-q-save" style="display:none;">保存</button>
-        <button class="btn" id="dlg-q-cancel-edit" style="display:none;">取消编辑</button>
-        <button class="btn danger" id="dlg-q-del" style="display:none;">删除</button>
+        <button class="btn primary" id="dlg-q-export">馃柤锔?瀵煎嚭鍥剧墖</button>
+        <button class="btn" id="dlg-q-close">鍏抽棴</button>
+        <button class="btn" id="dlg-q-edit">缂栬緫</button>
+        <button class="btn primary" id="dlg-q-save" style="display:none;">淇濆瓨</button>
+        <button class="btn" id="dlg-q-cancel-edit" style="display:none;">鍙栨秷缂栬緫</button>
+        <button class="btn danger" id="dlg-q-del" style="display:none;">鍒犻櫎</button>
       </div>
       <div class="row" style="margin-top:10px;">
         <span class="small muted" id="dlg-q-meta"></span>

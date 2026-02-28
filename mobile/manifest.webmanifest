@@ -1,10 +1,11 @@
 {
-  "name": "HORD Mobile Web Manager",
+  "name": "HORD 手机管理器",
   "short_name": "HORD",
-  "description": "Import, manage, review and export your HORD asset on mobile.",
+  "description": "导入 / 管理 / 导出完整 HORD 资产（移动端）。",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0b1022",
   "theme_color": "#0b1022",
   "icons": [
@@ -25,18 +26,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "icon128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon32.png",
-      "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "any"
     }
   ]
 }
