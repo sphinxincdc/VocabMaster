@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORD UI/UX Wireframe Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            padding: 2rem;
+            color: white;
+        }
+
+        .heading-font {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .canvas-area {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background-color: #0f172a;
+            margin-bottom: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .screenshot {
+            width: 1280px;
+            height: 800px;
+        }
+
+        .marquee {
+            width: 1400px;
+            height: 560px;
+        }
+
+        /* Wireframe Styles */
+        .wf-box {
+            border: 4px dashed #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fca5a5;
+        }
+
+        .wf-text {
+            border: 4px dashed #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="max-w-[1450px] mx-auto text-slate-800 pb-20">
+        <h1 class="text-3xl font-bold mb-8 heading-font">Play Mode: 严格物理隔离的 CSS Grid/Flex 原型</h1>
+
+        <!-- 截图 1：划词大图 (垂直堆叠，主体居中放大) -->
+        <h2 class="text-xl font-bold mb-3">截图 1: 极速原生划词 (Vertical Stack / Center Focus)</h2>
+        <div class="canvas-area screenshot flex flex-col items-center justify-between pt-16 px-16">
+            <!-- 层级 1：文案区（占极小高度，纯为引子） -->
+            <div class="wf-text w-full max-w-4xl text-center mb-8">
+                <h2 class="text-6xl font-bold heading-font mb-4 text-white">极速原生，丝滑划词 (H1)</h2>
+                <p class="text-2xl text-slate-300">在任意英文网页选中文本，AI 即刻响应深度解析。</p>
+            </div>
+
+            <!-- 层级 2 & 3：图文区（强制占据剩余所有空间，底部吃紧对齐，利用 relative/absolute 内聚重叠） -->
+            <div class="flex-grow w-full relative flex justify-center items-end wf-box pb-12">
+                <div
+                    class="absolute bottom-12 w-[1000px] h-[500px] bg-slate-800 rounded-t-2xl flex items-center justify-center text-slate-500 opacity-50">
+                    垫底背景网页 (Level 3 Noise)</div>
+                <div
+                    class="absolute bottom-[180px] w-[600px] h-[350px] bg-indigo-900 rounded-2xl flex items-center justify-center text-indigo-300 z-10 shadow-2xl scale-110">
+                    极度放大、清晰的主角弹窗 (Level 2 Signal)</div>
+                <span class="z-20">图片展示容器（严防溢出）</span>
+            </div>
+        </div>
+
+        <!-- 截图 2：千人千面 (标准的 F-Pattern，左文右图左右栅格) -->
+        <h2 class="text-xl font-bold mb-3 mt-12">截图 2: 不打架的左右护城河 (CSS Grid 5:7)</h2>
+        <div class="canvas-area screenshot grid grid-cols-12 gap-16 p-16 items-center">
+            <!-- 左侧文案：严格锁死在左边 5 个独立栅格中 -->
+            <div class="wf-text col-span-5 flex flex-col justify-center h-full">
+                <h2 class="text-[64px] font-bold heading-font mb-6 text-white leading-tight">千人千面<br>专属资产库 (H1)</h2>
+                <p class="text-2xl text-slate-300 leading-relaxed">打通 PC 与手机体系。<br>核心词本精读，完美适配夜猫子。</p>
+            </div>
+
+            <!-- 右侧图片：严格锁死在右边 7 个独立栅格中，内部用 flex 控制两部手机 -->
+            <div class="wf-box col-span-7 h-full flex items-center justify-end gap-6 relative px-4">
+                <div
+                    class="w-[320px] h-[640px] bg-slate-800 rounded-[40px] transform -translate-x-12 scale-90 opacity-60 flex items-center justify-center text-center">
+                    左侧次要手机<br>(Level 3)</div>
+                <div
+                    class="w-[380px] h-[750px] bg-slate-900 rounded-[48px] z-10 shadow-2xl flex items-center justify-center text-center border-4 border-slate-700">
+                    右侧主力手机<br>(Level 2 视觉落脚点)</div>
+                <span class="absolute top-4 left-4 text-xs text-red-300 z-20">右侧网格防线</span>
+            </div>
+        </div>
+
+        <!-- 截图 3：多端联动 (顶底分离 + 克制的克制) -->
+        <h2 class="text-xl font-bold mb-3 mt-12">截图 3: 宁缺毋滥的克制排版 (Flexbox Proportions)</h2>
+        <div class="canvas-area screenshot flex flex-col p-12">
+            <!-- 顶区：居中文案 (15%高度) -->
+            <div class="wf-text text-center shrink-0 mb-12">
+                <h2 class="text-6xl font-bold heading-font mb-4 text-white">全平台抗遗忘艾宾浩斯 (H1)</h2>
+                <p class="text-2xl text-slate-300">无论是在书桌还是地铁，复习无缝衔接。</p>
+            </div>
+
+            <!-- 底区：并排展示 (Flex 物理伸缩隔离) -->
+            <div class="flex-grow flex flex-row items-end gap-16 wf-box px-8 pb-8">
+                <!-- PC 高可用区域：占据极大面积 (flex-[2])，展示主细节 -->
+                <div
+                    class="flex-[3] w-full h-[550px] bg-slate-800 rounded-t-2xl flex flex-col justify-end p-8 border border-b-0 border-slate-600 relative overflow-hidden">
+                    <div class="text-center text-slate-400 mb-auto mt-20 text-xl font-bold">电脑端暗黑主控台<br>(The Core
+                        System)</div>
+                    <div class="w-full h-48 bg-slate-700 rounded-xl"></div>
+                </div>
+
+                <!-- 手机克制区域：只留一台手机 (flex-[1])，不再贪多，强调重点呼吸感 -->
+                <div
+                    class="flex-[1] w-full max-w-[340px] h-[680px] bg-slate-900 rounded-[40px] border-4 border-slate-700 shadow-2xl flex items-center justify-center">
+                    <span class="text-slate-400 font-bold text-center">唯一且克制的<br>移动端联动<br>(The Extension)</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

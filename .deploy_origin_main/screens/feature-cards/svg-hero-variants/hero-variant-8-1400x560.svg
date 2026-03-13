@@ -1,0 +1,30 @@
+﻿<svg width="1400" height="560" viewBox="0 0 1400 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F6FF"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#1B103A" flood-opacity="0.18"/>
+    </filter>
+    <clipPath id="clipA"><rect x="420" y="30" width="500" height="280" rx="34" /></clipPath>
+    <clipPath id="clipB"><rect x="920" y="30" width="500" height="280" rx="34" /></clipPath>
+    <clipPath id="clipC"><rect x="450" y="315" width="470" height="245" rx="32" /></clipPath>
+    <clipPath id="clipD"><rect x="950" y="315" width="470" height="245" rx="32" /></clipPath>
+  </defs>
+
+  <rect width="1400" height="560" fill="url(#bg)"/>
+  <circle cx="1180" cy="90" r="210" fill="#8B5CF6" opacity="0.08"/>
+  <circle cx="1220" cy="500" r="220" fill="#6366F1" opacity="0.06"/>
+
+  <text x="30" y="150" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="50" font-weight="800" fill="#111827">HORD</text>
+  <text x="30" y="212" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="700" fill="#5B3CC4">Hold Your Word</text>
+  <text x="30" y="256" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" fill="#374151">构建持久的英语能力</text>
+  <text x="30" y="300" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#4B5563">单词本 · 划词弹窗 · 艾宾浩斯 · iPhone 壁纸</text>
+  <text x="30" y="344" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#6B7280">Chrome 扩展 · 一次购买 · 长期使用</text>
+
+  <image href="file:///C:/OneDrive/Work%20Space/Vocab-Master%20WEB/screens/manange%E5%8D%95%E8%AF%8D%E6%9C%AC/manange%E5%8D%95%E8%AF%8D%E6%9C%AC%E6%97%A5%E9%97%B41.png" x="420" y="30" width="500" height="280" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipA)" filter="url(#shadow)" />
+  <image href="file:///C:/OneDrive/Work%20Space/Vocab-Master%20WEB/screens/content%E5%BC%B9%E7%AA%97/%E6%97%A5%E9%97%B4%E6%A8%A1%E5%BC%8F%E7%BF%BB%E8%AF%91.png" x="920" y="30" width="500" height="280" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipB)" filter="url(#shadow)" />
+  <image href="file:///C:/OneDrive/Work%20Space/Vocab-Master%20WEB/screens/test%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF/%E8%89%BE%E5%AE%BE%E6%B5%A9%E6%96%AF%E6%97%A5%E9%97%B4%E6%A8%A1%E5%BC%8F2.png" x="450" y="315" width="470" height="245" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipC)" filter="url(#shadow)" />
+  <image href="file:///C:/OneDrive/Work%20Space/Vocab-Master%20WEB/screens/iPhone%E5%A3%81%E7%BA%B8%E5%8A%9F%E8%83%BD/HapiGo_2026-02-05_04.16.17.png" x="950" y="315" width="470" height="245" preserveAspectRatio="xMidYMid meet" clip-path="url(#clipD)" filter="url(#shadow)" />
+</svg>

@@ -1,0 +1,24 @@
+{
+  "name": "HORD 手机管理器",
+  "short_name": "HORD",
+  "description": "导入 / 管理 / 导出完整 HORD 资产（移动端）。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1022",
+  "theme_color": "#0b1022",
+  "icons": [
+    {
+      "src": "logo-square-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

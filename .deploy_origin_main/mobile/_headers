@@ -1,0 +1,5 @@
+/*
+  Cache-Control: public, max-age=600
+
+/index.html
+  Cache-Control: no-store

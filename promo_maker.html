@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORD 宣传图动态编辑器 (Promo Maker)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow: hidden;
+            /* App like */
+        }
+
+        .canvas-container-wrapper {
+            background-image:
+                linear-gradient(45deg, #1e293b 25%, transparent 25%),
+                linear-gradient(135deg, #1e293b 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #1e293b 75%),
+                linear-gradient(135deg, transparent 75%, #1e293b 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+            background-color: #0f172a;
+            overflow: auto;
+            position: relative;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Center the Fabric canvas physically */
+        .canvas-container {
+            margin: 0 auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            /* Important to let fabric container scale */
+            transition: all 0.3s ease;
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .panel-block {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .prop-btn {
+            @apply text-slate-400 p-2 rounded hover:bg-slate-700 hover:text-white transition;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="h-16 bg-slate-900 border-b border-slate-700 flex items-center justify-between px-6 shrink-0 z-10">
+        <div class="flex items-center gap-4">
+            <div
+                class="bg-indigo-600 text-white w-8 h-8 rounded shrink-0 flex items-center justify-center font-bold text-xl drop-shadow">
+                H</div>
+            <h1 class="text-xl font-bold tracking-tight text-white">HORD Promo Maker <span
+                    class="text-sm font-normal text-slate-400 ml-2">动态排版工作站</span></h1>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+                <label class="text-sm text-slate-400 font-medium">画布尺寸:</label>
+                <select id="canvasPreset"
+                    class="bg-slate-800 border border-slate-600 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-indigo-500 font-mono">
+                    <option value="1400x560">Marquee (1400x560)</option>
+                    <option value="440x280">Small Tile (440x280)</option>
+                    <option value="1280x800">Screenshot (1280x800)</option>
+                    <option value="1920x1080">FHD Banner (1920x1080)</option>
+                    <option value="1080x1080">Social Square (1080x1080)</option>
+                </select>
+            </div>
+            <!-- Custom Size -->
+            <div class="flex items-center gap-2 border-l border-slate-700 pl-4">
+                <input type="number" id="customW"
+                    class="w-16 bg-slate-800 border-none rounded px-2 py-1.5 text-xs text-center font-mono"
+                    placeholder="W" value="1400">
+                <span class="text-slate-500 text-xs">x</span>
+                <input type="number" id="customH"
+                    class="w-16 bg-slate-800 border-none rounded px-2 py-1.5 text-xs text-center font-mono"
+                    placeholder="H" value="560">
+                <button id="applyCustomSize"
+                    class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded transition font-medium">应用</button>
+            </div>
+
+            <button id="exportBtn"
+                class="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-md text-sm font-bold flex items-center gap-2 shadow-lg shadow-indigo-900/50 ml-4">
+                <i class="fas fa-download"></i> 一键导出高清PNG
+            </button>
+        </div>
+    </header>
+
+    <!-- Main App -->
+    <main class="flex-grow flex overflow-hidden">
+
+        <!-- Left Toolbar -->
+        <aside
+            class="w-64 bg-slate-800 border-r border-slate-700 flex flex-col p-4 shrink-0 overflow-y-auto z-10 shadow-xl">
+
+            <div class="panel-block border-amber-900/50 bg-amber-900/10 mb-5">
+                <h3 class="text-xs font-bold text-amber-500 uppercase tracking-widest mb-3"><i
+                        class="fas fa-magic mr-2"></i>内置宣发布局方案</h3>
+                <p class="text-[11px] text-amber-200/70 mb-3 leading-relaxed">一键加载经典排版模板，只需双击改字或替换图片即可直接导出。</p>
+
+                <div class="flex flex-col gap-2">
+                    <button
+                        class="bg-amber-700/80 hover:bg-amber-600 text-white text-xs py-2 px-3 rounded text-left transition flex items-center gap-2 template-btn"
+                        data-tpl="smallTile">
+                        <i class="fas fa-th-large w-4 text-center"></i> 小型宣传块 (Small Tile)
+                    </button>
+                    <button
+                        class="bg-amber-700/80 hover:bg-amber-600 text-white text-xs py-2 px-3 rounded text-left transition flex items-center gap-2 template-btn"
+                        data-tpl="marquee">
+                        <i class="fas fa-panorama w-4 text-center"></i> 顶部核心巨幕 (Marquee)
+                    </button>
+                    <button
+                        class="bg-amber-700/80 hover:bg-amber-600 text-white text-xs py-2 px-3 rounded text-left transition flex items-center gap-2 template-btn"
+                        data-tpl="screenshot1">
+                        <i class="fas fa-desktop w-4 text-center"></i> 截图一：划词 (1280x800)
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-block border-indigo-900/50 bg-indigo-900/10">
+                <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4"><i
+                        class="fas fa-layer-group mr-2"></i>插入素材</h3>
+
+                <div class="flex flex-col gap-3">
+                    <label
+                        class="bg-slate-700 hover:bg-slate-600 p-4 rounded-lg border border-slate-600 cursor-pointer flex items-center justify-center gap-3 transition shadow group">
+                        <i
+                            class="fas fa-file-image text-2xl text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">上传图片 / 截图</span>
+                        <input type="file" id="imageUpload" class="hidden" accept="image/*" multiple>
+                    </label>
+
+                    <button id="addTextBtn"
+                        class="bg-slate-700 hover:bg-slate-600 p-4 rounded-lg border border-slate-600 flex items-center justify-center gap-3 transition shadow group">
+                        <i class="fas fa-font text-2xl text-blue-400 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-sm">插入主标题文字</span>
+                    </button>
+
+                    <button id="addSubTextBtn"
+                        class="bg-slate-700/50 hover:bg-slate-600 p-3 rounded-lg border border-slate-700 flex items-center justify-center gap-3 transition">
+                        <i class="fas fa-text-width text-lg text-blue-300"></i>
+                        <span class="font-medium text-sm text-slate-300">插入副标题段落</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4"><i
+                        class="fas fa-tv mr-2"></i>画布底色</h3>
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-3">
+                        <input type="color" id="bgColorPicker" class="w-10 h-10 rounded-md cursor-pointer border-0 p-0"
+                            value="#0f172a">
+                        <input type="text" id="bgColorInput"
+                            class="bg-slate-900 border border-slate-600 rounded-md px-3 py-2 text-sm w-full font-mono uppercase focus:border-indigo-500 outline-none"
+                            value="#0F172A">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto">
+                <button id="clearCanvasBtn"
+                    class="w-full bg-red-900/30 hover:bg-red-900/60 text-red-400 border border-red-800/50 py-3 rounded-md text-sm font-medium transition flex items-center justify-center gap-2">
+                    <i class="fas fa-trash-alt"></i> 清除画布内所有对象
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- Center Workspace -->
+        <section class="flex-grow canvas-container-wrapper p-10 flex items-center justify-center" id="canvasWrapper">
+            <canvas id="c"></canvas>
+        </section>
+
+        <!-- Right Properties -->
+        <aside
+            class="w-80 bg-slate-800 border-l border-slate-700 flex flex-col p-4 shrink-0 overflow-y-auto z-10 shadow-[-10px_0_15px_-3px_rgba(0,0,0,0.1)]">
+
+            <div id="noSelectionMsg"
+                class="flex flex-col items-center justify-center h-48 text-slate-500 text-center border-2 border-dashed border-slate-700 rounded-xl m-2">
+                <i class="fas fa-hand-pointer text-4xl mb-4 opacity-40"></i>
+                <p class="text-sm font-medium">请在画板中点击选中元素<br><span
+                        class="text-xs opacity-70 font-normal">即可解锁编辑属性面板</span></p>
+            </div>
+
+            <div id="activeProps" class="hidden flex flex-col h-full">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-5 border-b border-slate-700 pb-3">
+                    <h2 class="text-base font-bold text-slate-200">编辑属性</h2>
+                    <span
+                        class="text-[11px] uppercase tracking-wider font-bold bg-indigo-900 border border-indigo-700 text-indigo-300 px-2 py-1 rounded"
+                        id="propType">TEXT</span>
+                </div>
+
+                <!-- Z-Index Tools -->
+                <div
+                    class="bg-slate-900 p-2 rounded-lg border border-slate-700 mb-5 flex items-center justify-between shadow-inner">
+                    <div class="flex gap-1" title="叠放层级 (Z-Index)">
+                        <button class="prop-btn" title="上移一层" onclick="changeZIndex('up')"><i
+                                class="fas fa-arrow-up"></i></button>
+                        <button class="prop-btn" title="下移一层" onclick="changeZIndex('down')"><i
+                                class="fas fa-arrow-down"></i></button>
+                        <div class="w-px h-6 bg-slate-700 mx-1 self-center"></div>
+                        <button class="prop-btn text-indigo-400 hover:text-indigo-300" title="置于最顶层"
+                            onclick="changeZIndex('top')"><i class="fas fa-angle-double-up"></i></button>
+                        <button class="prop-btn" title="置于最底层" onclick="changeZIndex('bottom')"><i
+                                class="fas fa-angle-double-down"></i></button>
+                    </div>
+                    <div class="w-px h-6 bg-slate-700 mx-2"></div>
+                    <button class="text-red-400 hover:text-red-300 hover:bg-red-900/50 p-2 rounded transition"
+                        title="删除该元素 (Del)" onclick="deleteSelected()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+
+                <!-- Text Tools -->
+                <div id="textControls" class="panel-block">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">文字排版</h3>
+
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <label class="text-xs text-slate-500 block mb-1">文字内容 (双击画布中的文字也可编辑)</label>
+                            <textarea id="textValue"
+                                class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm w-full resize-y h-24 focus:border-indigo-500 outline-none leading-relaxed"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-slate-500 block mb-1">英文字体 (Font Family)</label>
+                            <select id="fontFamily"
+                                class="bg-slate-900 border border-slate-600 rounded px-2 py-2 text-sm w-full outline-none focus:border-indigo-500">
+                                <option value="Inter">Inter (现代无衬线)</option>
+                                <option value="Arial">Arial (经典粗体)</option>
+                                <option value="Roboto">Roboto (科技感)</option>
+                                <option value="'Courier New', Courier, monospace">Monospace (代码等宽)</option>
+                                <option value="Times New Roman">Serif (优雅衬线)</option>
+                            </select>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="w-1/2">
+                                <label class="text-xs text-slate-500 block mb-1">字号 (px)</label>
+                                <input type="number" id="fontSize"
+                                    class="bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm w-full outline-none focus:border-indigo-500 font-mono">
+                            </div>
+                            <div class="w-1/2">
+                                <label class="text-xs text-slate-500 block mb-1">文字颜色</label>
+                                <div class="flex border border-slate-600 rounded bg-slate-900 overflow-hidden h-9">
+                                    <input type="color" id="textColor"
+                                        class="w-10 h-10 -ml-1 -mt-1 border-0 cursor-pointer shrink-0">
+                                    <input type="text" id="textColorHex"
+                                        class="px-2 py-1 text-xs w-full outline-none bg-transparent font-mono uppercase">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Formatting -->
+                        <div class="flex items-center justify-between border-t border-slate-700 pt-4 mt-2">
+                            <div class="flex gap-1 bg-slate-900 p-1 rounded border border-slate-700">
+                                <button id="fontWeightBtn"
+                                    class="w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 font-bold transition">B</button>
+                                <button id="fontStyleBtn"
+                                    class="w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 italic transition font-serif">I</button>
+                                <button id="underlineBtn"
+                                    class="w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 underline transition">U</button>
+                            </div>
+
+                            <div class="flex gap-1 bg-slate-900 p-1 rounded border border-slate-700">
+                                <button
+                                    class="textAlignBtn w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 transition"
+                                    data-align="left"><i class="fas fa-align-left"></i></button>
+                                <button
+                                    class="textAlignBtn w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 transition"
+                                    data-align="center"><i class="fas fa-align-center"></i></button>
+                                <button
+                                    class="textAlignBtn w-8 h-8 rounded text-sm hover:bg-slate-700 text-slate-300 transition"
+                                    data-align="right"><i class="fas fa-align-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-1 mt-2">
+                            <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                <span>行高间距 (Line Height)</span>
+                                <span id="lhVal" class="font-mono">1.16</span>
+                            </div>
+                            <input type="range" id="lineHeight" min="0.5" max="3" step="0.05"
+                                class="w-full accent-indigo-500">
+                        </div>
+
+                        <div class="flex flex-col gap-1 mt-2">
+                            <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                <span>字间距 (Letter Spacing)</span>
+                                <span id="lsVal" class="font-mono">0</span>
+                            </div>
+                            <input type="range" id="letterSpacing" min="-200" max="1000" step="10" value="0"
+                                class="w-full accent-indigo-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generic Controls -->
+                <div class="panel-block">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">视觉与特效</h3>
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>图层不透明度 (Opacity)</span>
+                                <span id="opacityVal" class="font-mono">100%</span>
+                            </div>
+                            <input type="range" id="opacity" min="0" max="1" step="0.01" value="1"
+                                class="w-full accent-indigo-500">
+                        </div>
+
+                        <!-- Premium Shadow Toggle -->
+                        <div class="mt-2 bg-slate-900 p-3 rounded border border-slate-700">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="shadowToggle"
+                                    class="w-4 h-4 rounded bg-slate-800 border-slate-600 text-indigo-500 focus:ring-indigo-500 focus:ring-2">
+                                <span class="text-sm font-semibold text-slate-300 text-shadow">启用悬浮阴影 (Soft
+                                    Shadow)</span>
+                            </label>
+
+                            <!-- Detailed Shadow Settings (Hidden unless checked) -->
+                            <div id="shadowControls" class="hidden flex-col gap-3 mt-4 pt-4 border-t border-slate-800">
+                                <div>
+                                    <label class="text-xs text-slate-500 block mb-1">阴影颜色</label>
+                                    <div
+                                        class="flex border border-slate-600 rounded bg-slate-800 overflow-hidden h-7 w-24">
+                                        <input type="color" id="shadowColor" value="#000000"
+                                            class="w-8 h-8 -ml-1 -mt-1 border-0 cursor-pointer">
+                                        <input type="text" id="shadowColorHex" value="#000000"
+                                            class="px-2 py-1 text-[10px] w-full bg-transparent font-mono outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                                        <span>扩散大小 (Blur)</span> <span id="sdBlurVal">40</span>
+                                    </div>
+                                    <input type="range" id="shadowBlur" min="0" max="150" step="1" value="40"
+                                        class="w-full h-1 accent-indigo-400">
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="w-1/2">
+                                        <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                                            <span>X偏移</span><span id="sdXVal">0</span>
+                                        </div>
+                                        <input type="range" id="shadowOffsetX" min="-100" max="100" step="1" value="0"
+                                            class="w-full h-1 accent-indigo-400">
+                                    </div>
+                                    <div class="w-1/2">
+                                        <div class="flex justify-between text-[10px] text-slate-500 mb-1">
+                                            <span>Y偏移</span><span id="sdYVal">25</span>
+                                        </div>
+                                        <input type="range" id="shadowOffsetY" min="-100" max="100" step="1" value="25"
+                                            class="w-full h-1 accent-indigo-400">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </main>
+
+    <script>
+        // --- 1. Canvas Setup ---
+        const canvas = new fabric.Canvas('c', {
+            width: 1400,
+            height: 560,
+            backgroundColor: '#0f172a',
+            preserveObjectStacking: true, // Crucial for z-index
+            selectionBorderColor: '#818cf8',
+            selectionColor: 'rgba(129, 140, 248, 0.1)',
+            cornerColor: '#ffffff',
+            cornerStrokeColor: '#4f46e5',
+            borderColor: '#818cf8',
+            cornerSize: 10,
+            transparentCorners: false
+        });
+
+        const wrapper = document.getElementById('canvasWrapper');
+
+        function centerCanvas() {
+            setTimeout(() => {
+                wrapper.scrollTo(
+                    (wrapper.scrollWidth - wrapper.clientWidth) / 2,
+                    (wrapper.scrollHeight - wrapper.clientHeight) / 2
+                );
+            }, 50);
+        }
+
+        function setCanvasDimensions(w, h) {
+            canvas.setWidth(w);
+            canvas.setHeight(h);
+
+            // Adjust custom inputs
+            document.getElementById('customW').value = w;
+            document.getElementById('customH').value = h;
+
+            canvas.renderAll();
+            centerCanvas();
+        }
+
+        // Initialize center
+        centerCanvas();
+
+        // --- 2. Canvas Resizing ---
+        document.getElementById('canvasPreset').addEventListener('change', function (e) {
+            const [w, h] = this.value.split('x').map(Number);
+            setCanvasDimensions(w, h);
+        });
+
+        document.getElementById('applyCustomSize').addEventListener('click', () => {
+            const w = parseInt(document.getElementById('customW').value) || 1400;
+            const h = parseInt(document.getElementById('customH').value) || 560;
+            // Unselect preset
+            document.getElementById('canvasPreset').value = "";
+            setCanvasDimensions(w, h);
+        });
+
+        // Background Color Update
+        const bgPicker = document.getElementById('bgColorPicker');
+        const bgInput = document.getElementById('bgColorInput');
+
+        function updateBg(color) {
+            bgPicker.value = color.substring(0, 7); // Input type color only takes 6 hex
+            bgInput.value = color; // Input text takes the rest
+            canvas.backgroundColor = color;
+            canvas.renderAll();
+        }
+        bgPicker.addEventListener('input', (e) => updateBg(e.target.value));
+        bgInput.addEventListener('change', (e) => updateBg(e.target.value));
+
+        // --- 3. Adding Elements ---
+
+        // Add Major Title
+        document.getElementById('addTextBtn').addEventListener('click', () => {
+            const text = new fabric.IText('HORD 英语学习管家', {
+                left: canvas.width / 2,
+                top: canvas.height / 2,
+                fontFamily: 'Inter',
+                fill: '#ffffff',
+                fontSize: 64,
+                originX: 'center',
+                originY: 'center',
+                fontWeight: 'bold',
+                shadow: new fabric.Shadow({
+                    color: 'rgba(0,0,0,0.6)',
+                    blur: 15,
+                    offsetY: 4
+                })
+            });
+            canvas.add(text);
+            canvas.setActiveObject(text);
+        });
+
+        // Add Subtext block
+        document.getElementById('addSubTextBtn').addEventListener('click', () => {
+            const text = new fabric.IText('Hold your word\n全端沉浸式原生划词翻译\n基于最新的多语境 AI 模型\n随时随地，构建属于你的词汇资源库', {
+                left: canvas.width / 2,
+                top: (canvas.height / 2) + 100,
+                fontFamily: 'Inter',
+                fill: '#cbd5e1',
+                fontSize: 24,
+                lineHeight: 1.4,
+                originX: 'center',
+                originY: 'center',
+                textAlign: 'center'
+            });
+            canvas.add(text);
+            canvas.setActiveObject(text);
+        });
+
+        // Image Upload
+        document.getElementById('imageUpload').addEventListener('change', function (e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (f) {
+                    const data = f.target.result;
+                    fabric.Image.fromURL(data, function (img) {
+                        // Max scale guard for gigantic screenshots
+                        const maxW = canvas.width * 0.8;
+                        const maxH = canvas.height * 0.8;
+                        if (img.width > maxW || img.height > maxH) {
+                            const scale = Math.min(maxW / img.width, maxH / img.height);
+                            img.scale(scale);
+                        }
+
+                        img.set({
+                            left: canvas.width / 2,
+                            top: canvas.height / 2,
+                            originX: 'center',
+                            originY: 'center'
+                        });
+                        canvas.add(img);
+                        canvas.setActiveObject(img);
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+            this.value = ''; // Reset input
+        });
+
+        // --- 4. Properties Panel Logic ---
+
+        // Dom Elements
+        const panels = {
+            noSel: document.getElementById('noSelectionMsg'),
+            active: document.getElementById('activeProps'),
+            textCtrls: document.getElementById('textControls'),
+            typeLabel: document.getElementById('propType')
+        };
+
+        // Text Inputs
+        const textInputs = {
+            val: document.getElementById('textValue'),
+            font: document.getElementById('fontFamily'),
+            size: document.getElementById('fontSize'),
+            color: document.getElementById('textColor'),
+            colorHex: document.getElementById('textColorHex'),
+            bold: document.getElementById('fontWeightBtn'),
+            italic: document.getElementById('fontStyleBtn'),
+            under: document.getElementById('underlineBtn'),
+            align: document.querySelectorAll('.textAlignBtn'),
+            lh: document.getElementById('lineHeight'),
+            lhVal: document.getElementById('lhVal'),
+            ls: document.getElementById('letterSpacing'),
+            lsVal: document.getElementById('lsVal')
+        };
+
+        // Shadow Inputs
+        const sdCtrl = document.getElementById('shadowControls');
+        const sdTg = document.getElementById('shadowToggle');
+        const sdCol = document.getElementById('shadowColor');
+        const sdColH = document.getElementById('shadowColorHex');
+        const sdB = document.getElementById('shadowBlur');
+        const sdX = document.getElementById('shadowOffsetX');
+        const sdY = document.getElementById('shadowOffsetY');
+
+        function updatePanel() {
+            const obj = canvas.getActiveObject();
+            if (!obj) {
+                panels.noSel.classList.remove('hidden');
+                panels.active.classList.add('hidden');
+                return;
+            }
+
+            panels.noSel.classList.add('hidden');
+            panels.active.classList.remove('hidden');
+
+            const isText = obj.type === 'i-text' || obj.type === 'text';
+            panels.typeLabel.innerText = isText ? 'T 文字 (TEXT)' : '🖼 图片 (IMAGE)';
+            panels.typeLabel.className = isText
+                ? 'text-[11px] uppercase tracking-wider font-bold bg-indigo-900 border border-indigo-700 text-indigo-300 px-2 py-1 rounded'
+                : 'text-[11px] uppercase tracking-wider font-bold bg-emerald-900 border border-emerald-700 text-emerald-300 px-2 py-1 rounded';
+
+            // Fill Text props
+            if (isText) {
+                panels.textCtrls.classList.remove('hidden');
+                textInputs.val.value = obj.text;
+                textInputs.font.value = obj.fontFamily || 'Inter';
+                textInputs.size.value = Math.round(obj.fontSize);
+
+                const fill = obj.fill || '#ffffff';
+                textInputs.color.value = fill.substring(0, 7);
+                textInputs.colorHex.value = fill;
+
+                textInputs.bold.classList.toggle('bg-indigo-600', obj.fontWeight === 'bold');
+                textInputs.italic.classList.toggle('bg-indigo-600', obj.fontStyle === 'italic');
+                textInputs.under.classList.toggle('bg-indigo-600', obj.underline);
+
+                textInputs.lh.value = obj.lineHeight || 1.16;
+                textInputs.lhVal.innerText = obj.lineHeight.toFixed(2);
+
+                textInputs.ls.value = obj.charSpacing || 0;
+                textInputs.lsVal.innerText = obj.charSpacing || 0;
+
+                textInputs.align.forEach(btn => {
+                    const active = btn.dataset.align === obj.textAlign;
+                    btn.classList.toggle('bg-indigo-600', active);
+                    btn.classList.toggle('text-white', active);
+                });
+            } else {
+                panels.textCtrls.classList.add('hidden');
+            }
+
+            // Fill Generic Props
+            document.getElementById('opacity').value = obj.opacity;
+            document.getElementById('opacityVal').innerText = Math.round(obj.opacity * 100) + '%';
+
+            if (obj.shadow) {
+                sdTg.checked = true;
+                sdCtrl.classList.remove('hidden');
+                sdCtrl.classList.add('flex');
+
+                // Color formatting
+                let sCol = obj.shadow.color;
+                if (sCol.includes('rgba')) {
+                    // Try to extract first 3 for hex input if it's rgba, or just leave it.
+                    // For simplicity, input type color needs hex. If complex rgba just set hex to black
+                    sdCol.value = '#000000';
+                    sdColH.value = sCol;
+                } else {
+                    sdCol.value = sCol.substring(0, 7);
+                    sdColH.value = sCol;
+                }
+
+                sdB.value = obj.shadow.blur; document.getElementById('sdBlurVal').innerText = obj.shadow.blur;
+                sdX.value = obj.shadow.offsetX; document.getElementById('sdXVal').innerText = obj.shadow.offsetX;
+                sdY.value = obj.shadow.offsetY; document.getElementById('sdYVal').innerText = obj.shadow.offsetY;
+            } else {
+                sdTg.checked = false;
+                sdCtrl.classList.add('hidden');
+                sdCtrl.classList.remove('flex');
+            }
+        }
+
+        canvas.on('selection:created', updatePanel);
+        canvas.on('selection:updated', updatePanel);
+        canvas.on('selection:cleared', updatePanel);
+        canvas.on('object:modified', updatePanel);
+
+        // --- 5. Data Binding (Inputs -> Canvas) ---
+        function setObj(key, val) {
+            const obj = canvas.getActiveObject();
+            if (obj) { obj.set(key, val); canvas.renderAll(); }
+        }
+
+        textInputs.val.addEventListener('input', (e) => setObj('text', e.target.value));
+        canvas.on('text:changed', (e) => { if (e.target === canvas.getActiveObject()) textInputs.val.value = e.target.text; });
+
+        textInputs.font.addEventListener('change', (e) => setObj('fontFamily', e.target.value));
+        textInputs.size.addEventListener('input', (e) => setObj('fontSize', parseInt(e.target.value, 10)));
+
+        function updateTextColor(c) {
+            textInputs.color.value = c.substring(0, 7);
+            textInputs.colorHex.value = c;
+            setObj('fill', c);
+        }
+        textInputs.color.addEventListener('input', (e) => updateTextColor(e.target.value));
+        textInputs.colorHex.addEventListener('change', (e) => updateTextColor(e.target.value));
+
+        textInputs.lh.addEventListener('input', (e) => {
+            textInputs.lhVal.innerText = e.target.value;
+            setObj('lineHeight', parseFloat(e.target.value));
+        });
+
+        textInputs.ls.addEventListener('input', (e) => {
+            textInputs.lsVal.innerText = e.target.value;
+            setObj('charSpacing', parseInt(e.target.value, 10)); // Fabric uses charSpacing
+        });
+
+        textInputs.bold.addEventListener('click', () => {
+            const obj = canvas.getActiveObject();
+            if (obj && obj.type === 'i-text') {
+                const nw = obj.fontWeight === 'bold' ? 'normal' : 'bold';
+                setObj('fontWeight', nw);
+                textInputs.bold.classList.toggle('bg-indigo-600', nw === 'bold');
+            }
+        });
+        textInputs.italic.addEventListener('click', () => {
+            const obj = canvas.getActiveObject();
+            if (obj && obj.type === 'i-text') {
+                const nw = obj.fontStyle === 'italic' ? 'normal' : 'italic';
+                setObj('fontStyle', nw);
+                textInputs.italic.classList.toggle('bg-indigo-600', nw === 'italic');
+            }
+        });
+        textInputs.under.addEventListener('click', () => {
+            const obj = canvas.getActiveObject();
+            if (obj && obj.type === 'i-text') {
+                setObj('underline', !obj.underline);
+                textInputs.under.classList.toggle('bg-indigo-600', obj.underline);
+            }
+        });
+        textInputs.align.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const a = e.currentTarget.dataset.align;
+                setObj('textAlign', a);
+                updatePanel();
+            });
+        });
+
+        // Opacity
+        document.getElementById('opacity').addEventListener('input', (e) => {
+            setObj('opacity', parseFloat(e.target.value));
+            document.getElementById('opacityVal').innerText = Math.round(e.target.value * 100) + '%';
+        });
+
+        // Shadow Logic builder
+        function applyShadow() {
+            const obj = canvas.getActiveObject();
+            if (obj && sdTg.checked) {
+                const s = new fabric.Shadow({
+                    color: sdColH.value,
+                    blur: parseInt(sdB.value, 10),
+                    offsetX: parseInt(sdX.value, 10),
+                    offsetY: parseInt(sdY.value, 10)
+                });
+                obj.set('shadow', s);
+                canvas.renderAll();
+            }
+        }
+
+        sdTg.addEventListener('change', (e) => {
+            const obj = canvas.getActiveObject();
+            if (obj) {
+                if (e.target.checked) {
+                    sdCtrl.classList.remove('hidden');
+                    sdCtrl.classList.add('flex');
+                    applyShadow();
+                } else {
+                    sdCtrl.classList.add('hidden');
+                    sdCtrl.classList.remove('flex');
+                    obj.set('shadow', null);
+                    canvas.renderAll();
+                }
+            }
+        });
+
+        sdCol.addEventListener('input', (e) => { sdColH.value = e.target.value; applyShadow(); });
+        sdColH.addEventListener('change', (e) => { sdCol.value = e.target.value.substring(0, 7); applyShadow(); });
+
+        sdB.addEventListener('input', (e) => { document.getElementById('sdBlurVal').innerText = e.target.value; applyShadow(); });
+        sdX.addEventListener('input', (e) => { document.getElementById('sdXVal').innerText = e.target.value; applyShadow(); });
+        sdY.addEventListener('input', (e) => { document.getElementById('sdYVal').innerText = e.target.value; applyShadow(); });
+
+        // --- 6. Layer Z-Index & Deletion ---
+        window.changeZIndex = function (direction) {
+            const obj = canvas.getActiveObject();
+            if (!obj) return;
+            if (direction === 'up') canvas.bringForward(obj);
+            if (direction === 'down') canvas.sendBackwards(obj);
+            if (direction === 'top') canvas.bringToFront(obj);
+            if (direction === 'bottom') canvas.sendToBack(obj);
+            // Fix selection box rendering overlay issue
+            canvas.discardActiveObject();
+            canvas.setActiveObject(obj);
+        };
+
+        window.deleteSelected = function () {
+            const obj = canvas.getActiveObject();
+            if (obj) {
+                canvas.remove(obj);
+                canvas.discardActiveObject();
+            }
+        };
+
+        // Hotkey: Delete
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA' && !canvas.getActiveObject()?.isEditing) {
+                    deleteSelected();
+                }
+            }
+            // Hotkey Copy Paste
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+                // Copy (Simplistic version)
+                if (!canvas.getActiveObject()?.isEditing) canvas.getActiveObject()?.clone(function (cloned) { _clipboard = cloned; });
+            }
+            if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
+                if (!canvas.getActiveObject()?.isEditing && typeof _clipboard !== 'undefined') {
+                    _clipboard.clone(function (clonedObj) {
+                        canvas.discardActiveObject();
+                        clonedObj.set({ left: clonedObj.left + 20, top: clonedObj.top + 20, evented: true });
+                        if (clonedObj.type === 'activeSelection') {
+                            clonedObj.canvas = canvas;
+                            clonedObj.forEachObject(function (obj) { canvas.add(obj); });
+                            clonedObj.setCoords();
+                        } else {
+                            canvas.add(clonedObj);
+                        }
+                        _clipboard.top += 20; _clipboard.left += 20;
+                        canvas.setActiveObject(clonedObj);
+                        canvas.requestRenderAll();
+                    });
+                }
+            }
+        });
+        let _clipboard;
+
+        document.getElementById('clearCanvasBtn').addEventListener('click', () => {
+            if (confirm('💣 确定要清空画板吗？所有未导出的内容将丢失。')) {
+                canvas.clear();
+                canvas.backgroundColor = bgInput.value;
+                canvas.renderAll();
+            }
+        });
+
+        // --- 7. Export ---
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            canvas.discardActiveObject();
+            canvas.renderAll();
+
+            // Export at 2x resolution by default since they want HD!
+            const dataURL = canvas.toDataURL({
+                format: 'png',
+                quality: 1,
+                multiplier: 2
+            });
+
+            const link = document.createElement('a');
+            link.download = `HORD_Design_${canvas.width}x${canvas.height}_${Date.now()}.png`;
+            link.href = dataURL;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // --- 8. Template Engine ---
+        const templates = {
+            smallTile: {
+                width: 440, height: 280, bg: '#0f172a',
+                elements: [
+                    { type: 'image', url: 'logo.png', left: 220, top: 90, scale: 0.16, shadow: true },
+                    { type: 'text', text: '全端英语学习管家', left: 220, top: 180, fontSize: 44, fontWeight: 'bold', fill: '#ffffff', charSpacing: 100, shadow: true },
+                    { type: 'text', text: 'HORD        HOLD YOUR WORD', left: 220, top: 230, fontSize: 13, fontWeight: 'normal', fill: '#cbd5e1', charSpacing: 100 }
+                ]
+            },
+            marquee: {
+                width: 1400, height: 560, bg: '#0f172a',
+                elements: [
+                    // Text side
+                    { type: 'image', url: 'logo.png', left: 140, top: 120, scale: 0.08 },
+                    { type: 'text', text: 'HOLD YOUR WORD', left: 260, top: 120, fontSize: 16, fill: '#818cf8', fontWeight: 'bold', charSpacing: 200 },
+                    { type: 'text', text: 'HORD\n全端管家', left: 220, top: 220, fontSize: 58, fill: '#ffffff', fontWeight: 'bold', lineHeight: 1.15, shadow: true },
+                    { type: 'text', text: '• 原生极致翻译划词\n• 千人千面专属词库\n• 多端图表抗遗忘\n• 日夜全彩心流切换', left: 230, top: 400, fontSize: 20, fill: '#cbd5e1', lineHeight: 2.2 },
+
+                    // Art side (Manually placed overlapping images mimicking the CSS)
+                    { type: 'image', url: 'screens/manange单词本/manange单词本日间1.png', left: 930, top: 230, scaleX: 0.58, scaleY: 0.58, shadow: true },
+                    { type: 'image', url: 'screens/content弹窗/夜间网页截图.png', left: 910, top: 430, scaleX: 0.45, scaleY: 0.45, opacity: 0.4, shadow: false },
+                    { type: 'image', url: 'screens/content弹窗/弹窗夜间_transparent.png', left: 910, top: 430, scaleX: 0.4, scaleY: 0.4, shadow: true },
+                    { type: 'image', url: 'screens/手机管理系统/日间手机首页单词清单.png', left: 1220, top: 280, scaleX: 0.22, scaleY: 0.22, shadow: true },
+                    { type: 'image', url: 'screens/手机管理系统/夜间手机艾宾浩斯测试.png', left: 1340, top: 350, scaleX: 0.24, scaleY: 0.24, shadow: true }
+                ]
+            },
+            screenshot1: {
+                width: 1280, height: 800, bg: '#10172e', /* gradient approx */
+                elements: [
+                    { type: 'text', text: '极速原生，丝滑划词', left: 640, top: 120, fontSize: 54, fontWeight: 'bold', fill: '#ffffff', shadow: true },
+                    { type: 'text', text: '在任意英文网页选中文本，AI 即刻响应深度解析。', left: 640, top: 220, fontSize: 24, fill: '#cbd5e1' },
+                    { type: 'image', url: 'screens/content弹窗/夜间网页截图.png', left: 640, top: 580, scaleX: 0.75, scaleY: 0.75, opacity: 0.6, shadow: false },
+                    { type: 'image', url: 'screens/content弹窗/弹窗夜间_transparent.png', left: 640, top: 620, scaleX: 0.6, scaleY: 0.6, shadow: true }
+                ]
+            }
+        };
+
+        const standardShadow = new fabric.Shadow({
+            color: 'rgba(0,0,0,0.5)',
+            blur: 40,
+            offsetX: 0,
+            offsetY: 25
+        });
+
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const tplId = this.dataset.tpl;
+                const tpl = templates[tplId];
+                if (!tpl) return;
+
+                if (!confirm(`💣 即将覆盖当前画板。\n确定要加载【${this.innerText.trim()}】模板吗？`)) return;
+
+                // 1. Reset Canvas
+                canvas.clear();
+                updateBg(tpl.bg);
+
+                // Set Size via standard method to sync UI
+                document.getElementById('canvasPreset').value = `${tpl.width}x${tpl.height}`;
+                setCanvasDimensions(tpl.width, tpl.height);
+
+                // 2. Load Elements
+                tpl.elements.forEach(el => {
+                    if (el.type === 'text') {
+                        const t = new fabric.IText(el.text, {
+                            fontFamily: 'Inter',
+                            left: el.left,
+                            top: el.top,
+                            originX: el.originX || 'center',
+                            originY: el.originY || 'center',
+                            fontSize: el.fontSize,
+                            fontWeight: el.fontWeight || 'normal',
+                            fill: el.fill,
+                            charSpacing: el.charSpacing || 0,
+                            lineHeight: el.lineHeight || 1.16,
+                            shadow: el.shadow ? standardShadow : null
+                        });
+                        canvas.add(t);
+                    } else if (el.type === 'image') {
+                        fabric.Image.fromURL(el.url, function (img) {
+                            if (!img) return; // If file is missing locally, silently skip
+                            img.set({
+                                left: el.left,
+                                top: el.top,
+                                originX: el.originX || 'center',
+                                originY: el.originY || 'center',
+                                scaleX: el.scaleX || el.scale || 1,
+                                scaleY: el.scaleY || el.scale || 1,
+                                opacity: el.opacity || 1,
+                                shadow: el.shadow ? standardShadow : null
+                            });
+                            canvas.add(img);
+                            // Ensure proper layering as they arrive async
+                            canvas.requestRenderAll();
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

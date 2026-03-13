@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HORD 宣传图生成器 (Clean Architecture)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        heading: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e2e',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f1f5f9;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container exactly matching target resolutions */
+        .canvas-area {
+            background-color: #0f172a;
+            position: relative;
+            transform-origin: top left;
+            margin-bottom: 3rem;
+            border-radius: 1.5rem;
+            /* Rounded corners for the preview itself */
+            overflow: hidden;
+            /* Keep the background gradients inside */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Target Sizes */
+        .marquee {
+            width: 1400px;
+            height: 560px;
+        }
+
+        .promo-s {
+            width: 1280px;
+            height: 800px;
+        }
+
+        .small-tile {
+            width: 440px;
+            height: 280px;
+        }
+
+        /* Premium Dark Gradients */
+        .bg-gradient-dark {
+            background: radial-gradient(circle at 100% 0%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+        }
+
+        .bg-gradient-dark-2 {
+            background: radial-gradient(circle at 0% 100%, #172554 0%, #0f172a 60%, #020617 100%);
+        }
+
+        /* Ultra-premium shadows for devices */
+        .device-shadow {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 20px 40px -10px rgba(0, 0, 0, 0.5),
+                0 40px 80px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .device-shadow-heavy {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 30px 60px -15px rgba(0, 0, 0, 0.6),
+                0 50px 100px -20px rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+
+<body class="p-10 flex flex-col items-center">
+
+    <!-- Header & Controls -->
+    <div
+        class="w-[1400px] mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-800">HORD Store Assets</h1>
+            <p class="text-slate-500 text-sm mt-1">Clean Architecture Rebuild. No historic baggage.</p>
+        </div>
+        <button onclick="alert('Export functionality requires html2canvas integration.')"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium shadow-md transition-colors">
+            一键真实渲染导出
+        </button>
+    </div>
+
+    <div class="flex flex-col gap-12 items-center w-full">
+
+        <!-- 1. Small Tile -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">小型宣传图块 (Small Tile) -
+                440x280</h2>
+            <div class="canvas-area small-tile bg-gradient-dark flex flex-col items-center justify-center relative">
+                <!-- Ambient glow -->
+                <div class="absolute top-0 left-0 w-full h-[50%] bg-indigo-500/20 blur-[60px] rounded-full z-0"></div>
+                <!-- Extra lower glow for text pop -->
+                <div
+                    class="absolute bottom-[-10px] right-[-10px] w-[200px] h-[200px] bg-blue-500/20 blur-[50px] rounded-full z-0">
+                </div>
+
+                <div class="z-10 flex flex-col items-center justify-center text-center px-4 w-full h-full">
+                    <!-- Enlarged Logo -->
+                    <img src="logo.png" alt="Logo" class="w-[85px] h-[85px] object-contain mb-3 drop-shadow-2xl">
+
+                    <!-- Enlarged Chinese Text Dominating -->
+                    <h1 class="text-[44px] font-extrabold text-white tracking-widest leading-none mb-1 drop-shadow-lg whitespace-nowrap"
+                        style="text-shadow: 0 4px 15px rgba(0,0,0,0.6);">全端英语学习管家</h1>
+
+                    <!-- Sub-brand & Slogan (No divider line) -->
+                    <div class="flex items-center gap-3 mt-4">
+                        <span
+                            class="text-[20px] font-bold text-indigo-300 tracking-[0.2em] uppercase drop-shadow">HORD</span>
+                        <span
+                            class="text-[14px] font-semibold text-slate-300 tracking-[0.3em] uppercase opacity-95">Hold
+                            your word</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Marquee -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">顶部核心宣传位 (Marquee) -
+                1400x560</h2>
+            <div class="canvas-area marquee bg-gradient-dark flex items-center px-[80px]">
+
+                <div class="grid grid-cols-12 w-full gap-8 items-center">
+                    <!-- Text (4 cols) -->
+                    <div class="col-span-4 flex flex-col relative z-20">
+                        <div class="flex items-center gap-2 mb-4 mt-[-10px]">
+                            <img src="logo.png" alt="Logo" class="w-10 h-10 drop-shadow-md">
+                            <span class="text-xs font-bold text-indigo-400 tracking-[0.3em] uppercase">Hold your
+                                word</span>
+                        </div>
+                        <h1 class="text-[52px] font-extrabold leading-[1.1] mb-6 text-white drop-shadow-lg">HORD<br>全端管家
+                        </h1>
+
+                        <ul class="flex flex-col gap-4 border-l-4 border-indigo-500 pl-5">
+                            <li class="text-[18px] text-slate-200 font-medium flex items-center gap-3">
+                                <span
+                                    class="w-[6px] h-[6px] rounded-full bg-indigo-400 shrink-0 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+                                <span>原生极致翻译划词</span>
+                            </li>
+                            <li class="text-[18px] text-slate-200 font-medium flex items-center gap-3">
+                                <span
+                                    class="w-[6px] h-[6px] rounded-full bg-indigo-400 shrink-0 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+                                <span>千人千面专属词库</span>
+                            </li>
+                            <li class="text-[18px] text-slate-200 font-medium flex items-center gap-3">
+                                <span
+                                    class="w-[6px] h-[6px] rounded-full bg-indigo-400 shrink-0 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+                                <span>多端图表抗遗忘</span>
+                            </li>
+                            <li class="text-[18px] text-slate-200 font-medium flex items-center gap-3">
+                                <span
+                                    class="w-[6px] h-[6px] rounded-full bg-indigo-400 shrink-0 shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+                                <span>日夜全彩心流切换</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Complex Image Collage Stage (8 cols) -->
+                    <div class="col-span-8 relative h-[480px] flex items-center justify-center">
+                        <div class="relative w-full h-full">
+
+                            <!-- Layer 1: PC Word Management (Day Mode) -->
+                            <div
+                                class="absolute left-[3%] top-[3%] w-[60%] aspect-[16/10] rounded-[1.25rem] overflow-hidden border border-slate-300/40 device-shadow z-10 transition-transform hover:scale-[1.02] duration-500">
+                                <!-- Cropped closely to show list UI perfectly -->
+                                <img src="screens/manange单词本/manange单词本日间1.png"
+                                    class="w-full h-full object-cover object-top" alt="Word Box Day PC">
+                            </div>
+
+                            <!-- Layer 2: Web Popup Core Feature (Night Mode - PC) -->
+                            <div
+                                class="absolute left-[12%] bottom-[3%] w-[58%] aspect-[14/10] rounded-[1.5rem] overflow-hidden border border-slate-700/60 device-shadow-heavy z-20 bg-[#0f172a] transition-transform hover:-translate-y-2 duration-500">
+                                <!-- Background context is softly blurred -->
+                                <img src="screens/content弹窗/夜间网页截图.png"
+                                    class="absolute inset-0 w-full h-full object-cover object-left-top opacity-30 blur-[3px]"
+                                    alt="Web BG">
+                                <!-- Crisp popup centered precisely without clipping -->
+                                <div class="absolute inset-0 flex items-center justify-center p-5">
+                                    <img src="screens/content弹窗/弹窗夜间_transparent.png"
+                                        class="w-full max-h-full object-contain drop-shadow-2xl" alt="Popup Night PC">
+                                </div>
+                            </div>
+
+                            <!-- Layer 3: Mobile Word List (Day Mode) -->
+                            <div
+                                class="absolute right-[24%] top-[6%] w-[21%] aspect-[10/19] rounded-[2rem] overflow-hidden border-[4px] border-slate-200 device-shadow z-30 transition-transform hover:-translate-y-1 duration-500">
+                                <!-- Mobile mockups crop perfectly securely inside aspect ratio -->
+                                <img src="screens/手机管理系统/日间手机首页单词清单.png" class="w-full h-full object-cover object-top"
+                                    alt="Mobile Word Tracking Day">
+                            </div>
+
+                            <!-- Layer 4: Mobile Graph/Test (Night Mode) -->
+                            <div
+                                class="absolute right-[2%] bottom-[2%] w-[24%] aspect-[9/19] rounded-[2rem] overflow-hidden border-[5px] border-[#0a0f1a] device-shadow-heavy z-40 transition-transform hover:-translate-y-3 duration-500">
+                                <img src="screens/手机管理系统/夜间手机艾宾浩斯测试.png"
+                                    class="w-full h-full object-cover object-top block" alt="Mobile Testing Night">
+                            </div>
+
+                            <!-- Connecting Glow behind mobiles -->
+                            <div
+                                class="absolute right-[10%] bottom-[20%] w-[300px] h-[300px] bg-indigo-500/20 blur-[50px] rounded-full z-0 pointer-events-none">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Screenshot 1 -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">截图 1: 极速划词 (1280x800)
+            </h2>
+            <div class="canvas-area promo-s bg-gradient-dark-2 flex flex-col mx-auto" style="width: 1280px;">
+
+                <!-- Center Text -->
+                <div class="w-full text-center pt-[80px] pb-[40px] px-[100px] relative z-20">
+                    <h2 class="text-[54px] font-bold mb-6 text-white drop-shadow-lg tracking-tight">极速原生，丝滑划词</h2>
+                    <p
+                        class="text-[24px] text-indigo-200 font-medium drop-shadow inline-block bg-slate-900/60 backdrop-blur-md px-8 py-3 rounded-full border border-white/5">
+                        在任意英文网页选中文本，AI 即刻响应深度解析。
+                    </p>
+                </div>
+
+                <!-- Bottom Focus Image Stage -->
+                <div class="flex-grow relative w-full flex items-end justify-center overflow-hidden">
+                    <img src="screens/content弹窗/夜间网页截图.png"
+                        class="w-[85%] rounded-t-2xl border-t border-x border-slate-700/50 device-shadow-heavy absolute bottom-[-100px] opacity-80"
+                        alt="网页底层">
+                    <img src="screens/content弹窗/弹窗夜间_transparent.png"
+                        class="w-[50%] max-h-full object-contain drop-shadow-2xl absolute bottom-[60px] z-10"
+                        alt="翻译核心">
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Screenshot 2 -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">截图 2: 多端同步与个性化
+                (1280x800)</h2>
+            <div class="canvas-area promo-s bg-gradient-dark flex items-center px-[80px] mx-auto"
+                style="width: 1280px;">
+
+                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                    <!-- Text (5 cols) -->
+                    <div class="col-span-5 relative z-20">
+                        <h2 class="text-[54px] font-bold mb-6 text-white leading-tight drop-shadow-md">千人千面<br>你的专属资产库
+                        </h2>
+                        <p
+                            class="text-[22px] text-indigo-300 font-medium leading-[1.7] drop-shadow border-l-4 border-indigo-500 pl-5">
+                            打通 PC 与手机体系。<br>核心词本精读，多维图表统计，<br>完美适配你的夜猫子心境。
+                        </p>
+                    </div>
+
+                    <!-- Safe Interactive Stage (7 cols) -->
+                    <div class="col-span-7 relative h-[500px]">
+                        <!-- Guaranteed valid links from inventory -->
+                        <img src="screens/manange单词本/manange单词本夜间2.png"
+                            class="w-[85%] rounded-xl border border-slate-600/50 device-shadow absolute left-[5%] top-[15%]"
+                            alt="PC">
+                        <img src="screens/手机管理系统/夜间手机首页单词清单.png"
+                            class="w-[28%] rounded-[2.5rem] border-[6px] border-[#0a0f1a] device-shadow-heavy absolute right-[0%] top-[10%] z-10"
+                            alt="Mobile">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Screenshot 3 -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">截图 3: 艾宾浩斯复习 (1280x800)
+            </h2>
+            <div class="canvas-area promo-s bg-gradient-dark-2 flex flex-col mx-auto" style="width: 1280px;">
+
+                <!-- Top Text -->
+                <div class="w-full text-center pt-[80px] pb-[40px] px-[100px] relative z-20">
+                    <h2 class="text-[54px] font-bold mb-6 text-white drop-shadow-lg">全平台抗遗忘机制</h2>
+                    <p
+                        class="text-[24px] text-purple-200 font-medium drop-shadow inline-block bg-slate-900/60 backdrop-blur-md px-8 py-3 rounded-full border border-white/5">
+                        无论是在书桌还是地铁，复习进度无缝衔接，图表云端同步。
+                    </p>
+                </div>
+
+                <!-- Bottom Stage with overlap -->
+                <div class="flex-grow relative w-full max-w-[1100px] mx-auto flex items-end">
+                    <img src="screens/test艾宾浩斯/艾宾浩斯2.png"
+                        class="w-[80%] rounded-t-2xl border-t border-x border-slate-700/50 device-shadow-heavy absolute left-[5%] bottom-[-50px]"
+                        alt="PC">
+                    <img src="screens/手机管理系统/夜间手机艾宾浩斯测试.png"
+                        class="w-[25%] rounded-[2.5rem] border-[6px] border-[#0a0f1a] device-shadow-heavy absolute right-[5%] bottom-[40px] z-10"
+                        alt="Mobile">
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Screenshot 4 -->
+        <div class="w-[1400px]">
+            <h2 class="text-lg font-bold mb-3 text-slate-600 border-l-4 border-indigo-500 pl-3">截图 4: 社交分享与壁纸 (1280x800)
+            </h2>
+            <div class="canvas-area promo-s bg-gradient-dark flex items-center px-[80px] mx-auto"
+                style="width: 1280px;">
+
+                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                    <!-- Text (5 cols) -->
+                    <div class="col-span-5 relative z-20">
+                        <h2 class="text-[54px] font-bold mb-6 text-white leading-tight drop-shadow-md">灵感时刻<br>跨界留存</h2>
+                        <p
+                            class="text-[22px] text-indigo-300 font-medium leading-[1.7] drop-shadow border-l-4 border-indigo-500 pl-5">
+                            不仅仅是查词。<br>将触动你的英文金句一键生成精美社交卡片或手机锁屏壁纸。
+                        </p>
+                    </div>
+
+                    <!-- Images Stage (7 cols) -->
+                    <div class="col-span-7 relative h-[600px] flex items-center">
+                        <img src="screens/金句导出/保存金句社交媒体.png"
+                            class="w-[60%] rounded-2xl border border-slate-700/50 device-shadow absolute left-[5%] rotate-[-3deg] top-[25%]"
+                            alt="Card">
+                        <img src="screens/iPhone壁纸功能/hord-social-20260205-iphoneWallpaper-iphone-mockup.png"
+                            class="h-[95%] w-auto object-contain device-shadow-heavy absolute right-[5%] top-[2.5%] z-10 rotate-[2deg]"
+                            alt="Phone Wallpaper">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
