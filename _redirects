@@ -1,3 +1,6 @@
 /mobile https://hord-mobile-web.pages.dev/ 301
 /mobile/ https://hord-mobile-web.pages.dev/ 301
 /mobile/* https://hord-mobile-web.pages.dev/:splat 301
+/hub https://hord-hub-web.pages.dev/ 301
+/hub/ https://hord-hub-web.pages.dev/ 301
+/hub/* https://hord-hub-web.pages.dev/:splat 301
