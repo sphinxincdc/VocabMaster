@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>反馈与联系我们 - HORD 霍德英语</title>
+  <meta name="description" content="遇到使用问题、有好的产品建议，或者想加入 HORD 用户交流群？在这里找到我们。">
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+  <div class="fb-page">
+    <header class="fb-header">
+      <a class="fb-brand" href="/" aria-label="返回 HORD 官网首页">
+        <img src="logo.png" alt="" class="fb-logo" onerror="this.style.display='none'">
+        <div class="fb-brand-text">
+          <span class="fb-brand-main">HORD · 霍德英语</span>
+          <span class="fb-brand-sub">反馈与联系我们</span>
+        </div>
+      </a>
+    </header>
+
+    <main class="fb-card">
+      <section class="fb-hero" aria-labelledby="fb-title">
+        <h1 id="fb-title" class="fb-title">我们很想听到你的声音</h1>
+        <p class="fb-lead">
+          无论是功能建议、使用疑问，还是 bug 反馈，你都可以通过下面的方式直接找到我们。
+        </p>
+      </section>
+
+      <section class="fb-qr" aria-labelledby="fb-qr-title">
+        <h2 id="fb-qr-title" class="fb-section-title">扫码直接联系</h2>
+        <p class="fb-section-sub">微信扫码最方便，通常当天会回复。</p>
+
+        <div class="fb-qr-grid">
+          <a class="fb-qr-card"
+             href="https://u.wechat.com/EIiR8JO7OO094Wor0SwLoLQ?s=2"
+             target="_blank" rel="noopener"
+             aria-label="打开 Andy 个人微信二维码">
+            <figure>
+              <div class="fb-qr-frame">
+                <img src="assets/qr/qr-andy-wechat.jpg" alt="Andy 个人微信二维码" loading="lazy">
+              </div>
+              <figcaption>
+                <strong>Andy 个人微信</strong>
+                <span>扫码加好友，直接反馈问题</span>
+              </figcaption>
+            </figure>
+          </a>
+
+          <a class="fb-qr-card"
+             href="https://weixin.qq.com/g/AQYAAP6PgDaCB2CjLaOly8jX5xuq1NPZEwhjfv5xpS1VZp04qN30uhL64bQVpSt9"
+             target="_blank" rel="noopener"
+             aria-label="打开 Hord 霍德英语 2 群二维码">
+            <figure>
+              <div class="fb-qr-frame">
+                <img src="assets/qr/qr-hord-group.jpg" alt="Hord 霍德英语 2 群二维码" loading="lazy">
+              </div>
+              <figcaption>
+                <strong>Hord 霍德英语 2 群</strong>
+                <span>扫码进群，和同学们一起交流</span>
+              </figcaption>
+            </figure>
+          </a>
+        </div>
+      </section>
+
+      <section class="fb-form-section" aria-labelledby="fb-form-title">
+        <h2 id="fb-form-title" class="fb-section-title">或者写一条反馈</h2>
+        <p class="fb-section-sub">填写后会自动唤起你的邮件客户端。如果无法发送，也可以直接扫码加微信。</p>
+
+        <form id="fb-form" class="fb-form" novalidate>
+          <div class="fb-field-row">
+            <label class="fb-field">
+              <span class="fb-label">称呼（选填）</span>
+              <input type="text" name="name" class="fb-input" placeholder="怎么称呼你？">
+            </label>
+            <label class="fb-field">
+              <span class="fb-label">联系方式（选填）</span>
+              <input type="text" name="contact" class="fb-input" placeholder="邮箱 / 微信号">
+            </label>
+          </div>
+
+          <label class="fb-field">
+            <span class="fb-label">反馈类型</span>
+            <div class="fb-radio-row">
+              <label class="fb-radio"><input type="radio" name="type" value="建议" checked><span>💡 产品建议</span></label>
+              <label class="fb-radio"><input type="radio" name="type" value="Bug"><span>🐛 Bug 反馈</span></label>
+              <label class="fb-radio"><input type="radio" name="type" value="其他"><span>📝 其他</span></label>
+            </div>
+          </label>
+
+          <label class="fb-field">
+            <span class="fb-label">反馈内容 <span class="fb-required">*</span></span>
+            <textarea name="message" class="fb-textarea" rows="5" placeholder="请尽量描述清楚你遇到的情况、期望的结果，以及使用的设备和浏览器……" required></textarea>
+          </label>
+
+          <div class="fb-actions">
+            <button type="submit" class="fb-submit">📧 发送反馈</button>
+            <a href="/" class="fb-back">← 返回 HORD 官网</a>
+          </div>
+        </form>
+
+        <div id="fb-thanks" class="fb-thanks" hidden>
+          <div class="fb-thanks-icon">🙏</div>
+          <h3>感谢你的反馈！</h3>
+          <p>邮件客户端应该已经打开。如果它没有自动弹出，欢迎直接扫码加微信告诉我们。</p>
+          <a href="/" class="fb-back">← 返回 HORD 官网</a>
+        </div>
+      </section>
+
+      <footer class="fb-footer">
+        <div class="fb-links">
+          <a href="/">🏠 HORD 官网</a>
+          <a href="/mobile/">📱 手机网页版</a>
+          <a href="https://chromewebstore.google.com/detail/hord-%E4%B8%80%E9%94%AE%E7%94%9F%E8%AF%8D%E6%9C%AC-%E6%99%BA%E8%83%BD%E8%8B%B1%E8%AF%AD%E9%98%85%E8%AF%BB%E4%BC%B4%E4%BE%A3/cnmlcjjclidbefafpepadcdcjleamnni" target="_blank" rel="noopener">🌟 Chrome 扩展</a>
+        </div>
+        <p class="fb-copyright">HORD 英语伴侣 · 学习永远都不晚</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="feedback.js"></script>
+</body>
+</html>
