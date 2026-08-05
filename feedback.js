@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  // 反馈收件邮箱。上线前请替换为真实邮箱；如暂无邮箱，可改为 # 并隐藏表单。
-  const FEEDBACK_EMAIL = 'feedback@hord.asia';
+  // 反馈收件邮箱（开发者实控）。如后续接入 Cloudflare Worker / Supabase，替换此处的 mailto 逻辑即可。
+  const FEEDBACK_EMAIL = 'andyfreeman0919@gmail.com';
 
   const form = document.getElementById('fb-form');
   const thanks = document.getElementById('fb-thanks');

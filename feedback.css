@@ -128,7 +128,7 @@ html, body {
 /* ── 二维码 ── */
 .fb-qr-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
@@ -334,6 +334,9 @@ html, body {
 }
 
 /* ── 响应式 ── */
+@media (max-width: 900px) {
+  .fb-qr-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 640px) {
   .fb-card { padding: 26px 20px; }
   .fb-title { font-size: 22px; }
