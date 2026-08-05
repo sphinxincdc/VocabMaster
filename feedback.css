@@ -40,7 +40,7 @@ html, body {
 /* ── 顶栏 ── */
 .fb-header {
   width: 100%;
-  max-width: 720px;
+  max-width: 1500px;
   margin-bottom: 18px;
 }
 
@@ -78,7 +78,7 @@ html, body {
 /* ── 主卡片 ── */
 .fb-card {
   width: 100%;
-  max-width: 720px;
+  max-width: 1500px;
   background: var(--vb-surface);
   border: 1px solid var(--vb-border-2);
   border-radius: 24px;
@@ -185,7 +185,7 @@ html, body {
 /* ── 表单 ── */
 .fb-form-section { border-top: 1px solid var(--vb-border); padding-top: 36px; }
 
-.fb-form { display: flex; flex-direction: column; gap: 18px; }
+.fb-form { display: flex; flex-direction: column; gap: 18px; max-width: 760px; margin: 0 auto; }
 
 .fb-field-row {
   display: grid;
