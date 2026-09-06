@@ -1067,7 +1067,7 @@
         </p>
       </div>
 
-      <!-- Bento Item 5: 等级徽章进度 -->
+      <!-- Bento Item 5: 等级徽章进度与全量徽章矩阵 -->
       <div class="cyber-border rounded-3xl p-4 sm:p-5 bg-white dark:bg-darkcard shadow-sm flex flex-col justify-between card-spotlight">
         <div>
           <div class="flex items-center justify-between mb-3">
@@ -1077,14 +1077,37 @@
             </span>
             <span class="text-[11px] font-mono-code text-slate-400">成就激励</span>
           </div>
-          <div class="overflow-hidden rounded-2xl cursor-pointer group bg-slate-50 dark:bg-black/30 p-2" onclick="openLightbox('assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-Bento总览-等级进度徽章.png', '等级进度徽章与模块入口导航')">
-            <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-Bento总览-等级进度徽章.png" 
-                 alt="等级徽章成就" 
-                 class="w-full h-auto object-contain rounded-xl transition group-hover:scale-[1.01]" />
+          <div class="space-y-3">
+            <!-- 顶部等级与单词状态进度条 -->
+            <div class="overflow-hidden rounded-2xl cursor-pointer group bg-slate-50 dark:bg-black/30 p-2 border border-black/5 dark:border-white/5" onclick="openLightbox('assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-Bento总览-等级进度徽章.png', '等级进度徽章与模块入口导航')">
+              <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-Bento总览-等级进度徽章.png" 
+                   alt="等级徽章成就" 
+                   class="w-full h-auto object-contain rounded-xl transition group-hover:scale-[1.01]" />
+            </div>
+            <!-- 下半部 100 款成就徽章解锁矩阵实测 -->
+            <div class="overflow-hidden rounded-2xl cursor-pointer group bg-slate-50 dark:bg-black/30 p-2.5 border border-black/5 dark:border-white/5 relative" onclick="openLightbox('assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-全部徽章矩阵-成就激励.png', '100 款专属成长徽章矩阵 · 10 大系列解锁体系')">
+              <div class="overflow-hidden rounded-xl max-h-[290px] relative">
+                <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-全部徽章矩阵-成就激励.png" 
+                     alt="成长徽章全景矩阵" 
+                     class="w-full h-auto object-cover object-top transition group-hover:scale-[1.02]" />
+                <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white/95 dark:from-[#0c0c16]/95 to-transparent flex items-end justify-center pb-2 pointer-events-none">
+                  <span class="text-[10px] font-bold text-brand-600 dark:text-brand-300 flex items-center gap-1 bg-white/80 dark:bg-black/60 px-2.5 py-0.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-500/20">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                    点击全屏查看 100 款专属徽章
+                  </span>
+                </div>
+              </div>
+              <div class="mt-2.5 px-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+                <span class="font-medium text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>已点亮 29 / 未点亮 71
+                </span>
+                <span class="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full font-bold">10 大系列勋章</span>
+              </div>
+            </div>
           </div>
         </div>
         <p class="mt-3 text-xs text-slate-500 dark:text-slate-400">
-          以游戏化等级徽章与进度环记录每一次记忆蜕变，让积累充满成就感。
+          以游戏化等级徽章与进度环记录每一次记忆蜕变，10 大系列、100 款精雕成就徽章让积累充满荣耀感。
         </p>
       </div>
 
@@ -1591,6 +1614,26 @@
             </p>
           </div>
         </div>
+
+        <!-- Card 7: Obsidian Mist 1080P MacBook Laptop Wallpaper Mockup -->
+        <div class="quote-card-item desktop cyber-border rounded-3xl p-4 sm:p-5 bg-white dark:bg-darkcard shadow-lg hover:shadow-2xl transition duration-500 cursor-pointer group card-spotlight flex flex-col justify-between"
+             onclick="openLightbox('assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png', '黑曜薄雾 1080P MacBook 笔记本壁纸导出真机：We build things we know will break')">
+          <div class="overflow-hidden rounded-2xl bg-[#0f111a] p-3 flex items-center justify-center min-h-[220px]">
+            <img src="assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png" 
+                 class="max-h-[200px] w-auto max-w-full object-contain transition duration-500 group-hover:scale-105" 
+                 alt="Obsidian Mist MacBook 笔记本电脑壁纸" />
+          </div>
+          <div class="mt-4 px-2 space-y-1">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono-code text-[11px] text-purple-600 dark:text-purple-400 font-bold uppercase tracking-wider">Obsidian Mist · 1080P 横屏</span>
+              <span class="px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-[10px] font-bold">电脑壁纸</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white pt-1">“我们明知所造之物终将损毁，却依然坚持修复如初”</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              沉稳黑曜色调与 MacBook 宽屏真机排版，自带质感提示与无损 1080P 高清导出。
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1618,57 +1661,57 @@
         </div>
       </div>
 
-      <!-- Multi-Phone Staggered Gallery (4-Phone Organic Overlap with Hover Parallax) -->
-      <div class="relative pt-4 pb-8 flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row items-center justify-center gap-8 sm:gap-6 lg:gap-0 max-w-6xl mx-auto">
+      <!-- Multi-Phone Parallel Staggered Gallery (4-Phone Clean Parallel Layout, Zero Occlusion, Zero White Fringe) -->
+      <div class="relative pt-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 items-end max-w-[1360px] mx-auto">
         
-        <!-- Phone 1: 单词本中枢列表 (Left Wing, -6deg Tilt) -->
-        <div class="relative z-10 lg:-mr-10 xl:-mr-14 transform lg:-rotate-6 lg:translate-y-6 hover:rotate-0 hover:scale-105 hover:z-30 transition-all duration-500 cursor-pointer group flex flex-col items-center"
+        <!-- Phone 1: 单词本中枢列表 -->
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group transition-all duration-500 hover:-translate-y-2 lg:translate-y-4"
              onclick="openLightbox('assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-2.png', '移动端 · 掌上单词本中枢列表（按时间排序与待复习状态）')">
-          <div class="w-[240px] sm:w-[260px] lg:w-[270px] drop-shadow-2xl transition duration-500 group-hover:drop-shadow-[0_25px_35px_rgba(139,92,246,0.3)]">
+          <div class="w-full max-w-[260px] xl:max-w-[275px] drop-shadow-2xl transition duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_25px_35px_rgba(139,92,246,0.3)]">
             <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-2.png" 
                  alt="移动端单词本中枢" 
                  class="w-full h-auto object-contain" />
           </div>
-          <div class="mt-3 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
+          <div class="mt-4 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
             01 · 掌上单词本中枢
           </div>
         </div>
 
-        <!-- Phone 2: 艾宾浩斯智能复习 (Center C-Position, Main Focus, Scaled 1.05) -->
-        <div class="relative z-20 lg:-mr-6 xl:-mr-8 transform lg:scale-105 lg:-translate-y-4 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer group flex flex-col items-center"
+        <!-- Phone 2: 艾宾浩斯智能复习 (Hero Center, slightly elevated) -->
+        <div class="relative z-20 flex flex-col items-center cursor-pointer group transition-all duration-500 hover:-translate-y-2 lg:-translate-y-3"
              onclick="openLightbox('assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png', '移动端 · 艾宾浩斯智能复习卡片与金句轮播')">
-          <div class="w-[250px] sm:w-[270px] lg:w-[285px] drop-shadow-2xl transition duration-500 group-hover:drop-shadow-[0_25px_35px_rgba(99,102,241,0.35)]">
+          <div class="w-full max-w-[270px] xl:max-w-[285px] drop-shadow-2xl transition duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_25px_35px_rgba(99,102,241,0.35)]">
             <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png" 
                  alt="移动端艾宾浩斯智能复习" 
                  class="w-full h-auto object-contain" />
           </div>
-          <div class="mt-3 px-3 py-1 rounded-full bg-brand-500/15 border border-brand-500/30 text-[11px] font-mono-code font-bold text-brand-700 dark:text-brand-300">
+          <div class="mt-4 px-3 py-1 rounded-full bg-brand-500/15 border border-brand-500/30 text-[11px] font-mono-code font-bold text-brand-700 dark:text-brand-300">
             02 · 艾宾浩斯智能复习
           </div>
         </div>
 
-        <!-- Phone 3: 灵感金句库与导出工坊 (Right Wing, +3deg Tilt, Elevated) -->
-        <div class="relative z-15 lg:-ml-6 xl:-ml-8 transform lg:rotate-3 lg:translate-y-2 hover:rotate-0 hover:scale-105 hover:z-30 transition-all duration-500 cursor-pointer group flex flex-col items-center"
+        <!-- Phone 3: 灵感金句库与导出工坊 -->
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group transition-all duration-500 hover:-translate-y-2 lg:translate-y-1"
              onclick="openLightbox('assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-4.png', '移动端 · 灵感金句库与一键导出工坊')">
-          <div class="w-[240px] sm:w-[260px] lg:w-[270px] drop-shadow-2xl transition duration-500 group-hover:drop-shadow-[0_25px_35px_rgba(168,85,247,0.3)]">
+          <div class="w-full max-w-[260px] xl:max-w-[275px] drop-shadow-2xl transition duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_25px_35px_rgba(168,85,247,0.3)]">
             <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-4.png" 
                  alt="移动端金句库" 
                  class="w-full h-auto object-contain" />
           </div>
-          <div class="mt-3 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
+          <div class="mt-4 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
             03 · 灵感金句库与导出
           </div>
         </div>
 
-        <!-- Phone 4: iOS 桌面壁纸与轻量小组件 (Right Wing, +6deg Tilt) -->
-        <div class="relative z-10 lg:-ml-10 xl:-ml-14 transform lg:rotate-6 lg:translate-y-8 hover:rotate-0 hover:scale-105 hover:z-30 transition-all duration-500 cursor-pointer group flex flex-col items-center"
+        <!-- Phone 4: iOS 桌面壁纸与轻量小组件 -->
+        <div class="relative z-10 flex flex-col items-center cursor-pointer group transition-all duration-500 hover:-translate-y-2 lg:translate-y-5"
              onclick="openLightbox('assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png', '移动端 · iOS 桌面金句壁纸与轻量小组件')">
-          <div class="w-[240px] sm:w-[260px] lg:w-[270px] drop-shadow-2xl transition duration-500 group-hover:drop-shadow-[0_25px_35px_rgba(56,189,248,0.3)]">
+          <div class="w-full max-w-[260px] xl:max-w-[275px] drop-shadow-2xl transition duration-500 group-hover:scale-105 group-hover:drop-shadow-[0_25px_35px_rgba(56,189,248,0.3)]">
             <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png" 
                  alt="iOS 桌面壁纸与小组件" 
                  class="w-full h-auto object-contain" />
           </div>
-          <div class="mt-3 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
+          <div class="mt-4 px-3 py-1 rounded-full bg-slate-100 dark:bg-black/40 border border-black/5 dark:border-white/10 text-[11px] font-mono-code font-bold text-slate-700 dark:text-slate-300">
             04 · 桌面壁纸与小组件
           </div>
         </div>
@@ -2459,6 +2502,8 @@
       { src: 'assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-2.png', caption: '移动端 · 掌上单词本中枢列表（按时间排序与待复习状态）' },
       { src: 'assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png', caption: '移动端 · 艾宾浩斯智能复习卡片与金句轮播' },
       { src: 'assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-4.png', caption: '移动端 · 灵感金句库与一键导出工坊' },
+      { src: 'assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-全部徽章矩阵-成就激励.png', caption: '成长徽章系统 · 100 款专属成就徽章全景图与解锁体系' },
+      { src: 'assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png', caption: '黑曜薄雾 1080P MacBook 笔记本电脑壁纸导出真机' },
       { src: 'assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png', caption: '移动端 · iOS 桌面金句壁纸与轻量小组件' }
     ];
 
