@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>购买专业版 — HORD · 霍德英语学习管家</title>
-  <meta name="description" content="购买 HORD · 霍德英语学习管家（HORD English Companion）年度授权。支持支付宝/微信扫码，付款后请邮件确认付款信息。" />
-  <link rel="icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="apple-touch-icon" href="logo.png?v=20260203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>购买专业版 Pro — HORD 3.0 霍德英语学习管家</title>
+  <meta name="description" content="购买 HORD · 霍德英语学习管家 3.0 专业版年度授权。早鸟限时特惠 ¥88 / $25，支持支付宝与微信扫码，一次买断无自动续费。" />
+  <link rel="icon" type="image/png" href="logo.png?v=20260301" />
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260301" />
+  <link rel="apple-touch-icon" href="logo.png?v=20260301" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,158 +17,242 @@
         extend: {
           colors: {
             brand: {
-              600: "#8B5CF6",
-              700: "#7C3AED",
-              800: "#6D28D9"
-            }
+              50: "#f5f3ff",
+              100: "#ede9fe",
+              200: "#ddd6fe",
+              300: "#c4b5fd",
+              400: "#a78bfa",
+              500: "#8b5cf6",
+              600: "#7c3aed",
+              700: "#6d28d9",
+              800: "#5b21b6",
+              900: "#4c1d95"
+            },
+            darkbg: "#08080c",
+            darkcard: "#101018",
+            cybercyan: "#06b6d4"
           },
           boxShadow: {
-            glow: "0 0 40px rgba(139, 92, 246, 0.18)"
+            glow: "0 0 50px -10px rgba(139, 92, 246, 0.35)"
           }
         }
       }
-    }
+    };
   </script>
+
   <style>
-    :root { --grid-color: rgba(0, 0, 0, 0.06); }
-    .dark { --grid-color: rgba(255, 255, 255, 0.06); }
-    .bg-grid {
-      background-image:
-        radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
-      background-size: 22px 22px;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .cyber-border-gradient {
+      position: relative;
+    }
+    .cyber-border-gradient::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.6), rgba(6, 182, 212, 0.3), rgba(255, 255, 255, 0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
   </style>
 </head>
-<body class="bg-[#F6F3FF] text-[#1A1A22] antialiased dark:bg-[#0B0B10] dark:text-white">
-  <div class="relative min-h-screen overflow-hidden">
-    <div class="pointer-events-none absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-300/35 blur-[140px] dark:bg-purple-600/20"></div>
-    <div class="pointer-events-none absolute inset-0 bg-grid opacity-20"></div>
 
-    <header class="relative z-10">
-      <div class="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
-        <a class="flex items-center gap-3" href="index.html" aria-label="回到首页">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl">
-            <img src="logo.png" alt="HORD · 霍德英语学习管家 图标" class="h-10 w-10 object-contain"/>
-          </div>
-          <div class="leading-tight">
-            <div class="text-lg font-semibold tracking-wide"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</div>
-            <div class="mt-0.5 text-[11px] font-medium tracking-[0.18em] text-slate-500 dark:text-white/55">HORD English Companion</div>
-          </div>
-        </a>
-        <div class="flex items-center gap-3">
-          <button id="themeToggle" class="hidden items-center gap-2 rounded-full border border-black/10 px-3 py-2 text-xs text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white md:flex" type="button" aria-label="主题切换">
-            <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-            </svg>
-            <svg class="h-4 w-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-            </svg>
-            主题
-          </button>
-          <a href="activate.html" class="rounded-full border border-black/10 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">激活</a>
-        </div>
-      </div>
-    </header>
+<body class="bg-[#F8F9FC] text-[#13131A] dark:bg-darkbg dark:text-[#E8E8F2] antialiased min-h-screen flex flex-col transition-colors duration-300">
 
-    <main class="relative z-10">
-      <div class="mx-auto max-w-[1500px] px-5 pb-14 pt-8 sm:px-6 lg:px-8">
-        <div class="mb-10">
-          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Buy License</p>
-          <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">购买专业版</h1>
-          <p class="mt-3 text-slate-600 dark:text-white/70">一次性付费获得 1 年授权（不自动续费），最多 2 台设备激活。</p>
-        </div>
-
-        <div class="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <section class="rounded-3xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
-            <h2 class="text-lg font-semibold">订单信息</h2>
-            <div class="mt-5 space-y-4 text-sm text-slate-600 dark:text-white/70">
-              <div class="flex items-center justify-between">
-                <span>产品</span>
-                <span class="text-slate-900 dark:text-white">HORD · 霍德英语学习管家 年度授权</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span>价格</span>
-                <span class="text-right">
-                  <span class="block text-xs text-slate-400 line-through dark:text-white/45">原价 168 RMB / $50</span>
-                  <span class="block font-semibold text-purple-700 dark:text-purple-200">早鸟价 88 RMB / $25</span>
-                </span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span>发货方式</span>
-                <span class="text-slate-900 dark:text-white">付款后邮件确认付款信息并发送 License Key</span>
-              </div>
-            </div>
-
-            <div class="mt-5 inline-flex items-center rounded-full border border-purple-500/20 bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-700 dark:text-purple-200">
-              限时优惠：比原价立省 80 RMB / $25
-            </div>
-
-            <div class="mt-6 border-t border-black/10 pt-5 dark:border-white/10">
-              <label class="block text-sm font-medium">邮箱（用于接收 License Key）</label>
-              <input type="email" value="andyfreeman0919@gmail.com" placeholder="andyfreeman0919@gmail.com" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-slate-800 outline-none focus:ring-2 focus:ring-purple-400 dark:border-white/10 dark:bg-[#0B0B10] dark:text-white" />
-            </div>
-
-            <div class="mt-6">
-              <a href="mailto:andyfreeman0919@gmail.com?subject=HORD%20License%20Payment%20Confirmation&body=%E6%88%91%E5%B7%B2%E5%AE%8C%E6%88%90%E4%BB%98%E6%AC%BE%EF%BC%8C%E8%AF%B7%E7%A1%AE%E8%AE%A4%E4%BB%98%E6%AC%BE%E4%BF%A1%E6%81%AF%E5%B9%B6%E5%8F%91%E9%80%81%20License%20Key%E3%80%82%0A%E4%BB%98%E6%AC%BE%E6%96%B9%E5%BC%8F%EF%BC%9A%0A%E4%BB%98%E6%AC%BE%E9%87%91%E9%A2%9D%EF%BC%9A%0A%E4%BB%98%E6%AC%BE%E6%97%B6%E9%97%B4%EF%BC%9A%0A%E8%AE%A2%E5%8D%95%E9%82%AE%E7%AE%B1%EF%BC%9Aandyfreeman0919@gmail.com" class="block w-full rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-3 text-center text-sm font-medium text-white shadow-glow hover:brightness-110">付款后发送邮件确认</a>
-              <p class="mt-3 text-xs text-slate-500 dark:text-white/50">授权方式：付款后请发邮件到 andyfreeman0919@gmail.com 确认付款信息，核对后发送 License Key。</p>
-            </div>
-          </section>
-
-          <aside class="rounded-3xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
-            <h2 class="text-lg font-semibold">支付方式</h2>
-            <div class="mt-4 space-y-4 text-sm text-slate-600 dark:text-white/70">
-              <div class="rounded-2xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
-                <div class="mb-2 font-medium text-slate-900 dark:text-white">支付宝收款码</div>
-                <img src="收款码/alipay-hord.png" alt="支付宝收款码" class="w-full rounded-xl border border-black/10 dark:border-white/10" />
-              </div>
-              <div class="rounded-2xl border border-black/10 bg-white/70 p-4 dark:border-white/10 dark:bg-white/5">
-                <div class="mb-2 font-medium text-slate-900 dark:text-white">微信收款码</div>
-                <img src="收款码/wechat-hord.png" alt="微信收款码" class="w-full rounded-xl border border-black/10 dark:border-white/10" />
-              </div>
-            </div>
-            <div class="mt-6 text-xs text-slate-500 dark:text-white/50">
-              付款后请发邮件到 andyfreeman0919@gmail.com，确认付款信息后发送 License Key。
-            </div>
-          </aside>
-        </div>
-
-        <div class="mt-10 rounded-3xl border border-black/10 bg-white/70 p-6 text-sm text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-          授权方式：付款后请邮件发送付款信息到 andyfreeman0919@gmail.com，确认到账后发送 License Key。激活时联网一次即可。若 7 天内无法激活，可联系支持处理退款。
-        </div>
-      </div>
-    </main>
-
-    <footer class="relative z-10 border-t border-black/10 dark:border-white/10">
-      <div class="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-slate-500 dark:text-white/50 md:flex-row">
-	        <p>© 2026 HORD · 霍德英语学习管家. All rights reserved.</p>
-	        <div class="flex items-center gap-4">
-	          <a class="hover:text-slate-900 dark:hover:text-white/80" href="index.html">返回首页</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="activate.html">激活</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:andyfreeman0919@gmail.com">支持邮箱</a>
-        </div>
-      </div>
-    </footer>
+  <!-- 背景光晕 -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-brand-600/20 blur-[130px] rounded-full"></div>
   </div>
 
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (saved === "dark" || (!saved && prefersDark)) {
-        root.classList.add("dark");
-      }
-    })();
+  <!-- 顶部导航 -->
+  <header class="relative z-10 border-b border-black/5 dark:border-white/10 backdrop-blur-md bg-white/70 dark:bg-darkbg/70">
+    <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <a href="preview.html" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl p-0.5 bg-gradient-to-br from-brand-500 to-cybercyan shadow-glow flex items-center justify-center">
+          <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-AI生成3D玻璃H图标.png" onerror="this.src='logo.png'" alt="HORD Logo" class="w-full h-full object-contain rounded-lg" />
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-brand-600 to-cybercyan bg-clip-text text-transparent dark:from-white dark:to-brand-300">
+            HORD 3.0
+          </span>
+          <span class="block text-[10px] text-slate-500 tracking-wider">购买专业版 Pro 授权</span>
+        </div>
+      </a>
 
-    const themeToggle = document.getElementById("themeToggle");
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        const root = document.documentElement;
-        const isDark = root.classList.toggle("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
+      <div class="flex items-center gap-3">
+        <button id="themeToggleBtn" type="button" class="p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" title="切换主题">
+          🌗
+        </button>
+        <a href="activate.html" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition">
+          前往激活
+        </a>
+        <a href="preview.html" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-black/5 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/15 transition">
+          返回官网
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-300 text-xs font-semibold uppercase">
+        Early Bird License
+      </span>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">
+        锁定 HORD Pro 年度授权
+      </h1>
+      <p class="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+        一次性付费 1 年买断，不设自动续费扣款。支持最多 2 台设备跨端激活。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-start">
+      
+      <!-- 订单信息 (Col 7) -->
+      <div class="md:col-span-7 cyber-border-gradient rounded-3xl p-6 sm:p-7 bg-white/80 dark:bg-darkcard/90 shadow-sm space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-black/5 dark:border-white/10">
+          <h2 class="text-base font-bold text-slate-900 dark:text-white">订单明细</h2>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold font-mono-code">
+            早鸟直降 5 折
+          </span>
+        </div>
+
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span>授权产品</span>
+            <span class="font-semibold text-slate-900 dark:text-white">HORD 3.0 专业版 (1 年授权)</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span>授权设备</span>
+            <span class="font-mono-code text-slate-800 dark:text-slate-200">最多 2 台并发激活</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span>续费模式</span>
+            <span class="text-slate-800 dark:text-slate-200">一次性买断（绝不自动续费）</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span>应付金额</span>
+            <div class="text-right">
+              <span class="text-xs line-through text-slate-400 mr-2">原价 ¥168</span>
+              <span class="text-2xl font-extrabold text-brand-600 dark:text-brand-300">¥88</span>
+              <span class="text-xs text-slate-400"> / $25</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 接收邮箱 -->
+        <div class="pt-4 border-t border-black/5 dark:border-white/10 space-y-2">
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+            客服确认邮箱
+          </label>
+          <div class="p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 flex items-center justify-between">
+            <span class="font-mono-code text-xs text-brand-600 dark:text-brand-400 select-all">andyfreeman0919@gmail.com</span>
+            <button onclick="navigator.clipboard.writeText('andyfreeman0919@gmail.com'); alert('邮箱已复制到剪贴板！');" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-brand-500/10 text-brand-600 dark:text-brand-300 hover:bg-brand-500/20 transition">
+              一键复制
+            </button>
+          </div>
+        </div>
+
+        <!-- 确认邮件快捷跳转 -->
+        <div class="space-y-3">
+          <a href="mailto:andyfreeman0919@gmail.com?subject=HORD%20License%20Payment%20Confirmation&body=%E6%88%91%E5%B7%B2%E5%AE%8C%E6%88%90%E4%BB%98%E6%AC%BE%EF%BC%8C%E8%AF%B7%E7%A1%AE%E8%AE%A4%E4%BB%98%E6%AC%BE%E4%BF%A1%E6%81%AF%E5%B9%B6%E5%8F%91%E9%80%81%20License%20Key%E3%80%82%0A%E4%BB%98%E6%AC%BE%E6%96%B9%E5%BC%8F%EF%BC%9A%EF%BC%88%E6%94%AF%E4%BB%98%E5%AE%9D%20/%20%E5%BE%AE%E4%BF%A1%EF%BC%89%0A%E4%BB%98%E6%AC%BE%E9%87%91%E9%A2%9D%EF%BC%9A88%20%E5%85%83%0A%E4%BB%98%E6%AC%BE%E6%97%B6%E9%97%B4%EF%BC%9A%0A%E6%88%91%E7%9A%84%E6%8E%A5%E6%94%B6%E9%82%AE%E7%AE%B1%EF%BC%9A" 
+             class="block w-full py-3.5 text-center text-xs font-bold rounded-2xl bg-gradient-to-r from-brand-600 via-purple-600 to-cybercyan text-white shadow-glow hover:brightness-110 active:scale-98 transition">
+            ✉️ 付款后点击发送确认邮件
+          </a>
+          <p class="text-[11px] text-slate-500 text-center leading-relaxed">
+            支付成功后，请将付款凭证邮件发送至客服，我们将在核验后最快 10 分钟内发放专属 License Key。
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-[11px] text-emerald-700 dark:text-emerald-400 space-y-1">
+          <div class="font-bold">🛡️ 7 天无忧退款承诺</div>
+          <div>若购买后 7 天内因不可抗力导致插件无法激活使用，可邮件申请全额退款。</div>
+        </div>
+      </div>
+
+      <!-- 支付收款码展示 (Col 5) -->
+      <div class="md:col-span-5 cyber-border-gradient rounded-3xl p-6 bg-white/80 dark:bg-darkcard/90 shadow-sm space-y-5">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white">扫码快速支付</h2>
+
+        <!-- Pay Method Switcher Tab -->
+        <div class="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-xs font-semibold">
+          <button id="payTabAli" onclick="switchPayTab('alipay')" class="py-2 rounded-lg bg-blue-600 text-white shadow-sm transition">
+            支付宝支付
+          </button>
+          <button id="payTabWx" onclick="switchPayTab('wechat')" class="py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            微信支付
+          </button>
+        </div>
+
+        <!-- Alipay QR -->
+        <div id="alipayQrCard" class="text-center p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+          <div class="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">支付宝扫码付 ¥88</div>
+          <div class="overflow-hidden rounded-xl border border-black/10 dark:border-white/10 bg-white p-2 inline-block">
+            <img src="收款码/alipay-hord.png" alt="支付宝收款码" class="w-56 h-auto object-contain mx-auto" />
+          </div>
+          <div class="mt-2 text-[11px] text-slate-500">打开手机支付宝直接扫码</div>
+        </div>
+
+        <!-- WeChat QR -->
+        <div id="wechatQrCard" class="hidden text-center p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+          <div class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mb-2">微信扫码付 ¥88</div>
+          <div class="overflow-hidden rounded-xl border border-black/10 dark:border-white/10 bg-white p-2 inline-block">
+            <img src="收款码/wechat-hord.png" alt="微信收款码" class="w-56 h-auto object-contain mx-auto" />
+          </div>
+          <div class="mt-2 text-[11px] text-slate-500">打开微信「扫一扫」直接支付</div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="relative z-10 border-t border-black/5 dark:border-white/10 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+    © 2026 HORD English Companion · Hold Your Word
+  </footer>
+
+  <script>
+    const rootEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (localStorage.getItem('theme') === 'light') {
+      rootEl.classList.remove('dark');
+    } else {
+      rootEl.classList.add('dark');
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isDark = rootEl.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
     }
+
+    function switchPayTab(type) {
+      const aliTab = document.getElementById('payTabAli');
+      const wxTab = document.getElementById('payTabWx');
+      const aliQr = document.getElementById('alipayQrCard');
+      const wxQr = document.getElementById('wechatQrCard');
+
+      if (type === 'alipay') {
+        aliTab.className = 'py-2 rounded-lg bg-blue-600 text-white shadow-sm transition';
+        wxTab.className = 'py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        aliQr.classList.remove('hidden');
+        wxQr.classList.add('hidden');
+      } else {
+        wxTab.className = 'py-2 rounded-lg bg-emerald-600 text-white shadow-sm transition';
+        aliTab.className = 'py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        wxQr.classList.remove('hidden');
+        aliQr.classList.add('hidden');
+      }
+    }
   </script>
+
 </body>
 </html>

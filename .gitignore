@@ -1,1 +1,5 @@
 .DS_Store
+*.bak
+assets/screenshot_v3/_重复文件/
+redesign-assets/
+redesign.html

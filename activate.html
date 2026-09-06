@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>激活 License — HORD · 霍德英语学习管家</title>
-  <meta name="description" content="输入 License Key 激活 HORD · 霍德英语学习管家（HORD English Companion），最多 2 台设备。" />
-  <link rel="icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260203" />
-  <link rel="apple-touch-icon" href="logo.png?v=20260203" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>激活 License — HORD 3.0 霍德英语学习管家</title>
+  <meta name="description" content="输入 License Key 激活 HORD · 霍德英语学习管家 3.0 专业版。激活时仅联网一次，支持最多 2 台设备绑定。" />
+  <link rel="icon" type="image/png" href="logo.png?v=20260301" />
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=20260301" />
+  <link rel="apple-touch-icon" href="logo.png?v=20260301" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,133 +17,213 @@
         extend: {
           colors: {
             brand: {
-              600: "#8B5CF6",
-              700: "#7C3AED",
-              800: "#6D28D9"
-            }
+              500: "#8b5cf6",
+              600: "#7c3aed",
+              700: "#6d28d9"
+            },
+            darkbg: "#08080c",
+            darkcard: "#101018",
+            cybercyan: "#06b6d4"
           },
           boxShadow: {
-            glow: "0 0 40px rgba(139, 92, 246, 0.18)"
+            glow: "0 0 50px -10px rgba(139, 92, 246, 0.35)"
           }
         }
       }
-    }
+    };
   </script>
+
   <style>
-    :root { --grid-color: rgba(0, 0, 0, 0.06); }
-    .dark { --grid-color: rgba(255, 255, 255, 0.06); }
-    .bg-grid {
-      background-image:
-        radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
-      background-size: 22px 22px;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .cyber-border-gradient {
+      position: relative;
+    }
+    .cyber-border-gradient::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.6), rgba(6, 182, 212, 0.3), rgba(255, 255, 255, 0.05));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
   </style>
 </head>
-<body class="bg-[#F6F3FF] text-[#1A1A22] antialiased dark:bg-[#0B0B10] dark:text-white">
-  <div class="relative min-h-screen overflow-hidden">
-    <div class="pointer-events-none absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-300/35 blur-[140px] dark:bg-purple-600/20"></div>
-    <div class="pointer-events-none absolute inset-0 bg-grid opacity-20"></div>
 
-    <header class="relative z-10">
-      <div class="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 sm:px-6 lg:px-8">
-        <a class="flex items-center gap-3" href="index.html" aria-label="回到首页">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl">
-            <img src="logo.png" alt="HORD · 霍德英语学习管家 图标" class="h-10 w-10 object-contain"/>
-          </div>
-          <div class="leading-tight">
-            <div class="text-lg font-semibold tracking-wide"><span class="text-violet-600 dark:text-violet-300">HORD</span> · 霍德英语学习管家</div>
-            <div class="mt-0.5 text-[11px] font-medium tracking-[0.18em] text-slate-500 dark:text-white/55">HORD English Companion</div>
-          </div>
-        </a>
-        <div class="flex items-center gap-3">
-          <button id="themeToggle" class="hidden items-center gap-2 rounded-full border border-black/10 px-3 py-2 text-xs text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white md:flex" type="button" aria-label="主题切换">
-            <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-            </svg>
-            <svg class="h-4 w-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-            </svg>
-            主题
-          </button>
-          <a href="buy.html" class="rounded-full border border-black/10 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 dark:border-white/10 dark:text-white/80 dark:hover:text-white">购买</a>
-        </div>
-      </div>
-    </header>
+<body class="bg-[#F8F9FC] text-[#13131A] dark:bg-darkbg dark:text-[#E8E8F2] antialiased min-h-screen flex flex-col transition-colors duration-300">
 
-    <main class="relative z-10">
-      <div class="mx-auto max-w-[1500px] px-5 pb-14 pt-8 sm:px-6 lg:px-8">
-        <div class="mb-8">
-          <p class="text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-white/50">Activate License</p>
-          <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">输入 License 激活</h1>
-          <p class="mt-3 text-slate-600 dark:text-white/70">激活时联网一次即可完成绑定，最多 2 台设备。</p>
-        </div>
-
-        <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <section class="rounded-3xl border border-black/10 bg-white/70 p-6 dark:border-white/10 dark:bg-white/5">
-            <h2 class="text-lg font-semibold">激活信息</h2>
-            <div class="mt-5 space-y-4">
-              <div>
-                <label class="block text-sm font-medium">License Key</label>
-                <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-slate-800 outline-none focus:ring-2 focus:ring-purple-400 dark:border-white/10 dark:bg-[#0B0B10] dark:text-white" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium">绑定邮箱（用于查询授权）</label>
-                <input type="email" placeholder="you@example.com" class="mt-2 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-slate-800 outline-none focus:ring-2 focus:ring-purple-400 dark:border-white/10 dark:bg-[#0B0B10] dark:text-white" />
-              </div>
-            </div>
-
-            <div class="mt-6">
-              <a href="#" class="block w-full rounded-full bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-3 text-center text-sm font-medium text-white shadow-glow hover:brightness-110">立即激活</a>
-              <p class="mt-3 text-xs text-slate-500 dark:text-white/50">激活失败？请检查网络或联系支持。</p>
-            </div>
-          </section>
-
-          <aside class="rounded-3xl border border-black/10 bg-white/70 p-6 text-sm text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-            <h2 class="text-lg font-semibold">激活说明</h2>
-            <ul class="mt-4 space-y-3">
-              <li>License Key 购买后邮件发送。</li>
-              <li>激活时联网一次，用于绑定设备。</li>
-              <li>最多 2 台设备激活，可在到期后续期。</li>
-            </ul>
-            <div class="mt-6 rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-xs text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-white/50">
-              如果你更换了设备，可联系客服协助解绑。
-            </div>
-          </aside>
-        </div>
-      </div>
-    </main>
-
-    <footer class="relative z-10 border-t border-black/10 dark:border-white/10">
-      <div class="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-slate-500 dark:text-white/50 md:flex-row">
-        <p>© 2026 HORD · 霍德英语学习管家. All rights reserved.</p>
-        <div class="flex items-center gap-4">
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="index.html">返回首页</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="buy.html">购买</a>
-          <a class="hover:text-slate-900 dark:hover:text-white/80" href="mailto:support@example.com">支持邮箱</a>
-        </div>
-      </div>
-    </footer>
+  <!-- 背景光晕 -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-brand-600/20 blur-[130px] rounded-full"></div>
   </div>
 
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (saved === "dark" || (!saved && prefersDark)) {
-        root.classList.add("dark");
-      }
-    })();
+  <!-- 顶部导航 -->
+  <header class="relative z-10 border-b border-black/5 dark:border-white/10 backdrop-blur-md bg-white/70 dark:bg-darkbg/70">
+    <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <a href="preview.html" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl p-0.5 bg-gradient-to-br from-brand-500 to-cybercyan shadow-glow flex items-center justify-center">
+          <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-AI生成3D玻璃H图标.png" onerror="this.src='logo.png'" alt="HORD Logo" class="w-full h-full object-contain rounded-lg" />
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-brand-600 to-cybercyan bg-clip-text text-transparent dark:from-white dark:to-brand-300">
+            HORD 3.0
+          </span>
+          <span class="block text-[10px] text-slate-500 tracking-wider">License 激活控制台</span>
+        </div>
+      </a>
 
-    const themeToggle = document.getElementById("themeToggle");
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        const root = document.documentElement;
-        const isDark = root.classList.toggle("dark");
-        localStorage.setItem("theme", isDark ? "dark" : "light");
+      <div class="flex items-center gap-3">
+        <button id="themeToggleBtn" type="button" class="p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" title="切换主题">
+          🌗
+        </button>
+        <a href="buy.html" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition">
+          购买授权
+        </a>
+        <a href="preview.html" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-black/5 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/15 transition">
+          返回官网
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-300 text-xs font-semibold uppercase">
+        Activate Pro
+      </span>
+      <h1 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">
+        输入 License Key 激活
+      </h1>
+      <p class="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+        仅在首次激活时联网验证一次设备绑定，日常学习全程离线运行。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-start">
+      
+      <!-- 激活表单 (Col 7) -->
+      <div class="md:col-span-7 cyber-border-gradient rounded-3xl p-6 sm:p-7 bg-white/80 dark:bg-darkcard/90 shadow-sm space-y-6">
+        <h2 class="text-base font-bold text-slate-900 dark:text-white pb-3 border-b border-black/5 dark:border-white/10">
+          授权凭证录入
+        </h2>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              License Key（激活密钥）
+            </label>
+            <div class="relative">
+              <input id="keyInput" 
+                     type="text" 
+                     placeholder="HORD-XXXX-XXXX-XXXX" 
+                     class="w-full font-mono-code uppercase px-4 py-3 rounded-2xl border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs sm:text-sm tracking-wider" />
+            </div>
+            <p class="mt-1 text-[11px] text-slate-500">购买确认后由邮件发送的 16 位专属密钥。</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              绑定邮箱（用于找回及凭证查询）
+            </label>
+            <input id="emailInput" 
+                   type="email" 
+                   placeholder="you@example.com" 
+                   class="w-full px-4 py-3 rounded-2xl border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs sm:text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              邀请码（选填）
+            </label>
+            <input id="refInput" 
+                   type="text" 
+                   placeholder="若有好友推荐请输入" 
+                   class="w-full px-4 py-3 rounded-2xl border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs sm:text-sm" />
+          </div>
+        </div>
+
+        <button onclick="handleActivate()" 
+                class="block w-full py-3.5 text-center text-xs font-bold rounded-2xl bg-gradient-to-r from-brand-600 via-purple-600 to-cybercyan text-white shadow-glow hover:brightness-110 active:scale-98 transition">
+          立即激活并绑定当前设备 ⚡
+        </button>
+
+        <div id="activateResult" class="hidden p-3 rounded-xl text-xs"></div>
+      </div>
+
+      <!-- 说明与指南 (Col 5) -->
+      <div class="md:col-span-5 space-y-5">
+        <div class="cyber-border-gradient rounded-3xl p-6 bg-white/80 dark:bg-darkcard/90 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white">激活需知</h3>
+          <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">1.</span>
+              <span>每一份 Pro 授权支持最多同时激活 <strong>2 台不同设备</strong>。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">2.</span>
+              <span>设备标识基于本地安全算法匿名生成，绝不采集敏感个人身份信息。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-500 font-bold">3.</span>
+              <span>如需更换电脑或重装系统，请联系客服邮箱协助解绑旧设备。</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cyber-border-gradient rounded-3xl p-5 bg-white/80 dark:bg-darkcard/90 shadow-sm text-center">
+          <span class="text-xs text-slate-500">尚未购买 License？</span>
+          <div class="mt-2">
+            <a href="buy.html" class="inline-flex items-center gap-1 text-xs font-bold text-brand-600 dark:text-brand-300 hover:underline">
+              获取限时早鸟 ¥88 授权 →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="relative z-10 border-t border-black/5 dark:border-white/10 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+    © 2026 HORD English Companion · Hold Your Word
+  </footer>
+
+  <script>
+    const rootEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (localStorage.getItem('theme') === 'light') {
+      rootEl.classList.remove('dark');
+    } else {
+      rootEl.classList.add('dark');
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isDark = rootEl.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
     }
+
+    function handleActivate() {
+      const key = document.getElementById('keyInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const res = document.getElementById('activateResult');
+
+      if (!key || !email) {
+        res.className = 'p-3 rounded-xl text-xs bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20';
+        res.textContent = '请输入完整的 License Key 与绑定邮箱。';
+        res.classList.remove('hidden');
+        return;
+      }
+
+      res.className = 'p-3 rounded-xl text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20';
+      res.textContent = '提示：请在已安装 HORD 扩展的浏览器中直接打开扩展「设置」面板，填入 License 完成一键绑定。如需协助请联系客服邮件。';
+      res.classList.remove('hidden');
+    }
   </script>
+
 </body>
 </html>
