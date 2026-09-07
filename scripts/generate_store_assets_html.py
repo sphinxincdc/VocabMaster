@@ -122,7 +122,7 @@ html_content = '''<!DOCTYPE html>
                         <h1 class="font-bold text-lg text-white tracking-tight">HORD 词境伴侣 · Chrome 应用商店素材工坊</h1>
                         <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">Store Spec 3.0</span>
                     </div>
-                    <p class="text-xs text-slate-400">严格适配 Chrome 网上应用店官方像素与宽高比 · 包含 8 组高保真物料 · 支持单图即时导出与全量 ZIP 打包</p>
+                    <p class="text-xs text-slate-400">严格适配 Chrome 网上应用店官方像素与宽高比 · 零遮挡与高呼吸感排版 · 包含 8 组高保真物料</p>
                 </div>
             </div>
 
@@ -296,7 +296,7 @@ html_content = '''<!DOCTYPE html>
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">3</span>
                         <h2 class="text-xl font-bold text-white tracking-tight">横幅宣传主图 (Marquee Promo Tile)</h2>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：必须为 <code class="text-rose-300 font-mono">1400 × 560 px</code>。用于 Chrome 商店首页 Featured 头部精选横幅大图推荐位。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：必须为 <code class="text-rose-300 font-mono">1400 × 560 px</code>。首页 Featured 头部精选推荐位 · 元素零遮挡、双语字幕完整呈现。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-marquee', '03_marquee_promo_1400x560.png', 1400, 560)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -304,7 +304,7 @@ html_content = '''<!DOCTYPE html>
                 </button>
             </div>
 
-            <!-- Canvas Viewport with horizontal scrolling container -->
+            <!-- Canvas Viewport -->
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
                     <div id="artboard-marquee" class="artboard w-[1400px] h-[560px] rounded-2xl relative p-10 flex items-center justify-between overflow-hidden bg-gradient-to-br from-[#070B14] via-[#0D1424] to-[#180B1C]" data-name="03_marquee_promo_1400x560.png">
@@ -313,9 +313,8 @@ html_content = '''<!DOCTYPE html>
                         <div class="absolute -bottom-32 right-1/4 w-[32rem] h-[32rem] bg-indigo-600/20 rounded-full blur-[140px] pointer-events-none"></div>
                         <div class="absolute inset-0 ambient-grid opacity-25 pointer-events-none"></div>
 
-                        <!-- Left Hero Column (520px) -->
-                        <div class="relative z-10 w-[520px] flex flex-col justify-between h-full py-1">
-                            <!-- Top Brand Chip -->
+                        <!-- Left Hero Column (540px) -->
+                        <div class="relative z-10 w-[540px] flex flex-col justify-between h-full py-2">
                             <div>
                                 <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-lg mb-5">
                                     <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-Logo图标-H红心.png" alt="Logo" class="w-5 h-5 object-contain">
@@ -324,7 +323,7 @@ html_content = '''<!DOCTYPE html>
                                     <span contenteditable="true" class="text-[11px] font-semibold text-rose-300">深度重构版</span>
                                 </div>
 
-                                <h2 contenteditable="true" class="text-4xl font-black text-white leading-[1.2] tracking-tight">
+                                <h2 contenteditable="true" class="text-4xl font-black text-white leading-[1.22] tracking-tight">
                                     在真实语境中自然习得，<br>
                                     让每个英文单词<br>
                                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-red-400 to-amber-300">
@@ -359,21 +358,24 @@ html_content = '''<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Right Multi-Device Mockup Stage (780px, well within boundary) -->
-                        <div class="relative z-10 w-[780px] h-[480px] flex items-center justify-end pr-2">
-                            <!-- Layer 1 (Back): YouTube Player Card -->
-                            <div class="absolute right-4 top-2 w-[660px] h-[330px] rounded-xl overflow-hidden border border-white/15 shadow-2xl bg-slate-900 transform -rotate-1 hover:rotate-0 transition duration-500">
-                                <div class="bg-slate-800/90 px-3 py-1.5 flex items-center gap-1.5 border-b border-white/10">
-                                    <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
-                                    <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
-                                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
-                                    <span class="text-[10px] text-slate-400 font-mono ml-2">YouTube 原生双语字幕沉浸模式</span>
+                        <!-- Right Stage (780px) - Zero Collision Layout -->
+                        <div class="relative z-10 w-[780px] h-[480px]">
+                            <!-- Layer 1: YouTube Player Card (Top-Left, 570px wide, bilingual subtitles 100% visible) -->
+                            <div class="absolute left-2 top-2 w-[570px] h-[315px] rounded-xl overflow-hidden border border-white/15 shadow-2xl bg-slate-900 z-10">
+                                <div class="bg-slate-800/90 px-3 py-1.5 flex items-center justify-between border-b border-white/10">
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                                        <span class="text-[10px] text-slate-400 font-mono ml-2">YouTube 原生双语字幕沉浸模式</span>
+                                    </div>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold"><i class="fa-brands fa-youtube mr-1"></i>YouTube</span>
                                 </div>
-                                <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-播放页-双语字幕沉浸模式.png" alt="YouTube" class="w-full h-[calc(100%-25px)] object-cover object-top">
+                                <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-播放页-双语字幕沉浸模式.png" alt="YouTube" class="w-full h-[calc(100%-25px)] object-cover object-left-top">
                             </div>
 
-                            <!-- Layer 2 (Front-Left Floating): Context AI Web Lookup Popup -->
-                            <div class="absolute left-6 bottom-3 w-[400px] rounded-xl overflow-hidden border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.85)] bg-slate-950/95 backdrop-blur-2xl transform rotate-2 hover:rotate-0 transition duration-500 z-20">
+                            <!-- Layer 2: Web Context AI Popup Card (Lower-Right, 380px wide, zero overlap with subtitles) -->
+                            <div class="absolute right-2 bottom-3 w-[380px] rounded-xl overflow-hidden border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.95)] bg-slate-950/95 backdrop-blur-2xl z-20 transform hover:-translate-y-1 transition duration-300">
                                 <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-3 py-2 flex items-center justify-between border-b border-white/10">
                                     <div class="flex items-center gap-2">
                                         <span class="w-2 h-2 rounded-full bg-rose-500"></span>
@@ -384,14 +386,14 @@ html_content = '''<!DOCTYPE html>
                                 <img src="assets/screenshot_v3/04-网页划词弹窗/网页划词-unprecedented查词-AI语境解析.png" alt="Context AI" class="w-full h-auto object-cover">
                             </div>
 
-                            <!-- Layer 3 (Bottom-Right Floating Accent): Badge Achievement Matrix Pill (safely inside) -->
-                            <div class="absolute right-6 bottom-4 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-white/15 backdrop-blur-xl shadow-2xl z-30 flex items-center gap-3">
+                            <!-- Layer 3: 100-Badge Matrix Pill (Lower-Left under YouTube, perfectly placed) -->
+                            <div class="absolute left-2 bottom-4 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-white/15 backdrop-blur-xl shadow-2xl z-20 flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
                                     <i class="fa-solid fa-medal text-base"></i>
                                 </div>
                                 <div>
                                     <div class="text-xs font-bold text-white">全成就勋章矩阵</div>
-                                    <div class="text-[10px] text-slate-400">100 款专属精美成就已就绪</div>
+                                    <div class="text-[10px] text-slate-400">100 款专属成就 · 艾宾浩斯抗遗忘</div>
                                 </div>
                             </div>
                         </div>
@@ -494,7 +496,7 @@ html_content = '''<!DOCTYPE html>
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">5</span>
                         <h2 class="text-xl font-bold text-white tracking-tight">截图 2：YouTube & B 站双语伴侣 · 原生影音学习</h2>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。展示影音双语沉浸学习体验。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。双语字幕高保真展示 · 左右平衡排布，细节零遮挡。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-shot-2', '05_screenshot_2_video_companion_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -529,10 +531,10 @@ html_content = '''<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage (Tightly balanced within 1280px) -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center px-6">
-                            <!-- Main YouTube Player Mockup (Left/Center) -->
-                            <div class="w-[740px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-[0_30px_70px_rgba(0,0,0,0.85)] z-10">
+                        <!-- Showcase Stage (Refined Balance & Breathing Room) -->
+                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center px-4">
+                            <!-- Main YouTube Player Mockup (Left) -->
+                            <div class="w-[710px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-[0_30px_70px_rgba(0,0,0,0.85)] z-10">
                                 <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
@@ -546,7 +548,7 @@ html_content = '''<!DOCTYPE html>
                             </div>
 
                             <!-- Overlapping Bilibili Subtitles Inset (Right) -->
-                            <div class="w-[440px] rounded-2xl overflow-hidden border border-white/20 bg-slate-950/95 shadow-[0_35px_80px_rgba(0,0,0,0.9)] z-20 -ml-16 transform translate-y-4">
+                            <div class="w-[460px] rounded-2xl overflow-hidden border border-white/20 bg-slate-950/95 shadow-[0_35px_80px_rgba(0,0,0,0.92)] z-20 -ml-10 transform translate-y-3">
                                 <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
                                     <div class="flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
@@ -554,7 +556,7 @@ html_content = '''<!DOCTYPE html>
                                     </div>
                                     <span class="text-[11px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-semibold"><i class="fa-brands fa-bilibili mr-1"></i>B站</span>
                                 </div>
-                                <img src="assets/screenshot_v3/09-Bilibili-伴侣/Bilibili-播放页-双语字幕与侧栏列表-余华活着访谈.png" alt="Bilibili Subtitle" class="w-full h-[410px] object-cover object-left-top">
+                                <img src="assets/screenshot_v3/09-Bilibili-伴侣/Bilibili-播放页-双语字幕与侧栏列表-余华活着访谈.png" alt="Bilibili Subtitle" class="w-full h-[420px] object-cover object-left-top">
                             </div>
                         </div>
                     </div>
@@ -732,7 +734,7 @@ html_content = '''<!DOCTYPE html>
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">8</span>
                         <h2 class="text-xl font-bold text-white tracking-tight">截图 5：金句工坊壁纸艺术 · 手机电脑全端毫秒流转</h2>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。展示 4K 电脑与手机金句壁纸排版与跨端生态。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。沉浸式金句壁纸工坊 · 1080P/4K 实机样机与 iPhone 锁屏艺术。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-shot-5', '08_screenshot_5_quotes_mobile_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -767,30 +769,30 @@ html_content = '''<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage -->
+                        <!-- Showcase Stage (Clean, Native App Card Without Double Titlebar) -->
                         <div class="relative z-10 w-full h-[550px] flex items-center justify-center gap-6 px-4">
-                            <!-- Left: Mobile Mockup 1 -->
+                            <!-- Left: Mobile Mockup 1 (Daily Review & Quote Carousel) -->
                             <div class="w-[200px] h-[450px] flex items-center justify-center shrink-0 transform -rotate-2 hover:rotate-0 transition duration-300">
-                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png" alt="Mobile 1" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)]">
+                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png" alt="Mobile 1" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]">
                             </div>
 
-                            <!-- Center: MacBook Laptop Wallpaper Mockup -->
-                            <div class="w-[660px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_30px_70px_rgba(0,0,0,0.85)] z-10">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                            <!-- Center: MacBook Export Workbench Card (Clean floating app window) -->
+                            <div class="w-[670px] rounded-2xl overflow-hidden border border-white/20 bg-slate-900/90 shadow-[0_30px_70px_rgba(0,0,0,0.9)] z-10">
+                                <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">MacBook 1080P/4K 金句电脑壁纸实机样机</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">金句导出工坊 · 1080P/4K 实机壁纸排版</span>
                                     </div>
                                     <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Obsidian Mist 模板</span>
                                 </div>
-                                <img src="assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png" alt="Laptop Wallpaper" class="w-full h-[450px] object-cover object-center">
+                                <img src="assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png" alt="Laptop Wallpaper" class="w-full h-[435px] object-cover object-center">
                             </div>
 
-                            <!-- Right: Mobile Mockup 2 -->
+                            <!-- Right: Mobile Mockup 2 (iPhone Lock Screen Aesthetic Quote) -->
                             <div class="w-[200px] h-[450px] flex items-center justify-center shrink-0 transform rotate-2 hover:rotate-0 transition duration-300">
-                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png" alt="Mobile 3" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)]">
+                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png" alt="Mobile 3" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]">
                             </div>
                         </div>
                     </div>
@@ -877,10 +879,8 @@ html_content = '''<!DOCTYPE html>
 
         // 3. Smart Download: If not edited, download pre-rendered asset; if edited, use html2canvas!
         async function downloadAsset(elementId, filename, targetWidth, targetHeight) {
-            // Check if user edited text
             if (!hasUserEdited) {
                 try {
-                    // Fetch pre-rendered file directly
                     const preRenderedUrl = `assets/chrome_store/${filename}`;
                     const resp = await fetch(preRenderedUrl);
                     if (resp.ok) {
@@ -893,7 +893,6 @@ html_content = '''<!DOCTYPE html>
                 }
             }
 
-            // Otherwise, render live from DOM with html2canvas
             const el = document.getElementById(elementId);
             if (!el) return;
 
@@ -977,7 +976,6 @@ html_content = '''<!DOCTYPE html>
                 ptext.innerText = `${pct}% (${i + 1}/${items.length})`;
                 modalDesc.innerText = `正在处理: ${item.name}`;
 
-                // If not edited, fetch local pre-rendered file directly for ultra fast zip creation
                 let blob = null;
                 if (!hasUserEdited) {
                     try {
@@ -1035,4 +1033,4 @@ html_content = '''<!DOCTYPE html>
 with open('chrome-store-assets.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
 
-print("chrome-store-assets.html re-written successfully! Size:", os.path.getsize('chrome-store-assets.html'))
+print("chrome-store-assets.html regenerated successfully! Size:", os.path.getsize('chrome-store-assets.html'))
