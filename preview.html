@@ -283,7 +283,7 @@
           <span class="text-xl">🕹️</span> 英语电玩城 & 艾宾浩斯复习
         </a>
         <a href="#quote-export" onclick="closeMobileDrawer()" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
-          <span class="text-xl">🎨</span> 金句工坊 7 大模板壁纸
+          <span class="text-xl">🎨</span> 金句工坊模板与壁纸导出
         </a>
         <a href="#pricing" onclick="closeMobileDrawer()" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
           <span class="text-xl">💎</span> 透明定价与早鸟特惠
@@ -575,13 +575,13 @@
           在真实语境中顿悟：AI 语境深度解析与双引擎架构
         </h2>
         <p class="mt-3 text-slate-600 dark:text-slate-300 max-w-3xl text-xs sm:text-base leading-relaxed">
-          告别机械字典的孤立死记。HORD AI 实时解析当前句子的语法成分、修辞隐喻与深层语境，真正做到“在此语境中”精准释义。支持官方智能引擎开箱即用，亦可自由配置自定义 API（硅基流动 SiliconFlow、智谱 GLM、通义千问、DeepSeek 及标准 OpenAI 兼容接口），完全自主可控。
+          告别机械字典的孤立死记。HORD AI 实时解析当前句子的语法成分、修辞隐喻与深层语境，真正做到“在此语境中”精准释义。免费版使用官方智能引擎，每日可进行 20 次单词/句子智能解析；自定义 API（硅基流动 SiliconFlow、智谱 GLM、通义千问、DeepSeek 及标准 OpenAI 兼容接口）为 PRO 专属，普通翻译不占用该额度。
         </p>
       </div>
 
       <div class="flex flex-wrap items-center gap-2 text-xs font-mono-code text-slate-400 shrink-0">
         <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-        官方开箱即用 · 自定义 API 接入 (BYOK) · 语法成分拆解 · 拟人修辞解析
+        官方开箱即用（免费每日 20 次） · 自定义 API 接入（PRO） · 语法成分拆解 · 拟人修辞解析
       </div>
     </div>
 
@@ -681,10 +681,10 @@
             <div class="p-2.5 rounded-xl bg-white/70 dark:bg-black/40 border border-black/5 dark:border-white/10">
               <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mb-1">
                 <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                🔑 自定义 API 接入（BYOK 极客模式）
+                🔑 自定义 API 接入（PRO · BYOK 极客模式）
               </span>
               <span class="text-[11px] text-slate-500 dark:text-slate-400 block">
-                支持配置自己的 API Key 与 Base URL，直连<strong>硅基流动 (SiliconFlow)</strong>、<strong>智谱 AI (GLM)</strong>、<strong>阿里云通义千问</strong>、<strong>DeepSeek</strong>、<strong>OpenAI</strong> 与本地 Ollama。支持多模型横向对比，Key 仅存本地加密沙盒。
+                PRO 可配置自己的 API Key 与 Base URL，直连<strong>硅基流动 (SiliconFlow)</strong>、<strong>智谱 AI (GLM)</strong>、<strong>阿里云通义千问</strong>、<strong>DeepSeek</strong>、<strong>OpenAI</strong> 与本地 Ollama。支持多模型横向对比，Key 仅存本地加密沙盒；免费用户使用官方智能引擎。
               </span>
             </div>
           </div>
@@ -1813,7 +1813,7 @@
               永久免费
             </span>
           </div>
-          <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">适合初次体验核心网页划词与轻量复习的用户。</p>
+          <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">基础功能完整开放，主要限制词句收藏容量与官方 AI 解析次数。</p>
 
           <div class="mt-6 flex items-baseline gap-1">
             <span class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">¥0</span>
@@ -1823,7 +1823,7 @@
           <ul class="mt-6 sm:mt-8 space-y-3.5 text-xs text-slate-600 dark:text-slate-300">
             <li class="flex items-center gap-2.5">
               <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              网页划词与 YouTube 基础双语字幕
+              网页划词、YouTube 与 Bilibili 基础双语字幕
             </li>
             <li class="flex items-center gap-2.5">
               <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
@@ -1831,19 +1831,19 @@
             </li>
             <li class="flex items-center gap-2.5">
               <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              批注上限：10 条
+              句子收藏：上限 50 条
             </li>
             <li class="flex items-center gap-2.5">
               <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              金句基础导出（仅限基础模板）
+              金句导出：3 个模板，保留水印
             </li>
-            <li class="flex items-center gap-2.5 text-slate-400">
-              <span class="w-4 h-4 rounded-full bg-slate-100 dark:bg-white/5 text-slate-400 flex items-center justify-center text-xs shrink-0">✕</span>
-              不包含 B 站字幕深度伴侣
+            <li class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
+              官方 AI 智能解析：每日 20 次
             </li>
-            <li class="flex items-center gap-2.5 text-slate-400">
-              <span class="w-4 h-4 rounded-full bg-slate-100 dark:bg-white/5 text-slate-400 flex items-center justify-center text-xs shrink-0">✕</span>
-              不支持批量导入/导出与高级壁纸模板
+            <li class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
+              阅读器、复习、同步、导入导出与批量操作均可使用
             </li>
           </ul>
         </div>
@@ -1872,7 +1872,7 @@
           </div>
           
           <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-            构建持久英语能力的终极伴侣，解锁所有高级极客特性与双平台接管。
+            面向长期学习者，解除词句容量限制并开放自定义 AI 与完整导出能力。
           </p>
 
           <!-- Price Row (Crystal Clear High Contrast) -->
@@ -1892,31 +1892,31 @@
           <ul class="mt-6 space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-200">
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>无限制生词与批注容量</strong>（支持海量词汇）
+              <strong>无限单词与句子收藏</strong>（支持海量词句）
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>Bilibili & YouTube 双视频伴侣全功能解锁</strong>
+              <strong>Bilibili & YouTube 基础功能同样免费</strong>
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>AI 句法主干透析 & 硅基流动 / Gemini 自定义 Key</strong>
+              <strong>自定义 AI 接口</strong>（支持自己的模型与 Key）
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>3D 模拟书架原著阅读器与全文金句标注</strong>
+              <strong>官方 AI 智能解析不受免费每日 20 次限制</strong>
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>英语电玩城 5 大背词游戏 & 20 枚成就勋章</strong>
+              <strong>阅读器、复习、同步、导入导出与批量操作</strong>
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>QuoteExport 7 大全套壁纸模板与样机高清导出</strong>
+              <strong>QuoteExport 全部模板与去水印导出</strong>
             </li>
             <li class="flex items-center gap-2.5 font-medium">
               <span class="w-4 h-4 rounded-full bg-brand-500/20 text-brand-600 dark:text-brand-300 flex items-center justify-center font-bold text-xs shrink-0">✓</span>
-              <strong>HORD Hub 独立在线平台与全端多设备云同步</strong>
+              <strong>多设备同步不受免费版功能开关限制</strong>
             </li>
           </ul>
         </div>
@@ -1953,33 +1953,38 @@
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">网页即时划词</td>
-              <td class="py-3 px-4">基础划词</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">高频搭配短语展开 + AI 语境解析</td>
+              <td class="py-3 px-4">基础划词 + 官方 AI 每日 20 次</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">基础划词 + 自定义 AI，不限官方解析额度</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">视频字幕伴侣</td>
-              <td class="py-3 px-4">YouTube 基础字幕</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">YouTube + Bilibili 全功能接管</td>
+              <td class="py-3 px-4">YouTube + Bilibili 基础字幕</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">YouTube + Bilibili 基础字幕</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">AI 句法主干拆解</td>
-              <td class="py-3 px-4">每日 5 次体验</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">无限制 + 自由预设大模型 API Key</td>
+              <td class="py-3 px-4">官方 AI 智能解析每日 20 次</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">不限官方解析额度 + 自定义 AI</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">3D 原著阅读器</td>
-              <td class="py-3 px-4">基础排版</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">3D 书架 + EPUB/TXT 原著随心导入</td>
+              <td class="py-3 px-4">基础功能完整开放</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">基础功能完整开放</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">Arcade 背词游戏</td>
-              <td class="py-3 px-4">仅支持翻牌</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">5 款全开放 + 20 枚成就徽章</td>
+              <td class="py-3 px-4">基础功能完整开放</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">基础功能完整开放</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">金句壁纸工坊</td>
-              <td class="py-3 px-4">单一 Light 模板</td>
-              <td class="py-3 pl-4 font-bold text-brand-500">全套 7 模板 + 4:5/9:16/16:9 样机</td>
+              <td class="py-3 px-4">3 个模板，强制保留水印</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">全部模板，可移除水印</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-medium">句子收藏容量</td>
+              <td class="py-3 px-4">最多 50 条</td>
+              <td class="py-3 pl-4 font-bold text-brand-500">无上限（无限）</td>
             </tr>
             <tr>
               <td class="py-3 pr-4 font-medium">激活设备上限</td>
@@ -2040,7 +2045,7 @@
           <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
         </summary>
         <p class="mt-3 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-          HORD 提供双引擎架构：开箱即提供官方智能云端专线，无需配置即可享受毫秒级语境解析；同时支持极客自选（BYOK），您可以在设置中直接输入自己的 API Key 与 Base URL，轻松接入<strong>硅基流动 (SiliconFlow)</strong>、<strong>智谱 AI (GLM)</strong>、<strong>阿里云百炼 (通义千问)</strong>、<strong>DeepSeek</strong>、<strong>Claude</strong>、<strong>OpenAI</strong> 以及本地私有化的 <strong>Ollama</strong> 大模型。所有 Key 均严格保存在本地加密沙盒中，数据绝对隐私安全。
+          HORD 提供双引擎架构：免费版使用官方智能云端专线，单词/句子智能解析每日 20 次，普通翻译不占用该额度；PRO 另可启用极客自选（BYOK），在设置中输入自己的 API Key 与 Base URL，接入<strong>硅基流动 (SiliconFlow)</strong>、<strong>智谱 AI (GLM)</strong>、<strong>阿里云百炼 (通义千问)</strong>、<strong>DeepSeek</strong>、<strong>Claude</strong>、<strong>OpenAI</strong> 以及本地私有化的 <strong>Ollama</strong> 大模型。所有 Key 均严格保存在本地加密沙盒中，数据绝对隐私安全。
         </p>
       </details>
 

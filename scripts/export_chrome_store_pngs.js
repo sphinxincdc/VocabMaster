@@ -29,32 +29,87 @@ const fs = require('fs');
   });
   await new Promise(r => setTimeout(r, 2000));
 
-  const outDir = path.resolve(__dirname, '../assets/chrome_store');
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
+  const workspaceOutDir = path.resolve(__dirname, '../assets/chrome_store');
+  const downloadsRootDir = '/Users/andyhu/Downloads/HORD_Chrome_Store_上架素材全套';
+  const downloadsEnDir = path.join(downloadsRootDir, '官方英文命名直接上传版');
+
+  [workspaceOutDir, downloadsRootDir, downloadsEnDir].forEach(dir => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  });
 
   const artboards = [
-    { id: 'artboard-icon', filename: '01_store_icon_128x128.png', w: 128, h: 128 },
-    { id: 'artboard-small-promo', filename: '02_small_promo_440x280.png', w: 440, h: 280 },
-    { id: 'artboard-marquee', filename: '03_marquee_promo_1400x560.png', w: 1400, h: 560 },
-    { id: 'artboard-shot-1', filename: '04_screenshot_1_context_ai_1280x800.png', w: 1280, h: 800 },
-    { id: 'artboard-shot-2', filename: '05_screenshot_2_video_companion_1280x800.png', w: 1280, h: 800 },
-    { id: 'artboard-shot-3', filename: '06_screenshot_3_reader_3d_1280x800.png', w: 1280, h: 800 },
-    { id: 'artboard-shot-4', filename: '07_screenshot_4_arcade_badges_1280x800.png', w: 1280, h: 800 },
-    { id: 'artboard-shot-5', filename: '08_screenshot_5_quotes_mobile_1280x800.png', w: 1280, h: 800 }
+    { 
+      id: 'artboard-icon', 
+      filename: '01_store_icon_128x128.png', 
+      userFriendlyName: '01_应用图标_Store_Icon_128x128.png',
+      w: 128, h: 128 
+    },
+    { 
+      id: 'artboard-small-promo', 
+      filename: '02_small_promo_440x280.png', 
+      userFriendlyName: '02_小型宣传卡_Small_Promo_440x280.png',
+      w: 440, h: 280 
+    },
+    { 
+      id: 'artboard-marquee', 
+      filename: '03_marquee_promo_1400x560.png', 
+      userFriendlyName: '03_主要宣传横幅_Marquee_Promo_1400x560.png',
+      w: 1400, h: 560 
+    },
+    { 
+      id: 'artboard-shot-1', 
+      filename: '04_screenshot_1_context_ai_1280x800.png', 
+      userFriendlyName: '04_功能截图1_极速划词与AI语境深度透析_1280x800.png',
+      w: 1280, h: 800 
+    },
+    { 
+      id: 'artboard-shot-2', 
+      filename: '05_screenshot_2_video_companion_1280x800.png', 
+      userFriendlyName: '05_功能截图2_YouTube与B站双语影音伴侣_1280x800.png',
+      w: 1280, h: 800 
+    },
+    { 
+      id: 'artboard-shot-3', 
+      filename: '06_screenshot_3_reader_3d_1280x800.png', 
+      userFriendlyName: '06_功能截图3_3D实景原著书架与AI长难句拆解_1280x800.png',
+      w: 1280, h: 800 
+    },
+    { 
+      id: 'artboard-shot-4', 
+      filename: '07_screenshot_4_switch_arcade_1280x800.png', 
+      userFriendlyName: '07_功能截图4_任天堂Switch拟真英语电玩城大厅_1280x800.png',
+      w: 1280, h: 800 
+    },
+    { 
+      id: 'artboard-shot-5', 
+      filename: '08_screenshot_5_manager_bento_badges_1280x800.png', 
+      userFriendlyName: '08_功能截图5_单词本Bento中枢与100款成长勋章_1280x800.png',
+      w: 1280, h: 800 
+    }
   ];
 
   for (const item of artboards) {
     const el = await page.$(`#${item.id}`);
     if (el) {
-      const destPath = path.join(outDir, item.filename);
-      await el.screenshot({ path: destPath, omitBackground: false });
-      const stats = fs.statSync(destPath);
-      console.log(`Saved ${item.filename} (${stats.size} bytes)`);
+      // 1. Save to workspace assets/chrome_store/
+      const destWorkspace = path.join(workspaceOutDir, item.filename);
+      await el.screenshot({ path: destWorkspace, omitBackground: false });
+      
+      // 2. Save to Downloads root with clear descriptive name
+      const destUser = path.join(downloadsRootDir, item.userFriendlyName);
+      fs.copyFileSync(destWorkspace, destUser);
+
+      // 3. Save to Downloads English direct-upload dir
+      const destEn = path.join(downloadsEnDir, item.filename);
+      fs.copyFileSync(destWorkspace, destEn);
+
+      const stats = fs.statSync(destWorkspace);
+      console.log(`Saved ${item.userFriendlyName} (${stats.size} bytes)`);
     }
   }
 
   await browser.close();
-  console.log('Export finished.');
+  console.log('All store assets exported and copied to Downloads successfully!');
 })();

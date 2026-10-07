@@ -55,7 +55,6 @@ html_content = '''<!DOCTYPE html>
             color: #f1f5f9;
         }
 
-        /* Ambient grid pattern */
         .ambient-grid {
             background-size: 32px 32px;
             background-image: 
@@ -63,7 +62,6 @@ html_content = '''<!DOCTYPE html>
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
         }
 
-        /* Artboard styling */
         .artboard-wrapper {
             transform-origin: top left;
             transition: transform 0.2s ease;
@@ -78,7 +76,6 @@ html_content = '''<!DOCTYPE html>
             box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
-        /* Editable text cues */
         .editable-active [contenteditable="true"] {
             outline: 1.5px dashed rgba(244, 63, 94, 0.6);
             outline-offset: 3px;
@@ -90,7 +87,6 @@ html_content = '''<!DOCTYPE html>
             background-color: rgba(244, 63, 94, 0.08);
         }
 
-        /* Custom scrollbars */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -119,10 +115,10 @@ html_content = '''<!DOCTYPE html>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="font-bold text-lg text-white tracking-tight">HORD 词境伴侣 · Chrome 应用商店素材工坊</h1>
-                        <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">Store Spec 3.0</span>
+                        <h1 class="text-base font-extrabold text-white tracking-tight">HORD 词境伴侣 · Chrome 应用商店官方素材工坊</h1>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">真实产品界面标准</span>
                     </div>
-                    <p class="text-xs text-slate-400">严格适配 Chrome 网上应用店官方像素与宽高比 · 零遮挡与高呼吸感排版 · 包含 8 组高保真物料</p>
+                    <p class="text-xs text-slate-400">严格适配 Chrome 商店官方规范 · 70/30主横幅与 90/10功能截图 · 去机壳放大关键交互</p>
                 </div>
             </div>
 
@@ -159,8 +155,8 @@ html_content = '''<!DOCTYPE html>
             <a href="#sec-shot-1" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">4. 极速划词即查 (1280×800)</a>
             <a href="#sec-shot-2" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">5. 影音双语伴侣 (1280×800)</a>
             <a href="#sec-shot-3" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">6. 3D实景阅读 (1280×800)</a>
-            <a href="#sec-shot-4" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">7. 电玩城与勋章 (1280×800)</a>
-            <a href="#sec-shot-5" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">8. 金句壁纸工坊 (1280×800)</a>
+            <a href="#sec-shot-4" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">7. 电玩趣味复习 (1280×800)</a>
+            <a href="#sec-shot-5" class="px-2.5 py-1 rounded-md hover:text-white hover:bg-white/5 transition shrink-0">8. 词库中枢与勋章 (1280×800)</a>
         </div>
     </header>
 
@@ -186,14 +182,10 @@ html_content = '''<!DOCTYPE html>
             </div>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 flex items-center gap-8 ambient-grid">
-                <!-- Artboard Frame -->
                 <div class="shrink-0 p-2 bg-slate-900/90 rounded-2xl border border-white/10 shadow-2xl">
                     <div id="artboard-icon" class="artboard w-[128px] h-[128px] rounded-2xl flex items-center justify-center relative bg-gradient-to-br from-slate-900 via-[#101726] to-[#1c0f18] overflow-hidden" data-name="01_store_icon_128x128.png">
-                        <!-- Glow -->
                         <div class="absolute inset-0 bg-gradient-to-tr from-rose-500/20 via-transparent to-amber-500/20"></div>
-                        <!-- Logo -->
                         <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-Logo图标-H红心.png" alt="HORD Icon" class="w-[96px] h-[96px] object-contain relative z-10 drop-shadow-[0_10px_20px_rgba(244,63,94,0.4)]">
-                        <!-- Glass Border Highlight -->
                         <div class="absolute inset-0 rounded-2xl border border-white/20 pointer-events-none"></div>
                     </div>
                 </div>
@@ -227,15 +219,12 @@ html_content = '''<!DOCTYPE html>
             </div>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 flex flex-wrap items-center gap-8 ambient-grid">
-                <!-- Scaled Canvas Wrapper -->
                 <div class="shrink-0 p-3 bg-slate-900/90 rounded-2xl border border-white/10 shadow-2xl">
                     <div id="artboard-small-promo" class="artboard w-[440px] h-[280px] rounded-xl relative p-6 flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#0B0F19] via-[#111827] to-[#1a0f1b]" data-name="02_small_promo_440x280.png">
-                        <!-- Background Accents -->
                         <div class="absolute -top-16 -right-16 w-52 h-52 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
                         <div class="absolute -bottom-16 -left-16 w-52 h-52 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
                         <div class="absolute inset-0 ambient-grid opacity-30 pointer-events-none"></div>
 
-                        <!-- Top Status Bar -->
                         <div class="relative z-10 flex items-center justify-between">
                             <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -246,7 +235,6 @@ html_content = '''<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Center Identity -->
                         <div class="relative z-10 my-auto flex items-center gap-4">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-rose-500 via-red-500 to-amber-500 p-0.5 shadow-xl shadow-rose-500/25 shrink-0 flex items-center justify-center">
                                 <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-AI生成3D玻璃H图标.png" alt="Logo" class="w-full h-full object-cover rounded-2xl">
@@ -261,7 +249,6 @@ html_content = '''<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Bottom Feature Badges Strip -->
                         <div class="relative z-10 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-300 font-medium">
                             <span contenteditable="true" class="flex items-center gap-1"><i class="fa-solid fa-bolt text-amber-400"></i> 划词即查</span>
                             <span class="text-slate-600">•</span>
@@ -288,15 +275,17 @@ html_content = '''<!DOCTYPE html>
 
         <!-- ========================================================= -->
         <!-- ITEM 3: Marquee Promo Tile (1400 x 560 px) -->
+        <!-- 70% Real Screenshot + 30% Brand Layout Standard -->
         <!-- ========================================================= -->
         <section id="sec-marquee" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">3</span>
-                        <h2 class="text-xl font-bold text-white tracking-tight">横幅宣传主图 (Marquee Promo Tile)</h2>
+                        <h2 class="text-xl font-bold text-white tracking-tight">主要宣传横幅 (Marquee Promo Banner)</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">70% 真实产品 · 30% 品牌排版</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：必须为 <code class="text-rose-300 font-mono">1400 × 560 px</code>。首页 Featured 头部精选推荐位 · 元素零遮挡、双语字幕完整呈现。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：必须为 <code class="text-rose-300 font-mono">1400 × 560 px</code>。Chrome Web Store 首页焦点推荐核心位。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-marquee', '03_marquee_promo_1400x560.png', 1400, 560)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -304,17 +293,15 @@ html_content = '''<!DOCTYPE html>
                 </button>
             </div>
 
-            <!-- Canvas Viewport -->
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-marquee" class="artboard w-[1400px] h-[560px] rounded-2xl relative p-10 flex items-center justify-between overflow-hidden bg-gradient-to-br from-[#070B14] via-[#0D1424] to-[#180B1C]" data-name="03_marquee_promo_1400x560.png">
-                        <!-- Lighting & Grid -->
+                    <div id="artboard-marquee" class="artboard w-[1400px] h-[560px] rounded-2xl relative p-8 flex items-center justify-between overflow-hidden bg-gradient-to-br from-[#070B14] via-[#0D1424] to-[#180B1C]" data-name="03_marquee_promo_1400x560.png">
                         <div class="absolute -top-32 left-1/4 w-96 h-96 bg-rose-600/20 rounded-full blur-[120px] pointer-events-none"></div>
                         <div class="absolute -bottom-32 right-1/4 w-[32rem] h-[32rem] bg-indigo-600/20 rounded-full blur-[140px] pointer-events-none"></div>
                         <div class="absolute inset-0 ambient-grid opacity-25 pointer-events-none"></div>
 
-                        <!-- Left Hero Column (540px) -->
-                        <div class="relative z-10 w-[540px] flex flex-col justify-between h-full py-2">
+                        <!-- Left Hero Column: 30% Brand Layout (420px) -->
+                        <div class="relative z-10 w-[420px] flex flex-col justify-between h-full py-2 shrink-0">
                             <div>
                                 <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-lg mb-5">
                                     <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-Logo图标-H红心.png" alt="Logo" class="w-5 h-5 object-contain">
@@ -323,7 +310,7 @@ html_content = '''<!DOCTYPE html>
                                     <span contenteditable="true" class="text-[11px] font-semibold text-rose-300">深度重构版</span>
                                 </div>
 
-                                <h2 contenteditable="true" class="text-4xl font-black text-white leading-[1.22] tracking-tight">
+                                <h2 contenteditable="true" class="text-[34px] font-black text-white leading-[1.2] tracking-tight">
                                     在真实语境中自然习得，<br>
                                     让每个英文单词<br>
                                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-red-400 to-amber-300">
@@ -331,69 +318,87 @@ html_content = '''<!DOCTYPE html>
                                     </span>
                                 </h2>
 
-                                <p contenteditable="true" class="mt-4 text-sm text-slate-300 leading-relaxed">
-                                    突破孤立背单词困局。网页划词双核 AI 解析 · YouTube & B 站双语影音沉浸 · 3D 实景文学阅读器 · 艾宾浩斯电玩复习 · 金句壁纸全端秒级流转。
+                                <p contenteditable="true" class="mt-4 text-xs text-slate-300 leading-relaxed">
+                                    突破孤立背单词困局。网页划词双核 AI 解析 · YouTube & B 站双语影音沉浸 · 3D 实景文学阅读器 · 艾宾浩斯趣味复习闭环。
                                 </p>
                             </div>
 
-                            <!-- Highlights Badges Matrix -->
-                            <div class="pt-5 border-t border-white/10">
-                                <div class="grid grid-cols-3 gap-3">
+                            <div class="pt-4 border-t border-white/10">
+                                <div class="grid grid-cols-3 gap-2.5">
                                     <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <div class="text-rose-400 text-base mb-1"><i class="fa-solid fa-bolt"></i></div>
-                                        <div contenteditable="true" class="text-xs font-bold text-white">0.05s 极速响应</div>
-                                        <div contenteditable="true" class="text-[10px] text-slate-400 mt-0.5">网页任意划词即解</div>
+                                        <div class="text-rose-400 text-sm mb-1"><i class="fa-solid fa-bolt"></i></div>
+                                        <div contenteditable="true" class="text-[11px] font-bold text-white">0.05s 极速响应</div>
+                                        <div contenteditable="true" class="text-[9px] text-slate-400 mt-0.5">网页任意划词即解</div>
                                     </div>
                                     <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <div class="text-indigo-400 text-base mb-1"><i class="fa-solid fa-brain"></i></div>
-                                        <div contenteditable="true" class="text-xs font-bold text-white">双核 AI 语境</div>
-                                        <div contenteditable="true" class="text-[10px] text-slate-400 mt-0.5">官方与自建接口</div>
+                                        <div class="text-indigo-400 text-sm mb-1"><i class="fa-solid fa-brain"></i></div>
+                                        <div contenteditable="true" class="text-[11px] font-bold text-white">双核 AI 语境</div>
+                                        <div contenteditable="true" class="text-[9px] text-slate-400 mt-0.5">官方与自建接口</div>
                                     </div>
                                     <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <div class="text-amber-400 text-base mb-1"><i class="fa-solid fa-trophy"></i></div>
-                                        <div contenteditable="true" class="text-xs font-bold text-white">100+ 专属勋章</div>
-                                        <div contenteditable="true" class="text-[10px] text-slate-400 mt-0.5">5 款电玩游戏抗遗忘</div>
+                                        <div class="text-amber-400 text-sm mb-1"><i class="fa-solid fa-medal"></i></div>
+                                        <div contenteditable="true" class="text-[11px] font-bold text-white">100+ 专属勋章</div>
+                                        <div contenteditable="true" class="text-[9px] text-slate-400 mt-0.5">艾宾浩斯抗遗忘</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right Stage (780px) - Zero Collision Layout -->
-                        <div class="relative z-10 w-[780px] h-[480px]">
-                            <!-- Layer 1: YouTube Player Card (Top-Left, 570px wide, bilingual subtitles 100% visible) -->
-                            <div class="absolute left-2 top-2 w-[570px] h-[315px] rounded-xl overflow-hidden border border-white/15 shadow-2xl bg-slate-900 z-10">
-                                <div class="bg-slate-800/90 px-3 py-1.5 flex items-center justify-between border-b border-white/10">
-                                    <div class="flex items-center gap-1.5">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
-                                        <span class="text-[10px] text-slate-400 font-mono ml-2">YouTube 原生双语字幕沉浸模式</span>
+                        <!-- Right Stage: 70% Real Workflow Demonstration (930px) -->
+                        <div class="relative z-10 w-[930px] h-[500px] flex items-center justify-between gap-4">
+                            <!-- Left Sub-Stage (550px): Video Capture + Manager Closed Loop -->
+                            <div class="w-[550px] h-full flex flex-col justify-between">
+                                <!-- Top Card: YouTube In-Video Lookup (340px) -->
+                                <div class="w-full h-[340px] rounded-xl overflow-hidden border border-white/15 shadow-2xl bg-slate-900 flex flex-col">
+                                    <div class="bg-slate-800/95 px-3 py-1.5 flex items-center justify-between border-b border-white/10 shrink-0">
+                                        <div class="flex items-center gap-1.5">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+                                            <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+                                            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                                            <span class="text-[11px] text-slate-300 font-mono ml-2">YouTube · exponential 实时划词与双语字幕</span>
+                                        </div>
+                                        <span class="text-[10px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold"><i class="fa-brands fa-youtube mr-1"></i>YouTube</span>
                                     </div>
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold"><i class="fa-brands fa-youtube mr-1"></i>YouTube</span>
+                                    <div class="flex-1 bg-slate-950 overflow-hidden flex items-center justify-center">
+                                        <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-视频划词-exponential查词与双语字幕.png" alt="YouTube" class="w-full h-full object-cover object-left-bottom">
+                                    </div>
                                 </div>
-                                <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-播放页-双语字幕沉浸模式.png" alt="YouTube" class="w-full h-[calc(100%-25px)] object-cover object-left-top">
+
+                                <!-- Bottom Card: Closed Loop Vocabulary Hub Status (140px) -->
+                                <div class="w-full h-[142px] p-3.5 rounded-xl bg-slate-900/95 border border-white/15 backdrop-blur-xl shadow-2xl flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-3.5">
+                                        <div class="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 shrink-0 shadow-lg shadow-rose-500/10">
+                                            <i class="fa-solid fa-graduation-cap text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-bold text-white flex items-center gap-2">
+                                                <span>学习中枢无缝闭环</span>
+                                                <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-mono font-bold">已入库</span>
+                                            </div>
+                                            <div class="text-[11px] text-slate-300 mt-1">划词即刻沉淀至生词本 · 智能触发艾宾浩斯复习算法</div>
+                                            <div class="flex items-center gap-2 mt-2 text-[10px]">
+                                                <span class="px-2 py-0.5 rounded bg-slate-800 border border-white/10 text-slate-200 font-mono"><i class="fa-solid fa-book-bookmark text-rose-400 mr-1"></i>2,241 词已沉淀</span>
+                                                <span class="px-2 py-0.5 rounded bg-slate-800 border border-white/10 text-amber-300 font-mono"><i class="fa-solid fa-medal text-amber-400 mr-1"></i>29/100 勋章已点亮</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden border border-white/10 bg-slate-950">
+                                        <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-徽章系统-无缝完美展示.png" alt="Badges Mini" class="w-full h-full object-cover object-top">
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Layer 2: Web Context AI Popup Card (Lower-Right, 380px wide, zero overlap with subtitles) -->
-                            <div class="absolute right-2 bottom-3 w-[380px] rounded-xl overflow-hidden border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.95)] bg-slate-950/95 backdrop-blur-2xl z-20 transform hover:-translate-y-1 transition duration-300">
-                                <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-3 py-2 flex items-center justify-between border-b border-white/10">
+                            <!-- Right Sub-Stage (365px): Enlarged Light-Mode AI Breakdown Popup -->
+                            <div class="w-[365px] h-full rounded-xl overflow-hidden border border-white/20 shadow-[0_30px_70px_rgba(0,0,0,0.95)] bg-white flex flex-col">
+                                <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-3 py-2 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                                        <span class="text-xs font-bold text-white tracking-wide">网页划词 · AI 语境解析</span>
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        <span class="text-xs font-bold text-white tracking-wide">查词弹窗 · 双核 AI 语境深度解析</span>
                                     </div>
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono">0.05s</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono font-bold">0.05s</span>
                                 </div>
-                                <img src="assets/screenshot_v3/04-网页划词弹窗/网页划词-unprecedented查词-AI语境解析.png" alt="Context AI" class="w-full h-auto object-cover">
-                            </div>
-
-                            <!-- Layer 3: 100-Badge Matrix Pill (Lower-Left under YouTube, perfectly placed) -->
-                            <div class="absolute left-2 bottom-4 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-white/15 backdrop-blur-xl shadow-2xl z-20 flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                                    <i class="fa-solid fa-medal text-base"></i>
-                                </div>
-                                <div>
-                                    <div class="text-xs font-bold text-white">全成就勋章矩阵</div>
-                                    <div class="text-[10px] text-slate-400">100 款专属成就 · 艾宾浩斯抗遗忘</div>
+                                <div class="flex-1 p-2 bg-white overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/04-网页划词弹窗/查词弹窗-benevolent-AI语境深度解析-浅色版.png" alt="Context AI Light" class="w-full h-full object-contain object-top">
                                 </div>
                             </div>
                         </div>
@@ -404,6 +409,7 @@ html_content = '''<!DOCTYPE html>
 
         <!-- ========================================================= -->
         <!-- SCREENSHOT 1: 极速划词即查 · 双核 AI 语境深度透析 (1280x800) -->
+        <!-- 90% Real Product Screenshot + 10% Compact Annotation Standard -->
         <!-- ========================================================= -->
         <section id="sec-shot-1" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
@@ -411,8 +417,9 @@ html_content = '''<!DOCTYPE html>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">4</span>
                         <h2 class="text-xl font-bold text-white tracking-tight">截图 1：极速划词即查 · 双核 AI 语境深度透析</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">90% 真实产品 · 10% 标注</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code> (16:10 推荐格式)。店铺详情页首屏轮播图，决定用户第一印象。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。证明功能：网页任意划词 0.05s 瞬时响应，浅色双核 AI 精准剖析当前语境释义并一键收录。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-shot-1', '04_screenshot_1_context_ai_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -422,62 +429,56 @@ html_content = '''<!DOCTYPE html>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-shot-1" class="artboard w-[1280px] h-[800px] rounded-2xl relative p-10 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0E1526] to-[#0A0E1A]" data-name="04_screenshot_1_context_ai_1280x800.png">
-                        <!-- Top Ambient Glow -->
+                    <div id="artboard-shot-1" class="artboard w-[1280px] h-[800px] rounded-2xl relative flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0E1526] to-[#0A0E1A]" data-name="04_screenshot_1_context_ai_1280x800.png">
                         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-rose-600/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <!-- Top Header Area (150px) -->
-                        <div class="relative z-10 text-center max-w-4xl mx-auto">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs font-bold tracking-widest uppercase mb-3">
-                                <i class="fa-solid fa-bolt text-rose-400"></i>
-                                <span contenteditable="true">FEATURE 01 · BROWSER POPUP & CONTEXT AI</span>
+                        <!-- Top Compact Annotation Header (10% height ~76px) -->
+                        <div class="relative z-10 w-full flex items-center justify-between px-8 pt-5 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded-md bg-rose-500/20 text-rose-300 text-xs font-bold tracking-wider font-mono border border-rose-500/30 uppercase">FEATURE 01</span>
+                                <h2 contenteditable="true" class="text-2xl font-black text-white tracking-tight">
+                                    极速划词即查 · 双核 AI 语境深度透析
+                                </h2>
                             </div>
-                            <h2 contenteditable="true" class="text-3xl font-black text-white tracking-tight">
-                                极速划词即查 · 双核 AI 语境深度透析
-                            </h2>
-                            <p contenteditable="true" class="text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                                网页任意选词瞬间响应 · 支持官方解析与个人私有大模型 API 自由接入 · 搭配短语与真实语法语境精准剖析
-                            </p>
-                            <!-- Feature Pills -->
-                            <div class="mt-4 flex items-center justify-center gap-2.5 text-xs">
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-bolt text-amber-400 mr-1.5"></i>0.05s 瞬时浮窗</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-microchip text-indigo-400 mr-1.5"></i>双核 AI 智能切换</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-spell-check text-emerald-400 mr-1.5"></i>高频搭配短语</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-bookmark text-rose-400 mr-1.5"></i>真题例句自动关联</span>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-bolt text-amber-400 mr-1.5"></i>0.05s 瞬时响应</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-brain text-indigo-400 mr-1.5"></i>双核 AI 智能切换</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-spell-check text-emerald-400 mr-1.5"></i>搭配短语 & 原文例句</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-bookmark text-rose-400 mr-1.5"></i>一键入库收录</span>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage (560px) -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center gap-6 px-4">
-                            <!-- Card A: unprecedented AI Context Analysis -->
-                            <div class="w-[570px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition duration-300">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                        <!-- 90% Showcase Stage (~705px height) -->
+                        <div class="relative z-10 w-full h-[705px] flex items-center justify-center gap-6 px-6 py-4">
+                            <!-- Left Card (570px): Authentic Webpage Reading with Word Highlight -->
+                            <div class="w-[570px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">大模型语境解析 · unprecedented</span>
+                                        <span class="text-xs text-slate-300 font-mono ml-2 flex items-center gap-1.5"><i class="fa-solid fa-lock text-[10px] text-emerald-400"></i> techcrunch.com/article/ai-breakthrough</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">AI 解析模式</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">网页原生划词</span>
                                 </div>
-                                <div class="p-3 bg-slate-950 flex items-center justify-center">
-                                    <img src="assets/screenshot_v3/04-网页划词弹窗/网页划词-unprecedented查词-AI语境解析.png" alt="AI Context" class="w-full h-auto max-h-[460px] object-contain rounded-xl">
+                                <div class="flex-1 bg-slate-950 p-2 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/04-网页划词弹窗/网页划词-unprecedented查词-AI语境解析.png" alt="Web Context AI" class="w-full h-full object-cover object-left-top rounded-xl">
                                 </div>
                             </div>
 
-                            <!-- Card B: exhilarating Collocation & Source -->
-                            <div class="w-[570px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)] transform hover:-translate-y-1 transition duration-300">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                            <!-- Right Card (590px): Enlarged Light-Mode AI Breakdown Popup -->
+                            <div class="w-[590px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">高频搭配与详细释义 · exhilarating</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">查词弹窗 · 双核 AI 语境深度透析 (浅色沉浸版)</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold">权威词典库</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold">双核 AI 0.05s</span>
                                 </div>
-                                <div class="p-3 bg-slate-950 flex items-center justify-center">
-                                    <img src="assets/screenshot_v3/04-网页划词弹窗/网页划词-exhilarating查词-搭配短语.png" alt="Collocations" class="w-full h-auto max-h-[460px] object-contain rounded-xl">
+                                <div class="flex-1 bg-white p-3 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/04-网页划词弹窗/查词弹窗-benevolent-AI语境深度解析-浅色版.png" alt="AI Context Breakdown" class="w-full h-full object-contain object-top rounded-xl">
                                 </div>
                             </div>
                         </div>
@@ -487,16 +488,18 @@ html_content = '''<!DOCTYPE html>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SCREENSHOT 2: YouTube & B 站双语伴侣 · 原生影音学习 (1280x800) -->
+        <!-- SCREENSHOT 2: YouTube & B 站双语伴侣 · 原生影音沉浸学习 (1280x800) -->
+        <!-- 90% Real Product Screenshot + 10% Compact Annotation Standard -->
         <!-- ========================================================= -->
         <section id="sec-shot-2" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">5</span>
-                        <h2 class="text-xl font-bold text-white tracking-tight">截图 2：YouTube & B 站双语伴侣 · 原生影音学习</h2>
+                        <h2 class="text-xl font-bold text-white tracking-tight">截图 2：YouTube & B 站双语伴侣 · 原生影音沉浸学习</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">90% 真实产品 · 10% 标注</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。双语字幕高保真展示 · 左右平衡排布，细节零遮挡。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。证明功能：原生视频字幕同显、视频内实时划词悬浮释义与侧边栏字幕定位复读。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-shot-2', '05_screenshot_2_video_companion_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -506,57 +509,57 @@ html_content = '''<!DOCTYPE html>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-shot-2" class="artboard w-[1280px] h-[800px] rounded-2xl relative p-10 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0B0F1C] via-[#10172B] to-[#0A0D17]" data-name="05_screenshot_2_video_companion_1280x800.png">
-                        <!-- Top Ambient Glow -->
+                    <div id="artboard-shot-2" class="artboard w-[1280px] h-[800px] rounded-2xl relative flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0B0F1C] via-[#10172B] to-[#0A0D17]" data-name="05_screenshot_2_video_companion_1280x800.png">
                         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <!-- Top Header -->
-                        <div class="relative z-10 text-center max-w-4xl mx-auto">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-bold tracking-widest uppercase mb-3">
-                                <i class="fa-solid fa-play text-indigo-400"></i>
-                                <span contenteditable="true">FEATURE 02 · VIDEO IMMERSIVE COMPANION</span>
+                        <!-- Top Compact Annotation Header (10% height ~76px) -->
+                        <div class="relative z-10 w-full flex items-center justify-between px-8 pt-5 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-bold tracking-wider font-mono border border-indigo-500/30 uppercase">FEATURE 02</span>
+                                <h2 contenteditable="true" class="text-2xl font-black text-white tracking-tight">
+                                    YouTube & B 站双语伴侣 · 原生影音沉浸学习
+                                </h2>
                             </div>
-                            <h2 contenteditable="true" class="text-3xl font-black text-white tracking-tight">
-                                YouTube & B 站双语伴侣 · 原生影音沉浸学习
-                            </h2>
-                            <p contenteditable="true" class="text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                                原汁原味双语字幕同显 · 视频实时悬浮划词 · 侧边栏字幕列表精准精听与单句复读
-                            </p>
-                            <!-- Feature Pills -->
-                            <div class="mt-4 flex items-center justify-center gap-2.5 text-xs">
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-brands fa-youtube text-red-400 mr-1.5"></i>YouTube 原生双语字幕</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-brands fa-bilibili text-sky-400 mr-1.5"></i>B 站全功能伴侣</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-headphones text-amber-400 mr-1.5"></i>句段精听复读</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-cloud-arrow-down text-emerald-400 mr-1.5"></i>影音原生生词收录</span>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-brands fa-youtube text-red-400 mr-1.5"></i>YouTube 原生双语字幕</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-brands fa-bilibili text-sky-400 mr-1.5"></i>B 站双语伴侣</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-headphones text-amber-400 mr-1.5"></i>单句精听复读</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-cloud-arrow-down text-emerald-400 mr-1.5"></i>影音生词一键沉淀</span>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage (Refined Balance & Breathing Room) -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center px-4">
-                            <!-- Main YouTube Player Mockup (Left) -->
-                            <div class="w-[710px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-[0_30px_70px_rgba(0,0,0,0.85)] z-10">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                        <!-- 90% Showcase Stage (~705px height) -->
+                        <div class="relative z-10 w-full h-[705px] flex items-center justify-center gap-6 px-6 py-4">
+                            <!-- Left Card (580px): YouTube Real Subtitle & Popup -->
+                            <div class="w-[580px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">YouTube 原生双语字幕播放沉浸态</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">YouTube · exponential 实时划词查词与双语字幕同显</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold"><i class="fa-brands fa-youtube mr-1"></i>YouTube</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold"><i class="fa-brands fa-youtube mr-1"></i>YouTube 原生</span>
                                 </div>
-                                <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-播放页-双语字幕沉浸模式.png" alt="YouTube Player" class="w-full h-[450px] object-cover object-top">
+                                <div class="flex-1 bg-slate-950 p-2 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/07-YouTube-伴侣/YouTube-视频划词-exponential查词与双语字幕.png" alt="YouTube Subtitles" class="w-full h-full object-cover object-left-bottom rounded-xl">
+                                </div>
                             </div>
 
-                            <!-- Overlapping Bilibili Subtitles Inset (Right) -->
-                            <div class="w-[460px] rounded-2xl overflow-hidden border border-white/20 bg-slate-950/95 shadow-[0_35px_80px_rgba(0,0,0,0.92)] z-20 -ml-10 transform translate-y-3">
-                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                            <!-- Right Card (580px): Bilibili Real Subtitle & Popup -->
+                            <div class="w-[580px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
-                                        <span class="text-xs text-white font-medium">Bilibili 双语伴侣 · 侧栏精听与选词</span>
+                                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">Bilibili · resignation 查词与全览字幕列表联动</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-semibold"><i class="fa-brands fa-bilibili mr-1"></i>B站</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-semibold"><i class="fa-brands fa-bilibili mr-1"></i>B站伴侣</span>
                                 </div>
-                                <img src="assets/screenshot_v3/09-Bilibili-伴侣/Bilibili-播放页-双语字幕与侧栏列表-余华活着访谈.png" alt="Bilibili Subtitle" class="w-full h-[420px] object-cover object-left-top">
+                                <div class="flex-1 bg-slate-950 p-2 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/09-Bilibili-伴侣/Bilibili-视频划词-resignation查词弹窗.png" alt="Bilibili Subtitles" class="w-full h-full object-cover object-center rounded-xl">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -566,6 +569,7 @@ html_content = '''<!DOCTYPE html>
 
         <!-- ========================================================= -->
         <!-- SCREENSHOT 3: 3D 实景原著阅读器 · 经典文学与长难句剖析 (1280x800) -->
+        <!-- 90% Real Product Screenshot + 10% Compact Annotation Standard -->
         <!-- ========================================================= -->
         <section id="sec-shot-3" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
@@ -573,8 +577,9 @@ html_content = '''<!DOCTYPE html>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">6</span>
                         <h2 class="text-xl font-bold text-white tracking-tight">截图 3：3D 实景原著阅读器 · 经典文学与长难句剖析</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">90% 真实产品 · 10% 标注</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。展示 3D 拟真书架与长难句深度语法拆解能力。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。证明功能：24 本经典英文原著 3D 书架真实呈现、AI 树状语法长难句深度拆解与纯净排版。</p>
                 </div>
                 <button onclick="downloadAsset('artboard-shot-3', '06_screenshot_3_reader_3d_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
@@ -584,59 +589,57 @@ html_content = '''<!DOCTYPE html>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-shot-3" class="artboard w-[1280px] h-[800px] rounded-2xl relative p-10 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0D1528] to-[#0A0E1A]" data-name="06_screenshot_3_reader_3d_1280x800.png">
-                        <!-- Top Ambient Glow -->
+                    <div id="artboard-shot-3" class="artboard w-[1280px] h-[800px] rounded-2xl relative flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0D1528] to-[#0A0E1A]" data-name="06_screenshot_3_reader_3d_1280x800.png">
                         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-cyan-600/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <!-- Top Header -->
-                        <div class="relative z-10 text-center max-w-4xl mx-auto">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-3">
-                                <i class="fa-solid fa-book-open text-cyan-400"></i>
-                                <span contenteditable="true">FEATURE 03 · 3D IMMERSIVE READER</span>
+                        <!-- Top Compact Annotation Header (10% height ~76px) -->
+                        <div class="relative z-10 w-full flex items-center justify-between px-8 pt-5 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 text-xs font-bold tracking-wider font-mono border border-cyan-500/30 uppercase">FEATURE 03</span>
+                                <h2 contenteditable="true" class="text-2xl font-black text-white tracking-tight">
+                                    3D 实景原著阅读器 · 经典文学与长难句剖析
+                                </h2>
                             </div>
-                            <h2 contenteditable="true" class="text-3xl font-black text-white tracking-tight">
-                                3D 实景原著阅读器 · 经典文学与长难句剖析
-                            </h2>
-                            <p contenteditable="true" class="text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                                拟真质感原著书架 · 原汁原味英文排版 · AI 长难句树状语法剖析与全篇深度解析
-                            </p>
-                            <!-- Feature Pills -->
-                            <div class="mt-4 flex items-center justify-center gap-2.5 text-xs">
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-layer-group text-cyan-400 mr-1.5"></i>3D 拟真原著书架</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-wand-magic-sparkles text-amber-400 mr-1.5"></i>AI 长难句语法拆解</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-maximize text-emerald-400 mr-1.5"></i>全屏沉浸纯净排版</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-highlighter text-rose-400 mr-1.5"></i>段落金句实时高亮</span>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-layer-group text-cyan-400 mr-1.5"></i>3D 拟真原著书架 (24本)</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-wand-magic-sparkles text-amber-400 mr-1.5"></i>AI 长难句语法拆解</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-maximize text-emerald-400 mr-1.5"></i>全屏沉浸纯净排版</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-highlighter text-rose-400 mr-1.5"></i>段落金句实时高亮</span>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center gap-6 px-4">
-                            <!-- Left: 3D Bookshelf -->
-                            <div class="w-[640px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                        <!-- 90% Showcase Stage (~705px height) -->
+                        <div class="relative z-10 w-full h-[705px] flex items-center justify-center gap-5 px-6 py-4">
+                            <!-- Left Card (785px): 3D Bookshelf 24 Books (100% Complete Display, Zero Mistaken Cropping) -->
+                            <div class="w-[785px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">3D 实景拟真书架 · 经典英文原著</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">3D 实景拟真书架 · 经典英文原著全量典藏 (24 本全览无裁切)</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold">15+ 原著典藏</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold">24 本原著全览</span>
                                 </div>
-                                <img src="assets/screenshot_v3/03-阅读器-Reader/书架/阅读器-书架-丰富版15本书.png" alt="3D Bookshelf" class="w-full h-[450px] object-cover object-top">
+                                <div class="flex-1 bg-[#0e121a] p-1.5 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/03-阅读器-Reader/书架/阅读器-书架-全量24本书展示.png" alt="3D Bookshelf Full 24 Books" class="w-full h-full object-contain object-top rounded-xl">
+                                </div>
                             </div>
 
-                            <!-- Right: AI Grammar Tree Breakdown -->
-                            <div class="w-[500px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                            <!-- Right Card (425px): In-Reader AI Grammar Analysis & Translation -->
+                            <div class="w-[425px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">AI 语法分析与长难句剖析</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">AI 语法树剖析 · 原著长难句深度拆解</span>
                                     </div>
                                     <span class="text-[11px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold">长难句拆解</span>
                                 </div>
-                                <img src="assets/screenshot_v3/03-阅读器-Reader/AI翻译深度解析/阅读器-AI翻译面板-全页展开态.png" alt="AI Grammar" class="w-full h-[450px] object-cover object-top">
+                                <div class="flex-1 bg-slate-950 p-1.5 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/03-阅读器-Reader/AI翻译深度解析/阅读器-AI翻译面板-全页展开态.png" alt="AI Grammar Tree" class="w-full h-full object-cover object-top rounded-xl">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -645,18 +648,21 @@ html_content = '''<!DOCTYPE html>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SCREENSHOT 4: 英语电玩城 · 艾宾浩斯抗遗忘与 100 款成长勋章 (1280x800) -->
+        <!-- SCREENSHOT 4: 英语电玩城 · 单词连连看实战与艾宾浩斯记忆评级 (1280x800) -->
+        <!-- 90% Real Product Screenshot + 10% Compact Annotation Standard -->
+        <!-- (Zero Toy Console Mockups, Pure Native Game & Ebbinghaus Card) -->
         <!-- ========================================================= -->
         <section id="sec-shot-4" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">7</span>
-                        <h2 class="text-xl font-bold text-white tracking-tight">截图 4：英语电玩城 · 艾宾浩斯抗遗忘与 100 款成长勋章</h2>
+                        <h2 class="text-xl font-bold text-white tracking-tight">截图 4：英语电玩城 · 任天堂 Switch 拟真游戏化大厅</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30">90% 真实产品 · 10% 标注</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。展示 5 款电玩游戏复习与 100 款成长徽章激励机制。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。证明功能：Switch 拟真电玩大厅全景、5 大抗遗忘趣味对战模式、积分连击突破与成就卡带陈列槽闭环。</p>
                 </div>
-                <button onclick="downloadAsset('artboard-shot-4', '07_screenshot_4_arcade_badges_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
+                <button onclick="downloadAsset('artboard-shot-4', '07_screenshot_4_switch_arcade_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
                     <span>下载此图 (1280×800)</span>
                 </button>
@@ -664,59 +670,45 @@ html_content = '''<!DOCTYPE html>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-shot-4" class="artboard w-[1280px] h-[800px] rounded-2xl relative p-10 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0B0E1B] via-[#12162C] to-[#0A0D18]" data-name="07_screenshot_4_arcade_badges_1280x800.png">
-                        <!-- Top Ambient Glow -->
+                    <div id="artboard-shot-4" class="artboard w-[1280px] h-[800px] rounded-2xl relative flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#0B0E1B] via-[#12162C] to-[#0A0D18]" data-name="07_screenshot_4_switch_arcade_1280x800.png">
                         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-amber-600/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <!-- Top Header -->
-                        <div class="relative z-10 text-center max-w-4xl mx-auto">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-bold tracking-widest uppercase mb-3">
-                                <i class="fa-solid fa-gamepad text-amber-400"></i>
-                                <span contenteditable="true">FEATURE 04 · GAMIFIED REVIEW & BADGES</span>
+                        <!-- Top Compact Annotation Header (10% height ~76px) -->
+                        <div class="relative z-10 w-full flex items-center justify-between px-8 pt-5 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-xs font-bold tracking-wider font-mono border border-amber-500/30 uppercase">FEATURE 04</span>
+                                <h2 contenteditable="true" class="text-2xl font-black text-white tracking-tight">
+                                    英语电玩城 · 任天堂 Switch 拟真游戏化大厅
+                                </h2>
                             </div>
-                            <h2 contenteditable="true" class="text-3xl font-black text-white tracking-tight">
-                                英语电玩城 · 艾宾浩斯抗遗忘与 100 款成长勋章
-                            </h2>
-                            <p contenteditable="true" class="text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                                告别枯燥背词 · 5 款趣味闯关电玩游戏 · 遵循认知抗遗忘记忆算法 · 100 款成就徽章持续正向反馈
-                            </p>
-                            <!-- Feature Pills -->
-                            <div class="mt-4 flex items-center justify-center gap-2.5 text-xs">
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-gamepad text-amber-400 mr-1.5"></i>5 大互动电玩</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-chart-line text-emerald-400 mr-1.5"></i>艾宾浩斯曲线</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-medal text-rose-400 mr-1.5"></i>100 款成长勋章</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-fire text-amber-500 mr-1.5"></i>连胜打卡机制</span>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-gamepad text-amber-400 mr-1.5"></i>Switch 拟真电玩大厅</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-dice text-cyan-400 mr-1.5"></i>五大趣味抗遗忘对战</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-trophy text-amber-500 mr-1.5"></i>今日积分 & 连击突破</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-sd-card text-emerald-400 mr-1.5"></i>游戏徽章卡带陈列槽</span>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center gap-6 px-4">
-                            <!-- Left: Arcade Lobby -->
-                            <div class="w-[640px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                        <!-- 90% Showcase Stage (~705px height) -->
+                        <div class="relative z-10 w-full h-[705px] flex items-center justify-center px-6 py-4">
+                            <!-- Hero Card: Switch Arcade Homepage Full Display (Zero Cutoff, 100% Complete) -->
+                            <div class="w-full h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">复习电玩城 · 游戏化互动学习大厅</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">HORD 英语电玩城 · 任天堂 Switch 拟真游戏化大厅 (五大趣味抗遗忘对战全览)</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">5 大游戏合集</span>
-                                </div>
-                                <img src="assets/screenshot_v3/02-复习-Ebbinghaus/复习-英语电玩城-游戏化学习总览.png" alt="Arcade" class="w-full h-[450px] object-cover object-top">
-                            </div>
-
-                            <!-- Right: 100-Badge Matrix -->
-                            <div class="w-[500px] rounded-2xl overflow-hidden border border-white/15 bg-slate-900/90 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
-                                <div class="bg-slate-800/90 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
                                     <div class="flex items-center gap-2">
-                                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-                                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
-                                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">成长勋章系统 · 100 款全成就</span>
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">5 大趣味游戏模式</span>
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">724 今日积分</span>
+                                        <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">Switch 掌机沉浸感</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">激励体系</span>
                                 </div>
-                                <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-Dashboard-全部徽章矩阵-成就激励.png" alt="Badges" class="w-full h-[450px] object-cover object-top">
+                                <div class="flex-1 bg-[#e6e2d8] p-1.5 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/02-复习-Ebbinghaus/复习-英语电玩城-游戏化学习总览.png" alt="Switch Arcade Overview" class="w-full h-full object-contain object-center rounded-xl">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -725,18 +717,21 @@ html_content = '''<!DOCTYPE html>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SCREENSHOT 5: 金句工坊壁纸艺术 · 手机电脑全端毫秒流转 (1280x800) -->
+        <!-- SCREENSHOT 5: 单词本中枢 · 智能词库管理与 100 款成长勋章 (1280x800) -->
+        <!-- 90% Real Product Screenshot + 10% Compact Annotation Standard -->
+        <!-- (Zero Synthetic Mockup Casings, Pure Bento Dashboard & Badge Matrix) -->
         <!-- ========================================================= -->
         <section id="sec-shot-5" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 text-xs flex items-center justify-center font-bold">8</span>
-                        <h2 class="text-xl font-bold text-white tracking-tight">截图 5：金句工坊壁纸艺术 · 手机电脑全端毫秒流转</h2>
+                        <h2 class="text-xl font-bold text-white tracking-tight">截图 5：单词本中枢 · 智能词库管理与 100 款成长勋章</h2>
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-300 border border-rose-500/30">90% 真实产品 · 10% 标注</span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。沉浸式金句壁纸工坊 · 1080P/4K 实机样机与 iPhone 锁屏艺术。</p>
+                    <p class="text-xs text-slate-400 mt-1">官方规范：<code class="text-rose-300 font-mono">1280 × 800 px</code>。证明功能：全量词库集中收录管理、Bento 今日目标与掌握度数据分析、100 款全成就勋章矩阵闭环。</p>
                 </div>
-                <button onclick="downloadAsset('artboard-shot-5', '08_screenshot_5_quotes_mobile_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
+                <button onclick="downloadAsset('artboard-shot-5', '08_screenshot_5_manager_bento_badges_1280x800.png', 1280, 800)" class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10 hover:border-white/20 transition flex items-center gap-1.5 shadow">
                     <i class="fa-solid fa-download text-rose-400"></i>
                     <span>下载此图 (1280×800)</span>
                 </button>
@@ -744,55 +739,57 @@ html_content = '''<!DOCTYPE html>
 
             <div class="p-6 rounded-2xl bg-[#0c1017] border border-white/10 overflow-x-auto ambient-grid">
                 <div class="artboard-wrapper inline-block">
-                    <div id="artboard-shot-5" class="artboard w-[1280px] h-[800px] rounded-2xl relative p-10 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0E1527] to-[#0A0D18]" data-name="08_screenshot_5_quotes_mobile_1280x800.png">
-                        <!-- Top Ambient Glow -->
+                    <div id="artboard-shot-5" class="artboard w-[1280px] h-[800px] rounded-2xl relative flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#090D18] via-[#0E1527] to-[#0A0D18]" data-name="08_screenshot_5_manager_bento_badges_1280x800.png">
                         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-rose-600/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-                        <!-- Top Header -->
-                        <div class="relative z-10 text-center max-w-4xl mx-auto">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs font-bold tracking-widest uppercase mb-3">
-                                <i class="fa-solid fa-wand-magic-sparkles text-rose-400"></i>
-                                <span contenteditable="true">FEATURE 05 · QUOTE STUDIO & MULTI-DEVICE</span>
+                        <!-- Top Compact Annotation Header (10% height ~76px) -->
+                        <div class="relative z-10 w-full flex items-center justify-between px-8 pt-5 pb-3 border-b border-white/10">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded-md bg-rose-500/20 text-rose-300 text-xs font-bold tracking-wider font-mono border border-rose-500/30 uppercase">FEATURE 05</span>
+                                <h2 contenteditable="true" class="text-2xl font-black text-white tracking-tight">
+                                    单词本中枢 · 智能词库管理与 100 款成长勋章
+                                </h2>
                             </div>
-                            <h2 contenteditable="true" class="text-3xl font-black text-white tracking-tight">
-                                金句工坊壁纸艺术 · 手机电脑全端毫秒流转
-                            </h2>
-                            <p contenteditable="true" class="text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                                心动好词一键排版为 4K 电脑与手机壁纸 · 沉浸式名言社媒卡片 · 跨端云同步温故知新
-                            </p>
-                            <!-- Feature Pills -->
-                            <div class="mt-4 flex items-center justify-center gap-2.5 text-xs">
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-laptop text-amber-400 mr-1.5"></i>4K 电脑壁纸样机</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-mobile-screen text-sky-400 mr-1.5"></i>iPhone 锁屏金句艺术</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-palette text-rose-400 mr-1.5"></i>8+ 款大师艺术模板</span>
-                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"><i class="fa-solid fa-rotate text-emerald-400 mr-1.5"></i>全端数据无缝流转</span>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-table-columns text-amber-400 mr-1.5"></i>Bento 仪表盘总览</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-chart-pie text-emerald-400 mr-1.5"></i>掌握度分级与今日目标</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-medal text-rose-400 mr-1.5"></i>100 款全成就勋章</span>
+                                <span contenteditable="true" class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"><i class="fa-solid fa-rotate text-sky-400 mr-1.5"></i>全端数据无缝流转</span>
                             </div>
                         </div>
 
-                        <!-- Showcase Stage (Clean, Native App Card Without Double Titlebar) -->
-                        <div class="relative z-10 w-full h-[550px] flex items-center justify-center gap-6 px-4">
-                            <!-- Left: Mobile Mockup 1 (Daily Review & Quote Carousel) -->
-                            <div class="w-[200px] h-[450px] flex items-center justify-center shrink-0 transform -rotate-2 hover:rotate-0 transition duration-300">
-                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-1.png" alt="Mobile 1" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]">
-                            </div>
-
-                            <!-- Center: MacBook Export Workbench Card (Clean floating app window) -->
-                            <div class="w-[670px] rounded-2xl overflow-hidden border border-white/20 bg-slate-900/90 shadow-[0_30px_70px_rgba(0,0,0,0.9)] z-10">
-                                <div class="bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                        <!-- 90% Showcase Stage (~705px height) -->
+                        <div class="relative z-10 w-full h-[705px] flex items-center justify-center gap-5 px-6 py-4">
+                            <!-- Left Card (785px): Authentic Bento Vocabulary Hub (100% Complete Display, Zero Mistaken Cropping) -->
+                            <div class="w-[785px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
                                     <div class="flex items-center gap-2">
                                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                                        <span class="text-xs text-slate-300 font-medium ml-2">金句导出工坊 · 1080P/4K 实机壁纸排版</span>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">HORD 学习管家 · 单词本中枢 Bento 仪表盘 (完整展示无裁切)</span>
                                     </div>
-                                    <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Obsidian Mist 模板</span>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">2,241 词在库</span>
                                 </div>
-                                <img src="assets/screenshot_v3/08-金句导出-QuoteExport/成品素材-电脑壁纸/金句导出-ObsidianMist-1080P电脑壁纸-MacBook笔记本样机.png" alt="Laptop Wallpaper" class="w-full h-[435px] object-cover object-center">
+                                <div class="flex-1 bg-[#f4f6fb] p-1.5 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-Bento仪表盘-学习管家总览.png" alt="Bento Dashboard Full Display" class="w-full h-full object-contain object-top rounded-xl">
+                                </div>
                             </div>
 
-                            <!-- Right: Mobile Mockup 2 (iPhone Lock Screen Aesthetic Quote) -->
-                            <div class="w-[200px] h-[450px] flex items-center justify-center shrink-0 transform rotate-2 hover:rotate-0 transition duration-300">
-                                <img src="assets/screenshot_v3/05-移动端-Mobile/hord-mobile-preview-3.png" alt="Mobile 3" class="h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]">
+                            <!-- Right Card (425px): 100 Badges Full Matrix Achievement Board -->
+                            <div class="w-[425px] h-full rounded-2xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
+                                <div class="bg-slate-800/95 px-4 py-2.5 flex items-center justify-between border-b border-white/10 shrink-0">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                        <span class="text-xs text-slate-300 font-medium ml-2">成长勋章系统 · 100 款全成就矩阵</span>
+                                    </div>
+                                    <span class="text-[11px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-semibold">已点亮 29 / 100</span>
+                                </div>
+                                <div class="flex-1 bg-[#f8fafc] p-1.5 overflow-hidden flex items-center justify-center">
+                                    <img src="assets/screenshot_v3/01-Manager-单词本中枢/Manager-徽章系统-无缝完美展示.png" alt="Badges Matrix Full" class="w-full h-full object-contain object-top rounded-xl">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -838,7 +835,6 @@ html_content = '''<!DOCTYPE html>
                 }
             });
 
-            // Update UI buttons
             document.querySelectorAll('.zoom-btn').forEach(btn => {
                 if (parseFloat(btn.dataset.zoom) === val) {
                     btn.className = 'zoom-btn px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 font-medium hover:bg-rose-500/30 transition';
@@ -877,7 +873,7 @@ html_content = '''<!DOCTYPE html>
             }
         });
 
-        // 3. Smart Download: If not edited, download pre-rendered asset; if edited, use html2canvas!
+        // 3. Smart Download
         async function downloadAsset(elementId, filename, targetWidth, targetHeight) {
             if (!hasUserEdited) {
                 try {
@@ -908,11 +904,11 @@ html_content = '''<!DOCTYPE html>
             bar.style.width = '30%';
             ptext.innerText = '正在光栅化...';
 
-            try {
-                const wrapper = el.closest('.artboard-wrapper');
-                const prevTransform = wrapper ? wrapper.style.transform : '';
-                if (wrapper) wrapper.style.transform = 'none';
+            const wrapper = el.closest('.artboard-wrapper');
+            const prevTransform = wrapper ? wrapper.style.transform : '';
+            if (wrapper) wrapper.style.transform = 'none';
 
+            try {
                 const canvas = await html2canvas(el, {
                     scale: 1,
                     width: targetWidth,
@@ -925,39 +921,28 @@ html_content = '''<!DOCTYPE html>
 
                 if (wrapper) wrapper.style.transform = prevTransform;
 
-                bar.style.width = '90%';
-                ptext.innerText = '生成图像数据...';
+                bar.style.width = '80%';
+                ptext.innerText = '正在编码为 PNG...';
 
-                canvas.toBlob(blob => {
-                    saveAs(blob, filename);
+                canvas.toBlob((blob) => {
                     bar.style.width = '100%';
-                    ptext.innerText = '完成！';
+                    ptext.innerText = '导出完成！';
                     setTimeout(() => {
+                        saveAs(blob, filename);
                         modal.classList.add('hidden');
                         bar.style.width = '0%';
-                    }, 500);
+                    }, 400);
                 }, 'image/png');
-
             } catch (err) {
+                if (wrapper) wrapper.style.transform = prevTransform;
                 console.error(err);
                 alert('导出失败: ' + err.message);
                 modal.classList.add('hidden');
             }
         }
 
-        // 4. Batch Download All as ZIP
+        // 4. Batch Download ZIP
         async function downloadAllAsZip() {
-            const items = [
-                { id: 'artboard-icon', name: '01_store_icon_128x128.png', w: 128, h: 128 },
-                { id: 'artboard-small-promo', name: '02_small_promo_440x280.png', w: 440, h: 280 },
-                { id: 'artboard-marquee', name: '03_marquee_promo_1400x560.png', w: 1400, h: 560 },
-                { id: 'artboard-shot-1', name: '04_screenshot_1_context_ai_1280x800.png', w: 1280, h: 800 },
-                { id: 'artboard-shot-2', name: '05_screenshot_2_video_companion_1280x800.png', w: 1280, h: 800 },
-                { id: 'artboard-shot-3', name: '06_screenshot_3_reader_3d_1280x800.png', w: 1280, h: 800 },
-                { id: 'artboard-shot-4', name: '07_screenshot_4_arcade_badges_1280x800.png', w: 1280, h: 800 },
-                { id: 'artboard-shot-5', name: '08_screenshot_5_quotes_mobile_1280x800.png', w: 1280, h: 800 }
-            ];
-
             const modal = document.getElementById('exportModal');
             const modalTitle = document.getElementById('exportModalTitle');
             const modalDesc = document.getElementById('exportModalDesc');
@@ -965,16 +950,30 @@ html_content = '''<!DOCTYPE html>
             const ptext = document.getElementById('exportProgressText');
 
             modal.classList.remove('hidden');
-            modalTitle.innerText = '正在批量打包 Chrome 商店物料';
-            
-            const zip = new JSZip();
+            modalTitle.innerText = '正在打包下载所有物料...';
+            modalDesc.innerText = '正在准备 8 张官方规格物料';
+            bar.style.width = '10%';
+            ptext.innerText = '10%';
 
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-                const pct = Math.round(((i) / items.length) * 100);
-                bar.style.width = `${pct}%`;
-                ptext.innerText = `${pct}% (${i + 1}/${items.length})`;
-                modalDesc.innerText = `正在处理: ${item.name}`;
+            const zip = new JSZip();
+            const artboards = [
+                { id: 'artboard-icon', name: '01_store_icon_128x128.png', w: 128, h: 128 },
+                { id: 'artboard-small-promo', name: '02_small_promo_440x280.png', w: 440, h: 280 },
+                { id: 'artboard-marquee', name: '03_marquee_promo_1400x560.png', w: 1400, h: 560 },
+                { id: 'artboard-shot-1', name: '04_screenshot_1_context_ai_1280x800.png', w: 1280, h: 800 },
+                { id: 'artboard-shot-2', name: '05_screenshot_2_video_companion_1280x800.png', w: 1280, h: 800 },
+                { id: 'artboard-shot-3', name: '06_screenshot_3_reader_3d_1280x800.png', w: 1280, h: 800 },
+                { id: 'artboard-shot-4', name: '07_screenshot_4_switch_arcade_1280x800.png', w: 1280, h: 800 },
+                { id: 'artboard-shot-5', name: '08_screenshot_5_manager_bento_badges_1280x800.png', w: 1280, h: 800 }
+            ];
+
+            let count = 0;
+            for (const item of artboards) {
+                count++;
+                const percent = Math.round(10 + (count / artboards.length) * 75);
+                bar.style.width = percent + '%';
+                ptext.innerText = percent + '%';
+                modalDesc.innerText = `正在处理 (${count}/${artboards.length}): ${item.name}`;
 
                 let blob = null;
                 if (!hasUserEdited) {
@@ -1033,4 +1032,4 @@ html_content = '''<!DOCTYPE html>
 with open('chrome-store-assets.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
 
-print("chrome-store-assets.html regenerated successfully! Size:", os.path.getsize('chrome-store-assets.html'))
+print('chrome-store-assets.html regenerated successfully! Size:', os.path.getsize('chrome-store-assets.html'))
