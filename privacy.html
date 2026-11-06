@@ -2,13 +2,14 @@
 <html lang="zh-CN" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>隐私政策 (Privacy Policy) — HORD 3.0 霍德英语学习管家</title>
-  <meta name="description" content="HORD 霍德英语学习管家隐私政策与数据安全规范。阐明本地优先存储架构、划词来源 URL 限定说明、BYOK 密钥本地保留、Supabase 真实同步边界及匿名设备校验。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>隐私政策与数据透明度准则 — HORD 3.0 霍德英语学习管家</title>
+  <meta name="description" content="HORD 霍德英语学习管家隐私政策。严格阐明本地优先架构、划词来源 URL 限定说明、BYOK 密钥本地保留、Supabase 真实同步边界及匿名设备校验。" />
   <link rel="icon" type="image/png" href="logo.png?v=20260301" />
   <link rel="shortcut icon" type="image/png" href="logo.png?v=20260301" />
   <link rel="apple-touch-icon" href="logo.png?v=20260301" />
 
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -35,7 +36,8 @@
             amberpulse: "#f59e0b"
           },
           boxShadow: {
-            glow: "0 0 50px -10px rgba(139, 92, 246, 0.35)",
+            glow: "0 0 50px -10px rgba(139, 92, 246, 0.4)",
+            glowcyan: "0 0 50px -10px rgba(6, 182, 212, 0.4)",
             spotlight: "0 0 35px 0 rgba(139, 92, 246, 0.25)"
           }
         }
@@ -47,6 +49,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    
     .glass-nav {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(20px);
@@ -57,241 +60,354 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
-    .cyber-border {
+
+    .cyber-border-gradient {
       position: relative;
     }
-    .cyber-border::before {
+    .cyber-border-gradient::before {
       content: '';
       position: absolute;
       inset: -1px;
       border-radius: inherit;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(6, 182, 212, 0.2), rgba(255, 255, 255, 0.05));
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), rgba(6, 182, 212, 0.25), rgba(255, 255, 255, 0.05));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
+    }
+
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .mobile-safe-bottom {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+      }
     }
   </style>
 </head>
 
 <body class="bg-[#F8F9FC] text-[#13131A] dark:bg-darkbg dark:text-[#E8E8F2] antialiased min-h-screen flex flex-col transition-colors duration-300">
 
-  <!-- 背景柔光装饰 -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[450px] bg-brand-600/15 dark:bg-brand-600/20 blur-[140px] rounded-full"></div>
-    <div class="absolute top-[45%] -right-40 w-[500px] h-[500px] bg-cybercyan/10 blur-[130px] rounded-full"></div>
+  <!-- ================= 背景顶级光晕 (Background Ambient Glows) ================= -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden" style="z-index: 0;">
+    <div class="absolute -top-[15%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-brand-600/18 via-cybercyan/10 to-transparent blur-[140px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[40%] -right-[200px] w-[550px] h-[550px] bg-brand-700/10 blur-[160px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[75%] -left-[200px] w-[500px] h-[500px] bg-cybercyan/8 blur-[160px] rounded-full pointer-events-none"></div>
   </div>
 
-  <!-- 顶部导航 -->
-  <header class="sticky top-0 z-50 border-b border-black/5 dark:border-white/10 glass-nav transition-colors">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-xl p-0.5 bg-gradient-to-br from-brand-500 to-cybercyan shadow-glow flex items-center justify-center">
-          <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-AI生成3D玻璃H图标.png" onerror="this.src='logo.png'" alt="HORD Logo" class="w-full h-full object-contain rounded-lg" />
+  <!-- ================= 顶部科技感极简导航 (1500px Full Standard Header) ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-black/5 dark:border-white/10 transition-colors duration-300">
+    <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 shrink-0 group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl p-0.5 bg-gradient-to-br from-brand-500 via-purple-600 to-cybercyan shadow-glow flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-AI生成3D玻璃H图标.png" 
+               onerror="this.src='logo.png'" 
+               alt="HORD Logo" 
+               class="w-full h-full object-contain rounded-lg" />
         </div>
-        <div>
-          <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-brand-600 to-cybercyan bg-clip-text text-transparent dark:from-white dark:to-brand-300">
-            HORD 3.0
+        <div class="leading-none">
+          <div class="flex items-center gap-1.5">
+            <span class="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-600 via-purple-500 to-cybercyan bg-clip-text text-transparent dark:from-white dark:via-brand-300 dark:to-cybercyan">
+              HORD
+            </span>
+            <span class="px-1.5 py-0.5 text-[10px] font-bold uppercase rounded-md bg-brand-500/10 text-brand-600 dark:text-brand-300 border border-brand-500/20 font-mono-code">
+              3.0 Pro
+            </span>
+          </div>
+          <span class="block mt-1 text-[10px] text-slate-500 dark:text-slate-400 tracking-wider">
+            霍德英语学习管家
           </span>
-          <span class="block text-[10px] text-slate-500 dark:text-slate-400 tracking-wider">Privacy & Trust Center</span>
         </div>
       </a>
 
-      <div class="flex items-center gap-3">
-        <!-- 中英双语切换器 -->
-        <div class="flex items-center p-1 bg-black/5 dark:bg-white/10 rounded-xl text-xs font-semibold">
-          <button id="langZhBtn" type="button" class="px-2.5 py-1 rounded-lg bg-white dark:bg-brand-600 text-slate-900 dark:text-white shadow-sm transition">
-            中文
-          </button>
-          <button id="langEnBtn" type="button" class="px-2.5 py-1 rounded-lg text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition">
-            English
-          </button>
-        </div>
+      <!-- Desktop Nav Links (Clean, Aligned with index.html) -->
+      <nav class="hidden xl:flex items-center gap-1 text-xs font-semibold text-slate-600 dark:text-slate-300 whitespace-nowrap">
+        <a href="index.html#web-capture" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          网页划词
+        </a>
+        <a href="index.html#ai-engine" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          AI 语境解析
+        </a>
+        <a href="index.html#video-companion" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          双语视频伴侣
+        </a>
+        <a href="index.html#reader-ai" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          3D阅读 & AI
+        </a>
+        <a href="index.html#manager-bento" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          单词中枢 Bento
+        </a>
+        <a href="index.html#pricing" class="px-2.5 py-1.5 rounded-lg hover:text-brand-600 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition">
+          早鸟定价
+        </a>
+        <span class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 font-bold border border-brand-500/20">
+          隐私政策
+        </span>
+      </nav>
 
-        <!-- 主题切换 -->
-        <button id="themeToggleBtn" type="button" class="p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" title="切换暗色/浅色主题">
-          🌗
+      <!-- Action Buttons & Theme Switcher -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        
+        <!-- Theme Toggle (SVG Icons 100% matched with index.html) -->
+        <button id="themeToggleBtn" type="button" class="p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" title="切换日夜间主题">
+          <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-4 h-4 block dark:hidden text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
         </button>
 
-        <!-- 返回官网 -->
-        <a href="index.html" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-black/5 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/15 transition">
-          返回官网
+        <a href="activate.html" class="hidden md:inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-xl border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition whitespace-nowrap">
+          输入 License
         </a>
+
+        <a href="install.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition whitespace-nowrap">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+          安装插件
+        </a>
+
+        <a href="buy.html" class="relative group overflow-hidden rounded-xl p-px font-semibold text-xs text-white shadow-glow whitespace-nowrap">
+          <span class="absolute inset-0 bg-gradient-to-r from-brand-600 via-purple-500 to-cybercyan transition-all duration-300 group-hover:brightness-125"></span>
+          <span class="relative block px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-brand-600 to-purple-600 font-bold">
+            早鸟特惠 ¥88
+          </span>
+        </a>
+
+        <!-- Mobile Menu Trigger -->
+        <button id="mobileMenuBtn" type="button" class="xl:hidden p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" aria-label="打开菜单">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden xl:hidden border-t border-black/5 dark:border-white/10 px-4 py-4 space-y-2 bg-white/95 dark:bg-[#07070b]/95 backdrop-blur-xl">
+      <a href="index.html" class="block px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5">返回官网首页</a>
+      <a href="install.html" class="block px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5">安装扩展指南</a>
+      <a href="activate.html" class="block px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5">激活 License</a>
+      <a href="buy.html" class="block px-3 py-2 rounded-lg text-xs font-semibold text-brand-600 dark:text-brand-400 font-bold">购买 Pro 授权</a>
     </div>
   </header>
 
-  <!-- 主体区域 -->
-  <main class="relative z-10 flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+  <!-- ================= 主体内容区 (Hero + Segmented Switcher + Bento Articles) ================= -->
+  <main class="relative z-10 flex-1 max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-20 w-full">
 
-    <!-- 标题横幅 -->
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        <span class="lang-zh">隐私合规与透明度承诺</span>
-        <span class="lang-en hidden">Privacy & Compliance Commitment</span>
-      </span>
-
-      <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-        <span class="lang-zh">HORD 隐私政策</span>
-        <span class="lang-en hidden">HORD Privacy Policy</span>
-      </h1>
+    <!-- Hero 区域与双语切换控制条 -->
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
       
-      <p class="mt-3 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-        <span class="lang-zh">生效与最后更新时间：2026 年 11 月 6 日 ｜ 适用产品：HORD 浏览器扩展（Chrome / Edge）、HORD Hub 及移动端 PWA</span>
-        <span class="lang-en hidden">Effective & Last Updated: November 6, 2026 | Applicable: HORD Browser Extension (Chrome / Edge), HORD Hub & Mobile PWA</span>
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-300 text-xs font-semibold shadow-sm mb-4">
+        <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        <span class="font-mono-code uppercase tracking-wider text-[11px]">Security & Privacy Boundary Contract</span>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+        <span class="bg-gradient-to-r from-slate-900 via-brand-700 to-slate-800 dark:from-white dark:via-brand-200 dark:to-cybercyan bg-clip-text text-transparent">
+          <span class="lang-zh">HORD 隐私政策与数据透明度</span>
+          <span class="lang-en hidden">HORD Privacy Policy & Data Transparency</span>
+        </span>
+      </h1>
+
+      <p class="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        <span class="lang-zh">最后更新时间：2026 年 11 月 6 日 ｜ 覆盖产品：HORD 浏览器扩展（Chrome / Edge）、HORD Hub 及移动端 PWA</span>
+        <span class="lang-en hidden">Last Updated: November 6, 2026 | Applicable: HORD Browser Extension (Chrome / Edge), HORD Hub & Mobile PWA</span>
       </p>
+
+      <!-- 双语切换分段控制器 (Segmented Language Switcher) -->
+      <div class="mt-8 flex justify-center">
+        <div class="inline-flex items-center p-1.5 rounded-2xl bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10 backdrop-blur-md shadow-inner">
+          <button id="langZhBtn" type="button" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm bg-white dark:bg-brand-600 text-slate-900 dark:text-white">
+            <span>🇨🇳</span>
+            <span>中文条款 (Simplified Chinese)</span>
+          </button>
+          <button id="langEnBtn" type="button" class="flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+            <span>🇬🇧</span>
+            <span>English Terms (Full Policy)</span>
+          </button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 核心安全原则卡片矩阵 (Bento Grid) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-      <div class="p-5 rounded-2xl bg-white/80 dark:bg-darkcard border border-black/5 dark:border-white/10 shadow-sm cyber-border">
-        <div class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-sm mb-3">🛡️</div>
-        <h3 class="text-sm font-bold text-slate-900 dark:text-white">
-          <span class="lang-zh">本地优先架构</span>
+    <!-- 核心承诺 3 列 Bento 卡片 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+      
+      <div class="cyber-border-gradient p-6 rounded-3xl bg-white/80 dark:bg-darkcard/90 shadow-sm transition-all duration-300 hover:-translate-y-1">
+        <div class="w-10 h-10 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-lg mb-4">
+          🛡️
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">
+          <span class="lang-zh">本地优先存储架构</span>
           <span class="lang-en hidden">Local-First Architecture</span>
         </h3>
-        <p class="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-          <span class="lang-zh">生词、笔记、电子书正文与自定义 API 密钥保存在当前设备本地，未开启同步时零数据出端。</span>
+        <p class="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <span class="lang-zh">生词本、笔记、电子书正文与自定义 AI API Key 均保存在本地存储，未开启同步时零数据上传。</span>
           <span class="lang-en hidden">Vocabulary, notes, book contents, and personal BYOK keys remain stored on your local device.</span>
         </p>
       </div>
 
-      <div class="p-5 rounded-2xl bg-white/80 dark:bg-darkcard border border-black/5 dark:border-white/10 shadow-sm cyber-border">
-        <div class="w-8 h-8 rounded-lg bg-cybercyan/10 text-cybercyan flex items-center justify-center font-bold text-sm mb-3">🚫</div>
-        <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+      <div class="cyber-border-gradient p-6 rounded-3xl bg-white/80 dark:bg-darkcard/90 shadow-sm transition-all duration-300 hover:-translate-y-1">
+        <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-lg mb-4">
+          🚫
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">
           <span class="lang-zh">不采集全量浏览历史</span>
           <span class="lang-en hidden">No Web History Tracking</span>
         </h3>
-        <p class="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-          <span class="lang-zh">仅在划词收藏时记录当前词条的单条来源 URL，绝不记录、追踪或上传您的全量网页浏览记录。</span>
-          <span class="lang-en hidden">Only the source URL of explicitly collected words is stored for review context. We never monitor your browsing history.</span>
+        <p class="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <span class="lang-zh">仅在划词收藏时记录发生划词的单条页面来源 URL，绝不追踪、记录或分析用户的全量浏览历史。</span>
+          <span class="lang-en hidden">Only the source URL of explicitly collected words is saved for review context. We never track your browsing history.</span>
         </p>
       </div>
 
-      <div class="p-5 rounded-2xl bg-white/80 dark:bg-darkcard border border-black/5 dark:border-white/10 shadow-sm cyber-border">
-        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-sm mb-3">🔒</div>
-        <h3 class="text-sm font-bold text-slate-900 dark:text-white">
-          <span class="lang-zh">绝不出售任何数据</span>
-          <span class="lang-en hidden">Never Sell Your Data</span>
+      <div class="cyber-border-gradient p-6 rounded-3xl bg-white/80 dark:bg-darkcard/90 shadow-sm transition-all duration-300 hover:-translate-y-1">
+        <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg mb-4">
+          💎
+        </div>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">
+          <span class="lang-zh">商业透明 · 绝不售卖数据</span>
+          <span class="lang-en hidden">Commercial Honesty</span>
         </h3>
-        <p class="mt-1.5 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-          <span class="lang-zh">我们通过销售 Pro 软件授权维系商业运转，坚决不向任何广告商、数据经纪人出售或出租用户信息。</span>
+        <p class="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          <span class="lang-zh">通过销售 Pro 软件授权盈利，绝不向任何广告商、数据经纪人出售或出租用户的任何学习与个人数据。</span>
           <span class="lang-en hidden">We sustain our service via Pro software licenses. We never sell, rent, or monetize your personal data.</span>
         </p>
       </div>
+
     </div>
 
-    <!-- 政策正文部分 (Bilingual Articles) -->
-    <div class="space-y-8 bg-white/80 dark:bg-darkcard p-6 sm:p-10 rounded-3xl border border-black/5 dark:border-white/10 shadow-sm cyber-border">
+    <!-- 政策正文板块：模块化 Bento 卡片流 -->
+    <div class="space-y-6">
 
-      <!-- ================= 第一部分：本地数据与存储 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">01.</span>
-          <span class="lang-zh">本地数据存储与机密隔离（Local-First & Secrets Isolation）</span>
-          <span class="lang-en hidden">Local-First Storage & Secrets Isolation</span>
-        </h2>
-        
-        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
+      <!-- ================= 01 章节：本地数据与存储 ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 font-mono-code font-bold text-xs">
+            01 / STORAGE
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">本地数据存储与机密隔离（Local-First & Secrets Isolation）</span>
+            <span class="lang-en hidden">Local-First Storage & Secrets Isolation</span>
+          </h2>
+        </div>
+
+        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-3">
           <p class="lang-zh">
             HORD 遵循“本地优先（Local-First）”工程设计。在未登录云同步状态下，扩展完全离线运行：
           </p>
           <p class="lang-en hidden">
             HORD is built upon a strict "Local-First" architecture. When cloud sync is not enabled, the extension operates entirely on your local device:
           </p>
-          
-          <ul class="list-disc pl-5 space-y-1.5 text-slate-500 dark:text-slate-400">
-            <li>
-              <strong class="text-slate-800 dark:text-slate-200">
-                <span class="lang-zh">词库与学习数据：</span>
-                <span class="lang-en hidden">Vocabulary & Learning Data:</span>
+
+          <div class="grid sm:grid-cols-2 gap-4 mt-4">
+            <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+              <strong class="text-slate-900 dark:text-white block text-xs sm:text-sm mb-1">
+                <span class="lang-zh">词库与学习数据</span>
+                <span class="lang-en hidden">Vocabulary & Progress</span>
               </strong>
-              <span class="lang-zh">生词、释义、例句、用户笔记、艾宾浩斯复习进度、熟练度评分均保存在本机的 <code class="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 text-brand-600 dark:text-brand-400 font-mono-code text-xs">chrome.storage.local</code> 与 IndexedDB 中。</span>
-              <span class="lang-en hidden">Words, definitions, notes, spaced repetition progress, and mastery ratings are stored exclusively in your browser's local storage and IndexedDB.</span>
-            </li>
-            <li>
-              <strong class="text-slate-800 dark:text-slate-200">
-                <span class="lang-zh">自定义 AI 密钥（BYOK - Bring Your Own Key）：</span>
-                <span class="lang-en hidden">Custom AI API Keys (BYOK):</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                <span class="lang-zh">生词、释义、例句、用户笔记、艾宾浩斯复习进度、熟练度评分均保存在本机的 <code class="px-1.5 py-0.5 rounded bg-brand-500/10 text-brand-600 dark:text-brand-400 font-mono-code">chrome.storage.local</code> 与 IndexedDB 中。</span>
+                <span class="lang-en hidden">Words, definitions, notes, spaced repetition progress, and mastery ratings are stored in local storage and IndexedDB.</span>
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+              <strong class="text-brand-600 dark:text-brand-400 block text-xs sm:text-sm mb-1">
+                <span class="lang-zh">自定义 AI 密钥（BYOK）绝对本地隔离</span>
+                <span class="lang-en hidden">Custom AI API Keys (BYOK) Local Isolation</span>
               </strong>
-              <span class="lang-zh">您在扩展中填写的个人 API Key（包括 OpenAI、Anthropic、DeepSeek、Gemini、Groq 等）<strong>仅保存在当前设备本地</strong>。HORD 数据层具备强制脱敏契约（Sanitization Contract），在任何云同步或导出流程中均自动剔除密钥字段，<strong>绝不上载至任何云端服务器</strong>。</span>
-              <span class="lang-en hidden">Personal API Keys entered for custom AI providers remain strictly stored on your local device. Our sync layer employs an automated sanitization boundary that strips all provider secrets prior to sync, ensuring they are never uploaded.</span>
-            </li>
-            <li>
-              <strong class="text-slate-800 dark:text-slate-200">
-                <span class="lang-zh">电子书正文：</span>
-                <span class="lang-en hidden">E-Book Full Text:</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                <span class="lang-zh">您填写的个人 API Key（OpenAI、Anthropic、DeepSeek、Gemini 等）<strong>仅保存在当前设备本地</strong>。数据层具备强制脱敏契约，在任何云同步流程中自动剔除密钥，<strong>绝不上载至云端服务器</strong>。</span>
+                <span class="lang-en hidden">Personal API Keys entered for custom AI providers remain strictly stored on your local device. Our sync layer strips all provider secrets prior to sync, ensuring they are never uploaded.</span>
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+              <strong class="text-slate-900 dark:text-white block text-xs sm:text-sm mb-1">
+                <span class="lang-zh">电子书正文绝不上传</span>
+                <span class="lang-en hidden">E-Book Full Text Stays Local</span>
               </strong>
-              <span class="lang-zh">您导入阅读器的 TXT 或 EPUB 书籍正文仅缓存在本地 IndexedDB，绝不上传到服务器。</span>
-              <span class="lang-en hidden">Full-text contents of imported TXT/EPUB e-books are cached only within local IndexedDB and never uploaded to remote servers.</span>
-            </li>
-            <li>
-              <strong class="text-slate-800 dark:text-slate-200">
-                <span class="lang-zh">字幕翻译缓存：</span>
-                <span class="lang-en hidden">Subtitle Translation Cache:</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                <span class="lang-zh">您导入阅读器的 TXT 或 EPUB 书籍正文仅缓存在本地 IndexedDB，绝不上传到服务器。</span>
+                <span class="lang-en hidden">Full-text contents of imported TXT/EPUB e-books are cached only within local IndexedDB and never uploaded to remote servers.</span>
+              </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+              <strong class="text-slate-900 dark:text-white block text-xs sm:text-sm mb-1">
+                <span class="lang-zh">机器翻译缓存</span>
+                <span class="lang-en hidden">Machine Translation Cache</span>
               </strong>
-              <span class="lang-zh">视频字幕机器翻译缓存保存在本机存储（最多保留 30 条，写入时间先进先出 FIFO 淘汰，读取时做逻辑过期校验），不参与云同步。</span>
-              <span class="lang-en hidden">Machine translation results for video subtitles are cached in local browser storage (maximum 30 items, FIFO eviction), and are never synchronized to the cloud.</span>
-            </li>
-          </ul>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                <span class="lang-zh">视频字幕机器翻译缓存保存在本机存储（最多保留 30 条，写入时间先进先出 FIFO 淘汰，读取时做逻辑过期校验），不参与云同步。</span>
+                <span class="lang-en hidden">Machine translation results for video subtitles are cached in local browser storage (maximum 30 items, FIFO eviction), and are never synchronized to the cloud.</span>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <hr class="border-black/5 dark:border-white/10" />
+      <!-- ================= 02 章节：云同步与 Web 历史边界（审核核心重点） ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono-code font-bold text-xs">
+            02 / WEB HISTORY & SYNC
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">云端同步服务与网页访问信息限定披露（Cloud Sync & Web History Disclosure）</span>
+            <span class="lang-en hidden">Cloud Sync & Web History Transparency</span>
+          </h2>
+        </div>
 
-      <!-- ================= 第二部分：云同步与 Web 历史边界 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">02.</span>
-          <span class="lang-zh">云端同步服务与网页访问信息披露（Cloud Sync & Web History Disclosure）</span>
-          <span class="lang-en hidden">Cloud Sync & Web History Transparency</span>
-        </h2>
-        
-        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
-          <p class="lang-zh">
-            云同步为主动登录功能。若您注册并登录了 HORD 账号，数据同步机制遵循以下严格规范：
-          </p>
-          <p class="lang-en hidden">
-            Cloud sync is an optional, opt-in feature. When you register and log in to a HORD account, data synchronization operates under the following transparent rules:
-          </p>
-
-          <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-slate-700 dark:text-slate-300">
-            <strong class="text-amber-700 dark:text-amber-400 block mb-1 font-semibold text-xs sm:text-sm flex items-center gap-1.5">
-              <span>⚠️</span>
-              <span class="lang-zh">关于来源网页 URL（sourceUrl）的关键说明：</span>
-              <span class="lang-en hidden">Important Note Regarding Source URLs (Web History):</span>
-            </strong>
-            <p class="text-xs leading-relaxed lang-zh">
-              当您在网页或视频网站上<strong>主动划词收藏单词或例句</strong>时，为保证您在其他设备（如 HORD Hub 或手机端）复习时能够追溯原汁原味的原生语境，该生词词条会附带记录发生划词行为的<strong>单条来源网址（sourceUrl）与页面标题（sourceTitle）</strong>，并随生词元数据一并同步到您的云端个人词库。<br/>
-              <strong>【严正边界】：HORD 绝不监视、记录、搜集或上传您的任何未划词页面、全量浏览历史、搜索记录或会话 Cookie。没有发生主动划词行为的页面绝不会产生任何数据记录。</strong>
+        <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-4">
+          
+          <!-- 醒目审核警示框 Callout -->
+          <div class="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-slate-800 dark:text-slate-200">
+            <div class="flex items-center gap-2 mb-2 font-bold text-amber-700 dark:text-amber-300 text-sm">
+              <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+              <span class="lang-zh">关于来源网页 URL（sourceUrl）的关键限定说明（审核声明）：</span>
+              <span class="lang-en hidden">Mandatory Disclosure Regarding Source URLs (Partner Center & Web Store Audit):</span>
+            </div>
+            
+            <p class="text-xs leading-relaxed lang-zh text-slate-700 dark:text-slate-300">
+              当您在网页或视频网站上<strong>主动划词收藏单词或例句</strong>时，为保证您在其他设备（如 HORD Hub 或手机端）复习时能够追溯原汁原味的原生语境，该生词词条会附带记录发生划词行为的<strong>单条来源网址（sourceUrl）与页面标题（sourceTitle）</strong>，并随生词元数据一并同步到您的云端个人词库。<br/><br/>
+              <strong class="text-slate-900 dark:text-white underline decoration-amber-500/50 decoration-2">【绝对边界与不作为承诺】：</strong>HORD <strong>绝不</strong>监视、记录、搜集或上传您的任何未划词页面、全量浏览历史、搜索记录或会话 Cookie。没有发生主动划词行为的页面绝不会产生任何数据记录。
             </p>
-            <p class="text-xs leading-relaxed lang-en hidden">
-              When you <strong>explicitly select and save a word or quote</strong> on a webpage or video, the extension captures only the <strong>single source URL (sourceUrl) and title (sourceTitle)</strong> of that specific page as metadata attached to the vocabulary card. This allows you to revisit the authentic sentence context across your devices (Hub/Mobile).<br/>
-              <strong>[Strict Boundary]: HORD NEVER monitors, logs, tracks, or uploads your comprehensive browsing history, non-word webpages, search queries, or cookies. Webpages without explicit user word collection trigger zero data logging.</strong>
+
+            <p class="text-xs leading-relaxed lang-en hidden text-slate-700 dark:text-slate-300">
+              When you <strong>explicitly select and save a word or quote</strong> on a webpage or video, the extension captures only the <strong>single source URL (sourceUrl) and title (sourceTitle)</strong> of that specific page as metadata attached to the vocabulary card. This allows you to revisit the authentic sentence context across your devices (Hub/Mobile).<br/><br/>
+              <strong class="text-slate-900 dark:text-white underline decoration-amber-500/50 decoration-2">[Strict Boundary & Non-Tracking Guarantee]:</strong> HORD NEVER monitors, logs, tracks, or uploads your comprehensive browsing history, non-word webpages, search queries, or cookies. Webpages without explicit user word collection trigger zero data logging.
             </p>
           </div>
 
-          <p class="lang-zh">
-            <strong>传输与存储说明：</strong>同步数据通过行业标准的 HTTPS/TLS 加密通道传输，存储在由 HORD 托管的 Supabase 数据库专有数据表中。在此我们诚实说明：云端同步<strong>不是客户端端到端加密（Non-Client E2EE）</strong>，数据经 gzip 压缩后由具备鉴权凭据的服务端安全存储，具有数据库运维权限的管理人员理论上可读取解压后数据，请勿将敏感涉密文本存入公开笔记。
+          <p class="lang-zh text-slate-500 dark:text-slate-400">
+            <strong>传输与存储诚信披露：</strong>同步数据通过行业标准的 HTTPS/TLS 加密通道传输，存储在由 HORD 托管的 Supabase 数据库专有数据表中。在此我们诚实说明：云端同步<strong>不是客户端端到端加密（Non-Client E2EE）</strong>，数据经 gzip 压缩后由具备鉴权凭据的服务端安全存储，具有数据库运维权限的管理人员理论上可读取解压后数据，请勿将敏感涉密文本存入公开笔记。
           </p>
-          <p class="lang-en hidden">
+          <p class="lang-en hidden text-slate-500 dark:text-slate-400">
             <strong>Transmission & Storage:</strong> Data is synchronized over standard HTTPS/TLS and stored in dedicated tables within our hosted Supabase database. We maintain strict honesty: this sync is <strong>not client-side end-to-end encrypted (Non-E2EE)</strong>; data is compressed with gzip and secured by server-side authentication controls.
           </p>
+
         </div>
       </section>
 
-      <hr class="border-black/5 dark:border-white/10" />
+      <!-- ================= 03 章节：授权校验与设备指纹 ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-cybercyan/10 text-cybercyan font-mono-code font-bold text-xs">
+            03 / DEVICE HASH
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">专业版授权与匿名设备校验（License Activation & Device Hash）</span>
+            <span class="lang-en hidden">License Verification & Anonymous Device Hash</span>
+          </h2>
+        </div>
 
-      <!-- ================= 第三部分：授权校验与设备指纹 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">03.</span>
-          <span class="lang-zh">专业版授权与匿名设备校验（License Activation & Device Hash）</span>
-          <span class="lang-en hidden">License Verification & Anonymous Device Hash</span>
-        </h2>
-        
         <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
           <p class="lang-zh">
             为了校验 HORD Pro 激活码的设备绑定数量（最多支持 2 台设备），在激活授权时，客户端会通过浏览器环境属性计算生成一个<strong>单向不可逆的匿名哈希（Anonymous Device Hash）</strong>并提交给 License Worker。
@@ -308,16 +424,18 @@
         </div>
       </section>
 
-      <hr class="border-black/5 dark:border-white/10" />
+      <!-- ================= 04 章节：第三方服务交互 ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 font-mono-code font-bold text-xs">
+            04 / NETWORKS
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">第三方网络请求与外部交互（Third-Party Interactions）</span>
+            <span class="lang-en hidden">Third-Party Network Interactions</span>
+          </h2>
+        </div>
 
-      <!-- ================= 第四部分：第三方服务交互 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">04.</span>
-          <span class="lang-zh">第三方网络请求与外部交互（Third-Party Interactions）</span>
-          <span class="lang-en hidden">Third-Party Network Interactions</span>
-        </h2>
-        
         <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
           <p class="lang-zh">
             在您使用划词查词、发音与字幕功能时，会产生以下经过明确授权的网络交互：
@@ -326,7 +444,7 @@
             When you actively look up words, play audio pronunciations, or display bilingual subtitles, the following minimal network interactions occur:
           </p>
 
-          <ul class="list-disc pl-5 space-y-1.5 text-slate-500 dark:text-slate-400">
+          <ul class="list-disc pl-5 space-y-2 text-slate-500 dark:text-slate-400">
             <li>
               <strong class="text-slate-800 dark:text-slate-200">
                 <span class="lang-zh">词典与发音服务：</span>
@@ -347,16 +465,18 @@
         </div>
       </section>
 
-      <hr class="border-black/5 dark:border-white/10" />
+      <!-- ================= 05 章节：用户权利与数据删除 ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono-code font-bold text-xs">
+            05 / YOUR RIGHTS
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">您的权利：导出、备份与彻底删除（Data Portability & Erasure）</span>
+            <span class="lang-en hidden">Your Rights: Export & Permanent Deletion</span>
+          </h2>
+        </div>
 
-      <!-- ================= 第五部分：用户权利与数据删除 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">05.</span>
-          <span class="lang-zh">您的权利：导出、备份与彻底删除（Data Portability & Erasure）</span>
-          <span class="lang-en hidden">Your Rights: Export & Permanent Deletion</span>
-        </h2>
-        
         <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2">
           <p class="lang-zh">
             您对自己的学习数据享有完整控制权：
@@ -365,7 +485,7 @@
             You maintain complete ownership and control over your learning data:
           </p>
 
-          <ul class="list-disc pl-5 space-y-1.5 text-slate-500 dark:text-slate-400">
+          <ul class="list-disc pl-5 space-y-2 text-slate-500 dark:text-slate-400">
             <li>
               <strong class="text-slate-800 dark:text-slate-200">
                 <span class="lang-zh">数据导出与便携性：</span>
@@ -387,42 +507,45 @@
                 <span class="lang-zh">云端数据注销与清除：</span>
                 <span class="lang-en hidden">Cloud Data Deletion:</span>
               </strong>
-              <span class="lang-zh">若需彻底清空或注销云端账号资产，您可随时发送邮件至支持邮箱，我们将在 3 个工作日内核实并从 Supabase 数据库中物理删除您的全部关联行。</span>
-              <span class="lang-en hidden">To permanently delete your synchronized cloud data, send a request to our support email, and we will wipe your records from Supabase within 3 business days.</span>
+              <span class="lang-zh">若需彻底清空或注销云端账号资产，您可随时发送邮件至官方支持邮箱，我们将在 3 个工作日内核实并物理删除您的全部关联行。</span>
+              <span class="lang-en hidden">To permanently delete your synchronized cloud data, send a request to our support email, and we will wipe your records within 3 business days.</span>
             </li>
           </ul>
         </div>
       </section>
 
-      <hr class="border-black/5 dark:border-white/10" />
+      <!-- ================= 06 章节：官方支持与联系方式 ================= -->
+      <section class="cyber-border-gradient rounded-3xl p-6 sm:p-8 bg-white/80 dark:bg-darkcard/90 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 font-mono-code font-bold text-xs">
+            06 / CONTACT
+          </span>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            <span class="lang-zh">官方支持与联系方式（Official Support & Compliance Contact）</span>
+            <span class="lang-en hidden">Official Support & Privacy Contact</span>
+          </h2>
+        </div>
 
-      <!-- ================= 第六部分：支持与联系方式 ================= -->
-      <section class="space-y-3">
-        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <span class="text-brand-500 font-mono-code text-sm">06.</span>
-          <span class="lang-zh">支持与联系方式（Contact & Support）</span>
-          <span class="lang-en hidden">Contact & Support</span>
-        </h2>
-        
         <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           <p class="lang-zh">
-            如果您对本隐私政策、数据边界或商店权限有任何疑问、建议或合规核验需求，请随时与我们联系：
+            如果您对本隐私政策、数据边界、应用商店审核合规有任何疑问，请通过官方支持渠道联系维护团队：
           </p>
           <p class="lang-en hidden">
-            If you have any questions, feedback, or compliance inquiries regarding this Privacy Policy, please contact our team:
+            If you have any questions, feedback, or compliance inquiries regarding this Privacy Policy, please contact our maintenance team:
           </p>
-          
-          <div class="mt-4 p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+
+          <div class="mt-5 p-5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
-                <span class="lang-zh">官方支持与合规邮箱</span>
-                <span class="lang-en hidden">Official Support & Privacy Email</span>
+              <div class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mb-1">
+                <span class="lang-zh">官方合规与客户支持邮箱</span>
+                <span class="lang-en hidden">Official Support & Compliance Email</span>
               </div>
-              <a href="mailto:andyfreeman0919@gmail.com" class="text-brand-600 dark:text-brand-400 font-bold font-mono-code hover:underline text-sm sm:text-base">
+              <a href="mailto:andyfreeman0919@gmail.com" class="text-brand-600 dark:text-brand-400 font-bold font-mono-code hover:underline text-base sm:text-lg">
                 andyfreeman0919@gmail.com
               </a>
             </div>
-            <a href="mailto:andyfreeman0919@gmail.com" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition shadow-sm">
+
+            <a href="mailto:andyfreeman0919@gmail.com" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-purple-600 hover:from-brand-500 hover:to-purple-500 text-white font-bold text-xs transition shadow-glow whitespace-nowrap">
               <span class="lang-zh">发送邮件咨询</span>
               <span class="lang-en hidden">Email Support</span>
             </a>
@@ -434,23 +557,24 @@
 
   </main>
 
-  <!-- 页脚 -->
-  <footer class="relative z-10 border-t border-black/5 dark:border-white/10 py-10 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto text-xs text-slate-500 dark:text-slate-400 w-full">
+  <!-- ================= 极客页脚 FOOTER (100% 同构对齐 index.html) ================= -->
+  <footer class="relative z-10 border-t border-black/5 dark:border-white/10 py-10 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-[1500px] mx-auto text-xs text-slate-500 dark:text-slate-400 pb-24 sm:pb-12 w-full">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      
       <div class="flex items-center gap-3">
-        <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-Logo图标-H红心.png" onerror="this.src='logo.png'" alt="HORD Logo" class="w-7 h-7 object-contain rounded-lg" />
+        <img src="assets/screenshot_v3/06-品牌素材-Brand/品牌素材-Logo图标-H红心.png" onerror="this.src='logo.png'" alt="HORD Logo" class="w-8 h-8 object-contain rounded-lg" />
         <div>
-          <div class="font-bold text-slate-800 dark:text-white">
+          <div class="font-bold text-sm text-slate-900 dark:text-white">
             HORD · 霍德英语学习管家
           </div>
-          <div class="text-[10px] text-slate-400">
-            Hold Your Word ｜ 真实、透明、本地优先的语言习得伴侣
+          <div class="text-[11px] text-slate-400 tracking-wider">
+            Hold Your Word ｜ 构建持久的英语能力
           </div>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-5 text-xs">
-        <a href="privacy.html" class="text-brand-600 dark:text-brand-400 font-semibold transition">隐私政策</a>
+      <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
+        <a href="privacy.html" class="text-brand-600 dark:text-brand-400 font-bold transition">隐私政策</a>
         <a href="buy.html" class="hover:text-slate-900 dark:hover:text-white transition">购买 Pro</a>
         <a href="activate.html" class="hover:text-slate-900 dark:hover:text-white transition">激活 License</a>
         <a href="install.html" class="hover:text-slate-900 dark:hover:text-white transition">安装指引</a>
@@ -463,16 +587,28 @@
     </div>
   </footer>
 
-  <!-- 交互逻辑：暗黑模式与双语切换 -->
+  <!-- ================= 移动端固定底部快捷操作条 ================= -->
+  <div class="sm:hidden fixed bottom-0 inset-x-0 z-40 glass-nav border-t border-black/10 dark:border-white/10 p-3 px-4 flex items-center justify-between gap-3 mobile-safe-bottom">
+    <a href="install.html" class="flex-1 py-2.5 text-center text-xs font-bold rounded-xl border border-black/10 dark:border-white/15 bg-white dark:bg-[#12121e] text-slate-800 dark:text-white shadow-sm">
+      免费安装
+    </a>
+    <a href="buy.html" class="flex-1 py-2.5 text-center text-xs font-bold rounded-xl bg-gradient-to-r from-brand-600 to-purple-600 text-white shadow-glow">
+      早鸟 ¥88 Pro
+    </a>
+  </div>
+
+  <!-- ================= 交互逻辑 (Theme & Bilingual Switcher) ================= -->
   <script>
-    // 1. 暗色模式管理（与官网主体系同步）
+    // 1. 暗色/浅色主题同步系统（与官网保持同一事实源）
     const rootEl = document.documentElement;
     const themeBtn = document.getElementById('themeToggleBtn');
+    
     if (localStorage.getItem('theme') === 'light') {
       rootEl.classList.remove('dark');
     } else {
       rootEl.classList.add('dark');
     }
+
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
         const isDark = rootEl.classList.toggle('dark');
@@ -480,7 +616,16 @@
       });
     }
 
-    // 2. 双语切换系统（中文 / English）
+    // 2. 移动端菜单切换
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // 3. 双语切换系统（中文 / English）
     const zhBtn = document.getElementById('langZhBtn');
     const enBtn = document.getElementById('langEnBtn');
     const zhEls = document.querySelectorAll('.lang-zh');
@@ -490,14 +635,14 @@
       if (lang === 'en') {
         zhEls.forEach(el => el.classList.add('hidden'));
         enEls.forEach(el => el.classList.remove('hidden'));
-        enBtn.className = 'px-2.5 py-1 rounded-lg bg-white dark:bg-brand-600 text-slate-900 dark:text-white shadow-sm transition';
-        zhBtn.className = 'px-2.5 py-1 rounded-lg text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition';
+        enBtn.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm bg-white dark:bg-brand-600 text-slate-900 dark:text-white';
+        zhBtn.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
         document.documentElement.lang = 'en';
       } else {
         enEls.forEach(el => el.classList.add('hidden'));
         zhEls.forEach(el => el.classList.remove('hidden'));
-        zhBtn.className = 'px-2.5 py-1 rounded-lg bg-white dark:bg-brand-600 text-slate-900 dark:text-white shadow-sm transition';
-        enBtn.className = 'px-2.5 py-1 rounded-lg text-slate-500 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition';
+        zhBtn.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-sm bg-white dark:bg-brand-600 text-slate-900 dark:text-white';
+        enBtn.className = 'flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white';
         document.documentElement.lang = 'zh-CN';
       }
       localStorage.setItem('hord_privacy_lang', lang);
@@ -508,7 +653,6 @@
       enBtn.addEventListener('click', () => setLanguage('en'));
     }
 
-    // 初始化语言偏好（若浏览器为英文环境则优先展示英文，否则按上次保存或默认中文）
     const savedLang = localStorage.getItem('hord_privacy_lang');
     if (savedLang) {
       setLanguage(savedLang);
