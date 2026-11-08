@@ -1,0 +1,546 @@
+import os
+import re
+import json
+import base64
+from PIL import Image, ImageDraw, ImageFont
+
+print("=== Building HORD CWS V2 Pipeline ===")
+
+# 1. Base64 Assets
+def b64(path, mime):
+    with open(path, 'rb') as f:
+        return f"data:{mime};base64," + base64.b64encode(f.read()).decode('ascii')
+
+assets_map = {
+    'icon': b64('assets/toolkit/icon128.png', 'image/png'),
+    'elon': b64('assets/toolkit/feed_elon_starship.jpg', 'image/jpeg'),
+    'elonAvatar': b64('assets/toolkit/feed_elon_avatar.jpg', 'image/jpeg'),
+    'cr7Avatar': b64('assets/toolkit/feed_cr7_avatar.jpg', 'image/jpeg'),
+    'hug': b64('assets/toolkit/feed_cr7_messi_hug_opt.jpg', 'image/jpeg'),
+    'ad': b64('assets/toolkit/feed_ad_ugly_vpn.jpg', 'image/jpeg'),
+    'nasa': b64('assets/toolkit/feed_nasa_cosmos.jpg', 'image/jpeg'),
+    'nasaAvatar': b64('assets/toolkit/feed_nasa_avatar_opt.png', 'image/png'),
+    'taylorAvatar': b64('assets/toolkit/feed_taylor_avatar.jpg', 'image/jpeg'),
+}
+print("Loaded Base64 assets.")
+
+# 2. Comprehensive 8-Language Localization Dictionary (V2 Pure Value-First)
+LOCALES_CONFIG = {
+    "zh-CN": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "让 X 与 Threads 更好用",
+            "sub": "界面净化 · 媒体保存 · 自由排版 · 关键词过滤",
+            "pills": ["界面清爽", "原生体验"],
+            "metrics": "18.4K 回复 · 52.8K 转推 · 410K 点赞 · 32.5M 浏览",
+            "btn": "保存 4K 视频"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "一键保存视频与原图",
+            "sub": "无缝内嵌于推特操作栏，无需跳转复制，一键下载高清视频与原图。",
+            "pills": ["原生内嵌", "极速直链"],
+            "metrics": "18.4K 回复      52.8K 转推      410K 点赞      32.5M 浏览",
+            "btn": "保存视频 (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "告别广告与无关推荐",
+            "sub": "智能移除赞助推文与恶俗推广，时间线无缝贴合，零空白残留。",
+            "pills": ["消除广告", "零留白残留"],
+            "beforeTag": "原版 X: 充斥商业推广与打扰阅读",
+            "afterTag": "开启 HORD: 100% 纯净无广告时间线",
+            "bottomPill": "广告与推广推文无痕移除 · 0% 留白残留 · 纯净贴合"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "自由调节时间线宽度与居中",
+            "sub": "告别默认 600px 狭窄拥挤视窗，在宽屏大显示器上享受舒展视野。",
+            "pills": ["巨幕居中", "600px - 1400px"],
+            "sliderLabel": "时间线宽度自由调节:",
+            "modePill": "1050px 居中专注模式",
+            "metrics": "14.2K 回复      48.6K 转推      210K 点赞      18.4M 浏览",
+            "bottomNote": "左右冗余侧边栏已自动清空折叠"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "过滤不想看到的关键词与噪音",
+            "sub": "自定义规则屏蔽剧透、空投与炒作垃圾，专注真正有价值的内容。",
+            "pills": ["关键词屏蔽", "高信噪比"],
+            "placeholder": "输入要屏蔽的关键词或话题标签 (例如: #剧透, 空投, 营销号, 炒作)...",
+            "addBtn": "+ 添加规则",
+            "rulesLabel": "已生效屏蔽规则:",
+            "rules": ["✕ #剧透", "✕ #空投", "✕ #营销号", "✕ #炒作"],
+            "status": "静音引擎运行中 · 已过滤 18 条",
+            "mutedRow": "已自动折叠: 匹配规则 \"#空投\" 的 1 条低信噪比推广推文 (点击可展开)",
+            "metrics": "1.8K 回复      6.2K 转推      45K 点赞      2.8M 浏览",
+            "bottomNote": "信噪比大幅提升 · 专注高质量资讯"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "让 X 与 Threads 更好用",
+            "sub": "界面净化 · 媒体保存 · 自由排版 · 关键词过滤",
+            "pills": ["界面纯净无广告", "4K 媒体一键保存", "宽屏居中排版", "关键词静音过滤"],
+            "btn": "保存 4K 视频"
+        },
+        "small": {
+            "title": "让 X 与 Threads 更好用",
+            "sub": "界面净化 · 媒体保存 · 自由排版",
+            "pills": ["界面纯净", "4K 一键下载"]
+        }
+    },
+
+    "zh-TW": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "讓 X 與 Threads 更好用",
+            "sub": "介面淨化 · 媒體保存 · 自由排版 · 關鍵詞過濾",
+            "pills": ["介面清爽", "原生體驗"],
+            "metrics": "18.4K 回覆 · 52.8K 轉推 · 410K 喜歡 · 32.5M 瀏覽",
+            "btn": "保存 4K 影片"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "一鍵保存影片與原圖",
+            "sub": "無縫內嵌於推文操作列，無需跳轉複製，一鍵下載高畫質影片與原圖。",
+            "pills": ["原生內嵌", "極速直鏈"],
+            "metrics": "18.4K 回覆      52.8K 轉推      410K 喜歡      32.5M 瀏覽",
+            "btn": "保存影片 (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "告別廣告與無關推薦",
+            "sub": "智慧移除贊助推文與詐騙廣告，時間軸無縫貼合，零空白殘留。",
+            "pills": ["消除廣告", "零留白殘留"],
+            "beforeTag": "原版 X: 充斥商業推廣與打擾閱讀",
+            "afterTag": "開啟 HORD: 100% 純淨無廣告時間軸",
+            "bottomPill": "廣告與推廣推文無痕移除 · 0% 留白殘留 · 純淨貼合"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "自由調節時間軸寬度與置中",
+            "sub": "告別預設 600px 狹窄擁擠視窗，在寬螢幕大顯示器上享受舒展視野。",
+            "pills": ["巨幕置中", "600px - 1400px"],
+            "sliderLabel": "時間軸寬度自由調節:",
+            "modePill": "1050px 置中專注模式",
+            "metrics": "14.2K 回覆      48.6K 轉推      210K 喜歡      18.4M 瀏覽",
+            "bottomNote": "左右冗餘側邊欄已自動清空摺疊"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "過濾不想看到的關鍵詞與噪音",
+            "sub": "自訂規則屏蔽爆雷、空投與炒作垃圾，專注真正有價值的內容。",
+            "pills": ["關鍵詞屏蔽", "高信噪比"],
+            "placeholder": "輸入要屏蔽的關鍵詞或話題標籤 (例如: #爆雷, 空投, 炒作)...",
+            "addBtn": "+ 添加規則",
+            "rulesLabel": "已生效屏蔽規則:",
+            "rules": ["✕ #爆雷", "✕ #空投", "✕ #行銷號", "✕ #炒作"],
+            "status": "靜音引擎運行中 · 已過濾 18 條",
+            "mutedRow": "已自動摺疊: 匹配規則 \"#空投\" 的 1 條推廣推文 (點擊可展開)",
+            "metrics": "1.8K 回覆      6.2K 轉推      45K 喜歡      2.8M 瀏覽",
+            "bottomNote": "信噪比大幅提升 · 專注高質量資訊"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "讓 X 與 Threads 更好用",
+            "sub": "介面淨化 · 媒體保存 · 自由排版 · 關鍵詞過濾",
+            "pills": ["介面純淨無廣告", "4K 媒體一鍵保存", "寬螢幕置中排版", "關鍵詞靜音過濾"],
+            "btn": "保存 4K 影片"
+        },
+        "small": {
+            "title": "讓 X 與 Threads 更好用",
+            "sub": "介面淨化 · 媒體保存 · 自由排版",
+            "pills": ["介面純淨", "4K 一鍵下載"]
+        }
+    },
+
+    "en-US": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "Make X & Threads Better",
+            "sub": "Ad Shield · Media Saver · Custom Layout · Keyword Filter",
+            "pills": ["Clean Feed", "Native Feel"],
+            "metrics": "18.4K Replies · 52.8K Reposts · 410K Likes · 32.5M Views",
+            "btn": "Save 4K Video"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "Save Videos & Photos in One Click",
+            "sub": "Seamlessly embedded in tweet action bars. No external URLs needed.",
+            "pills": ["Native Action Bar", "Direct Link"],
+            "metrics": "18.4K Replies      52.8K Reposts      410K Likes      32.5M Views",
+            "btn": "Save Video (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "Say Goodbye to Ads & Clutter",
+            "sub": "Smart removal of sponsored tweets and spam. Smooth timeline with zero gaps.",
+            "pills": ["100% Ad-Free", "Zero Gap Residual"],
+            "beforeTag": "Stock X: Cluttered with Ads & Promos",
+            "afterTag": "HORD Active: 100% Clean Timeline",
+            "bottomPill": "Sponsored ads removed seamlessly · Zero gap residual · Pure feed"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "Custom Timeline Width & Centering",
+            "sub": "Break free from the cramped 600px prison. Enjoy expansive reading on wide screens.",
+            "pills": ["Centered Reading", "600px - 1400px"],
+            "sliderLabel": "Custom Timeline Width:",
+            "modePill": "1050px Centered Widescreen",
+            "metrics": "14.2K Replies      48.6K Reposts      210K Likes      18.4M Views",
+            "bottomNote": "Sidebars cleanly collapsed for distraction-free reading"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "Filter Keywords & Distractions",
+            "sub": "Mute spoilers, crypto spam, and gossip to focus on content that matters.",
+            "pills": ["Keyword Filter", "High Signal-to-Noise"],
+            "placeholder": "Type keywords or hashtags to mute (e.g. #spoilers, airdrop, gossip)...",
+            "addBtn": "+ Add Rule",
+            "rulesLabel": "Active Mute Rules:",
+            "rules": ["✕ #spoilers", "✕ #airdrop", "✕ #giveaway", "✕ #drama"],
+            "status": "Mute Engine Active · 18 Muted",
+            "mutedRow": "Auto-collapsed: 1 tweet matching \"#airdrop\" muted (click to expand)",
+            "metrics": "1.8K Replies      6.2K Reposts      45K Likes      2.8M Views",
+            "bottomNote": "High signal-to-noise ratio · Focus on valuable insights"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "Make X & Threads Better",
+            "sub": "Ad Shield · Media Saver · Custom Layout · Keyword Filter",
+            "pills": ["Clean Feed", "4K Video Saver", "Widescreen Centered", "Noise Muted"],
+            "btn": "Save 4K Video"
+        },
+        "small": {
+            "title": "Make X & Threads Better",
+            "sub": "Ad Shield · Media Saver · Custom Layout",
+            "pills": ["Clean Feed", "4K Download"]
+        }
+    },
+
+    "ja": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "X と Threads をより快適に",
+            "sub": "広告非表示 · 動画保存 · 自由レイアウト · キーワード除外",
+            "pills": ["すっきり表示", "シームレス操作"],
+            "metrics": "18.4K 返信 · 52.8K リポスト · 410K いいね · 32.5M 表示",
+            "btn": "4K動画を保存"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "動画と高画質画像をワンクリック保存",
+            "sub": "ポストの操作バーに直接組み込み。URLコピー不要で高画質保存。",
+            "pills": ["直接組み込み", "高速保存"],
+            "metrics": "18.4K 返信      52.8K リポスト      410K いいね      32.5M 表示",
+            "btn": "動画を保存 (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "プロモーション広告をすっきり消去",
+            "sub": "広告や不要なスパムを自然に消去。空白を残さずタイムラインを結合。",
+            "pills": ["広告ゼロ", "空白なし"],
+            "beforeTag": "公式 X: 広告とプロモーションが多数",
+            "afterTag": "HORD 有効: 100% クリーンなタイムライン",
+            "bottomPill": "広告をシームレスに消去 · 余白なし · 快適な読書感"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "表示幅の自由調整と中央配置",
+            "sub": "600pxの窮屈な枠から解放。ワイドモニターで快適な大画面読書を。",
+            "pills": ["中央配置", "600px - 1400px"],
+            "sliderLabel": "表示幅の自由調節:",
+            "modePill": "1050px 中央大画面モード",
+            "metrics": "14.2K 返信      48.6K リポスト      210K いいね      18.4M 表示",
+            "bottomNote": "左右の不要バーを自動で非表示"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "不要なキーワードとノイズを非表示",
+            "sub": "ネタバレやスパムをミュート。本当に読みたい価値ある情報だけに集中。",
+            "pills": ["キーワード除外", "高情報密度"],
+            "placeholder": "非表示にするキーワードやタグを入力 (#ネタバレ, スパム)...",
+            "addBtn": "+ ルール追加",
+            "rulesLabel": "適用中のミュート:",
+            "rules": ["✕ #ネタバレ", "✕ #エアドロ", "✕ #スパム", "✕ #ゴシップ"],
+            "status": "ミュート稼働中 · 18件非表示",
+            "mutedRow": "自動折りたたみ: \"#エアドロ\" に一致するポスト (クリックで展開)",
+            "metrics": "1.8K 返信      6.2K リポスト      45K いいね      2.8M 表示",
+            "bottomNote": "情報密度が大幅向上 · 価値ある投稿だけに集中"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "X と Threads をより快適に",
+            "sub": "広告非表示 · 動画保存 · 自由レイアウト · キーワード除外",
+            "pills": ["広告ゼロ", "4K動画ワンクリック保存", "中央ワイド配置", "ノイズミュート"],
+            "btn": "4K動画を保存"
+        },
+        "small": {
+            "title": "X と Threads をより快適に",
+            "sub": "広告非表示 · 動画保存 · 自由レイアウト",
+            "pills": ["広告ゼロ", "4K保存"]
+        }
+    },
+
+    "ko": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "X와 Threads를 더욱 쾌적하게",
+            "sub": "광고 차단 · 미디어 저장 · 맞춤 레이아웃 · 키워드 필터",
+            "pills": ["깔끔한 피드", "자연스러운 사용감"],
+            "metrics": "18.4K 답글 · 52.8K 재게시 · 410K 마음에 들어요 · 32.5M 조회",
+            "btn": "4K 동영상 저장"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "동영상 및 원본 사진 원클릭 저장",
+            "sub": "게시물 작업 표시줄에 직접 내장되어 URL 복사 없이 바로 저장합니다.",
+            "pills": ["직접 내장", "초고속 다운로드"],
+            "metrics": "18.4K 답글      52.8K 재게시      410K 마음에 들어요      32.5M 조회",
+            "btn": "동영상 저장 (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "프로모션 광고와 스팸 완벽 제거",
+            "sub": "스폰서 게시물을 깔끔하게 제거하여 여백 없이 부드러운 타임라인을 완성합니다.",
+            "pills": ["광고 없는 피드", "여백 잔여물 제로"],
+            "beforeTag": "기본 X: 광고와 무관한 추천으로 혼잡",
+            "afterTag": "HORD 활성화: 100% 순수한 타임라인",
+            "bottomPill": "프로모션 게시물 완벽 제거 · 0% 여백 잔여물 · 매끄러운 피드"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "타임라인 너비 조절 및 중앙 정렬",
+            "sub": "답답한 600px 기본 너비에서 벗어나 와이드 모니터에서 넓고 편안하게 감상하세요.",
+            "pills": ["중앙 정렬", "600px - 1400px"],
+            "sliderLabel": "타임라인 너비 자유 조절:",
+            "modePill": "1050px 중앙 몰입 모드",
+            "metrics": "14.2K 답글      48.6K 재게시      210K 마음에 들어요      18.4M 조회",
+            "bottomNote": "좌우 불필요한 사이드바 자동 접힘"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "원치 않는 키워드와 피로한 소음 차단",
+            "sub": "스포일러와 광고성 키워드를 뮤트하여 가치 있는 콘텐츠에만 집중하세요.",
+            "pills": ["키워드 차단", "높은 정보 밀도"],
+            "placeholder": "차단할 키워드나 해시태그 입력 (#스포일러, 에어드랍)...",
+            "addBtn": "+ 규칙 추가",
+            "rulesLabel": "적용 중인 뮤트 규칙:",
+            "rules": ["✕ #스포일러", "✕ #에어드랍", "✕ #광고봇", "✕ #어그로"],
+            "status": "필터링 엔진 가동 중 · 18개 차단",
+            "mutedRow": "자동 접힘: \"#에어드랍\" 키워드와 일치하는 게시물 (클릭하여 펼치기)",
+            "metrics": "1.8K 답글      6.2K 재게시      45K 마음에 들어요      2.8M 조회",
+            "bottomNote": "정보 밀도 대폭 향상 · 핵심 인사이트에만 집중"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "X와 Threads를 더욱 쾌적하게",
+            "sub": "광고 차단 · 미디어 저장 · 맞춤 레이아웃 · 키워드 필터",
+            "pills": ["광고 없는 피드", "4K 미디어 저장", "중앙 와이드 정렬", "소음 키워드 차단"],
+            "btn": "4K 동영상 저장"
+        },
+        "small": {
+            "title": "X와 Threads를 더욱 쾌적하게",
+            "sub": "광고 차단 · 미디어 저장 · 맞춤 레이아웃",
+            "pills": ["광고 없는 피드", "4K 다운로드"]
+        }
+    },
+
+    "es": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "Haz que X y Threads sean mejores",
+            "sub": "Limpia anuncios · Guarda multimedia · Diseño libre · Filtro",
+            "pills": ["Feed Limpio", "Nativo"],
+            "metrics": "18.4K Respuestas · 52.8K Reposts · 410K Me gusta · 32.5M Vistas",
+            "btn": "Guardar Video 4K"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "Guarda videos y fotos en un clic",
+            "sub": "Integrado en la barra de acciones de la publicación, sin copiar enlaces.",
+            "pills": ["Integración Nativa", "Enlace Directo"],
+            "metrics": "18.4K Respuestas      52.8K Reposts      410K Me gusta      32.5M Vistas",
+            "btn": "Guardar Video (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "Dile adiós a los anuncios y al ruido",
+            "sub": "Elimina publicaciones patrocinadas y spam sin dejar espacios vacíos en tu feed.",
+            "pills": ["Sin Anuncios", "Cero Espacios Vacíos"],
+            "beforeTag": "X Original: Saturado de anuncios y publicidad",
+            "afterTag": "Con HORD: Feed 100% Limpio y Fluido",
+            "bottomPill": "Anuncios eliminados sin rastro · Cero espacios vacíos · Lectura pura"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "Ancho de feed y centrado libre",
+            "sub": "Libérate de los 600px oficiales y disfruta de una lectura inmersiva en pantallas anchas.",
+            "pills": ["Centrado de Feed", "600px - 1400px"],
+            "sliderLabel": "Ajuste libre de ancho:",
+            "modePill": "Modo Pantalla Ancha 1050px",
+            "metrics": "14.2K Respuestas      48.6K Reposts      210K Me gusta      18.4M Vistas",
+            "bottomNote": "Barras laterales innecesarias ocultas automáticamente"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "Filtra palabras clave y distracciones",
+            "sub": "Silencia spoilers y spam para enfocarte en el contenido que de verdad te importa.",
+            "pills": ["Filtro de Palabras", "Máxima Claridad"],
+            "placeholder": "Palabras o hashtags para silenciar (#spoilers, airdrop)...",
+            "addBtn": "+ Añadir Regla",
+            "rulesLabel": "Reglas activas:",
+            "rules": ["✕ #spoilers", "✕ #airdrop", "✕ #sorteos", "✕ #chismes"],
+            "status": "Motor activo · 18 silenciados",
+            "mutedRow": "Auto-ocultado: 1 post que coincide con \"#airdrop\" (clic para ver)",
+            "metrics": "1.8K Respuestas      6.2K Reposts      45K Me gusta      2.8M Vistas",
+            "bottomNote": "Máxima claridad · Enfócate en contenido de calidad"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "Haz que X y Threads sean mejores",
+            "sub": "Sin Anuncios · Guardar Media · Diseño Libre · Filtro Mots-clés",
+            "pills": ["Feed Limpio", "Descarga 4K", "Diseño Centrado", "Silenciar Spam"],
+            "btn": "Guardar Video 4K"
+        },
+        "small": {
+            "title": "Haz que X y Threads sean mejores",
+            "sub": "Sin Anuncios · Guardar Media · Diseño Libre",
+            "pills": ["Feed Limpio", "Descarga 4K"]
+        }
+    },
+
+    "fr": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "Rendez X et Threads encore meilleurs",
+            "sub": "Sans publicité · Téléchargement · Mise en page · Filtre",
+            "pills": ["Fil Épuré", "Expérience Native"],
+            "metrics": "18.4K Réponses · 52.8K Reposts · 410K J'aime · 32.5M Vues",
+            "btn": "Sauvegarder en 4K"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "Téléchargez vidéos et photos en un clic",
+            "sub": "Bouton directement intégré sous les posts, sans copier de lien externe.",
+            "pills": ["Intégration Directe", "Lien Direct"],
+            "metrics": "18.4K Réponses      52.8K Reposts      410K J'aime      32.5M Vues",
+            "btn": "Sauvegarder Vidéo (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "Dites adieu aux publicités et spams",
+            "sub": "Supprimez les posts sponsorisés et le bruit sans laisser d'espaces vides.",
+            "pills": ["100% Sans Pub", "Zéro Espace Vide"],
+            "beforeTag": "X Classique: Encombré de pubs et de promos",
+            "afterTag": "Avec HORD: Fil 100% Propre et Épuré",
+            "bottomPill": "Publicités retirées sans trace · Zéro espace vide · Fil continu"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "Largeur personnalisée et centrage du fil",
+            "sub": "Dépassez la limite de 600px pour profiter d'un confort de lecture sur grand écran.",
+            "pills": ["Lecture Centrée", "600px - 1400px"],
+            "sliderLabel": "Réglage de la largeur du fil:",
+            "modePill": "Mode Large Centré 1050px",
+            "metrics": "14.2K Réponses      48.6K Reposts      210K J'aime      18.4M Vues",
+            "bottomNote": "Barres latérales masquées automatiquement"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "Filtrez les mots-clés et distractions",
+            "sub": "Masquez spoilers et spams pour vous concentrer sur les contenus qui comptent.",
+            "pills": ["Filtrage Mots-Clés", "Signal Élevé"],
+            "placeholder": "Mots-clés ou hashtags à masquer (#spoilers, airdrop)...",
+            "addBtn": "+ Ajouter Règle",
+            "rulesLabel": "Règles actives:",
+            "rules": ["✕ #spoilers", "✕ #airdrop", "✕ #giveaway", "✕ #gossip"],
+            "status": "Moteur actif · 18 masqués",
+            "mutedRow": "Masqué automatiquement: 1 post contenant \"#airdrop\" (cliquer pour voir)",
+            "metrics": "1.8K Réponses      6.2K Reposts      45K J'aime      2.8M Vues",
+            "bottomNote": "Signal élevé · Concentrez-vous sur l'essentiel"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "Rendez X et Threads encore meilleurs",
+            "sub": "Sans Pub · Téléchargement · Mise en page · Filtre Mots-clés",
+            "pills": ["Fil Épuré", "Téléchargement 4K", "Mise en page Centrée", "Filtre Mots-clés"],
+            "btn": "Sauvegarder en 4K"
+        },
+        "small": {
+            "title": "Rendez X et Threads encore meilleurs",
+            "sub": "Sans Pub · Téléchargement · Mise en page",
+            "pills": ["Fil Épuré", "Téléchargement 4K"]
+        }
+    },
+
+    "de": {
+        "s1": {
+            "tag": "ALL-IN-ONE FOR X & THREADS",
+            "title": "Mach X und Threads einfach besser",
+            "sub": "Werbeschutz · Medien-Download · Freies Layout · Keyword-Filter",
+            "pills": ["Saubere Timeline", "Natives Gefühl"],
+            "metrics": "18.4K Antworten · 52.8K Reposts · 410K Likes · 32.5M Aufrufe",
+            "btn": "4K Video Speichern"
+        },
+        "s2": {
+            "tag": "ONE-CLICK MEDIA DOWNLOAD",
+            "title": "Videos und Fotos mit einem Klick speichern",
+            "sub": "Direkt in die Post-Aktionsleiste integriert. Keine externen Links erforderlich.",
+            "pills": ["Direkt Integriert", "Direkter Link"],
+            "metrics": "18.4K Antworten      52.8K Reposts      410K Likes      32.5M Aufrufe",
+            "btn": "Video Speichern (4K)"
+        },
+        "s3": {
+            "tag": "BEFORE & AFTER COMPARISON",
+            "title": "Schluss mit Werbung und störendem Spam",
+            "sub": "Entfernt gesponserte Posts lückenlos, für eine vollkommen saubere Timeline.",
+            "pills": ["100% Werbefrei", "Keine Leerräume"],
+            "beforeTag": "Standard-X: Überladen mit Werbung und Promos",
+            "afterTag": "Mit HORD: 100% Saubere Timeline",
+            "bottomPill": "Werbung nahtlos entfernt · Keine Leerräume · Purer Lesekomfort"
+        },
+        "s4": {
+            "tag": "CUSTOM LAYOUT & CENTERING",
+            "title": "Timeline-Breite anpassen und zentrieren",
+            "sub": "Befreie dich von engen 600px und genieße ein großzügiges Leseerlebnis auf Widescreen.",
+            "pills": ["Zentrierte Ansicht", "600px - 1400px"],
+            "sliderLabel": "Timeline-Breite frei anpassen:",
+            "modePill": "1050px Widescreen Zentriert",
+            "metrics": "14.2K Antworten      48.6K Reposts      210K Likes      18.4M Aufrufe",
+            "bottomNote": "Seitenleisten automatisch ausgeblendet"
+        },
+        "s5": {
+            "tag": "KEYWORD & NOISE RADAR",
+            "title": "Keywords und Ablenkungen filtern",
+            "sub": "Blende Spoiler und Krypto-Spam stumm, um dich auf relevante Inhalte zu konzentrieren.",
+            "pills": ["Keyword-Filter", "Fokus auf Wert"],
+            "placeholder": "Keywords oder Hashtags eingeben (#spoiler, airdrop)...",
+            "addBtn": "+ Regel hinzufügen",
+            "rulesLabel": "Aktive Stummschaltungen:",
+            "rules": ["✕ #spoiler", "✕ #airdrop", "✕ #gewinnspiel", "✕ #gossip"],
+            "status": "Filter aktiv · 18 stummgeschaltet",
+            "mutedRow": "Automatisch eingeklappt: 1 Post mit \"#airdrop\" (Klicken zum Einblenden)",
+            "metrics": "1.8K Antworten      6.2K Reposts      45K Likes      2.8M Aufrufe",
+            "bottomNote": "Maximale Klarheit · Fokus auf wertvolle Einblicke"
+        },
+        "marquee": {
+            "tag": "FOR X & THREADS",
+            "title": "Mach X und Threads einfach besser",
+            "sub": "Werbeschutz · Medien-Download · Freies Layout · Keyword-Filter",
+            "pills": ["Saubere Timeline", "4K Video-Download", "Widescreen Zentriert", "Keyword-Filter"],
+            "btn": "4K Video Speichern"
+        },
+        "small": {
+            "title": "Mach X und Threads einfach besser",
+            "sub": "Werbeschutz · Medien-Download · Freies Layout",
+            "pills": ["Saubere Timeline", "4K Download"]
+        }
+    }
+}
+print("Configured all 8 locales.")
+
+# Output json of LOCALES_CONFIG for the HTML builder
+with open("locales_config_v2.json", "w", encoding="utf-8") as f:
+    json.dump(LOCALES_CONFIG, f, ensure_ascii=False, indent=2)
+print("Saved locales_config_v2.json")

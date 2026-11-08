@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlock Pro License — HORD X-Threads Toolkit</title>
+  <meta name="description" content="Purchase HORD X-Threads Toolkit Pro License. Ultrawide responsive timelines, 4K lossless video extraction, ad-shielding engine, multi-device activation. Early bird special ¥49 / $7.99." />
+  <link rel="icon" type="image/png" href="../assets/toolkit/icon48.png" />
+  <link rel="apple-touch-icon" href="../assets/toolkit/icon128.png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              black: "#06080F",
+              card: "#0D111E",
+              border: "rgba(255, 255, 255, 0.08)",
+              cyan: "#00F2FE",
+              teal: "#4FACFE",
+              neon: "#10B981",
+              purple: "#7928CA",
+              pink: "#FF0080"
+            }
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'Inter', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 35px -5px rgba(0, 242, 254, 0.3)',
+            'glow-sm': '0 0 15px rgba(0, 242, 254, 0.25)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .light .cyber-grid {
+      background-image: 
+        linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    }
+
+    .hud-card {
+      position: relative;
+      background: rgba(13, 17, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .light .hud-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-cyber {
+      background: linear-gradient(135deg, #FFFFFF 20%, #A5B4FC 60%, #00F2FE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .light .text-gradient-cyber {
+      background: linear-gradient(135deg, #0F172A 20%, #312E81 60%, #0284C7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-[#F8FAFC] text-slate-800 dark:bg-cyber-black dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-cyber-cyan selection:text-black transition-colors duration-300">
+
+  <!-- 背景网格与光晕 -->
+  <div class="fixed inset-0 cyber-grid pointer-events-none z-0"></div>
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-cyan-500/15 via-purple-600/10 to-transparent blur-[140px] pointer-events-none z-0"></div>
+
+  <!-- 顶部导航 -->
+  <header class="relative z-10 border-b border-black/5 dark:border-white/10 backdrop-blur-xl bg-white/70 dark:bg-[#06080F]/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- 品牌入口 -->
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-600 shadow-glow-sm flex items-center justify-center transition-transform group-hover:scale-105">
+          <img src="../assets/toolkit/icon128.png" alt="HORD Logo" class="w-full h-full object-contain rounded-lg" />
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight font-sans text-slate-900 dark:text-white">
+              HORD <span class="text-gradient-cyan">X-Threads</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+              PRO CHECKOUT
+            </span>
+          </div>
+          <span class="block text-[10px] text-slate-500 dark:text-slate-400 font-mono" data-i18n="nav.desc">
+            OFFICIAL LICENSE DISPATCH
+          </span>
+        </div>
+      </a>
+
+      <!-- 右侧控制区 -->
+      <div class="flex items-center gap-3">
+        
+        <!-- 语言切换 -->
+        <button id="langToggleBtn" type="button" class="px-2.5 py-1.5 rounded-xl border border-black/10 dark:border-white/10 text-xs font-mono font-medium hover:bg-black/5 dark:hover:bg-white/5 transition flex items-center gap-1.5" title="Switch Language">
+          <span class="text-xs">🌐</span>
+          <span id="currentLangLabel">EN</span>
+        </button>
+
+        <!-- 主题切换 -->
+        <button id="themeToggleBtn" type="button" class="p-2 rounded-xl border border-black/10 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 transition" title="Toggle Theme">
+          <span class="dark:hidden">☀️</span>
+          <span class="hidden dark:inline">🌙</span>
+        </button>
+
+        <!-- 返回产品介绍页 -->
+        <a href="index.html" class="px-3.5 py-1.5 text-xs font-mono rounded-xl bg-black/5 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:bg-black/10 dark:hover:bg-white/15 transition flex items-center gap-1">
+          <span data-i18n="nav.back">← Product Page</span>
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 结算主体 -->
+  <main class="relative z-10 flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
+    
+    <!-- 标头与优惠说明 -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 text-xs font-mono uppercase tracking-wider mb-3">
+        <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span data-i18n="head.tag">EARLY BIRD PRO LICENSE // 1-YEAR BUYOUT</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight font-sans text-slate-900 dark:text-white" data-i18n="head.title">
+        Upgrade to Pro Power Suite
+      </h1>
+      <p class="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-sans" data-i18n="head.desc">
+        One-time payment with zero auto-renewal traps. Supports activation on up to 2 personal devices with 7-day refund guarantee.
+      </p>
+    </div>
+
+    <!-- 订单与支付分栏 -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 左栏：订单明细 (Col 7) -->
+      <div class="lg:col-span-7 hud-card rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+        
+        <div class="flex items-center justify-between pb-4 border-b border-black/5 dark:border-white/10 font-mono text-xs">
+          <h2 class="text-base font-bold font-sans text-slate-900 dark:text-white" data-i18n="order.title">
+            Order Summary
+          </h2>
+          <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 font-bold">
+            -45% EARLY BIRD DISCOUNT
+          </span>
+        </div>
+
+        <!-- 详细明细清单 -->
+        <div class="space-y-4 text-xs sm:text-sm font-sans">
+          
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span data-i18n="order.item">Licensed Product</span>
+            <span class="font-bold text-slate-900 dark:text-white font-mono">HORD X-Threads Toolkit Pro (v1.1.x)</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span data-i18n="order.device">Device Allowance</span>
+            <span class="font-mono text-slate-800 dark:text-slate-200" data-i18n="order.deviceVal">Up to 2 Concurrent Devices</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span data-i18n="order.type">License Model</span>
+            <span class="text-slate-800 dark:text-slate-200" data-i18n="order.typeVal">1-Year Buyout (No Auto-Renewals)</span>
+          </div>
+
+          <div class="flex items-center justify-between text-slate-600 dark:text-slate-400">
+            <span data-i18n="order.includes">Included Modules</span>
+            <span class="font-mono text-cyan-400 text-xs text-right">
+              Ultrawide + 4K Sniffer + Ad-Shield v4
+            </span>
+          </div>
+
+          <!-- 金额计算 -->
+          <div class="pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between">
+            <span class="font-bold text-slate-900 dark:text-white" data-i18n="order.total">Total Due</span>
+            <div class="text-right">
+              <span class="text-xs line-through text-slate-400 mr-2 font-mono">¥88 / $25</span>
+              <span class="text-3xl font-extrabold text-cyan-500 dark:text-cyan-400 font-sans">¥49</span>
+              <span class="text-sm font-bold text-slate-500 font-mono"> / $7.99</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 客服确认邮箱 -->
+        <div class="pt-4 border-t border-black/5 dark:border-white/10 space-y-2 font-sans">
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 font-mono" data-i18n="mail.label">
+            VERIFICATION &amp; DISPATCH DESK:
+          </label>
+          <div class="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 flex items-center justify-between">
+            <span class="font-mono text-xs sm:text-sm text-cyan-500 select-all font-semibold">andyfreeman0919@gmail.com</span>
+            <button onclick="navigator.clipboard.writeText('andyfreeman0919@gmail.com'); alert('Support Email copied to clipboard!');" 
+                    class="px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-cyan-500/10 text-cyan-500 hover:bg-cyan-500/20 transition" data-i18n="mail.copy">
+              Copy Email
+            </button>
+          </div>
+        </div>
+
+        <!-- 确认邮件快捷发送 -->
+        <div class="space-y-3 font-sans">
+          <a href="mailto:andyfreeman0919@gmail.com?subject=HORD%20X-Threads%20Toolkit%20Pro%20Payment%20Confirmation&body=Hello%20HORD%20Support%2C%0A%0AI%20have%20completed%20the%20payment%20for%20HORD%20X-Threads%20Toolkit%20Pro.%0A%0A-%20Payment%20Method%3A%20(Alipay%20%2F%20WeChat%20%2F%20PayPal%20%2F%20Other)%0A-%20Paid%20Amount%3A%20%C2%A549%20%2F%20%247.99%0A-%20Payment%20Time%3A%20%0A-%20My%20Delivery%20Email%3A%20%0A%0APlease%20verify%20my%20receipt%20and%20issue%20the%20exclusive%20License%20Key.%20Thank%20you!" 
+             class="block w-full py-4 text-center text-xs sm:text-sm font-bold font-mono uppercase tracking-wider rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white shadow-glow-cyan hover:brightness-110 active:scale-[0.99] transition">
+            ✉️ <span data-i18n="mail.sendBtn">Send Payment Receipt via Email</span>
+          </a>
+          <p class="text-[11px] text-slate-500 text-center leading-relaxed font-mono" data-i18n="mail.note">
+            After completing payment, please send your transaction screenshot or timestamp to customer support. Keys are generally issued within 10 minutes.
+          </p>
+        </div>
+
+        <!-- 7 天保障 -->
+        <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-600 dark:text-emerald-400 space-y-1 font-sans">
+          <div class="font-bold flex items-center gap-1.5" data-i18n="refund.title">
+            <span>🛡️</span> 7-Day Money-Back Guarantee
+          </div>
+          <div class="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400" data-i18n="refund.desc">
+            If our extension cannot activate or run as promised on your machine due to compatibility constraints within 7 days, email us for an unconditional full refund.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右栏：扫码快速支付 (Col 5) -->
+      <div class="lg:col-span-5 hud-card rounded-3xl p-6 sm:p-7 space-y-5 shadow-xl">
+        
+        <div class="flex items-center justify-between pb-3 border-b border-black/5 dark:border-white/10 font-mono text-xs">
+          <h2 class="text-base font-bold font-sans text-slate-900 dark:text-white" data-i18n="pay.title">
+            Instant QR Payment
+          </h2>
+          <span class="text-cyan-400">● LIVE</span>
+        </div>
+
+        <!-- 支付方式切换 Tab -->
+        <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 text-xs font-mono font-bold">
+          <button id="payTabAli" onclick="switchPayTab('alipay')" class="py-2.5 rounded-xl bg-blue-600 text-white shadow-sm transition">
+            Alipay (支付宝)
+          </button>
+          <button id="payTabWx" onclick="switchPayTab('wechat')" class="py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            WeChat Pay (微信)
+          </button>
+        </div>
+
+        <!-- 支付宝收款码 -->
+        <div id="alipayQrCard" class="text-center p-5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+          <div class="text-xs font-mono font-bold text-blue-500 mb-2">
+            SCAN WITH ALIPAY · PAY ¥49
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white p-2.5 inline-block shadow-md">
+            <img src="../收款码/alipay-hord.png" alt="Alipay QR Code" class="w-56 h-auto object-contain mx-auto" />
+          </div>
+          <div class="mt-3 text-[11px] text-slate-500 font-mono" data-i18n="pay.aliHelp">
+            Open Alipay app on your phone to scan and pay
+          </div>
+        </div>
+
+        <!-- 微信收款码 -->
+        <div id="wechatQrCard" class="hidden text-center p-5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+          <div class="text-xs font-mono font-bold text-emerald-500 mb-2">
+            SCAN WITH WECHAT · PAY ¥49
+          </div>
+          <div class="overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white p-2.5 inline-block shadow-md">
+            <img src="../收款码/wechat-hord.png" alt="WeChat Pay QR Code" class="w-56 h-auto object-contain mx-auto" />
+          </div>
+          <div class="mt-3 text-[11px] text-slate-500 font-mono" data-i18n="pay.wxHelp">
+            Open WeChat "Scan" on your phone to complete payment
+          </div>
+        </div>
+
+        <!-- 针对国际用户友好通道 -->
+        <div class="p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20 text-xs font-mono space-y-2">
+          <div class="flex items-center gap-1.5 text-cyan-400 font-bold" data-i18n="global.title">
+            <span>🌍</span> International / Overseas Users
+          </div>
+          <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed font-sans" data-i18n="global.desc">
+            Need to pay with PayPal, international credit cards, or crypto? Simply send an inquiry to <a href="mailto:andyfreeman0919@gmail.com" class="text-cyan-400 underline">andyfreeman0919@gmail.com</a> and we will provide an invoice or custom payment link instantly.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="relative z-10 border-t border-black/5 dark:border-white/10 py-8 text-center text-xs font-mono text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 HORD English Companion · Hold Your Word</div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-cyan-400 transition">Toolkit Home</a>
+        <a href="../buy.html" class="hover:text-cyan-400 transition">HORD Main Pro</a>
+        <a href="../index.html" class="hover:text-cyan-400 transition">Main Website</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 交互脚本 -->
+  <script>
+    // 双语字典
+    const i18nDict = {
+      en: {
+        "nav.desc": "OFFICIAL LICENSE DISPATCH",
+        "nav.back": "← Product Page",
+        "head.tag": "EARLY BIRD PRO LICENSE // 1-YEAR BUYOUT",
+        "head.title": "Upgrade to Pro Power Suite",
+        "head.desc": "One-time payment with zero auto-renewal traps. Supports activation on up to 2 personal devices with 7-day refund guarantee.",
+        "order.title": "Order Summary",
+        "order.item": "Licensed Product",
+        "order.device": "Device Allowance",
+        "order.deviceVal": "Up to 2 Concurrent Devices",
+        "order.type": "License Model",
+        "order.typeVal": "1-Year Buyout (No Auto-Renewals)",
+        "order.includes": "Included Modules",
+        "order.total": "Total Due",
+        "mail.label": "VERIFICATION & DISPATCH DESK:",
+        "mail.copy": "Copy Email",
+        "mail.sendBtn": "Send Payment Receipt via Email",
+        "mail.note": "After completing payment, please send your transaction screenshot or timestamp to customer support. Keys are generally issued within 10 minutes.",
+        "refund.title": "7-Day Money-Back Guarantee",
+        "refund.desc": "If our extension cannot activate or run as promised on your machine due to compatibility constraints within 7 days, email us for an unconditional full refund.",
+        "pay.title": "Instant QR Payment",
+        "pay.aliHelp": "Open Alipay app on your phone to scan and pay",
+        "pay.wxHelp": "Open WeChat 'Scan' on your phone to complete payment",
+        "global.title": "International / Overseas Users",
+        "global.desc": "Need to pay with PayPal, international credit cards, or crypto? Simply send an inquiry to andyfreeman0919@gmail.com and we will provide an invoice or custom payment link instantly."
+      },
+      zh: {
+        "nav.desc": "官方专属授权发放",
+        "nav.back": "← 返回产品介绍",
+        "head.tag": "早鸟专业版授权 // 1 年买断",
+        "head.title": "升级至 Pro 极客专业版",
+        "head.desc": "一次性买断付费，绝不设自动续费暗扣。支持最多 2 台设备跨端激活，享 7 天无忧退款承诺。",
+        "order.title": "订单明细",
+        "order.item": "授权产品",
+        "order.device": "授权设备",
+        "order.deviceVal": "最多 2 台并发激活",
+        "order.type": "续费模式",
+        "order.typeVal": "一次性买断 (绝不自动续费)",
+        "order.includes": "包含极客模块",
+        "order.total": "应付金额",
+        "mail.label": "客服确认与分发邮箱:",
+        "mail.copy": "一键复制",
+        "mail.sendBtn": "付款后点击发送确认邮件",
+        "mail.note": "支付成功后，请将付款凭证邮件发送至客服，我们将在核验后最快 10 分钟内发放专属 License Key。",
+        "refund.title": "7 天无忧退款承诺",
+        "refund.desc": "若购买后 7 天内因不可抗力导致插件无法激活使用，可邮件申请全额退款。",
+        "pay.title": "扫码快速支付",
+        "pay.aliHelp": "打开手机支付宝直接扫码支付",
+        "pay.wxHelp": "打开微信「扫一扫」直接支付",
+        "global.title": "海外及国际用户支付",
+        "global.desc": "如需使用 PayPal、国际信用卡或数字加密方式支付，欢迎直接发送邮件至 andyfreeman0919@gmail.com，我们将即刻为您提供专属账单或跨境支付链接。"
+      }
+    };
+
+    let currentLang = 'en';
+    const langBtn = document.getElementById('langToggleBtn');
+    const langLabel = document.getElementById('currentLangLabel');
+
+    function updateLanguage(lang) {
+      currentLang = lang;
+      langLabel.textContent = lang === 'en' ? 'EN' : '中文';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18nDict[lang] && i18nDict[lang][key]) {
+          el.textContent = i18nDict[lang][key];
+        }
+      });
+      localStorage.setItem('hord_toolkit_lang', lang);
+    }
+
+    if (langBtn) {
+      langBtn.addEventListener('click', () => {
+        updateLanguage(currentLang === 'en' ? 'zh' : 'en');
+      });
+    }
+
+    const savedLang = localStorage.getItem('hord_toolkit_lang');
+    if (savedLang) {
+      updateLanguage(savedLang);
+    } else {
+      const browserLang = navigator.language.toLowerCase();
+      if (browserLang.startsWith('zh')) {
+        updateLanguage('zh');
+      } else {
+        updateLanguage('en');
+      }
+    }
+
+    // 主题切换
+    const rootEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggleBtn');
+
+    if (localStorage.getItem('theme') === 'light') {
+      rootEl.classList.remove('dark');
+      rootEl.classList.add('light');
+    } else {
+      rootEl.classList.add('dark');
+      rootEl.classList.remove('light');
+    }
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isDark = rootEl.classList.toggle('dark');
+        rootEl.classList.toggle('light', !isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+
+    // 支付 Tab 切换
+    function switchPayTab(type) {
+      const aliTab = document.getElementById('payTabAli');
+      const wxTab = document.getElementById('payTabWx');
+      const aliQr = document.getElementById('alipayQrCard');
+      const wxQr = document.getElementById('wechatQrCard');
+
+      if (type === 'alipay') {
+        aliTab.className = 'py-2.5 rounded-xl bg-blue-600 text-white shadow-sm transition';
+        wxTab.className = 'py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        aliQr.classList.remove('hidden');
+        wxQr.classList.add('hidden');
+      } else {
+        wxTab.className = 'py-2.5 rounded-xl bg-emerald-600 text-white shadow-sm transition';
+        aliTab.className = 'py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition';
+        wxQr.classList.remove('hidden');
+        aliQr.classList.add('hidden');
+      }
+    }
+  </script>
+
+</body>
+</html>

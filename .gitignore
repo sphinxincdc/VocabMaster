@@ -1,5 +1,7 @@
 .DS_Store
 *.bak
+__pycache__/
+*.pyc
 assets/screenshot_v3/_重复文件/
 redesign-assets/
 redesign.html
