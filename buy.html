@@ -9,6 +9,7 @@
   <link rel="shortcut icon" type="image/png" href="logo.png?v=20260301" />
   <link rel="apple-touch-icon" href="logo.png?v=20260301" />
 
+  <script src="/assets/paddle-checkout.js" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -180,6 +181,15 @@
 
       <!-- 支付收款码展示 (Col 5) -->
       <div class="md:col-span-5 cyber-border-gradient rounded-3xl p-6 bg-white/80 dark:bg-darkcard/90 shadow-sm space-y-5">
+        <section class="space-y-3 pb-5 border-b border-black/5 dark:border-white/10" aria-labelledby="internationalPaymentTitle">
+          <h2 id="internationalPaymentTitle" class="text-base font-bold text-slate-900 dark:text-white">国际付款 · International checkout</h2>
+          <button type="button" data-paddle-product="hord" aria-describedby="paddleCheckoutStatus" class="w-full py-3.5 px-3 rounded-xl bg-brand-600 text-white text-sm font-bold hover:bg-brand-700 disabled:opacity-60 disabled:cursor-wait transition">
+            Buy with Card / PayPal — $25
+          </button>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">通过 Paddle 安全结账。一次付款，1 年授权，最多 2 台设备，不自动续费。付款核验后，License Key 将发送至结账邮箱。</p>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed" lang="en">One-time payment · 1-year license · Up to 2 devices · No auto-renewal. Your license key will be emailed after payment verification.</p>
+          <p id="paddleCheckoutStatus" role="status" aria-live="polite" class="text-xs text-brand-600 dark:text-brand-300 leading-relaxed"></p>
+        </section>
         <h2 class="text-base font-bold text-slate-900 dark:text-white">扫码快速支付</h2>
 
         <!-- Pay Method Switcher Tab -->

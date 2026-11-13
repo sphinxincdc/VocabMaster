@@ -8,6 +8,8 @@
   <link rel="icon" type="image/png" href="/assets/toolkit/icon48.png" />
   <link rel="apple-touch-icon" href="/assets/toolkit/icon128.png" />
 
+  <script src="/assets/paddle-checkout.js" defer></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -298,7 +300,7 @@
           <!-- 3 个固定 Tabs -->
           <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-white/5 light:bg-slate-100 border border-white/10 light:border-slate-200 text-xs font-mono font-bold">
             <button id="payTabCard" type="button" onclick="switchPayMethod('card')" class="py-2.5 rounded-xl bg-brand-blue text-white shadow-sm transition cursor-pointer font-mono font-bold text-xs">
-              Credit Card
+              Card / PayPal
             </button>
             <button id="payTabAli" type="button" onclick="switchPayMethod('alipay')" class="py-2.5 rounded-xl text-slate-400 hover:text-white light:hover:text-black transition cursor-pointer font-mono font-bold text-xs">
               Alipay
@@ -312,56 +314,28 @@
         <!-- 统一固定尺寸的支付内容展示区 (固定 min-height 为 470px，确保切换任何一种方式都不发生高度跳变与颠簸) -->
         <div class="flex-1 min-h-[470px] flex flex-col justify-center">
 
-          <!-- 1. 国际信用卡 / Stripe / Apple Pay -->
+          <!-- 1. Paddle international checkout -->
           <div id="cardPaymentPanel" class="w-full h-full min-h-[470px] p-5 rounded-2xl bg-white/5 light:bg-slate-50 border border-white/10 light:border-slate-200 flex flex-col justify-between font-sans text-xs">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between pb-2 border-b border-white/10 light:border-slate-200">
+            <div class="space-y-5">
+              <div class="flex items-center justify-between gap-2 pb-2 border-b border-white/10 light:border-slate-200">
                 <span class="font-bold text-white light:text-slate-900 font-mono text-xs" data-i18n="p.cardTitle">GLOBAL CARD CHECKOUT</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-brand-blue/20 text-brand-cyan light:bg-blue-100 light:text-brand-blue font-mono font-bold">Stripe / Apple Pay</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-brand-blue/20 text-brand-cyan light:bg-blue-100 light:text-brand-blue font-mono font-bold">Paddle</span>
               </div>
-
-              <!-- 模拟安全外卡信息 -->
-              <div class="p-3.5 rounded-xl bg-black/40 light:bg-white border border-white/10 light:border-slate-300 space-y-2.5">
-                <div>
-                  <label class="block text-[10px] text-slate-400 light:text-slate-500 mb-1 font-mono uppercase">CARD NUMBER</label>
-                  <div class="p-2.5 rounded-lg bg-black/50 light:bg-slate-50 border border-white/10 light:border-slate-200 font-mono text-slate-200 light:text-slate-800 flex items-center justify-between text-xs tracking-wider">
-                    <span>•••• •••• •••• 4242</span>
-                    <span class="text-[11px] font-mono text-slate-400 flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                      VISA / MC
-                    </span>
-                  </div>
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div>
-                    <label class="block text-[10px] text-slate-400 light:text-slate-500 mb-1 font-mono uppercase">EXPIRY</label>
-                    <div class="p-2 rounded-lg bg-black/50 light:bg-slate-50 border border-white/10 light:border-slate-200 font-mono text-slate-200 light:text-slate-800 text-xs">
-                      12 / 28
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-[10px] text-slate-400 light:text-slate-500 mb-1 font-mono uppercase">CVC</label>
-                    <div class="p-2 rounded-lg bg-black/50 light:bg-slate-50 border border-white/10 light:border-slate-200 font-mono text-slate-200 light:text-slate-800 text-xs">
-                      •••
-                    </div>
-                  </div>
-                </div>
+              <div class="p-5 rounded-xl bg-black/40 light:bg-white border border-white/10 light:border-slate-300 text-center space-y-3">
+                <div class="font-bold text-white light:text-slate-900">X-Threads Toolkit Pro</div>
+                <div class="text-4xl font-extrabold text-brand-cyan light:text-brand-blue">$9.90 <span class="text-xs font-normal">USD</span></div>
+                <div class="text-slate-400 light:text-slate-600" data-i18n="h.desc">One-year buyout license with zero recurring surprises. Supports activation on up to 2 personal devices.</div>
               </div>
-
-              <div class="p-3 rounded-xl bg-brand-cyan/10 light:bg-blue-50 border border-brand-cyan/20 light:border-blue-200 text-[11px] text-brand-cyan light:text-brand-blue leading-relaxed font-mono">
-                <div class="flex items-center gap-1.5 mb-1 font-bold text-white light:text-slate-900">
-                  <svg class="w-3.5 h-3.5 text-brand-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  <span data-i18n="p.gatewayTitle">STRIPE GATEWAY INTEGRATION</span>
-                </div>
-                <span data-i18n="p.gatewayNote">Direct card billing checkout connects in v1.2. For instant access right now, email us or use QR checkout tabs.</span>
+              <div class="p-3 rounded-xl bg-brand-cyan/10 light:bg-blue-50 border border-brand-cyan/20 light:border-blue-200 text-[11px] text-brand-cyan light:text-brand-blue leading-relaxed">
+                <div class="mb-1 font-bold text-white light:text-slate-900" data-i18n="p.gatewayTitle">SECURE PADDLE CHECKOUT</div>
+                <span data-i18n="p.gatewayNote">Pay securely with Paddle. After payment verification, your license key will be sent to your checkout email. No auto-renewal.</span>
               </div>
             </div>
-
-            <div class="pt-3">
-              <a href="mailto:andyfreeman0919@gmail.com?subject=X-Toolkit%20Pro%20Card%20Reservation" 
-                 class="block w-full py-3 text-center rounded-xl bg-brand-blue text-white font-mono font-bold text-xs hover:bg-blue-600 transition shadow-md" data-i18n="p.requestCard">
-                Request Direct Payment Link ($9.9)
-              </a>
+            <div class="pt-3 space-y-3">
+              <button type="button" data-paddle-product="toolkit" aria-describedby="paddleCheckoutStatus" class="block w-full py-3 px-2 text-center rounded-xl bg-brand-blue text-white font-mono font-bold text-xs hover:bg-blue-600 disabled:opacity-60 disabled:cursor-wait transition shadow-md" data-i18n="p.requestCard">
+                Buy with Card / PayPal — $9.90
+              </button>
+              <p id="paddleCheckoutStatus" role="status" aria-live="polite" class="text-xs text-brand-cyan light:text-brand-blue leading-relaxed"></p>
             </div>
           </div>
 
@@ -474,9 +448,9 @@
         "m.note": "After completing payment, please email your transaction receipt screenshot. Keys are dispatched within 10 minutes.",
         "p.title": "Payment Methods",
         "p.cardTitle": "GLOBAL CARD CHECKOUT",
-        "p.gatewayTitle": "STRIPE GATEWAY DIRECT",
-        "p.gatewayNote": "Direct card billing checkout connects in v1.2. For instant access right now, email us or use QR checkout tabs.",
-        "p.requestCard": "Request Direct Payment Link ($9.9)",
+        "p.gatewayTitle": "SECURE PADDLE CHECKOUT",
+        "p.gatewayNote": "Pay securely with Paddle. After payment verification, your license key will be sent to your checkout email. No auto-renewal.",
+        "p.requestCard": "Buy with Card / PayPal — $9.90",
         "p.aliTitle": "Scan with Alipay · Pay ¥69 (~$9.9)",
         "p.aliDesc": "Open Alipay app on your phone to scan and pay",
         "p.wxTitle": "Scan with WeChat · Pay ¥69 (~$9.9)",
@@ -515,9 +489,9 @@
         "m.note": "付款完成后，请将交易截图发送至总台邮箱，我们将在 10 分钟内完成核验并发放您的独家激活码。",
         "p.title": "支持的支付方式",
         "p.cardTitle": "国际信用卡 / 银行卡结算",
-        "p.gatewayTitle": "STRIPE 官方直连网关",
-        "p.gatewayNote": "Stripe 直接网关将于 v1.2 接入。如需立即可用授权，请使用支付宝/微信扫码或点击下方索取直付链接。",
-        "p.requestCard": "索取信用卡直付账单链接 ($9.9)",
+        "p.gatewayTitle": "Paddle 安全结账",
+        "p.gatewayNote": "通过 Paddle 安全付款。付款核验后，授权码将发送至结账时填写的邮箱。不自动续费。",
+        "p.requestCard": "银行卡 / PayPal 付款 — $9.90",
         "p.aliTitle": "推荐使用支付宝 · 实付 ¥69 (~$9.9)",
         "p.aliDesc": "请打开手机支付宝 App 扫一扫完成支付",
         "p.wxTitle": "推荐使用微信支付 · 实付 ¥69 (~$9.9)",
@@ -556,9 +530,9 @@
         "m.note": "付款完成後，請將交易截圖發送至總台郵箱，我們將在 10 分鐘內完成核驗並發放您的獨家授權碼。",
         "p.title": "支援的支付方式",
         "p.cardTitle": "國際信用卡 / 銀行卡結算",
-        "p.gatewayTitle": "STRIPE 官方直連網關",
-        "p.gatewayNote": "Stripe 直接網關將於 v1.2 接入。如需立即可用授權，請使用支付寶/微信掃碼或點擊下方索取直付連結。",
-        "p.requestCard": "索取信用卡直付帳單連結 ($9.9)",
+        "p.gatewayTitle": "Paddle 安全結帳",
+        "p.gatewayNote": "透過 Paddle 安全付款。付款核驗後，授權碼將寄送至結帳時填寫的信箱。不自動續費。",
+        "p.requestCard": "銀行卡 / PayPal 付款 — $9.90",
         "p.aliTitle": "推薦使用支付寶 · 實付 ¥69 (~$9.9)",
         "p.aliDesc": "請打開手機支付寶 App 掃一掃完成支付",
         "p.wxTitle": "推薦使用微信支付 · 實付 ¥69 (~$9.9)",
@@ -597,9 +571,9 @@
         "m.note": "お支払い完了後、領収書スクリーンショットを上記窓口までメール送信してください。10分以内にライセンスキーを発行いたします。",
         "p.title": "対応している決済方法",
         "p.cardTitle": "国際クレジットカード決済",
-        "p.gatewayTitle": "STRIPE 決済ゲートウェイ",
-        "p.gatewayNote": "Stripe直接決済はv1.2で連携予定です。今すぐご利用の場合はQR決済または下記リンクをご利用ください。",
-        "p.requestCard": "決済リンクをリクエスト ($9.9)",
+        "p.gatewayTitle": "PADDLE 安全決済",
+        "p.gatewayNote": "Paddle で安全にお支払い。入金確認後、決済時のメールアドレスにライセンスキーを送信します。自動更新はありません。",
+        "p.requestCard": "カード / PayPal で購入 — $9.90",
         "p.aliTitle": "Alipay (アリペイ) で支払う · ¥69 (~$9.9)",
         "p.aliDesc": "Alipay アプリのスキャン機能で読み取ってお支払いください",
         "p.wxTitle": "WeChat Pay (微信支付) で支払う · ¥69 (~$9.9)",
@@ -638,9 +612,9 @@
         "m.note": "결제 완료 후 영수증 캡처본을 위 이메일로 보내주시면 10분 이내에 정품 인증키를 발급해 드립니다.",
         "p.title": "지원 결제 수단",
         "p.cardTitle": "해외 신용카드 결제",
-        "p.gatewayTitle": "STRIPE 게이트웨이 직접 연결",
-        "p.gatewayNote": "Stripe 직결 결제는 v1.2에서 연동됩니다. 즉시 이용을 원하시면 QR 결제를 이용해 주세요.",
-        "p.requestCard": "카드 결제 링크 요청 ($9.9)",
+        "p.gatewayTitle": "PADDLE 보안 결제",
+        "p.gatewayNote": "Paddle로 안전하게 결제하세요. 결제 확인 후 결제 시 입력한 이메일로 라이선스 키를 보내드립니다. 자동 갱신은 없습니다.",
+        "p.requestCard": "카드 / PayPal로 구매 — $9.90",
         "p.aliTitle": "Alipay 결제 · ¥69 (~$9.9)",
         "p.aliDesc": "모바일 Alipay 앱의 스캔 기능으로 결제를 완료하세요",
         "p.wxTitle": "WeChat Pay 결제 · ¥69 (~$9.9)",
@@ -679,9 +653,9 @@
         "m.note": "Tras realizar el pago, envíanos el comprobante por email. Tu clave se enviará en menos de 10 minutos.",
         "p.title": "Métodos de Pago Disponibles",
         "p.cardTitle": "PAGO GLOBAL CON TARJETA",
-        "p.gatewayTitle": "INTEGRACIÓN STRIPE DIRECTA",
-        "p.gatewayNote": "La pasarela directa de Stripe se conectará en v1.2. Para acceso inmediato, usa QR o contáctanos.",
-        "p.requestCard": "Solicitar Enlace de Pago con Tarjeta ($9.9)",
+        "p.gatewayTitle": "PAGO SEGURO CON PADDLE",
+        "p.gatewayNote": "Paga de forma segura con Paddle. Tras verificar el pago, enviaremos la clave de licencia al correo del pago. Sin renovación automática.",
+        "p.requestCard": "Comprar con tarjeta / PayPal — $9.90",
         "p.aliTitle": "Pagar con Alipay · ¥69 (~$9.9)",
         "p.aliDesc": "Abre la aplicación Alipay y escanea el código para pagar",
         "p.wxTitle": "Pagar con WeChat Pay · ¥69 (~$9.9)",
@@ -720,9 +694,9 @@
         "m.note": "Après le règlement, envoyez votre capture de reçu par email. Votre clé d'activation sera livrée sous 10 minutes.",
         "p.title": "Modes de Paiement Disponibles",
         "p.cardTitle": "PAIEMENT PAR CARTE BANCAIRE",
-        "p.gatewayTitle": "PASSERELLE STRIPE DIRECTE",
-        "p.gatewayNote": "Le paiement Stripe direct sera connecté dans la v1.2. Pour un accès immédiat, utilisez le QR code.",
-        "p.requestCard": "Demander le Lien de Paiement Carte (9,9 $)",
+        "p.gatewayTitle": "PAIEMENT SÉCURISÉ PADDLE",
+        "p.gatewayNote": "Payez en toute sécurité avec Paddle. Après vérification du paiement, votre clé sera envoyée à l’adresse e-mail saisie lors du paiement. Sans renouvellement automatique.",
+        "p.requestCard": "Payer par carte / PayPal — 9,90 $",
         "p.aliTitle": "Paiement via Alipay · ¥69 (~9,9 $)",
         "p.aliDesc": "Ouvrez l'application Alipay et scannez le QR code pour payer",
         "p.wxTitle": "Paiement via WeChat Pay · ¥69 (~9,9 $)",
@@ -761,9 +735,9 @@
         "m.note": "Senden Sie nach Abschluss der Zahlung Ihren Screenshot des Belegs. Ihr Lizenzschlüssel wird innerhalb von 10 Minuten zugestellt.",
         "p.title": "Unterstützte Zahlungsarten",
         "p.cardTitle": "KREDITKARTENZAHLUNG",
-        "p.gatewayTitle": "STRIPE DIREKT-GATEWAY",
-        "p.gatewayNote": "Direkte Kartenzahlung über Stripe folgt in v1.2. Für sofortigen Zugriff nutzen Sie bitte QR-Zahlung.",
-        "p.requestCard": "Zahlungslink anfordern (9,9 $)",
+        "p.gatewayTitle": "SICHER BEZAHLEN MIT PADDLE",
+        "p.gatewayNote": "Sicher mit Paddle bezahlen. Nach Zahlungsprüfung senden wir Ihren Lizenzschlüssel an die beim Kauf angegebene E-Mail-Adresse. Keine automatische Verlängerung.",
+        "p.requestCard": "Mit Karte / PayPal kaufen — 9,90 $",
         "p.aliTitle": "Mit Alipay bezahlen · ¥69 (~9,9 $)",
         "p.aliDesc": "Öffnen Sie Alipay und scannen Sie den QR-Code zum Bezahlen",
         "p.wxTitle": "Mit WeChat Pay bezahlen · ¥69 (~9,9 $)",
@@ -802,9 +776,9 @@
         "m.note": "Após pagar, envie seu comprovante por e-mail. Sua chave será enviada em até 10 minutos.",
         "p.title": "Métodos de Pagamento Suportados",
         "p.cardTitle": "PAGAMENTO COM CARTÃO GLOBAL",
-        "p.gatewayTitle": "INTEGRAÇÃO DIRETA STRIPE",
-        "p.gatewayNote": "O checkout direto via Stripe estará na v1.2. Para ativação imediata, utilize QR code.",
-        "p.requestCard": "Solicitar Link de Cartão ($9.9)",
+        "p.gatewayTitle": "PAGAMENTO SEGURO PADDLE",
+        "p.gatewayNote": "Pague com segurança pelo Paddle. Após a verificação do pagamento, enviaremos a chave de licença ao e-mail informado na compra. Sem renovação automática.",
+        "p.requestCard": "Comprar com cartão / PayPal — US$ 9,90",
         "p.aliTitle": "Pagar com Alipay · ¥69 (~$9.9)",
         "p.aliDesc": "Abra o aplicativo Alipay e escaneie o código para pagar",
         "p.wxTitle": "Pagar com WeChat Pay · ¥69 (~$9.9)",
@@ -843,9 +817,9 @@
         "m.note": "После оплаты отправьте чек на почту. Ваш лицензионный ключ будет выслан в течение 10 минут.",
         "p.title": "Доступные Способы Оплаты",
         "p.cardTitle": "ОПЛАТА БАНКОВСКОЙ КАРТОЙ",
-        "p.gatewayTitle": "ШЛЮЗ STRIPE НАПРЯМУЮ",
-        "p.gatewayNote": "Прямая интеграция со Stripe запланирована в v1.2. Для мгновенного доступа используйте QR-оплату.",
-        "p.requestCard": "Запросить Ссылку на Оплату ($9.9)",
+        "p.gatewayTitle": "БЕЗОПАСНАЯ ОПЛАТА PADDLE",
+        "p.gatewayNote": "Безопасная оплата через Paddle. После проверки платежа ключ лицензии будет отправлен на адрес почты, указанный при оплате. Без автопродления.",
+        "p.requestCard": "Купить картой / PayPal — $9.90",
         "p.aliTitle": "Оплата через Alipay · ¥69 (~$9.9)",
         "p.aliDesc": "Откройте приложение Alipay и отсканируйте QR-код",
         "p.wxTitle": "Оплата через WeChat Pay · ¥69 (~$9.9)",
@@ -884,9 +858,9 @@
         "m.note": "بعد إتمام الدفع، أرسل لقطة شاشة للإيصال وسنرسل مفتاح التفعيل خلال 10 دقائق.",
         "p.title": "طرق الدفع المدعومة",
         "p.cardTitle": "الدفع بالبطاقات العالمية",
-        "p.gatewayTitle": "بوابة دفع STRIPE المباشرة",
-        "p.gatewayNote": "سيتم تفعيل الدفع المباشر في الإصدار 1.2. للدخول الفوري استخدم رمز الاستجابة السريعة.",
-        "p.requestCard": "طلب رابط دفع بالبطاقة ($9.9)",
+        "p.gatewayTitle": "دفع آمن عبر PADDLE",
+        "p.gatewayNote": "ادفع بأمان عبر Paddle. بعد التحقق من الدفع، سنرسل مفتاح الترخيص إلى البريد الإلكتروني الذي أدخلته عند الدفع. بدون تجديد تلقائي.",
+        "p.requestCard": "شراء بالبطاقة / PayPal — $9.90",
         "p.aliTitle": "الدفع عبر Alipay · ¥69 (~$9.9)",
         "p.aliDesc": "افتح تطبيق Alipay وامسح الرمز للدفع",
         "p.wxTitle": "الدفع عبر WeChat Pay · ¥69 (~$9.9)",
@@ -925,9 +899,9 @@
         "m.note": "भुगतान पूरा करने के बाद स्क्रीनशॉट ईमेल करें। आपकी लाइसेंस कुंजी 10 मिनट के भीतर भेज दी जाएगी।",
         "p.title": "समर्थित भुगतान विधियाँ",
         "p.cardTitle": "अंतर्राष्ट्रीय कार्ड चेकआउट",
-        "p.gatewayTitle": "STRIPE सीधा गेटवे",
-        "p.gatewayNote": "Stripe सीधा चेकआउट v1.2 में जुड़ेगा। तत्काल पहुंच के लिए QR कोड का उपयोग करें।",
-        "p.requestCard": "कार्ड भुगतान लिंक का अनुरोध करें ($9.9)",
+        "p.gatewayTitle": "PADDLE से सुरक्षित भुगतान",
+        "p.gatewayNote": "Paddle से सुरक्षित भुगतान करें। भुगतान सत्यापन के बाद लाइसेंस कुंजी चेकआउट में दिए गए ईमेल पर भेजी जाएगी। कोई स्वचालित नवीनीकरण नहीं।",
+        "p.requestCard": "कार्ड / PayPal से खरीदें — $9.90",
         "p.aliTitle": "Alipay से भुगतान करें · ¥69 (~$9.9)",
         "p.aliDesc": "भुगतान करने के लिए Alipay ऐप से स्कैन करें",
         "p.wxTitle": "WeChat Pay से भुगतान करें · ¥69 (~$9.9)",
@@ -966,9 +940,9 @@
         "m.note": "Dopo il pagamento, invia lo screenshot della ricevuta. La tua chiave di attivazione sarà inviata entro 10 minuti.",
         "p.title": "Metodi di Pagamento Disponibili",
         "p.cardTitle": "PAGAMENTO CON CARTA GLOBALE",
-        "p.gatewayTitle": "INTEGRAZIONE STRIPE DIRETTA",
-        "p.gatewayNote": "Il pagamento diretto con Stripe sarà integrato nella v1.2. Per accesso immediato, usa i pagamenti QR.",
-        "p.requestCard": "Richiedi Link di Pagamento Carta ($9.9)",
+        "p.gatewayTitle": "PAGAMENTO SICURO PADDLE",
+        "p.gatewayNote": "Paga in sicurezza con Paddle. Dopo la verifica del pagamento, la chiave di licenza sarà inviata all’email indicata al pagamento. Nessun rinnovo automatico.",
+        "p.requestCard": "Acquista con carta / PayPal — 9,90 $",
         "p.aliTitle": "Paga con Alipay · ¥69 (~$9.9)",
         "p.aliDesc": "Apri l'app Alipay e scansiona il codice per pagare",
         "p.wxTitle": "Paga con WeChat Pay · ¥69 (~$9.9)",
@@ -1007,9 +981,9 @@
         "m.note": "Po dokonaniu płatności prześlij zrzut ekranu potwierdzenia. Twój klucz licencyjny zostanie wysłany w ciągu 10 minut.",
         "p.title": "Dostępne Metody Płatności",
         "p.cardTitle": "PŁATNOŚĆ KARTĄ MIĘDZYNARODOWĄ",
-        "p.gatewayTitle": "BEZPOŚREDNIA BRAMKA STRIPE",
-        "p.gatewayNote": "Bezpośrednia płatność Stripe będzie dostępna w v1.2. Aby uzyskać natychmiastowy dostęp, użyj płatności QR.",
-        "p.requestCard": "Poproś o Link do Płatności Kartą (9,9 USD)",
+        "p.gatewayTitle": "BEZPIECZNA PŁATNOŚĆ PADDLE",
+        "p.gatewayNote": "Zapłać bezpiecznie przez Paddle. Po weryfikacji płatności wyślemy klucz licencyjny na adres e-mail podany przy zakupie. Bez automatycznego odnawiania.",
+        "p.requestCard": "Kup kartą / PayPal — 9,90 USD",
         "p.aliTitle": "Zapłać przez Alipay · ¥69 (~9,9 USD)",
         "p.aliDesc": "Otwórz aplikację Alipay i zeskanuj kod, aby zapłacić",
         "p.wxTitle": "Zapłać przez WeChat Pay · ¥69 (~9,9 USD)",
@@ -1055,6 +1029,7 @@
     function switchLanguage(langCode) {
       const targetLangMeta = supportedLanguages.find(l => l.code === langCode) || supportedLanguages[0];
       currentLangLabel.textContent = targetLangMeta.label;
+      document.documentElement.lang = targetLangMeta.code;
 
       if (langCode === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
